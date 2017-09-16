@@ -1,4 +1,4 @@
-﻿namespace ExileAndRevelationAssetExtractor
+﻿namespace ExileAndRevelationAssetExtractor.App
 {
     partial class MainForm
     {

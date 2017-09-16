@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ExileAndRevelationAssetExtractor
+namespace ExileAndRevelationAssetExtractor.App
 {
     public partial class MainForm : Form
     {
