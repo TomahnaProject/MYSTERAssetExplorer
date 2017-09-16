@@ -41,6 +41,13 @@ namespace ExileAndRevelationAssetExtractor.Services
             return CreateListing(markers);
         }
 
+        internal FileListing IndexM4BDataFile(string filePath)
+        {
+            List<FileMarker> potentialMarkers = FilePotentialMarkers(filePath);
+            List<FileMarker> markers = GetConfirmedMarkers(filePath, potentialMarkers);
+            return CreateListing(markers);
+        }
+
         private List<FileMarker> FilePotentialMarkers(string filePath)
         {
             List<FileMarker> markers = new List<FileMarker>();
@@ -73,9 +80,9 @@ namespace ExileAndRevelationAssetExtractor.Services
                     for (int i = 0; i < buffer.Length; i++)
                     {
                         if (buffer[i] == jpgStart[0])
-                            markers.Add(new FileMarker(offset + i, FileMarkerType.BinkStart));
-                        else if(buffer[i] == binkStart[0])
                             markers.Add(new FileMarker(offset + i, FileMarkerType.JpgStart));
+                        else if(buffer[i] == binkStart[0])
+                            markers.Add(new FileMarker(offset + i, FileMarkerType.BinkStart));
                     }
                 }
             }
@@ -217,35 +224,5 @@ namespace ExileAndRevelationAssetExtractor.Services
             }
             return listing;
         }
-
-        internal FileListing IndexRevelationDataFile(string filePath)
-        {
-            byte[] fileData = ReadFile(filePath);
-            throw new NotImplementedException();
-        }
-
-        public static byte[] ReadFile(string filePath)
-        {
-            byte[] buffer;
-            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            try
-            {
-                int length = (int)fileStream.Length;  // get file length
-                buffer = new byte[length];            // create buffer
-                int count;                            // actual number of bytes read
-                int sum = 0;                          // total number of bytes read
-
-                // read until Read method returns 0 (end of the stream has been reached)
-                while ((count = fileStream.Read(buffer, sum, length - sum)) > 0)
-                    sum += count;  // sum is a buffer offset for next reading
-            }
-            finally
-            {
-                fileStream.Close();
-            }
-            return buffer;
-        }
-
-
     }
 }

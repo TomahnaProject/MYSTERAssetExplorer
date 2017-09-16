@@ -33,7 +33,7 @@ namespace ExileAndRevelationAssetExtractor.App
             }
             else if (Path.GetExtension(filePath).ToUpper() == M4FileExtension)
             {
-                files = indexer.IndexRevelationDataFile(_filePath);
+                files = indexer.IndexM4BDataFile(_filePath);
             }
             else
             {
