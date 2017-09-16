@@ -30,23 +30,23 @@ namespace ExileAndRevelationAssetExtractor.Services
             JpgStart,
             JpgEnd,
             BinkStart,
+            BinkEnd,
             Mb4Start,
         }
 
         internal FileListing IndexM3AFile(string filePath)
         {
-            List<FileMarker> markers = FindFileMarkers(filePath);
+            List<FileMarker> potentialMarkers = FilePotentialMarkers(filePath);
+            List<FileMarker> markers = GetConfirmedMarkers(filePath, potentialMarkers);
             return CreateListing(markers);
         }
 
-        private List<FileMarker> FindFileMarkers(string filePath)
+        private List<FileMarker> FilePotentialMarkers(string filePath)
         {
             List<FileMarker> markers = new List<FileMarker>();
 
-
             int BUFFER_SIZE = 4096;
             byte[] buffer = new byte[BUFFER_SIZE];
-            byte[] headerBuffer = new byte[3];
             FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             try
             {
@@ -56,7 +56,6 @@ namespace ExileAndRevelationAssetExtractor.Services
                 int count = 0;
                 int offset = 0;
                 int returnedBufferSize = 0;
-                int returnedHeaderBufferSize = 0;
                 while (count < bufferCount)
                 {
                     offset = count * BUFFER_SIZE;
@@ -67,41 +66,17 @@ namespace ExileAndRevelationAssetExtractor.Services
                     //check and handle end of file
                     if (returnedBufferSize < BUFFER_SIZE)
                     {
+                        buffer = new byte[returnedBufferSize];
                     }
 
-                    //search buffer for markers/headers
+                    //search buffer for the start of markers/headers
                     for (int i = 0; i < buffer.Length; i++)
                     {
-                        if (buffer[i] == jpgStart[0] || buffer[i] == binkStart[0])
-                        {
-                            // confirm it's actually a marker
-                            var currentLocation = offset + i;
-                            if (currentLocation + headerBuffer.Length > fileLength)
-                                throw new Exception("Attempting to read beyond end of file");
-
-                            fileStream.Seek(currentLocation, SeekOrigin.Begin);
-                            fileStream.Read(headerBuffer, 0, headerBuffer.Length);
-
-                            // determine type of marker
-                            if (headerBuffer[0] == jpgStart[0])
-                            {
-                                if (headerBuffer[1] == jpgStart[1])
-                                    markers.Add(new FileMarker(currentLocation, FileMarkerType.JpgStart));
-                                else if (headerBuffer[1] == jpgEnd[1])
-                                    markers.Add(new FileMarker(currentLocation, FileMarkerType.JpgEnd));
-                            }
-                            else if (headerBuffer[0] == binkStart[0])
-                            {
-                                if (headerBuffer[1] == binkStart[1])
-                                    if (headerBuffer[2] == binkStart[2])
-                                        markers.Add(new FileMarker(currentLocation, FileMarkerType.BinkStart));
-                            }
-
-                        }
+                        if (buffer[i] == jpgStart[0])
+                            markers.Add(new FileMarker(offset + i, FileMarkerType.BinkStart));
+                        else if(buffer[i] == binkStart[0])
+                            markers.Add(new FileMarker(offset + i, FileMarkerType.JpgStart));
                     }
-
-
-
                 }
             }
             finally
@@ -110,6 +85,98 @@ namespace ExileAndRevelationAssetExtractor.Services
             }
             return markers;
         }
+
+        private List<FileMarker> GetConfirmedMarkers(string filePath, List<FileMarker> potentialMarkers)
+        {
+            List<FileMarker> confirmedMarkers = new List<FileMarker>();
+            int headerRegionSize = 64;
+            byte[] headerRegion = new byte[headerRegionSize];
+
+            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            try
+            {
+                int fileLength = (int)fileStream.Length;
+                int headerRegionReturnSize = 64;
+                foreach (var marker in potentialMarkers)
+                {
+                    if(marker.Index < fileLength)
+                    {
+                        fileStream.Seek(marker.Index, SeekOrigin.Begin);
+                        fileStream.Read(headerRegion, 0, headerRegion.Length);
+                    }
+                    else
+                    {
+                        fileStream.Seek(marker.Index, SeekOrigin.Begin);
+                        // headerRegionReturnSize should always be at least 1
+                        headerRegionReturnSize = fileStream.Read(headerRegion, 0, headerRegion.Length);
+                    }
+
+
+                    if (headerRegion[0] == jpgStart[0])
+                    {
+                        if (headerRegionReturnSize < 2) // too small for jpg stuff
+                            continue;
+
+                        if (headerRegion[1] == jpgStart[1])
+                        {
+                            if (headerRegion[2] == jpgStart[2])
+                                confirmedMarkers.Add(new FileMarker(marker.Index, FileMarkerType.JpgStart));
+                        }
+                        else if (headerRegion[1] == jpgEnd[1])
+                        {
+                            confirmedMarkers.Add(new FileMarker(marker.Index, FileMarkerType.JpgEnd));
+                        }
+                    }
+                    else if (headerRegion[0] == binkStart[0])
+                    {
+                        if (headerRegionReturnSize < 8) // too small for bink
+                            continue;
+
+                        var text = Encoding.ASCII.GetString(headerRegion);
+                        if (headerRegion[1] == binkStart[1])
+                            if (headerRegion[2] == binkStart[2])
+                            {
+                                byte[] binkFileSizeBytes = new byte[]
+                                {
+                                    headerRegion[4],
+                                    headerRegion[5],
+                                    headerRegion[6],
+                                    headerRegion[7]
+                                };
+                                // the size from the header does not include first 8 bytes
+                                var rawFileSize = BitConverter.ToInt32(binkFileSizeBytes, 0);
+                                //var divided = rawFileSize / 2;
+                                var binkFileSize = rawFileSize + 8;
+
+                                var start = marker.Index;
+                                var end = marker.Index + binkFileSize;
+
+                                if(end < 0)
+                                {
+                                    throw new Exception("NEGATIVE BINK FILE END");
+                                }
+
+                                confirmedMarkers.Add(new FileMarker(start, FileMarkerType.BinkStart));
+                                confirmedMarkers.Add(new FileMarker(end + binkFileSize, FileMarkerType.BinkEnd));
+
+                                // check for markers between these two indexes
+                                List<FileMarker> invalid = potentialMarkers.Where(x => (start < x.Index && x.Index < end)).ToList();
+                                foreach(FileMarker invalidMarker in invalid)
+                                {
+                                    invalidMarker.Index = 0;
+                                }
+                            }
+                    }
+                }
+            }
+            finally
+            {
+                fileStream.Close();
+            }
+
+            return confirmedMarkers;
+        }
+
 
         private FileListing CreateListing(List<FileMarker> markers)
         {
@@ -126,10 +193,13 @@ namespace ExileAndRevelationAssetExtractor.Services
                 }
                 else if(currentFile.Type == FileMarkerType.BinkStart)
                 {
-                    if(marker.Type == FileMarkerType.JpgStart)
+                    if(marker.Type == FileMarkerType.BinkEnd)
                     {
                         fileCount += 1;
-                        listing.Add(new FileIndex(fileCount, fileCount.ToString("D4"), FileType.Bink, currentFile.Index, marker.Index -1));
+
+                        listing.Add(new FileIndex(
+                            fileCount, fileCount.ToString("D4"), FileType.Bink,
+                            currentFile.Index, marker.Index));
                         currentFile = null;
                     }
                 }
@@ -138,7 +208,8 @@ namespace ExileAndRevelationAssetExtractor.Services
                     if (marker.Type == FileMarkerType.JpgEnd)
                     {
                         fileCount += 1;
-                        listing.Add(new FileIndex(fileCount, fileCount.ToString("D4"), FileType.Jpg, currentFile.Index, marker.Index - 1));
+                        // add 2 to the ending index to include end of file bytes/marker
+                        listing.Add(new FileIndex(fileCount, fileCount.ToString("D4"), FileType.Jpg, currentFile.Index, (marker.Index - 1) + 2));
                         currentFile = null;
                     }
                 }

@@ -22,7 +22,7 @@ namespace ExileAndRevelationAssetExtractor.Services
 
         private byte[] ExtractFile(string dataFilePath, FileIndex file)
         {
-            int bufferSize = file.End - file.Start;
+            int bufferSize = (file.End - file.Start) +1;
             byte[] buffer = new byte[bufferSize];
             FileStream fileStream = new FileStream(dataFilePath, FileMode.Open, FileAccess.Read);
             try
