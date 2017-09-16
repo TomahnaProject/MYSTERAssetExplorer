@@ -12,9 +12,22 @@ namespace ExileAndRevelationAssetExtractor.App
 {
     public partial class MainForm : Form
     {
+        private ExileAndRevelationAssetExtractorApp App;
+
         public MainForm()
         {
             InitializeComponent();
+            App = new ExileAndRevelationAssetExtractorApp();
+        }
+
+        private void openFile_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                openFileDialog.FileName = "";
+                var filePath = openFileDialog.FileName;
+                App.OpenFile(filePath);
+            }
         }
     }
 }
