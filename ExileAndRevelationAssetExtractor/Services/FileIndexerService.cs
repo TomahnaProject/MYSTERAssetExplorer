@@ -81,8 +81,6 @@ namespace ExileAndRevelationAssetExtractor.Services
                     {
                         if (buffer[i] == jpgStart[0])
                             markers.Add(new FileMarker(offset + i, FileMarkerType.JpgStart));
-                        else if(buffer[i] == binkStart[0])
-                            markers.Add(new FileMarker(offset + i, FileMarkerType.BinkStart));
                     }
                 }
             }
@@ -134,46 +132,6 @@ namespace ExileAndRevelationAssetExtractor.Services
                             confirmedMarkers.Add(new FileMarker(marker.Index, FileMarkerType.JpgEnd));
                         }
                     }
-                    else if (headerRegion[0] == binkStart[0])
-                    {
-                        if (headerRegionReturnSize < 8) // too small for bink
-                            continue;
-
-                        var text = Encoding.ASCII.GetString(headerRegion);
-                        if (headerRegion[1] == binkStart[1])
-                            if (headerRegion[2] == binkStart[2])
-                            {
-                                byte[] binkFileSizeBytes = new byte[]
-                                {
-                                    headerRegion[4],
-                                    headerRegion[5],
-                                    headerRegion[6],
-                                    headerRegion[7]
-                                };
-                                // the size from the header does not include first 8 bytes
-                                var rawFileSize = BitConverter.ToInt32(binkFileSizeBytes, 0);
-                                //var divided = rawFileSize / 2;
-                                var binkFileSize = rawFileSize + 8;
-
-                                var start = marker.Index;
-                                var end = marker.Index + binkFileSize;
-
-                                if(end < 0)
-                                {
-                                    throw new Exception("NEGATIVE BINK FILE END");
-                                }
-
-                                confirmedMarkers.Add(new FileMarker(start, FileMarkerType.BinkStart));
-                                confirmedMarkers.Add(new FileMarker(end + binkFileSize, FileMarkerType.BinkEnd));
-
-                                // check for markers between these two indexes
-                                List<FileMarker> invalid = potentialMarkers.Where(x => (start < x.Index && x.Index < end)).ToList();
-                                foreach(FileMarker invalidMarker in invalid)
-                                {
-                                    invalidMarker.Index = 0;
-                                }
-                            }
-                    }
                 }
             }
             finally
@@ -197,18 +155,6 @@ namespace ExileAndRevelationAssetExtractor.Services
                 {
                     if (marker.Type == FileMarkerType.JpgStart || marker.Type == FileMarkerType.BinkStart)
                         currentFile = marker;
-                }
-                else if(currentFile.Type == FileMarkerType.BinkStart)
-                {
-                    if(marker.Type == FileMarkerType.BinkEnd)
-                    {
-                        fileCount += 1;
-
-                        listing.Add(new FileIndex(
-                            fileCount, fileCount.ToString("D4"), FileType.Bink,
-                            currentFile.Index, marker.Index));
-                        currentFile = null;
-                    }
                 }
                 else if (currentFile.Type == FileMarkerType.JpgStart)
                 {
