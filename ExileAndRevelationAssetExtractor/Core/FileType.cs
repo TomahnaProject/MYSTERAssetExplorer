@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ExileAndRevelationAssetExtractor.Core
 {
-    public class File
+    public enum FileType
     {
-        
+        Jpg,
+        Bink,
+        Zap,
+        M4B,  
     }
 }

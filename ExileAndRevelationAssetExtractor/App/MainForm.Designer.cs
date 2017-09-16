@@ -30,6 +30,8 @@
         {
             this.openFile = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.ExtractFilesButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFile
@@ -46,11 +48,22 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
+            // ExtractFilesButton
+            // 
+            this.ExtractFilesButton.Location = new System.Drawing.Point(177, 56);
+            this.ExtractFilesButton.Name = "ExtractFilesButton";
+            this.ExtractFilesButton.Size = new System.Drawing.Size(75, 23);
+            this.ExtractFilesButton.TabIndex = 1;
+            this.ExtractFilesButton.Text = "Extract Files";
+            this.ExtractFilesButton.UseVisualStyleBackColor = true;
+            this.ExtractFilesButton.Click += new System.EventHandler(this.ExtractFilesButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 265);
+            this.Controls.Add(this.ExtractFilesButton);
             this.Controls.Add(this.openFile);
             this.Name = "MainForm";
             this.Text = "Exile And Revelation Asset Extractor";
@@ -62,6 +75,8 @@
 
         private System.Windows.Forms.Button openFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button ExtractFilesButton;
     }
 }
 

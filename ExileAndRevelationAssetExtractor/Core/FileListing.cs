@@ -8,5 +8,21 @@ namespace ExileAndRevelationAssetExtractor.Core
 {
     public class FileListing
     {
+        List<FileIndex> files;
+
+        public FileListing()
+        {
+            files = new List<FileIndex>();
+        }
+
+        public void Add(FileIndex file)
+        {
+            files.Add(file);
+        }
+
+        public List<FileIndex> GetList()
+        {
+            return files.ToList();
+        }
     }
 }
