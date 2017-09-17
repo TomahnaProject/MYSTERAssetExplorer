@@ -9,9 +9,11 @@ namespace ERAssetExtractor.App
 {
     public class ERAssetExtractorContext
     {
-        public FileListing files;
-        public FileIndexerService indexer;
-        public FileExtractionService extractor;
+        public string DataDirectory { get; set; }
+
+        public VirtualFileListing files;
+        public VirtualFileIndexerService indexer;
+        public VirtualFileExtractionService extractor;
         public WorkspaceModificationService workspaceModServ;
         public RegistryManager registryManager;
         public IUIContext uiContext;

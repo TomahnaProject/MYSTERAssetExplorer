@@ -8,12 +8,12 @@ using System.IO;
 
 namespace ERAssetExtractor.Services
 {
-    public class FileExtractionService
+    public class VirtualFileExtractionService
     {
-        internal void Extract(string _filePath, FileListing files, string folderPath)
+        internal void Extract(string _filePath, VirtualFileListing files, string folderPath)
         {
             var fileListing = files.GetList();
-            var fileSaveService = new FileSaveService();
+            var fileSaveService = new VirtualFileSaveService();
             foreach (var file in fileListing)
             {
                 var data = ExtractFile(_filePath, file);
@@ -21,7 +21,7 @@ namespace ERAssetExtractor.Services
             }
         }
 
-        private byte[] ExtractFile(string dataFilePath, FileIndex file)
+        private byte[] ExtractFile(string dataFilePath, VirtualFileIndex file)
         {
             int bufferSize = (file.End - file.Start) +1;
             byte[] buffer = new byte[bufferSize];

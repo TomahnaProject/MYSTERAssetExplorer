@@ -8,7 +8,7 @@ using System.IO;
 
 namespace ERAssetExtractor.Services
 {
-    public class FileIndexerService
+    public class VirtualFileIndexerService
     {
         public readonly byte[] jpgStart = new byte[] { 0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46, 0x49, 0x46 };
         public readonly byte[] jpgEnd = new byte[] { 0xFF, 0xD9 };
@@ -34,14 +34,14 @@ namespace ERAssetExtractor.Services
             Mb4Start,
         }
 
-        internal FileListing IndexM3AFile(string filePath)
+        internal VirtualFileListing IndexM3AFile(string filePath)
         {
             List<FileMarker> potentialMarkers = FilePotentialMarkers(filePath);
             List<FileMarker> markers = GetConfirmedMarkers(filePath, potentialMarkers);
             return CreateListing(markers);
         }
 
-        internal FileListing IndexM4BDataFile(string filePath)
+        internal VirtualFileListing IndexM4BDataFile(string filePath)
         {
             List<FileMarker> potentialMarkers = FilePotentialMarkers(filePath);
             List<FileMarker> markers = GetConfirmedMarkers(filePath, potentialMarkers);
@@ -168,10 +168,10 @@ namespace ERAssetExtractor.Services
         }
 
 
-        private FileListing CreateListing(List<FileMarker> markers)
+        private VirtualFileListing CreateListing(List<FileMarker> markers)
         {
             var fileCount = 0;
-            var listing = new FileListing();
+            var listing = new VirtualFileListing();
             FileMarker currentFile = null;
 
             foreach (var marker in markers)
@@ -187,7 +187,7 @@ namespace ERAssetExtractor.Services
                     {
                         fileCount += 1;
                         // add 2 to the ending index to include end of file bytes/marker
-                        listing.Add(new FileIndex(fileCount, fileCount.ToString("D4"), FileType.Jpg, currentFile.Index, (marker.Index - 1) + 2));
+                        listing.Add(new VirtualFileIndex(fileCount, fileCount.ToString("D4"), FileType.Jpg, currentFile.Index, (marker.Index - 1) + 2));
                         currentFile = null;
                     }
                 }

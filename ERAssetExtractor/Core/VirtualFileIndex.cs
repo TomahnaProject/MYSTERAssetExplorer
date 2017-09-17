@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ERAssetExtractor.Core
 {
     // meant to be read only; once the indexer figures out what/where a file is, then it shouldn't change around
-    public class FileIndex
+    public class VirtualFileIndex
     {
         private int _id;
         private string _name;
@@ -21,7 +21,7 @@ namespace ERAssetExtractor.Core
         public int Start { get { return _start; } }
         public int End { get { return _end; } }
 
-        public FileIndex(int id, string name, FileType type, int start, int end)
+        public VirtualFileIndex(int id, string name, FileType type, int start, int end)
         {
             _id = id;
             _name = name;

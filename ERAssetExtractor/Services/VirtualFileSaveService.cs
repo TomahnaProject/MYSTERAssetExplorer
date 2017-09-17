@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ERAssetExtractor.Services
 {
-    public class FileSaveService
+    public class VirtualFileSaveService
     {
-        public void SaveFile(string filePath, FileIndex file, byte[] data)
+        public void SaveFile(string filePath, VirtualFileIndex file, byte[] data)
         {
             string extension = "";
             if (file.Type == FileType.Jpg)

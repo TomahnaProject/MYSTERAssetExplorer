@@ -2,6 +2,7 @@
 using ERAssetExtractor.Services;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,11 +24,14 @@ namespace ERAssetExtractor.App
         {
             _context = new ERAssetExtractorContext();
             _context.uiContext = uiContext;
-            _context.files = new FileListing();
-            _context.indexer = new FileIndexerService();
-            _context.extractor = new FileExtractionService();
+            _context.files = new VirtualFileListing();
+            _context.indexer = new VirtualFileIndexerService();
+            _context.extractor = new VirtualFileExtractionService();
             _context.registryManager = new RegistryManager(uiContext);
             _context.workspaceModServ = new WorkspaceModificationService(uiContext);
+
+
+
         }
 
         public void OpenFile(string filePath)
@@ -75,7 +79,21 @@ namespace ERAssetExtractor.App
 
         public void SetWorkingDirectory(string path)
         {
-            _context.workspaceModServ.SetWorkingDirectory(path);
+            if (!Directory.Exists(Path.GetDirectoryName(path)))
+                _context.uiContext.WriteToConsole(Color.Red, "The following path is invalid: \"" + path + "\"");
+            _context.DataDirectory = Path.GetDirectoryName(path);
+
+            var files = LoadDataFiles();
+
+            //_context.workspaceModServ.SetWorkingDirectory(path);
+        }
+
+        public List<string> LoadDataFiles()
+        {
+            var directory = new DirectoryInfo(_context.DataDirectory);
+            var masks = new[] { "*.m3a", "*.m4b" };
+            var files = masks.SelectMany(directory.EnumerateFiles);
+            return files.Select(x=>x.FullName).ToList();
         }
 
         public void SortDataFiles()

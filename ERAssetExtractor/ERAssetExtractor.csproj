@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\ERAssetExtractorContext.cs" />
-    <Compile Include="App\ExileAndRevelationAssetExtractorApp.cs" />
+    <Compile Include="App\ERAssetExtractorApp.cs" />
     <Compile Include="App\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,8 +63,8 @@
     </Compile>
     <Compile Include="App\UIContext.cs" />
     <Compile Include="Core\CubeMapImageSet.cs" />
-    <Compile Include="Core\FileIndex.cs" />
-    <Compile Include="Core\FileListing.cs" />
+    <Compile Include="Core\VirtualFileIndex.cs" />
+    <Compile Include="Core\VirtualFileListing.cs" />
     <Compile Include="Core\FileType.cs" />
     <Compile Include="Core\Media.cs" />
     <Compile Include="Core\Node.cs" />
@@ -76,9 +76,9 @@
     <Compile Include="RichTextBoxExtensions.cs" />
     <Compile Include="Services\ConversionService.cs" />
     <Compile Include="Services\ExileIndexer.cs" />
-    <Compile Include="Services\FileExtractionService.cs" />
-    <Compile Include="Services\FileIndexerService.cs" />
-    <Compile Include="Services\FileSaveService.cs" />
+    <Compile Include="Services\VirtualFileExtractionService.cs" />
+    <Compile Include="Services\VirtualFileIndexerService.cs" />
+    <Compile Include="Services\VirtualFileSaveService.cs" />
     <Compile Include="Services\Indexer.cs" />
     <Compile Include="Services\IUIContext.cs" />
     <Compile Include="Services\NodeFaceValidator.cs" />

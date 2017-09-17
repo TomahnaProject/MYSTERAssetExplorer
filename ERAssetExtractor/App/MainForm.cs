@@ -60,7 +60,7 @@ namespace ERAssetExtractor.App
 
         private void sortButton_Click(object sender, EventArgs e)
         {
-            app.SortDataFiles();
+            //app.SortDataFiles();
         }
 
         private void WriteToConsole(Color color, string message)

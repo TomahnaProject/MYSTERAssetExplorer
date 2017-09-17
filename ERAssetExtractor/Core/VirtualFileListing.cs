@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace ERAssetExtractor.Core
 {
-    public class FileListing
+    public class VirtualFileListing
     {
-        List<FileIndex> files;
+        List<VirtualFileIndex> files;
 
-        public FileListing()
+        public VirtualFileListing()
         {
-            files = new List<FileIndex>();
+            files = new List<VirtualFileIndex>();
         }
 
-        public void Add(FileIndex file)
+        public void Add(VirtualFileIndex file)
         {
             files.Add(file);
         }
 
-        public List<FileIndex> GetList()
+        public List<VirtualFileIndex> GetList()
         {
             return files.ToList();
         }
