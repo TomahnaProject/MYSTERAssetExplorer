@@ -277,5 +277,10 @@ namespace ERAssetExtractor.App
             // the second node.
             return ContainsNode(node1, node2.Parent);
         }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            app.SaveRegistry();
+        }
     }
 }

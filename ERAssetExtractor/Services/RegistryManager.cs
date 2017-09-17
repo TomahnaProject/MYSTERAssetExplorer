@@ -10,19 +10,19 @@ namespace ERAssetExtractor.Services
     public class RegistryManager
     {
         private IUIContext uiContext;
-        public GameList Registries { get; set; }
+        public GameRegistry Registry { get; set; }
 
         public RegistryManager(IUIContext context)
         {
             uiContext = context;
-            Registries = new GameList();
+            Registry = new GameRegistry();
 
             //CreateFakeRegistry();
         }
 
         public void RegenTreeView()
         {
-            var nodesByAreas = Registries.Exile.Nodes.GroupBy(x => x.Zone);
+            var nodesByAreas = Registry.Exile.Nodes.GroupBy(x => x.Zone);
             var scene_tNodes = new List<TreeNode>();
 
             foreach (var area in nodesByAreas)

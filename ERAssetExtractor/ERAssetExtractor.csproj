@@ -62,9 +62,8 @@
       <DependentUpon>NodeViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="App\UIContext.cs" />
-    <Compile Include="Core\AssetOrganization\GameList.cs" />
+    <Compile Include="Core\AssetOrganization\GameRegistry.cs" />
     <Compile Include="Core\CubeMapImageSet.cs" />
-    <Compile Include="Core\AssetOrganization\Game.cs" />
     <Compile Include="Core\AssetOrganization\AssetRegistry.cs" />
     <Compile Include="Core\AssetOrganization\Scene.cs" />
     <Compile Include="Core\Vector3.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="RichTextBoxExtensions.cs" />
     <Compile Include="Services\ConversionService.cs" />
     <Compile Include="Services\ExileIndexer.cs" />
+    <Compile Include="Services\RegistryPersistenceService.cs" />
     <Compile Include="Services\VirtualFileExtractionService.cs" />
     <Compile Include="Services\VirtualFileIndexerService.cs" />
     <Compile Include="Services\VirtualFileSaveService.cs" />

@@ -19,6 +19,7 @@ namespace ERAssetExtractor.App
         public VirtualFileIndexerService indexer;
         public VirtualFileExtractionService extractor;
         public RegistryManager registryManager;
+        public RegistryPersistenceService registryPersistence;
         public IUIContext uiContext;
     }
 }

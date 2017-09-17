@@ -31,6 +31,7 @@
             this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
             this.fileListing = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.nodeListing = new System.Windows.Forms.TreeView();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -47,7 +48,8 @@
             this.sortButton = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.openViewer = new System.Windows.Forms.ToolStripLabel();
-            this.nodeListing = new System.Windows.Forms.TreeView();
+            this.saveButton = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -108,6 +110,21 @@
             this.splitContainer1.Size = new System.Drawing.Size(1036, 594);
             this.splitContainer1.SplitterDistance = 511;
             this.splitContainer1.TabIndex = 7;
+            // 
+            // nodeListing
+            // 
+            this.nodeListing.AllowDrop = true;
+            this.nodeListing.BackColor = System.Drawing.Color.Black;
+            this.nodeListing.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.nodeListing.Location = new System.Drawing.Point(224, 12);
+            this.nodeListing.Name = "nodeListing";
+            this.nodeListing.Size = new System.Drawing.Size(161, 485);
+            this.nodeListing.TabIndex = 22;
+            this.nodeListing.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.nodeListing_ItemDrag);
+            this.nodeListing.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.nodeListing_AfterSelect);
+            this.nodeListing.DragDrop += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragDrop);
+            this.nodeListing.DragEnter += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragEnter);
+            this.nodeListing.DragOver += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragOver);
             // 
             // button4
             // 
@@ -216,6 +233,8 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openFolder,
+            this.toolStripSeparator3,
+            this.saveButton,
             this.toolStripSeparator1,
             this.sortButton,
             this.toolStripSeparator2,
@@ -257,20 +276,17 @@
             this.openViewer.Text = "Open Node Viewer";
             this.openViewer.Click += new System.EventHandler(this.toolStripLabel1_Click_1);
             // 
-            // nodeListing
+            // saveButton
             // 
-            this.nodeListing.AllowDrop = true;
-            this.nodeListing.BackColor = System.Drawing.Color.Black;
-            this.nodeListing.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.nodeListing.Location = new System.Drawing.Point(224, 12);
-            this.nodeListing.Name = "nodeListing";
-            this.nodeListing.Size = new System.Drawing.Size(161, 485);
-            this.nodeListing.TabIndex = 22;
-            this.nodeListing.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.nodeListing_ItemDrag);
-            this.nodeListing.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.nodeListing_AfterSelect);
-            this.nodeListing.DragDrop += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragDrop);
-            this.nodeListing.DragEnter += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragEnter);
-            this.nodeListing.DragOver += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragOver);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(31, 22);
+            this.saveButton.Text = "Save";
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // MainForm
             // 
@@ -317,6 +333,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TreeView nodeListing;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripLabel saveButton;
     }
 }
 

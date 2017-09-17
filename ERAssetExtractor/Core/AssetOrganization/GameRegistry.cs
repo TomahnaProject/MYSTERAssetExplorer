@@ -5,12 +5,12 @@ using System.Text;
 
 namespace ERAssetExtractor.Core
 {
-    public class GameList
+    public class GameRegistry
     {
         public AssetRegistry Exile { get; set; }
         public AssetRegistry Revelation { get; set; }
 
-        public GameList()
+        public GameRegistry()
         {
             Exile = new AssetRegistry();
             Revelation = new AssetRegistry();

@@ -28,49 +28,11 @@ namespace ERAssetExtractor.App
             _context.indexer = new VirtualFileIndexerService();
             _context.extractor = new VirtualFileExtractionService();
             _context.registryManager = new RegistryManager(uiContext);
+            _context.registryPersistence = new RegistryPersistenceService();
 
-            //SaveRegistryFiles();
-            LoadRegistryFiles();
+            LoadRegistry();
         }
 
-        const string templateRegistryXML = @"<AssetRegistry><Nodes /></AssetRegistry>";
-
-        const string regDir = "Registry";
-        string exileRegistryFilePath = Path.Combine(regDir, "ExileAssetRegistry.xml");
-        string revelationRegistryFilePath = Path.Combine(regDir, "RevelationAssetRegistry.xml");
-
-        private void LoadRegistryFiles()
-        {
-            if (!Directory.Exists(regDir))
-                Directory.CreateDirectory(regDir);
-
-            var exileRegistryText = File.ReadAllText(exileRegistryFilePath);
-            if (string.IsNullOrEmpty(exileRegistryText))
-                File.WriteAllText(exileRegistryFilePath, templateRegistryXML);
-
-            var revalationRegistryText = File.ReadAllText(revelationRegistryFilePath);
-            if (string.IsNullOrEmpty(revalationRegistryText))
-                File.WriteAllText(revelationRegistryFilePath, templateRegistryXML);
-
-            var serializationService = new AssetRegistrySerializationService();
-            var exileRegistry = serializationService.DeserializeRegistry(exileRegistryText);
-            var revelationRegistry = serializationService.DeserializeRegistry(revalationRegistryText);
-
-            _context.registryManager.Registries.Exile = exileRegistry;
-            _context.registryManager.Registries.Revelation = revelationRegistry;
-
-            _context.registryManager.RegenTreeView();
-        }
-
-        private void SaveRegistryFiles()
-        {
-            var serializer = new AssetRegistrySerializationService();
-            var exileRegistry = serializer.SerializeRegistry(_context.registryManager.Registries.Exile);
-            var revelationRegistry = serializer.SerializeRegistry(_context.registryManager.Registries.Revelation);
-
-            File.WriteAllText(exileRegistryFilePath, exileRegistry);
-            File.WriteAllText(revelationRegistryFilePath, revelationRegistry);
-        }
 
         public void OpenFile(string filePath)
         {
@@ -90,6 +52,17 @@ namespace ERAssetExtractor.App
             {
                 throw new Exception("NOT A VALID FILE FORMAT");
             }
+        }
+
+        private void LoadRegistry()
+        {
+            var registry = _context.registryPersistence.GetRegistryFromDisk();
+            _context.registryManager.Registry = registry;
+        }
+
+        public void SaveRegistry()
+        {
+            _context.registryPersistence.SaveRegistryToDisk(_context.registryManager.Registry);
         }
 
         public void ExtractFiles(string folderPath)
