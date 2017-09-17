@@ -1,4 +1,5 @@
 ﻿using ERAssetExtractor.Core;
+using ERAssetExtractor.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,13 @@ namespace ERAssetExtractor.App
 {
     public class ERAssetExtractorContext
     {
-        List<IMedia> Files { get; set; }
+        public FileListing files;
+        public FileIndexerService indexer;
+        public FileExtractionService extractor;
+        public WorkspaceModificationService workspaceModServ;
+        public RegistryManager registryManager;
+        public IUIContext uiContext;
+
+        public List<IMedia> Files { get; set; }
     }
 }

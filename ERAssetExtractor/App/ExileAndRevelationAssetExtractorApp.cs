@@ -14,14 +14,21 @@ namespace ERAssetExtractor.App
         string M3FileExtension = ".M3A";
         string M4FileExtension = ".M4B";
 
-        
-
-        FileListing files = new FileListing();
-        FileIndexerService indexer = new FileIndexerService();
-        FileExtractionService extractor = new FileExtractionService();
-
         string _filePath;
         string _extractionPath;
+
+        ERAssetExtractorContext _context;
+
+        public ERAssetExtractorApp(IUIContext uiContext)
+        {
+            _context = new ERAssetExtractorContext();
+            _context.uiContext = uiContext;
+            _context.files = new FileListing();
+            _context.indexer = new FileIndexerService();
+            _context.extractor = new FileExtractionService();
+            _context.registryManager = new RegistryManager(uiContext);
+            _context.workspaceModServ = new WorkspaceModificationService(uiContext);
+        }
 
         public void OpenFile(string filePath)
         {
@@ -29,13 +36,13 @@ namespace ERAssetExtractor.App
             if (!File.Exists(filePath))
                 throw new Exception("No such file " + filePath);
 
-            if(Path.GetExtension(filePath).ToUpper() == M3FileExtension)
+            if (Path.GetExtension(filePath).ToUpper() == M3FileExtension)
             {
-                files = indexer.IndexM3AFile(_filePath);
+                _context.files = _context.indexer.IndexM3AFile(_filePath);
             }
             else if (Path.GetExtension(filePath).ToUpper() == M4FileExtension)
             {
-                files = indexer.IndexM4BDataFile(_filePath);
+                _context.files = _context.indexer.IndexM4BDataFile(_filePath);
             }
             else
             {
@@ -48,41 +55,32 @@ namespace ERAssetExtractor.App
             _extractionPath = folderPath;
             if (!Directory.Exists(folderPath))
                 return;
-            extractor.Extract(_filePath, files, _extractionPath);
+            _context.extractor.Extract(_filePath, _context.files, _extractionPath);
 
-        }
-
-        WorkspaceModificationService workspaceModServ;
-        RegistryManager registryManager;
-
-        public ERAssetExtractorApp(IUIContext context)
-        {
-            workspaceModServ = new WorkspaceModificationService(context);
-            registryManager = new RegistryManager(context);
         }
 
         public Workspace GetWorkspace()
         {
-            return workspaceModServ.Workspace;
+            return _context.workspaceModServ.Workspace;
         }
 
         public CubeMapImageSet GetCurrentSet() // hackiness
         {
-            return workspaceModServ.currentSet;
+            return _context.workspaceModServ.currentSet;
         }
         public void SetCurrentSet(CubeMapImageSet imageSet) // hackiness
         {
-            workspaceModServ.currentSet = imageSet;
+            _context.workspaceModServ.currentSet = imageSet;
         }
 
         public void SetWorkingDirectory(string path)
         {
-            workspaceModServ.SetWorkingDirectory(path);
+            _context.workspaceModServ.SetWorkingDirectory(path);
         }
 
         public void SortDataFiles()
         {
-            workspaceModServ.SortDataFiles();
+            _context.workspaceModServ.SortDataFiles();
         }
     }
 }
