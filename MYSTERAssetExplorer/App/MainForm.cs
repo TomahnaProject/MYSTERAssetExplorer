@@ -281,6 +281,24 @@ namespace MYSTERAssetExplorer.App
         private void saveButton_Click(object sender, EventArgs e)
         {
             app.SaveRegistry();
+            //todo check if everything went okay
+            MessageBox.Show("registry changes have been saved");
+        }
+
+        private void aboutButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Utility used to view and extract assets of Myst 3 Exile, and Myst 4 Revelation.\r\nCreated in 2017 by James Thomas");
+        }
+
+        private void helpButton_Click(object sender, EventArgs e)
+        {
+            var message = "You must select a folder containing .m3a and .m4b files.\r\n";
+            message += "The app will show assets from whatever data files are available in that folder.\r\n";
+
+            message += "\r\nThe app comes with a registry that maps the various asset files contained within the data files";
+            message += " to the various nodes.\r\n";
+            message += "\r\nAlterations to this registry can be saved, and loaded in subsequent sessions.\r\n";
+            MessageBox.Show(message);
         }
     }
 }
