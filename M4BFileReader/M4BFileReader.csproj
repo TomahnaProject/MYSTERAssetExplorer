@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4C8F15E9-7AB0-4220-8E4E-7CB241DCA561}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{7E68ABAA-F6FF-49C7-B263-6968DAFEE15A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExileAndRevelationAssetExtractor</RootNamespace>
-    <AssemblyName>ExileAndRevelationAssetExtractor</AssemblyName>
+    <RootNamespace>M4BFileReader</RootNamespace>
+    <AssemblyName>M4BFileReader</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -39,60 +39,19 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\ExileAndRevelationAssetExtractorApp.cs" />
-    <Compile Include="App\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="App\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\FileIndex.cs" />
-    <Compile Include="Core\FileListing.cs" />
-    <Compile Include="Core\FileType.cs" />
+    <Compile Include="M4BReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ConversionService.cs" />
-    <Compile Include="Services\ExileIndexer.cs" />
-    <Compile Include="Services\FileExtractionService.cs" />
-    <Compile Include="Services\FileIndexerService.cs" />
-    <Compile Include="Services\FileSaveService.cs" />
-    <Compile Include="Services\Indexer.cs" />
-    <Compile Include="Services\RevelationIndexer.cs" />
-    <EmbeddedResource Include="App\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Content Include="Notes\M4b_fileformat.txt" />
+    <None Include="w1z01n020.m4b">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
