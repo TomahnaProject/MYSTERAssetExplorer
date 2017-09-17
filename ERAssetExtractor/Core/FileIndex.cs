@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExileAndRevelationAssetExtractor.Core
+namespace ERAssetExtractor.Core
 {
     // meant to be read only; once the indexer figures out what/where a file is, then it shouldn't change around
     public class FileIndex

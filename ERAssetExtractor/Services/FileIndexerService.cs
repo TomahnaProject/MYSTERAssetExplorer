@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ExileAndRevelationAssetExtractor.Core;
+using ERAssetExtractor.Core;
 using System.IO;
 
-namespace ExileAndRevelationAssetExtractor.Services
+namespace ERAssetExtractor.Services
 {
     public class FileIndexerService
     {

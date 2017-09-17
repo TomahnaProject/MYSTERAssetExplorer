@@ -1,5 +1,5 @@
-﻿using ExileAndRevelationAssetExtractor.Core;
-using ExileAndRevelationAssetExtractor.Services;
+﻿using ERAssetExtractor.Core;
+using ERAssetExtractor.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExileAndRevelationAssetExtractor.App
+namespace ERAssetExtractor.App
 {
-    public class ExileAndRevelationAssetExtractorApp
+    public class ERAssetExtractorApp
     {
         string M3FileExtension = ".M3A";
         string M4FileExtension = ".M4B";

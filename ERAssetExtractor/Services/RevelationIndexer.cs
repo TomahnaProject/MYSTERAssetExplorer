@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExileAndRevelationAssetExtractor.Core
+namespace ERAssetExtractor.Services
 {
-    public enum FileType
+    public class RevelationIndexer : Indexer
     {
-        Jpg,
-        Bink,
-        Zap,
-        M4B,  
     }
 }
