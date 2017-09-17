@@ -62,15 +62,20 @@
       <DependentUpon>NodeViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="App\UIContext.cs" />
+    <Compile Include="Core\AssetOrganization\GameList.cs" />
     <Compile Include="Core\CubeMapImageSet.cs" />
+    <Compile Include="Core\AssetOrganization\Game.cs" />
+    <Compile Include="Core\AssetOrganization\AssetRegistry.cs" />
+    <Compile Include="Core\AssetOrganization\Scene.cs" />
+    <Compile Include="Core\Vector3.cs" />
     <Compile Include="Core\VirtualFileIndex.cs" />
     <Compile Include="Core\VirtualFileListing.cs" />
     <Compile Include="Core\FileType.cs" />
     <Compile Include="Core\Media.cs" />
-    <Compile Include="Core\Node.cs" />
-    <Compile Include="Core\NodeRegistry.cs" />
+    <Compile Include="Core\AssetOrganization\Node.cs" />
     <Compile Include="Core\Sprite.cs" />
-    <Compile Include="Core\Workspace.cs" />
+    <Compile Include="Core\VirtualFolder.cs" />
+    <Compile Include="Core\AssetOrganization\Zone.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RichTextBoxExtensions.cs" />
@@ -82,11 +87,10 @@
     <Compile Include="Services\Indexer.cs" />
     <Compile Include="Services\IUIContext.cs" />
     <Compile Include="Services\NodeFaceValidator.cs" />
-    <Compile Include="Services\NodeRegistrySerializationService.cs" />
+    <Compile Include="Services\AssetRegistrySerializationService.cs" />
     <Compile Include="Services\PanoBuilder.cs" />
     <Compile Include="Services\RegistryManager.cs" />
     <Compile Include="Services\RevelationIndexer.cs" />
-    <Compile Include="Services\WorkspaceModificationService.cs" />
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="App\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -117,7 +121,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Registry\RevelationAssetRegistry.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Registry\ExileAssetRegistry.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

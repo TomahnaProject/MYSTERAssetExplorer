@@ -10,23 +10,24 @@ namespace ERAssetExtractor.Services
     public class RegistryManager
     {
         private IUIContext uiContext;
-        public NodeRegistry Registry { get; set; }
+        public GameList Registries { get; set; }
 
         public RegistryManager(IUIContext context)
         {
             uiContext = context;
-            CreateFakeRegistry();
-            RegenTreeView();
+            Registries = new GameList();
+
+            //CreateFakeRegistry();
         }
 
         public void RegenTreeView()
         {
-            var nodesByAreas = Registry.Nodes.GroupBy(x => x.Area);
+            var nodesByAreas = Registries.Exile.Nodes.GroupBy(x => x.Zone);
             var scene_tNodes = new List<TreeNode>();
 
             foreach (var area in nodesByAreas)
             {
-                var areaName = area.FirstOrDefault().Area;
+                var areaName = area.FirstOrDefault().Zone;
                 var area_tNodes = new List<TreeNode>();
                 foreach(var node in area)
                 {
@@ -49,22 +50,22 @@ namespace ERAssetExtractor.Services
 
         public void CreateFakeRegistry()
         {
-            Registry = new NodeRegistry();
-            var node01 = new Node();
-            node01.Scene = "MA";
-            node01.Area = "TO";
-            node01.Id = 1;
+            //var exile = new AssetRegistry();
+            //var node01 = new Node();
+            //node01.Scene = "MA";
+            //node01.Area = "TO";
+            //node01.Id = 1;
 
-            var cubeMap = new CubeMapImageSet();
-            cubeMap.Back = "a";
-            cubeMap.Bottom = "b";
-            cubeMap.Front = "c";
-            cubeMap.Left = "d";
-            cubeMap.Right = "e";
-            cubeMap.Top = "f";
-            node01.CubeMap = cubeMap;
+            //var cubeMap = new CubeMapImageSet();
+            //cubeMap.Back = "a";
+            //cubeMap.Bottom = "b";
+            //cubeMap.Front = "c";
+            //cubeMap.Left = "d";
+            //cubeMap.Right = "e";
+            //cubeMap.Top = "f";
+            //node01.CubeMap = cubeMap;
 
-            Registry.AddNode(node01);
+            //Registry.AddNode(node01);
         }
     }
 }

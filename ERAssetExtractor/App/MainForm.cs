@@ -87,21 +87,21 @@ namespace ERAssetExtractor.App
 
         private void LoadImageToViewer()
         {
-            string[] list = fileListing.SelectedItems.Cast<string>().ToArray();
+            //string[] list = fileListing.SelectedItems.Cast<string>().ToArray();
 
-            // add path data so the images can be found
-            var nodeDir = app.GetWorkspace().NodeDir;
-            for(int i = 0; i<list.Length; i++)
-                list[i] = Path.Combine(nodeDir, list[i]);
+            //// add path data so the images can be found
+            //var nodeDir = ""; //app.GetWorkspace().NodeDir;
+            //for(int i = 0; i<list.Length; i++)
+            //    list[i] = Path.Combine(nodeDir, list[i]);
 
-            var imageSet = CubeMapImageSet.FillFromArray(list);
-            viewer.SetNode(imageSet);
-            app.SetCurrentSet(imageSet); // hackiness
+            //var imageSet = CubeMapImageSet.FillFromArray(list);
+            //viewer.SetNode(imageSet);
+            //app.SetCurrentSet(imageSet); // hackiness
         }
 
         private void toolStripLabel1_Click(object sender, EventArgs e)
         {
-            app.SortDataFiles();
+            //app.SortDataFiles();
         }
 
         private void toolStripLabel1_Click_1(object sender, EventArgs e)
@@ -125,29 +125,29 @@ namespace ERAssetExtractor.App
 
         private void NextSelection()
         {
-            if (!Directory.Exists(app.GetWorkspace().RootDir))
-                return;
+            //if (!Directory.Exists(app.GetWorkspace().RootDir))
+            //    return;
 
-            var lastSelectedIndex = -1;
-            if (fileListing.SelectedItems.Count > 0)
-            {
-                var i = fileListing.SelectedItems[fileListing.SelectedItems.Count - 1];
-                lastSelectedIndex = fileListing.Items.IndexOf(i);
-            }
+            //var lastSelectedIndex = -1;
+            //if (fileListing.SelectedItems.Count > 0)
+            //{
+            //    var i = fileListing.SelectedItems[fileListing.SelectedItems.Count - 1];
+            //    lastSelectedIndex = fileListing.Items.IndexOf(i);
+            //}
 
-            fileListing.SelectedItems.Clear();
-            fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 1]);
-            fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 2]);
-            fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 3]);
-            fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 4]);
-            fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 5]);
-            fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 6]);
+            //fileListing.SelectedItems.Clear();
+            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 1]);
+            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 2]);
+            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 3]);
+            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 4]);
+            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 5]);
+            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 6]);
 
-            viewer.Show();
-            viewer.ActivateLoadNode();
+            //viewer.Show();
+            //viewer.ActivateLoadNode();
 
-            var nextNode = (int)nodeNumber.Value + 1;
-            nodeNumber.Value = nextNode;
+            //var nextNode = (int)nodeNumber.Value + 1;
+            //nodeNumber.Value = nextNode;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -157,14 +157,14 @@ namespace ERAssetExtractor.App
 
         private void ConstructPano()
         {
-            if (!Directory.Exists(app.GetWorkspace().PanoDir))
-                Directory.CreateDirectory(app.GetWorkspace().PanoDir);
-            int nodeNumber = (int)this.nodeNumber.Value;
-            var panoName = panoNameInput.Text + "_" + nodeNumber.ToString("D3");
+            //if (!Directory.Exists(app.GetWorkspace().PanoDir))
+            //    Directory.CreateDirectory(app.GetWorkspace().PanoDir);
+            //int nodeNumber = (int)this.nodeNumber.Value;
+            //var panoName = panoNameInput.Text + "_" + nodeNumber.ToString("D3");
 
-            WriteToConsole(Color.Yellow, "Building Pano " + panoName);
-            builder.BuildPanorama(app.GetWorkspace().PanoDir, panoName, app.GetCurrentSet());
-            WriteToConsole(Color.LimeGreen, "Pano Completed!");
+            //WriteToConsole(Color.Yellow, "Building Pano " + panoName);
+            //builder.BuildPanorama(app.GetWorkspace().PanoDir, panoName, app.GetCurrentSet());
+            //WriteToConsole(Color.LimeGreen, "Pano Completed!");
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)

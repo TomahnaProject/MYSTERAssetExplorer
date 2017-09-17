@@ -28,10 +28,48 @@ namespace ERAssetExtractor.App
             _context.indexer = new VirtualFileIndexerService();
             _context.extractor = new VirtualFileExtractionService();
             _context.registryManager = new RegistryManager(uiContext);
-            _context.workspaceModServ = new WorkspaceModificationService(uiContext);
 
+            //SaveRegistryFiles();
+            LoadRegistryFiles();
+        }
 
+        const string templateRegistryXML = @"<AssetRegistry><Nodes /></AssetRegistry>";
 
+        const string regDir = "Registry";
+        string exileRegistryFilePath = Path.Combine(regDir, "ExileAssetRegistry.xml");
+        string revelationRegistryFilePath = Path.Combine(regDir, "RevelationAssetRegistry.xml");
+
+        private void LoadRegistryFiles()
+        {
+            if (!Directory.Exists(regDir))
+                Directory.CreateDirectory(regDir);
+
+            var exileRegistryText = File.ReadAllText(exileRegistryFilePath);
+            if (string.IsNullOrEmpty(exileRegistryText))
+                File.WriteAllText(exileRegistryFilePath, templateRegistryXML);
+
+            var revalationRegistryText = File.ReadAllText(revelationRegistryFilePath);
+            if (string.IsNullOrEmpty(revalationRegistryText))
+                File.WriteAllText(revelationRegistryFilePath, templateRegistryXML);
+
+            var serializationService = new AssetRegistrySerializationService();
+            var exileRegistry = serializationService.DeserializeRegistry(exileRegistryText);
+            var revelationRegistry = serializationService.DeserializeRegistry(revalationRegistryText);
+
+            _context.registryManager.Registries.Exile = exileRegistry;
+            _context.registryManager.Registries.Revelation = revelationRegistry;
+
+            _context.registryManager.RegenTreeView();
+        }
+
+        private void SaveRegistryFiles()
+        {
+            var serializer = new AssetRegistrySerializationService();
+            var exileRegistry = serializer.SerializeRegistry(_context.registryManager.Registries.Exile);
+            var revelationRegistry = serializer.SerializeRegistry(_context.registryManager.Registries.Revelation);
+
+            File.WriteAllText(exileRegistryFilePath, exileRegistry);
+            File.WriteAllText(revelationRegistryFilePath, revelationRegistry);
         }
 
         public void OpenFile(string filePath)
@@ -63,19 +101,14 @@ namespace ERAssetExtractor.App
 
         }
 
-        public Workspace GetWorkspace()
-        {
-            return _context.workspaceModServ.Workspace;
-        }
-
-        public CubeMapImageSet GetCurrentSet() // hackiness
-        {
-            return _context.workspaceModServ.currentSet;
-        }
-        public void SetCurrentSet(CubeMapImageSet imageSet) // hackiness
-        {
-            _context.workspaceModServ.currentSet = imageSet;
-        }
+        //public CubeMapImageSet GetCurrentSet() // hackiness
+        //{
+        //    return _context.workspaceModServ.currentSet;
+        //}
+        //public void SetCurrentSet(CubeMapImageSet imageSet) // hackiness
+        //{
+        //    _context.workspaceModServ.currentSet = imageSet;
+        //}
 
         public void SetWorkingDirectory(string path)
         {
@@ -96,9 +129,9 @@ namespace ERAssetExtractor.App
             return files.Select(x=>x.FullName).ToList();
         }
 
-        public void SortDataFiles()
-        {
-            _context.workspaceModServ.SortDataFiles();
-        }
+        //public void SortDataFiles()
+        //{
+        //    _context.workspaceModServ.SortDataFiles();
+        //}
     }
 }
