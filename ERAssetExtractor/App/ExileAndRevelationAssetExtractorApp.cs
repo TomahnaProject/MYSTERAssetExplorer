@@ -51,5 +51,38 @@ namespace ERAssetExtractor.App
             extractor.Extract(_filePath, files, _extractionPath);
 
         }
+
+        WorkspaceModificationService workspaceModServ;
+        RegistryManager registryManager;
+
+        public ERAssetExtractorApp(IUIContext context)
+        {
+            workspaceModServ = new WorkspaceModificationService(context);
+            registryManager = new RegistryManager(context);
+        }
+
+        public Workspace GetWorkspace()
+        {
+            return workspaceModServ.Workspace;
+        }
+
+        public CubeMapImageSet GetCurrentSet() // hackiness
+        {
+            return workspaceModServ.currentSet;
+        }
+        public void SetCurrentSet(CubeMapImageSet imageSet) // hackiness
+        {
+            workspaceModServ.currentSet = imageSet;
+        }
+
+        public void SetWorkingDirectory(string path)
+        {
+            workspaceModServ.SetWorkingDirectory(path);
+        }
+
+        public void SortDataFiles()
+        {
+            workspaceModServ.SortDataFiles();
+        }
     }
 }

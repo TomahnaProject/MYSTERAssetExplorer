@@ -47,8 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\CubeMapWranglerApp.cs" />
-    <Compile Include="App\CubeMapWranglerContext.cs" />
+    <Compile Include="App\ERAssetExtractorContext.cs" />
     <Compile Include="App\ExileAndRevelationAssetExtractorApp.cs" />
     <Compile Include="App\MainForm.cs">
       <SubType>Form</SubType>

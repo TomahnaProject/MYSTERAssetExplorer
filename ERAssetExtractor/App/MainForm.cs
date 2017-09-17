@@ -14,7 +14,7 @@ namespace ERAssetExtractor.App
 {
     public partial class MainForm : Form
     {
-        ERAssetExtractorApp2 app;
+        ERAssetExtractorApp app;
         NodeViewer viewer;
         PanoBuilder builder;
 
@@ -26,7 +26,7 @@ namespace ERAssetExtractor.App
             uiContext.WriteToConsole += WriteToConsole;
             uiContext.ListFiles += FillListBox;
             uiContext.PopulateNodes += FillTreeView;
-            app = new ERAssetExtractorApp2(uiContext);
+            app = new ERAssetExtractorApp(uiContext);
 
             viewer = new NodeViewer(LoadImageToViewer);
             builder = new PanoBuilder();
