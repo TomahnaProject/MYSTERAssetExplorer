@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MYSTERAssetExplorer.App
 {
-    public class MYSTERAssetExplorerApp
+    public class AssetExplorerApp
     {
         string M3FileExtension = ".M3A";
         string M4FileExtension = ".M4B";
@@ -18,11 +18,11 @@ namespace MYSTERAssetExplorer.App
         string _filePath;
         string _extractionPath;
 
-        MYSTERAssetExplorerContext _context;
+        AssetExplorerContext _context;
 
-        public MYSTERAssetExplorerApp(IUIContext uiContext)
+        public AssetExplorerApp(IUIContext uiContext)
         {
-            _context = new MYSTERAssetExplorerContext();
+            _context = new AssetExplorerContext();
             _context.uiContext = uiContext;
             _context.files = new VirtualFileListing();
             _context.indexer = new VirtualFileIndexerService();

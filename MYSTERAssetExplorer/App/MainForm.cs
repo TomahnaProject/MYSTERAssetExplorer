@@ -14,7 +14,7 @@ namespace MYSTERAssetExplorer.App
 {
     public partial class MainForm : Form
     {
-        MYSTERAssetExplorerApp app;
+        AssetExplorerApp app;
         NodeViewer viewer;
         PanoBuilder builder;
 
@@ -26,7 +26,7 @@ namespace MYSTERAssetExplorer.App
             uiContext.WriteToConsole += WriteToConsole;
             uiContext.ListFiles += FillListBox;
             uiContext.PopulateNodes += FillTreeView;
-            app = new MYSTERAssetExplorerApp(uiContext);
+            app = new AssetExplorerApp(uiContext);
 
             viewer = new NodeViewer(LoadImageToViewer);
             builder = new PanoBuilder();

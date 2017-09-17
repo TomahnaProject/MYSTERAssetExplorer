@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\ERAssetExtractorContext.cs" />
-    <Compile Include="App\ERAssetExtractorApp.cs" />
+    <Compile Include="App\AssetExplorerContext.cs" />
+    <Compile Include="App\AssetExplorerApp.cs" />
     <Compile Include="App\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

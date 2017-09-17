@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MYSTERAssetExplorer.App
 {
-    public class MYSTERAssetExplorerContext
+    public class AssetExplorerContext
     {
         public string DataDirectory { get; set; }
         public string CurrentNode { get; set; }
