@@ -61,26 +61,45 @@ namespace ExileAndRevelationAssetExtractor.Services
                 int bufferCount = fileLength / buffer.Length;
 
                 int count = 0;
-                int offset = 0;
+                int bufferOffset = 0;
                 int returnedBufferSize = 0;
-                while (count < bufferCount)
+                int offset;
+                while (count <= bufferCount)
                 {
-                    offset = count * BUFFER_SIZE;
-                    fileStream.Seek(offset, SeekOrigin.Begin);
-                    returnedBufferSize = fileStream.Read(buffer, 0, BUFFER_SIZE);
+                    bufferOffset = count * BUFFER_SIZE;
+                    fileStream.Seek(bufferOffset, SeekOrigin.Begin);
+                    returnedBufferSize = fileStream.Read(buffer, 0, buffer.Length);
                     count++;
 
                     //check and handle end of file
                     if (returnedBufferSize < BUFFER_SIZE)
                     {
                         buffer = new byte[returnedBufferSize];
+                        // need to manually do this again to get that last bit of the file
+                        fileStream.Seek(bufferOffset, SeekOrigin.Begin);
+                        fileStream.Read(buffer, 0, buffer.Length);
                     }
 
                     //search buffer for the start of markers/headers
                     for (int i = 0; i < buffer.Length; i++)
                     {
-                        if (buffer[i] == jpgStart[0])
-                            markers.Add(new FileMarker(offset + i, FileMarkerType.JpgStart));
+                        offset = bufferOffset + i;
+
+                        if (i < (buffer.Length-1))
+                        {
+                            if (buffer[i] == jpgStart[0])
+                            {
+                                if(buffer[i + 1] == jpgStart[1])
+                                    markers.Add(new FileMarker(offset, FileMarkerType.JpgStart));
+                                else if (buffer[i + 1] == jpgEnd[1])
+                                    markers.Add(new FileMarker(offset, FileMarkerType.JpgEnd));
+                            }
+                        }
+                        else
+                        {
+                            if (buffer[i] == jpgStart[0])
+                                markers.Add(new FileMarker(offset, FileMarkerType.JpgStart));
+                        }
                     }
                 }
             }
@@ -116,16 +135,22 @@ namespace ExileAndRevelationAssetExtractor.Services
                         headerRegionReturnSize = fileStream.Read(headerRegion, 0, headerRegion.Length);
                     }
 
+                    if (headerRegionReturnSize < jpgEnd.Length) // too small for jpg marker
+                        continue;
 
                     if (headerRegion[0] == jpgStart[0])
                     {
-                        if (headerRegionReturnSize < 2) // too small for jpg stuff
-                            continue;
-
                         if (headerRegion[1] == jpgStart[1])
                         {
+                            if (headerRegionReturnSize < jpgStart.Length) // prefer to find a full header
+                                continue;
+
                             if (headerRegion[2] == jpgStart[2])
-                                confirmedMarkers.Add(new FileMarker(marker.Index, FileMarkerType.JpgStart));
+                                if (headerRegion[3] == jpgStart[3])
+                                    if (headerRegion[4] == jpgStart[4])
+                                        if (headerRegion[5] == jpgStart[5])
+                                            if (headerRegion[6] == jpgStart[6])
+                                                confirmedMarkers.Add(new FileMarker(marker.Index, FileMarkerType.JpgStart));
                         }
                         else if (headerRegion[1] == jpgEnd[1])
                         {
