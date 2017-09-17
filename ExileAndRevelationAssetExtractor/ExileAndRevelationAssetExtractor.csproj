@@ -59,8 +59,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConversionService.cs" />
+    <Compile Include="Services\ExileIndexer.cs" />
     <Compile Include="Services\FileExtractionService.cs" />
     <Compile Include="Services\FileIndexerService.cs" />
+    <Compile Include="Services\FileSaveService.cs" />
+    <Compile Include="Services\Indexer.cs" />
+    <Compile Include="Services\RevelationIndexer.cs" />
     <EmbeddedResource Include="App\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

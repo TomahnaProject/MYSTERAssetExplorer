@@ -14,6 +14,8 @@ namespace ExileAndRevelationAssetExtractor.App
         string M3FileExtension = ".M3A";
         string M4FileExtension = ".M4B";
 
+        
+
         FileListing files = new FileListing();
         FileIndexerService indexer = new FileIndexerService();
         FileExtractionService extractor = new FileExtractionService();

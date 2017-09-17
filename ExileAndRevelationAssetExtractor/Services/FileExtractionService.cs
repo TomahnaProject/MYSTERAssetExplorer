@@ -13,10 +13,11 @@ namespace ExileAndRevelationAssetExtractor.Services
         internal void Extract(string _filePath, FileListing files, string folderPath)
         {
             var fileListing = files.GetList();
+            var fileSaveService = new FileSaveService();
             foreach (var file in fileListing)
             {
                 var data = ExtractFile(_filePath, file);
-                SaveFile(file, data, folderPath);
+                fileSaveService.SaveFile(folderPath, file, data);
             }
         }
 
@@ -35,18 +36,6 @@ namespace ExileAndRevelationAssetExtractor.Services
                 fileStream.Close();
             }
             return buffer;
-        }
-
-        private void SaveFile(FileIndex file, byte[] data, string extractionPath)
-        {
-            string extension = "";
-            if (file.Type == FileType.Jpg)
-                extension = ".jpg";
-            else if (file.Type == FileType.Bink)
-                extension = ".bik";
-
-            var savePath = Path.Combine(extractionPath, file.Name + extension);
-            File.WriteAllBytes(savePath, data);
         }
     }
 }
