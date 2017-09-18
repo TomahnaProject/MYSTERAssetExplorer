@@ -18,31 +18,42 @@ namespace MYSTERAssetExplorer.App
 
         public void RegenTreeView(GameRegistry registry)
         {
+            var games = new List<TreeNode>();
+            var exileNodes = NodesForAssetRegistry(registry.Exile);
+            games.Add(new TreeNode("Exile", exileNodes.ToArray()));
+            var revNodes = NodesForAssetRegistry(registry.Revelation);
+            games.Add(new TreeNode("Revelation", revNodes.ToArray()));
+            _uiContext.PopulateNodes(games.ToArray());
+        }
 
-            var nodesByAreas = registry.Exile.Nodes.GroupBy(x => x.Zone);
-            var scene_tNodes = new List<TreeNode>();
+        private List<TreeNode> NodesForAssetRegistry(AssetRegistry registry)
+        {
+            var registry_tNodes = new List<TreeNode>();
 
-            foreach (var area in nodesByAreas)
+            var nodesByScene = registry.Nodes.GroupBy(x => x.Scene);
+
+            foreach(var scene in nodesByScene)
             {
-                var areaName = area.FirstOrDefault().Zone;
-                var area_tNodes = new List<TreeNode>();
-                foreach (var node in area)
+                var sceneName = scene.FirstOrDefault().Scene;
+                var scene_tNodes = new List<TreeNode>();
+                var nodesByZones = scene.GroupBy(x => x.Zone);
+
+                foreach (var zone in nodesByZones)
                 {
-                    var nodeName = node.Id.ToString();
-                    var nodeParts = new List<TreeNode>();
-                    nodeParts.Add(new TreeNode("Back", (new TreeNode[1] { new TreeNode(node.CubeMap.Back) })));
-                    nodeParts.Add(new TreeNode("Bottom", (new TreeNode[1] { new TreeNode(node.CubeMap.Bottom) })));
-                    nodeParts.Add(new TreeNode("Front", (new TreeNode[1] { new TreeNode(node.CubeMap.Front) })));
-                    nodeParts.Add(new TreeNode("Left", (new TreeNode[1] { new TreeNode(node.CubeMap.Left) })));
-                    nodeParts.Add(new TreeNode("Right", (new TreeNode[1] { new TreeNode(node.CubeMap.Right) })));
-                    nodeParts.Add(new TreeNode("Top", (new TreeNode[1] { new TreeNode(node.CubeMap.Top) })));
-                    area_tNodes.Add(new TreeNode(nodeName, nodeParts.ToArray()));
+                    var zoneName = zone.FirstOrDefault().Zone;
+                    var zone_tNodes = new List<TreeNode>();
+                    var orderedNodes = zone.OrderBy(x => x.Id);
+
+                    foreach (var node in orderedNodes)
+                    {
+                        var nodeName = node.Id.ToString();
+                        zone_tNodes.Add(new TreeNode(nodeName));
+                    }
+                    scene_tNodes.Add(new TreeNode(zoneName, zone_tNodes.ToArray()));
                 }
-
-                scene_tNodes.Add(new TreeNode(areaName, area_tNodes.ToArray()));
+                registry_tNodes.Add(new TreeNode(sceneName, scene_tNodes.ToArray()));
             }
-
-            _uiContext.PopulateNodes(scene_tNodes.ToArray());
+            return registry_tNodes;
         }
     }
 }
