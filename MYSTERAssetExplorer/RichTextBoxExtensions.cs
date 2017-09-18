@@ -17,6 +17,9 @@ namespace MYSTERAssetExplorer
             box.SelectionColor = color;
             box.AppendText(text);
             box.SelectionColor = box.ForeColor;
+
+            box.SelectionStart = box.Text.Length;
+            box.ScrollToCaret();
         }
     }
 }

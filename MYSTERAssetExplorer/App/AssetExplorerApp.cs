@@ -63,14 +63,18 @@ namespace MYSTERAssetExplorer.App
 
         private void LoadRegistry()
         {
+            _context.uiContext.WriteToConsole(Color.Orange, "Loading Registry...");
             var registry = _context.registryPersistence.GetRegistryFromDisk();
             _context.registryManager.Registry = registry;
             treeViewManager.RegenTreeView(_context.registryManager.Registry);
+            _context.uiContext.WriteToConsole(Color.Green, "Registry Loaded Successfully!");
         }
 
         public void SaveRegistry()
         {
+            _context.uiContext.WriteToConsole(Color.Orange, "Saving Registry...");
             _context.registryPersistence.SaveRegistryToDisk(_context.registryManager.Registry);
+            _context.uiContext.WriteToConsole(Color.Green, "Registry Saved!");
         }
 
         public void ExtractFiles(string folderPath)
@@ -93,11 +97,19 @@ namespace MYSTERAssetExplorer.App
 
         public void SetWorkingDirectory(string path)
         {
-            if (!Directory.Exists(Path.GetDirectoryName(path)))
-                _context.uiContext.WriteToConsole(Color.Red, "The following path is invalid: \"" + path + "\"");
-            _context.DataDirectory = Path.GetDirectoryName(path);
+            var dir = Path.GetDirectoryName(path);
+            _context.uiContext.WriteToConsole(Color.Orange, "Opening Folder " + dir);
+
+            if (!Directory.Exists(dir))
+                _context.uiContext.WriteToConsole(Color.Red, "The following path is invalid: \"" + dir + "\"");
+            _context.DataDirectory = dir;
 
             var files = LoadDataFiles();
+
+            foreach(var file in files)
+            {
+                _context.uiContext.WriteToConsole(Color.Green, "Found file " + file);
+            }
 
             //_context.workspaceModServ.SetWorkingDirectory(path);
         }
@@ -109,10 +121,5 @@ namespace MYSTERAssetExplorer.App
             var files = masks.SelectMany(directory.EnumerateFiles);
             return files.Select(x=>x.FullName).ToList();
         }
-
-        //public void SortDataFiles()
-        //{
-        //    _context.workspaceModServ.SortDataFiles();
-        //}
     }
 }
