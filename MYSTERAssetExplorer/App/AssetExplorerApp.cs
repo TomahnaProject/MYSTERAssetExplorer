@@ -20,6 +20,8 @@ namespace MYSTERAssetExplorer.App
 
         AssetExplorerContext _context;
 
+        RegistryTreeViewManager treeViewManager;
+
         public AssetExplorerApp(IUIContext uiContext)
         {
             _context = new AssetExplorerContext();
@@ -30,9 +32,14 @@ namespace MYSTERAssetExplorer.App
             _context.registryManager = new RegistryManager(uiContext);
             _context.registryPersistence = new RegistryPersistenceService();
 
-            LoadRegistry();
-        }
+            treeViewManager = new RegistryTreeViewManager(uiContext);
 
+            LoadRegistry();
+
+            treeViewManager.RegenTreeView(_context.registryManager.Registry);
+            //var fakeReg = _context.registryManager.CreateFakeRegistry();
+            //_context.registryManager.Registry.Exile = fakeReg;
+        }
 
         public void OpenFile(string filePath)
         {
@@ -58,6 +65,7 @@ namespace MYSTERAssetExplorer.App
         {
             var registry = _context.registryPersistence.GetRegistryFromDisk();
             _context.registryManager.Registry = registry;
+            treeViewManager.RegenTreeView(_context.registryManager.Registry);
         }
 
         public void SaveRegistry()
