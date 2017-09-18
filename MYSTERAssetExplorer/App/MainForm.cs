@@ -24,7 +24,7 @@ namespace MYSTERAssetExplorer.App
 
             var uiContext = new UIContext();
             uiContext.WriteToConsole += WriteToConsole;
-            uiContext.ListFiles += FillListBox;
+            uiContext.ListFiles += FillListView;
             uiContext.PopulateNodes += FillTreeView;
             app = new AssetExplorerApp(uiContext);
 
@@ -68,10 +68,22 @@ namespace MYSTERAssetExplorer.App
             logOutput.AppendText(message + "\r\n",color);
         }
 
-        private void FillListBox(List<string> files)
+        private void FillListView(List<string> files)
         {
             fileListing.Items.Clear();
-            fileListing.Items.AddRange(files.ToArray());
+
+            foreach(var file in files)
+            {
+                var item = new ListViewItem(file, 1);
+                var subItems = new ListViewItem.ListViewSubItem[]
+                {
+                    new ListViewItem.ListViewSubItem(item, "size"),
+                    new ListViewItem.ListViewSubItem(item, "offset")
+                };
+
+                item.SubItems.AddRange(subItems);
+                fileListing.Items.Add(item);
+            }
         }
 
         private void FillTreeView(TreeNode[] nodes)

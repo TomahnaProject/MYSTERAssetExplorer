@@ -59,6 +59,8 @@ namespace MYSTERAssetExplorer.App
             {
                 throw new Exception("NOT A VALID FILE FORMAT");
             }
+            var fileList = _context.files.GetList().Select(x => x.Name).ToList();
+            _context.uiContext.ListFiles(fileList);
         }
 
         private void LoadRegistry()
@@ -109,6 +111,11 @@ namespace MYSTERAssetExplorer.App
             foreach(var file in files)
             {
                 _context.uiContext.WriteToConsole(Color.Green, "Found file " + file);
+            }
+
+            foreach(var file in files)
+            {
+                // construct fileListing
             }
 
             //_context.workspaceModServ.SetWorkingDirectory(path);

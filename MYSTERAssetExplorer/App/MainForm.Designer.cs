@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
-            this.fileListing = new System.Windows.Forms.ListBox();
             this.nextSelectionButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.previewGroup = new System.Windows.Forms.GroupBox();
@@ -74,6 +73,12 @@
             this.splitContainerFileListings = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.button4 = new System.Windows.Forms.Button();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.fileListing = new System.Windows.Forms.ListView();
+            this.fileColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.sizeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.offsetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.previewGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.extractGroup.SuspendLayout();
@@ -102,28 +107,15 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFolderDialog
             // 
             this.openFolderDialog.FileName = "Select Folder";
-            // 
-            // fileListing
-            // 
-            this.fileListing.BackColor = System.Drawing.Color.Black;
-            this.fileListing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileListing.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.fileListing.FormattingEnabled = true;
-            this.fileListing.ItemHeight = 14;
-            this.fileListing.Location = new System.Drawing.Point(0, 0);
-            this.fileListing.Margin = new System.Windows.Forms.Padding(0);
-            this.fileListing.MinimumSize = new System.Drawing.Size(100, 215);
-            this.fileListing.Name = "fileListing";
-            this.fileListing.ScrollAlwaysVisible = true;
-            this.fileListing.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.fileListing.Size = new System.Drawing.Size(111, 690);
-            this.fileListing.TabIndex = 6;
-            this.fileListing.SelectedIndexChanged += new System.EventHandler(this.fileListing_SelectedIndexChanged);
             // 
             // nextSelectionButton
             // 
@@ -162,7 +154,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Black;
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 15);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
@@ -281,7 +273,7 @@
             this.listBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox3.BackColor = System.Drawing.Color.Black;
+            this.listBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.listBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 14;
@@ -308,7 +300,7 @@
             this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox2.BackColor = System.Drawing.Color.Black;
+            this.listBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.listBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 14;
@@ -335,7 +327,7 @@
             this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox1.BackColor = System.Drawing.Color.Black;
+            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.listBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 14;
@@ -405,14 +397,14 @@
             // nodeListing
             // 
             this.nodeListing.AllowDrop = true;
-            this.nodeListing.BackColor = System.Drawing.Color.Black;
+            this.nodeListing.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.nodeListing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nodeListing.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.nodeListing.Location = new System.Drawing.Point(0, 0);
             this.nodeListing.Margin = new System.Windows.Forms.Padding(0);
             this.nodeListing.MinimumSize = new System.Drawing.Size(100, 215);
             this.nodeListing.Name = "nodeListing";
-            this.nodeListing.Size = new System.Drawing.Size(219, 690);
+            this.nodeListing.Size = new System.Drawing.Size(100, 690);
             this.nodeListing.TabIndex = 22;
             this.nodeListing.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.nodeListing_ItemDrag);
             this.nodeListing.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.nodeListing_AfterSelect);
@@ -613,13 +605,13 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.fileListing);
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer4);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.nodeListing);
             this.splitContainer1.Size = new System.Drawing.Size(334, 690);
-            this.splitContainer1.SplitterDistance = 111;
+            this.splitContainer1.SplitterDistance = 232;
             this.splitContainer1.TabIndex = 29;
             // 
             // button4
@@ -630,6 +622,62 @@
             this.button4.TabIndex = 30;
             this.button4.Text = "Extract This File";
             this.button4.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.treeView1);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.fileListing);
+            this.splitContainer4.Size = new System.Drawing.Size(232, 690);
+            this.splitContainer4.SplitterDistance = 101;
+            this.splitContainer4.TabIndex = 7;
+            // 
+            // treeView1
+            // 
+            this.treeView1.AllowDrop = true;
+            this.treeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(0);
+            this.treeView1.MinimumSize = new System.Drawing.Size(100, 215);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(101, 690);
+            this.treeView1.TabIndex = 23;
+            // 
+            // fileListing
+            // 
+            this.fileListing.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.fileListing.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.fileColumn,
+            this.sizeColumn,
+            this.offsetColumn});
+            this.fileListing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileListing.Location = new System.Drawing.Point(0, 0);
+            this.fileListing.Name = "fileListing";
+            this.fileListing.Size = new System.Drawing.Size(127, 690);
+            this.fileListing.TabIndex = 0;
+            this.fileListing.UseCompatibleStateImageBehavior = false;
+            // 
+            // fileColumn
+            // 
+            this.fileColumn.Text = "File";
+            // 
+            // sizeColumn
+            // 
+            this.sizeColumn.Text = "Size";
+            // 
+            // offsetColumn
+            // 
+            this.offsetColumn.Text = "offset";
             // 
             // MainForm
             // 
@@ -675,13 +723,16 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.OpenFileDialog openFolderDialog;
-        private System.Windows.Forms.ListBox fileListing;
         private System.Windows.Forms.ToolStrip MenuStrip;
         private System.Windows.Forms.ToolStripLabel openFolder;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -726,6 +777,12 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.ListView fileListing;
+        private System.Windows.Forms.ColumnHeader fileColumn;
+        private System.Windows.Forms.ColumnHeader sizeColumn;
+        private System.Windows.Forms.ColumnHeader offsetColumn;
     }
 }
 

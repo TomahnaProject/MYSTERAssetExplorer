@@ -45,6 +45,7 @@
             // 
             // topBox
             // 
+            this.topBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.topBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.topBox.Location = new System.Drawing.Point(331, 11);
             this.topBox.Margin = new System.Windows.Forms.Padding(0);
@@ -56,6 +57,7 @@
             // 
             // backBox
             // 
+            this.backBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.backBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.backBox.Location = new System.Drawing.Point(971, 331);
             this.backBox.Margin = new System.Windows.Forms.Padding(0);
@@ -67,6 +69,7 @@
             // 
             // rightBox
             // 
+            this.rightBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.rightBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rightBox.Location = new System.Drawing.Point(651, 331);
             this.rightBox.Margin = new System.Windows.Forms.Padding(0);
@@ -78,6 +81,7 @@
             // 
             // bottomBox
             // 
+            this.bottomBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.bottomBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.bottomBox.Location = new System.Drawing.Point(331, 651);
             this.bottomBox.Margin = new System.Windows.Forms.Padding(0);
@@ -89,6 +93,7 @@
             // 
             // leftBox
             // 
+            this.leftBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.leftBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.leftBox.Location = new System.Drawing.Point(11, 331);
             this.leftBox.Margin = new System.Windows.Forms.Padding(0);
@@ -100,6 +105,7 @@
             // 
             // frontBox
             // 
+            this.frontBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.frontBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.frontBox.Location = new System.Drawing.Point(331, 331);
             this.frontBox.Margin = new System.Windows.Forms.Padding(0);
@@ -123,7 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(1325, 909);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.topBox);
