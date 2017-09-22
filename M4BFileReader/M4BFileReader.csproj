@@ -44,9 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileType.cs" />
     <Compile Include="M4BReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VirtualFileIndex.cs" />
+    <Compile Include="VirtualFolder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

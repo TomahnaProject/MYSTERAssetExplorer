@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MYSTERAssetExplorer.Core;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -20,6 +21,29 @@ namespace M4BFileReader
             if (File.Exists(filePath) && hasProperExtension)
             {
                 ReadM4BFile(filePath);
+                //var rootFolder = ReadM4BFile(filePath);
+                //PrintFolderContents(rootFolder);
+            }
+        }
+
+        public void PrintFolderContents(VirtualFolder folder, int indentCount = 0)
+        {
+            string indents = "";
+            for(int i=0; i<indentCount; i++)
+            {
+                indents += "\t";
+            }
+            Console.WriteLine("\r\n-------------------------");
+            Console.WriteLine(string.Format("{0}{1}", indents, folder.Name));
+            Console.WriteLine("-------------------------");
+            foreach (var subFolder in folder.SubFolders)
+            {
+                PrintFolderContents(subFolder, indentCount + 1);
+            }
+
+            foreach(var file in folder.Files)
+            {
+                Console.WriteLine(string.Format("\r\n{0}{1}{2,-30}", indents, file.Name, "(s " + file.GetSize() + " o " + file.Start + ")"));
             }
         }
 
