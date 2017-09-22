@@ -49,6 +49,7 @@ namespace M4BFileReader
 
         public VirtualFolder ReadM4BFile(string filePath)
         {
+            fileCount = 0;
             ErrorCount = 0;
             VirtualFolder builtFolder;
             var fileName = Path.GetFileName(filePath);
@@ -62,7 +63,7 @@ namespace M4BFileReader
             {
                 fileStream.Close();
             }
-            MessageBox.Show("# of Parsing Errors: " + ErrorCount);
+            MessageBox.Show("# of Parsing Errors: " + ErrorCount + "\r\nFileCount:" + fileCount);
             return builtFolder;
         }
 
@@ -309,8 +310,10 @@ namespace M4BFileReader
             {
                 var thisFile = new VirtualFileIndex(0, fileNameLowercase, fileType, FileOffset, FileOffset + FileSize);
                 parentFolder.Files.Add(thisFile);
+                fileCount++;
             }
             return index;
         }
+        int fileCount = 0;
     }
 }
