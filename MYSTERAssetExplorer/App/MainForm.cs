@@ -25,7 +25,8 @@ namespace MYSTERAssetExplorer.App
             var uiContext = new UIContext();
             uiContext.WriteToConsole += WriteToConsole;
             uiContext.ListFiles += FillListView;
-            uiContext.PopulateNodes += FillTreeView;
+            uiContext.PopulateNodes += FillNodeTreeView;
+            uiContext.PopulateFolders += FillFolderTreeView;
             app = new AssetExplorerApp(uiContext);
 
             viewer = new NodeViewer(LoadImageToViewer);
@@ -68,17 +69,17 @@ namespace MYSTERAssetExplorer.App
             logOutput.AppendText(message + "\r\n",color);
         }
 
-        private void FillListView(List<string> files)
+        private void FillListView(List<VirtualFileIndex> files)
         {
             fileListing.Items.Clear();
 
             foreach(var file in files)
             {
-                var item = new ListViewItem(file, 1);
+                var item = new ListViewItem(file.Name, 1);
                 var subItems = new ListViewItem.ListViewSubItem[]
                 {
-                    new ListViewItem.ListViewSubItem(item, "size"),
-                    new ListViewItem.ListViewSubItem(item, "offset")
+                    new ListViewItem.ListViewSubItem(item, (file.End - file.Start).ToString()),
+                    new ListViewItem.ListViewSubItem(item, file.Start.ToString())
                 };
 
                 item.SubItems.AddRange(subItems);
@@ -86,7 +87,7 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
-        private void FillTreeView(TreeNode[] nodes)
+        private void FillNodeTreeView(TreeNode[] nodes)
         {
             nodeListing.Nodes.Clear();
             nodeListing.Nodes.AddRange(nodes);
@@ -311,6 +312,19 @@ namespace MYSTERAssetExplorer.App
             message += " to the various nodes.\r\n";
             message += "\r\nAlterations to this registry can be saved, and loaded in subsequent sessions.\r\n";
             MessageBox.Show(message);
+        }
+
+        private void folderTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode newSelected = e.Node;
+            fileListing.Items.Clear();
+            DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
+        }
+
+        private void FillFolderTreeView(TreeNode[] nodes)
+        {
+            nodeListing.Nodes.Clear();
+            nodeListing.Nodes.AddRange(nodes);
         }
     }
 }

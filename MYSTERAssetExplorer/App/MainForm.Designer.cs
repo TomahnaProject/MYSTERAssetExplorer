@@ -34,6 +34,7 @@
             this.previewGroup = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.extractGroup = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -72,9 +73,8 @@
             this.MainPanel = new System.Windows.Forms.Panel();
             this.splitContainerFileListings = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button4 = new System.Windows.Forms.Button();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.folderTreeView = new System.Windows.Forms.TreeView();
             this.fileListing = new System.Windows.Forms.ListView();
             this.fileColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.sizeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -175,10 +175,19 @@
             this.extractGroup.ForeColor = System.Drawing.Color.Gainsboro;
             this.extractGroup.Location = new System.Drawing.Point(0, 0);
             this.extractGroup.Name = "extractGroup";
-            this.extractGroup.Size = new System.Drawing.Size(440, 316);
+            this.extractGroup.Size = new System.Drawing.Size(440, 321);
             this.extractGroup.TabIndex = 27;
             this.extractGroup.TabStop = false;
             this.extractGroup.Text = "Extract Assets";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(32, 85);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(111, 24);
+            this.button4.TabIndex = 30;
+            this.button4.Text = "Extract This File";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -254,7 +263,7 @@
             this.NodePropertiesGroup.ForeColor = System.Drawing.Color.Gainsboro;
             this.NodePropertiesGroup.Location = new System.Drawing.Point(0, 0);
             this.NodePropertiesGroup.Name = "NodePropertiesGroup";
-            this.NodePropertiesGroup.Size = new System.Drawing.Size(222, 690);
+            this.NodePropertiesGroup.Size = new System.Drawing.Size(222, 699);
             this.NodePropertiesGroup.TabIndex = 23;
             this.NodePropertiesGroup.TabStop = false;
             this.NodePropertiesGroup.Text = "Node Properties";
@@ -404,7 +413,7 @@
             this.nodeListing.Margin = new System.Windows.Forms.Padding(0);
             this.nodeListing.MinimumSize = new System.Drawing.Size(100, 215);
             this.nodeListing.Name = "nodeListing";
-            this.nodeListing.Size = new System.Drawing.Size(100, 690);
+            this.nodeListing.Size = new System.Drawing.Size(100, 699);
             this.nodeListing.TabIndex = 22;
             this.nodeListing.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.nodeListing_ItemDrag);
             this.nodeListing.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.nodeListing_AfterSelect);
@@ -422,7 +431,7 @@
             this.logOutput.Name = "logOutput";
             this.logOutput.ReadOnly = true;
             this.logOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.logOutput.Size = new System.Drawing.Size(1004, 43);
+            this.logOutput.Size = new System.Drawing.Size(1004, 34);
             this.logOutput.TabIndex = 2;
             this.logOutput.Text = "";
             // 
@@ -511,7 +520,7 @@
             this.ControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ControlPanel.Location = new System.Drawing.Point(0, 0);
             this.ControlPanel.Name = "ControlPanel";
-            this.ControlPanel.Size = new System.Drawing.Size(666, 690);
+            this.ControlPanel.Size = new System.Drawing.Size(666, 699);
             this.ControlPanel.TabIndex = 23;
             // 
             // splitContainer2
@@ -527,7 +536,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(666, 690);
+            this.splitContainer2.Size = new System.Drawing.Size(666, 699);
             this.splitContainer2.SplitterDistance = 222;
             this.splitContainer2.TabIndex = 29;
             // 
@@ -545,8 +554,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.extractGroup);
-            this.splitContainer3.Size = new System.Drawing.Size(440, 690);
-            this.splitContainer3.SplitterDistance = 370;
+            this.splitContainer3.Size = new System.Drawing.Size(440, 699);
+            this.splitContainer3.SplitterDistance = 374;
             this.splitContainer3.TabIndex = 0;
             // 
             // splitContainerFooter
@@ -566,7 +575,7 @@
             // 
             this.splitContainerFooter.Panel2.Controls.Add(this.logOutput);
             this.splitContainerFooter.Size = new System.Drawing.Size(1004, 770);
-            this.splitContainerFooter.SplitterDistance = 723;
+            this.splitContainerFooter.SplitterDistance = 732;
             this.splitContainerFooter.TabIndex = 29;
             // 
             // MainPanel
@@ -577,7 +586,7 @@
             this.MainPanel.Controls.Add(this.splitContainerFileListings);
             this.MainPanel.Location = new System.Drawing.Point(0, 30);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(1004, 690);
+            this.MainPanel.Size = new System.Drawing.Size(1004, 699);
             this.MainPanel.TabIndex = 29;
             // 
             // splitContainerFileListings
@@ -593,7 +602,7 @@
             // splitContainerFileListings.Panel2
             // 
             this.splitContainerFileListings.Panel2.Controls.Add(this.ControlPanel);
-            this.splitContainerFileListings.Size = new System.Drawing.Size(1004, 690);
+            this.splitContainerFileListings.Size = new System.Drawing.Size(1004, 699);
             this.splitContainerFileListings.SplitterDistance = 334;
             this.splitContainerFileListings.TabIndex = 29;
             // 
@@ -610,18 +619,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.nodeListing);
-            this.splitContainer1.Size = new System.Drawing.Size(334, 690);
+            this.splitContainer1.Size = new System.Drawing.Size(334, 699);
             this.splitContainer1.SplitterDistance = 232;
             this.splitContainer1.TabIndex = 29;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(32, 85);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(111, 24);
-            this.button4.TabIndex = 30;
-            this.button4.Text = "Extract This File";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // splitContainer4
             // 
@@ -631,27 +631,28 @@
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.treeView1);
+            this.splitContainer4.Panel1.Controls.Add(this.folderTreeView);
             // 
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.fileListing);
-            this.splitContainer4.Size = new System.Drawing.Size(232, 690);
+            this.splitContainer4.Size = new System.Drawing.Size(232, 699);
             this.splitContainer4.SplitterDistance = 101;
             this.splitContainer4.TabIndex = 7;
             // 
-            // treeView1
+            // folderTreeView
             // 
-            this.treeView1.AllowDrop = true;
-            this.treeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(0);
-            this.treeView1.MinimumSize = new System.Drawing.Size(100, 215);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(101, 690);
-            this.treeView1.TabIndex = 23;
+            this.folderTreeView.AllowDrop = true;
+            this.folderTreeView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.folderTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.folderTreeView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.folderTreeView.Location = new System.Drawing.Point(0, 0);
+            this.folderTreeView.Margin = new System.Windows.Forms.Padding(0);
+            this.folderTreeView.MinimumSize = new System.Drawing.Size(100, 215);
+            this.folderTreeView.Name = "folderTreeView";
+            this.folderTreeView.Size = new System.Drawing.Size(101, 699);
+            this.folderTreeView.TabIndex = 23;
+            this.folderTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.folderTreeView_NodeMouseClick);
             // 
             // fileListing
             // 
@@ -663,7 +664,7 @@
             this.fileListing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileListing.Location = new System.Drawing.Point(0, 0);
             this.fileListing.Name = "fileListing";
-            this.fileListing.Size = new System.Drawing.Size(127, 690);
+            this.fileListing.Size = new System.Drawing.Size(127, 699);
             this.fileListing.TabIndex = 0;
             this.fileListing.UseCompatibleStateImageBehavior = false;
             // 
@@ -778,7 +779,7 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView folderTreeView;
         private System.Windows.Forms.ListView fileListing;
         private System.Windows.Forms.ColumnHeader fileColumn;
         private System.Windows.Forms.ColumnHeader sizeColumn;

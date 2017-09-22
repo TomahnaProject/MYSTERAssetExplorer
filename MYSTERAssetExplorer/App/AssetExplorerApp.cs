@@ -59,7 +59,7 @@ namespace MYSTERAssetExplorer.App
             {
                 throw new Exception("NOT A VALID FILE FORMAT");
             }
-            var fileList = _context.files.GetList().Select(x => x.Name).ToList();
+            var fileList = _context.files.GetList();
             _context.uiContext.ListFiles(fileList);
         }
 
