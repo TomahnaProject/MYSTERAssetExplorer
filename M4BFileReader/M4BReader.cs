@@ -20,9 +20,8 @@ namespace M4BFileReader
             var hasProperExtension = filePath.ToLower().Contains(".m4b");
             if (File.Exists(filePath) && hasProperExtension)
             {
-                ReadM4BFile(filePath);
-                //var rootFolder = ReadM4BFile(filePath);
-                //PrintFolderContents(rootFolder);
+                var rootFolder = ReadM4BFile(filePath);
+                PrintFolderContents(rootFolder);
             }
         }
 
@@ -35,7 +34,6 @@ namespace M4BFileReader
             }
             Console.WriteLine("\r\n-------------------------");
             Console.WriteLine(string.Format("{0}{1}", indents, folder.Name));
-            Console.WriteLine("-------------------------");
             foreach (var subFolder in folder.SubFolders)
             {
                 PrintFolderContents(subFolder, indentCount + 1);
@@ -47,26 +45,34 @@ namespace M4BFileReader
             }
         }
 
-        public void ReadM4BFile(string filePath)
+        public VirtualFolder ReadM4BFile(string filePath)
         {
+            VirtualFolder builtFolder;
+            var fileName = Path.GetFileName(filePath);
             FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             try
             {
                 var totalFileSize = fileStream.Seek(0, SeekOrigin.End);
-                ReadM4BFileData(fileStream, 0, totalFileSize);
+                builtFolder = ReadM4BFileData(fileStream, fileName, 0, totalFileSize);
             }
             finally
             {
                 fileStream.Close();
             }
+            return builtFolder;
         }
 
-        public void ReadM4BFileData(FileStream fileStream, long startIndex, long endIndex)
+        // used recursively to read nested m4b files
+        public VirtualFolder ReadM4BFileData(FileStream fileStream, string fileName, long startIndex, long endIndex)
         {
             var totalHeaderSize = 0;
-            if (HasM4BHeader(fileStream, 0, out totalHeaderSize))
+            if (HasM4BHeader(fileStream, startIndex, out totalHeaderSize))
             {
-                ReadM4bBody(fileStream, totalHeaderSize, endIndex);
+                return ReadM4bBody(fileStream, fileName, startIndex + totalHeaderSize, endIndex);
+            }
+            else
+            {
+                throw new Exception("Not an m4b file");
             }
         }
 
@@ -76,12 +82,11 @@ namespace M4BFileReader
             long index = startIndex;
 
             var headerSizeBuffer = new byte[sizeof(int)];
-            fileStream.Seek(0, SeekOrigin.Begin);
+            fileStream.Seek(index, SeekOrigin.Begin);
             fileStream.Read(headerSizeBuffer, 0, headerSizeBuffer.Length);
             index += sizeof(int);
 
             var headerSize = BitConverter.ToInt32(headerSizeBuffer, 0);
-            Console.WriteLine("Header Size: " + headerSize);
 
             var headerBuffer = new byte[headerSize];
             fileStream.Seek(index, SeekOrigin.Begin);
@@ -111,8 +116,9 @@ namespace M4BFileReader
             return true;
         }
 
-        private void ReadM4bBody(FileStream fileStream, long startIndex, long endIndex)
+        private VirtualFolder ReadM4bBody(FileStream fileStream, string fileName, long startIndex, long endIndex)
         {
+            var folder = new VirtualFolder(fileName);
             long index = startIndex;
 
             byte[] buffer = new byte[sizeof(byte)];
@@ -121,15 +127,15 @@ namespace M4BFileReader
             index += sizeof(byte);
 
             var rootFolderCount = (int)buffer[0];
-            Console.WriteLine("Root Folder Count: " + rootFolderCount);
 
             for (int i = 0; i < rootFolderCount; i++)
             {
-                index = ReadFolder(fileStream, index);
+                index = ReadFolder(folder, fileStream, index);
             }
+            return folder;
         }
 
-        private long ReadFolder(FileStream fileStream, long startIndex)
+        private long ReadFolder(VirtualFolder parentFolder, FileStream fileStream, long startIndex)
         {
             long index = startIndex;
 
@@ -146,6 +152,7 @@ namespace M4BFileReader
             index += buffer.Length;
 
             var folderName = Encoding.ASCII.GetString(buffer);
+            var thisFolder = new VirtualFolder(folderName.TrimEnd(new char[1] { '\0' }));
 
             buffer = new byte[sizeof(byte)];
             fileStream.Seek(index, SeekOrigin.Begin);
@@ -153,30 +160,28 @@ namespace M4BFileReader
             index += buffer.Length;
 
             var subFolderCount = (int)buffer[0];
-            Console.WriteLine("\r\n\r\n -------------------------\r\n + " + folderName);
-            if (subFolderCount > 0)
-                Console.WriteLine(subFolderCount + " folders");
 
             // ubi organized the data in such a way that folders contain either subfolders or files, but not both
             if (subFolderCount != 0)
             {
-                index = IterateFolders(fileStream, index, subFolderCount);
+                index = IterateFolders(thisFolder, fileStream, index, subFolderCount);
             }
             else
             {
-                index = IterateFiles(fileStream, index);
+                index = IterateFiles(thisFolder, fileStream, index);
             }
+            parentFolder.SubFolders.Add(thisFolder);
             return index;
         }
 
 
-        private long IterateFolders(FileStream fileStream, long startIndex, int folderCount)
+        private long IterateFolders(VirtualFolder parentFolder, FileStream fileStream, long startIndex, int folderCount)
         {
             long index = startIndex;
 
             for (int i = 0; i < folderCount; i++)
             {
-                index = ReadFolder(fileStream, index);
+                index = ReadFolder(parentFolder, fileStream, index);
             }
 
             var buffer = new byte[sizeof(uint)];
@@ -185,12 +190,16 @@ namespace M4BFileReader
             index += sizeof(uint);
 
             var fileCount = BitConverter.ToUInt32(buffer, 0);
-            Debug.Assert(fileCount == 0); // should be zero, no folder has both children folders and files
+
+            // fileCount SHOULD be zero, ASSUMING no folder has both children folders and files
+            // which is apparently NOT the case, there ARE cases where there is an actual count here
+            // and that there may be rare cases of a file and folder living in the same parent folder
+            //Debug.Assert(fileCount == 0);
 
             return index;
         }
 
-        private long IterateFiles(FileStream fileStream, long startIndex)
+        private long IterateFiles(VirtualFolder parentFolder, FileStream fileStream, long startIndex)
         {
             long index = startIndex;
 
@@ -200,17 +209,15 @@ namespace M4BFileReader
             index += sizeof(uint);
 
             var fileCount = BitConverter.ToUInt32(buffer, 0);
-            if (fileCount > 0)
-                Console.WriteLine(fileCount + " files");
 
             for (int i = 0; i < fileCount; i++)
             {
-                index = ReadFileInfo(fileStream, index);
+                index = ReadFileInfo(parentFolder, fileStream, index);
             }
             return index;
         }
 
-        private long ReadFileInfo(FileStream fileStream, long startIndex)
+        private long ReadFileInfo(VirtualFolder parentFolder, FileStream fileStream, long startIndex)
         {
             long index = startIndex;
 
@@ -241,7 +248,30 @@ namespace M4BFileReader
             index += sizeof(uint);
 
             var FileOffset = BitConverter.ToUInt32(buffer, 0);
-            Console.Write(string.Format("\r\n - {0}{1,-30}", FileName, "(s " + FileSize + " o " + FileOffset + ")"));
+
+            var fileType = FileType.Unknown;
+            var fileNameLowercase = FileName.TrimEnd(new char[1] { '\0' }).ToLower();
+            if (fileNameLowercase.EndsWith(".jpg"))
+                fileType = FileType.Jpg;
+            else if (fileNameLowercase.EndsWith(".zap"))
+                fileType = FileType.Zap;
+            else if (fileNameLowercase.EndsWith(".m4b"))
+                fileType = FileType.M4B;
+            else if (fileNameLowercase.EndsWith(".bik"))
+                fileType = FileType.Bink;
+            else
+                fileType = FileType.Unknown;
+
+            if(fileType == FileType.M4B)
+            {
+                var folder = ReadM4BFileData(fileStream, fileNameLowercase, FileOffset, FileOffset + FileSize);
+                parentFolder.SubFolders.Add(folder);
+            }
+            else
+            {
+                var thisFile = new VirtualFileIndex(0, fileNameLowercase, fileType, FileOffset, FileOffset + FileSize);
+                parentFolder.Files.Add(thisFile);
+            }
             return index;
         }
     }
