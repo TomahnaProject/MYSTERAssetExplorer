@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace M4BFileReader
 {
@@ -44,9 +45,11 @@ namespace M4BFileReader
                 Console.WriteLine(string.Format("\r\n{0}{1}{2,-30}", indents, file.Name, "(s " + file.GetSize() + " o " + file.Start + ")"));
             }
         }
+        public int ErrorCount = 0;
 
         public VirtualFolder ReadM4BFile(string filePath)
         {
+            ErrorCount = 0;
             VirtualFolder builtFolder;
             var fileName = Path.GetFileName(filePath);
             FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
@@ -59,19 +62,20 @@ namespace M4BFileReader
             {
                 fileStream.Close();
             }
+            MessageBox.Show("# of Parsing Errors: " + ErrorCount);
             return builtFolder;
         }
 
         // used recursively to read nested m4b files
         public VirtualFolder ReadM4BFileData(FileStream fileStream, string fileName, long fileStart, long fileEnd)
         {
-            if (fileName == "w1z04n115.m4b")
+            //if (fileName == "w1z04n115.m4b") // another m4b with some unusual format
+            //{
+            //}
+
+            if (fileName == "common.m4b" || fileName == "shared.m4b")
             {
-                return null;
-            }
-            if (fileName == "common.m4b" || fileName == "shared.m4b" || fileName == "w1z04n115.m4b")
-            {
-                return null; // shared is some kind of special m4b, can't be read like the others
+                return null; // common/shared have some kind of special format, and can't be read like the other m4b
             }
             var totalHeaderSize = 0;
             if (HasM4BHeader(fileStream, fileStart, out totalHeaderSize))
@@ -82,6 +86,7 @@ namespace M4BFileReader
                 }
                 catch (Exception ex)
                 {
+                    ErrorCount++;
                     return null;
                 }
             }
@@ -169,6 +174,11 @@ namespace M4BFileReader
 
             var folderNameSize = BitConverter.ToUInt32(buffer, 0);
 
+            if (folderNameSize > 512)
+            {
+                throw new Exception("FolderNameSize Too Big");
+            }
+
             buffer = new byte[folderNameSize];
             fileStream.Seek(index, SeekOrigin.Begin);
             fileStream.Read(buffer, 0, buffer.Length);
@@ -250,6 +260,11 @@ namespace M4BFileReader
             index += sizeof(uint);
 
             var fileNameSize = BitConverter.ToUInt32(buffer, 0);
+            
+            if(fileNameSize > 512)
+            {
+                throw new Exception("FileNameSize Too Big");
+            }
 
             buffer = new byte[fileNameSize];
             fileStream.Seek(index, SeekOrigin.Begin);
@@ -284,11 +299,6 @@ namespace M4BFileReader
                 fileType = FileType.Bink;
             else
                 fileType = FileType.Unknown;
-
-            if(fileNameLowercase == "programers.bin")
-            {
-
-            }
 
             if(fileType == FileType.M4B)
             {
