@@ -71,7 +71,7 @@ namespace MYSTERAssetExplorer.App
 
         private void FillListView(List<VirtualFileIndex> files)
         {
-            fileListing.Items.Clear();
+            fileExplorer.Items.Clear();
 
             foreach(var file in files)
             {
@@ -83,14 +83,14 @@ namespace MYSTERAssetExplorer.App
                 };
 
                 item.SubItems.AddRange(subItems);
-                fileListing.Items.Add(item);
+                fileExplorer.Items.Add(item);
             }
         }
 
         private void FillNodeTreeView(TreeNode[] nodes)
         {
-            nodeListing.Nodes.Clear();
-            nodeListing.Nodes.AddRange(nodes);
+            nodeExplorer.Nodes.Clear();
+            nodeExplorer.Nodes.AddRange(nodes);
         }
 
         private void launchNodeViewer_Click(object sender, EventArgs e)
@@ -202,7 +202,7 @@ namespace MYSTERAssetExplorer.App
 
         private void BuildAllPanos()
         {
-            int nodeCount = (fileListing.Items.Count / 6);
+            int nodeCount = (fileExplorer.Items.Count / 6);
             int counter = 0;
             while(counter < nodeCount)
             {
@@ -229,10 +229,10 @@ namespace MYSTERAssetExplorer.App
         private void nodeListing_DragDrop(object sender, DragEventArgs e)
         {
             // Retrieve the client coordinates of the drop location.
-            Point targetPoint = nodeListing.PointToClient(new Point(e.X, e.Y));
+            Point targetPoint = nodeExplorer.PointToClient(new Point(e.X, e.Y));
 
             // Retrieve the node at the drop location.
-            TreeNode targetNode = nodeListing.GetNodeAt(targetPoint);
+            TreeNode targetNode = nodeExplorer.GetNodeAt(targetPoint);
 
             // Retrieve the node that was dragged.
             TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
@@ -273,10 +273,10 @@ namespace MYSTERAssetExplorer.App
         private void nodeListing_DragOver(object sender, DragEventArgs e)
         {
             // Retrieve the client coordinates of the mouse position.
-            Point targetPoint = nodeListing.PointToClient(new Point(e.X, e.Y));
+            Point targetPoint = nodeExplorer.PointToClient(new Point(e.X, e.Y));
 
             // Select the node at the mouse position.
-            nodeListing.SelectedNode = nodeListing.GetNodeAt(targetPoint);
+            nodeExplorer.SelectedNode = nodeExplorer.GetNodeAt(targetPoint);
         }
 
         private bool ContainsNode(TreeNode node1, TreeNode node2)
@@ -317,14 +317,14 @@ namespace MYSTERAssetExplorer.App
         private void folderTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
-            fileListing.Items.Clear();
+            fileExplorer.Items.Clear();
             DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
         }
 
         private void FillFolderTreeView(TreeNode[] nodes)
         {
-            nodeListing.Nodes.Clear();
-            nodeListing.Nodes.AddRange(nodes);
+            nodeExplorer.Nodes.Clear();
+            nodeExplorer.Nodes.AddRange(nodes);
         }
     }
 }

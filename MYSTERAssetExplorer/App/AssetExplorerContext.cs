@@ -12,14 +12,13 @@ namespace MYSTERAssetExplorer.App
         public string DataDirectory { get; set; }
         public string CurrentNode { get; set; }
 
-        public List<IMedia> Files { get; set; }
-
-
-        public VirtualFileListing files;
-        public VirtualFileIndexerService indexer;
-        public VirtualFileExtractionService extractor;
+        public VirtualFolder files;
         public RegistryManager registryManager;
         public RegistryPersistenceService registryPersistence;
         public IUIContext uiContext;
+
+        // i may want to remove these
+        public List<IMedia> Files { get; set; }
+        public VirtualFileExtractionService extractor;
     }
 }

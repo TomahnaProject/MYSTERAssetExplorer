@@ -54,7 +54,7 @@
             this.nodeProp_SceneInput = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.nodeListing = new System.Windows.Forms.TreeView();
+            this.nodeExplorer = new System.Windows.Forms.TreeView();
             this.logOutput = new System.Windows.Forms.RichTextBox();
             this.MenuStrip = new System.Windows.Forms.ToolStrip();
             this.openFolder = new System.Windows.Forms.ToolStripLabel();
@@ -74,8 +74,8 @@
             this.splitContainerFileListings = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.folderTreeView = new System.Windows.Forms.TreeView();
-            this.fileListing = new System.Windows.Forms.ListView();
+            this.folderExplorer = new System.Windows.Forms.TreeView();
+            this.fileExplorer = new System.Windows.Forms.ListView();
             this.fileColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.sizeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.offsetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -403,23 +403,23 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Zone";
             // 
-            // nodeListing
+            // nodeExplorer
             // 
-            this.nodeListing.AllowDrop = true;
-            this.nodeListing.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.nodeListing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nodeListing.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.nodeListing.Location = new System.Drawing.Point(0, 0);
-            this.nodeListing.Margin = new System.Windows.Forms.Padding(0);
-            this.nodeListing.MinimumSize = new System.Drawing.Size(100, 215);
-            this.nodeListing.Name = "nodeListing";
-            this.nodeListing.Size = new System.Drawing.Size(100, 699);
-            this.nodeListing.TabIndex = 22;
-            this.nodeListing.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.nodeListing_ItemDrag);
-            this.nodeListing.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.nodeListing_AfterSelect);
-            this.nodeListing.DragDrop += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragDrop);
-            this.nodeListing.DragEnter += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragEnter);
-            this.nodeListing.DragOver += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragOver);
+            this.nodeExplorer.AllowDrop = true;
+            this.nodeExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.nodeExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nodeExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.nodeExplorer.Location = new System.Drawing.Point(0, 0);
+            this.nodeExplorer.Margin = new System.Windows.Forms.Padding(0);
+            this.nodeExplorer.MinimumSize = new System.Drawing.Size(100, 215);
+            this.nodeExplorer.Name = "nodeExplorer";
+            this.nodeExplorer.Size = new System.Drawing.Size(100, 699);
+            this.nodeExplorer.TabIndex = 22;
+            this.nodeExplorer.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.nodeListing_ItemDrag);
+            this.nodeExplorer.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.nodeListing_AfterSelect);
+            this.nodeExplorer.DragDrop += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragDrop);
+            this.nodeExplorer.DragEnter += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragEnter);
+            this.nodeExplorer.DragOver += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragOver);
             // 
             // logOutput
             // 
@@ -618,7 +618,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.nodeListing);
+            this.splitContainer1.Panel2.Controls.Add(this.nodeExplorer);
             this.splitContainer1.Size = new System.Drawing.Size(334, 699);
             this.splitContainer1.SplitterDistance = 232;
             this.splitContainer1.TabIndex = 29;
@@ -631,42 +631,42 @@
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.folderTreeView);
+            this.splitContainer4.Panel1.Controls.Add(this.folderExplorer);
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.fileListing);
+            this.splitContainer4.Panel2.Controls.Add(this.fileExplorer);
             this.splitContainer4.Size = new System.Drawing.Size(232, 699);
             this.splitContainer4.SplitterDistance = 101;
             this.splitContainer4.TabIndex = 7;
             // 
-            // folderTreeView
+            // folderExplorer
             // 
-            this.folderTreeView.AllowDrop = true;
-            this.folderTreeView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.folderTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.folderTreeView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.folderTreeView.Location = new System.Drawing.Point(0, 0);
-            this.folderTreeView.Margin = new System.Windows.Forms.Padding(0);
-            this.folderTreeView.MinimumSize = new System.Drawing.Size(100, 215);
-            this.folderTreeView.Name = "folderTreeView";
-            this.folderTreeView.Size = new System.Drawing.Size(101, 699);
-            this.folderTreeView.TabIndex = 23;
-            this.folderTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.folderTreeView_NodeMouseClick);
+            this.folderExplorer.AllowDrop = true;
+            this.folderExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.folderExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.folderExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.folderExplorer.Location = new System.Drawing.Point(0, 0);
+            this.folderExplorer.Margin = new System.Windows.Forms.Padding(0);
+            this.folderExplorer.MinimumSize = new System.Drawing.Size(100, 215);
+            this.folderExplorer.Name = "folderExplorer";
+            this.folderExplorer.Size = new System.Drawing.Size(101, 699);
+            this.folderExplorer.TabIndex = 23;
+            this.folderExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.folderTreeView_NodeMouseClick);
             // 
-            // fileListing
+            // fileExplorer
             // 
-            this.fileListing.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.fileListing.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.fileExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.fileExplorer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileColumn,
             this.sizeColumn,
             this.offsetColumn});
-            this.fileListing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileListing.Location = new System.Drawing.Point(0, 0);
-            this.fileListing.Name = "fileListing";
-            this.fileListing.Size = new System.Drawing.Size(127, 699);
-            this.fileListing.TabIndex = 0;
-            this.fileListing.UseCompatibleStateImageBehavior = false;
+            this.fileExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileExplorer.Location = new System.Drawing.Point(0, 0);
+            this.fileExplorer.Name = "fileExplorer";
+            this.fileExplorer.Size = new System.Drawing.Size(127, 699);
+            this.fileExplorer.TabIndex = 0;
+            this.fileExplorer.UseCompatibleStateImageBehavior = false;
             // 
             // fileColumn
             // 
@@ -746,7 +746,7 @@
         private System.Windows.Forms.NumericUpDown nodeNumber;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TreeView nodeListing;
+        private System.Windows.Forms.TreeView nodeExplorer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel saveButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -779,8 +779,8 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.TreeView folderTreeView;
-        private System.Windows.Forms.ListView fileListing;
+        private System.Windows.Forms.TreeView folderExplorer;
+        private System.Windows.Forms.ListView fileExplorer;
         private System.Windows.Forms.ColumnHeader fileColumn;
         private System.Windows.Forms.ColumnHeader sizeColumn;
         private System.Windows.Forms.ColumnHeader offsetColumn;

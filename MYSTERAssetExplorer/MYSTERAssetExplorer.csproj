@@ -69,7 +69,6 @@
     <Compile Include="Core\AssetOrganization\Scene.cs" />
     <Compile Include="Core\Vector3.cs" />
     <Compile Include="Core\VirtualFileIndex.cs" />
-    <Compile Include="Core\VirtualFileListing.cs" />
     <Compile Include="Core\FileType.cs" />
     <Compile Include="Core\Media.cs" />
     <Compile Include="Core\AssetOrganization\Node.cs" />
@@ -80,18 +79,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RichTextBoxExtensions.cs" />
     <Compile Include="Services\ConversionService.cs" />
-    <Compile Include="Services\ExileIndexer.cs" />
+    <Compile Include="Services\IFileIndexerService.cs" />
+    <Compile Include="Services\M4BFileIndexingService.cs" />
     <Compile Include="Services\RegistryPersistenceService.cs" />
     <Compile Include="Services\VirtualFileExtractionService.cs" />
-    <Compile Include="Services\VirtualFileIndexerService.cs" />
+    <Compile Include="Services\M3AFileIndexingService.cs" />
     <Compile Include="Services\VirtualFileSaveService.cs" />
-    <Compile Include="Services\Indexer.cs" />
     <Compile Include="Services\IUIContext.cs" />
     <Compile Include="Services\NodeFaceValidator.cs" />
     <Compile Include="Services\AssetRegistrySerializationService.cs" />
     <Compile Include="Services\PanoBuilder.cs" />
     <Compile Include="Services\RegistryManager.cs" />
-    <Compile Include="Services\RevelationIndexer.cs" />
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="App\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -11,6 +11,8 @@ namespace MYSTERAssetExplorer.Core
         Jpg,
         Bink,
         Zap,
-        M4B,  
+        M4B,
+        Binary,
+        Unknown,
     }
 }

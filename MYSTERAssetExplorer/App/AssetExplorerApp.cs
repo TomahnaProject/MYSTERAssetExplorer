@@ -26,8 +26,7 @@ namespace MYSTERAssetExplorer.App
         {
             _context = new AssetExplorerContext();
             _context.uiContext = uiContext;
-            _context.files = new VirtualFileListing();
-            _context.indexer = new VirtualFileIndexerService();
+            _context.files = new VirtualFolder("/");
             _context.extractor = new VirtualFileExtractionService();
             _context.registryManager = new RegistryManager(uiContext);
             _context.registryPersistence = new RegistryPersistenceService();
@@ -43,24 +42,28 @@ namespace MYSTERAssetExplorer.App
 
         public void OpenFile(string filePath)
         {
+            IFileIndexerService indexingService;
             _filePath = filePath;
             if (!File.Exists(filePath))
                 throw new Exception("No such file " + filePath);
 
             if (Path.GetExtension(filePath).ToUpper() == M3FileExtension)
             {
-                _context.files = _context.indexer.IndexM3AFile(_filePath);
+                indexingService = new M3AFileIndexingService();
+                _context.files = indexingService.IndexFile(_filePath);
             }
             else if (Path.GetExtension(filePath).ToUpper() == M4FileExtension)
             {
-                _context.files = _context.indexer.IndexM4BDataFile(_filePath);
+                indexingService = new M4BFileIndexingService();
+                _context.files = indexingService.IndexFile(_filePath);
             }
             else
             {
                 throw new Exception("NOT A VALID FILE FORMAT");
             }
-            var fileList = _context.files.GetList();
-            _context.uiContext.ListFiles(fileList);
+
+
+            //_context.uiContext.ListFiles(fileList);
         }
 
         private void LoadRegistry()
@@ -81,10 +84,10 @@ namespace MYSTERAssetExplorer.App
 
         public void ExtractFiles(string folderPath)
         {
-            _extractionPath = folderPath;
-            if (!Directory.Exists(folderPath))
-                return;
-            _context.extractor.Extract(_filePath, _context.files, _extractionPath);
+            //_extractionPath = folderPath;
+            //if (!Directory.Exists(folderPath))
+            //    return;
+            //_context.extractor.Extract(_filePath, _context.files, _extractionPath);
 
         }
 

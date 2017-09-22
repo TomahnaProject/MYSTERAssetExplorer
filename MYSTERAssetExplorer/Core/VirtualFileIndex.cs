@@ -12,22 +12,27 @@ namespace MYSTERAssetExplorer.Core
         private int _id;
         private string _name;
         private FileType _type;
-        private int _start;
-        private int _end;
+        private long _start;
+        private long _end;
 
         public int Id { get { return _id; } }
         public string Name { get { return _name; } }
         public FileType Type { get { return _type; } }
-        public int Start { get { return _start; } }
-        public int End { get { return _end; } }
+        public long Start { get { return _start; } }
+        public long End { get { return _end; } }
 
-        public VirtualFileIndex(int id, string name, FileType type, int start, int end)
+        public VirtualFileIndex(int id, string name, FileType type, long start, long end)
         {
             _id = id;
             _name = name;
             _type = type;
             _start = start;
             _end = end;
+        }
+
+        public long GetSize()
+        {
+            return End - Start;
         }
     }
 }
