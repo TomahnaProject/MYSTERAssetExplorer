@@ -84,6 +84,7 @@
     <Compile Include="Services\IFileIndexerService.cs" />
     <Compile Include="Services\M4BFileIndexingService.cs" />
     <Compile Include="Services\RegistryPersistenceService.cs" />
+    <Compile Include="Services\TileImageStitcher.cs" />
     <Compile Include="Services\VirtualFileExtractionService.cs" />
     <Compile Include="Services\M3AFileIndexingService.cs" />
     <Compile Include="Services\VirtualFileSaveService.cs" />

@@ -20,6 +20,28 @@ namespace MYSTERAssetExplorer.Services
             //}
         }
 
+        public byte[] GetImageDataFromVirtualFileTiledImage(VirtualFileTiledImage tiledImage)
+        {
+            var stitcher = new TileImageStitcher(this);
+            return stitcher.StitchTiledImage(tiledImage);
+        }
+
+        public byte[] GetImageDataFromVirtualFile(VirtualFileIndex file)
+        {
+            if (file.Type == FileType.Jpg)
+            {
+                var jpgData = CopyFile(file);
+                return jpgData;
+            }
+            if (file.Type == FileType.Zap)
+            {
+                var zapData = CopyFile(file);
+                var jpgData = ConversionService.ConvertFromZapToJpg(zapData);
+                return jpgData;
+            }
+            return new byte[0];
+        }
+
         public byte[] CopyFile(VirtualFileIndex file)
         {
             int bufferSize = (int)(file.End - file.Start) +1; // assuming that any given file never has more bytes that max int size

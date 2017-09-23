@@ -676,7 +676,7 @@
             // 
             this.splitContainer4.Panel2.Controls.Add(this.fileExplorer);
             this.splitContainer4.Size = new System.Drawing.Size(333, 699);
-            this.splitContainer4.SplitterDistance = 144;
+            this.splitContainer4.SplitterDistance = 233;
             this.splitContainer4.TabIndex = 7;
             // 
             // folderExplorer
@@ -693,7 +693,7 @@
             this.folderExplorer.MinimumSize = new System.Drawing.Size(100, 215);
             this.folderExplorer.Name = "folderExplorer";
             this.folderExplorer.SelectedImageIndex = 0;
-            this.folderExplorer.Size = new System.Drawing.Size(144, 699);
+            this.folderExplorer.Size = new System.Drawing.Size(233, 699);
             this.folderExplorer.TabIndex = 23;
             this.folderExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.folderExplorer_NodeMouseClick);
             // 
@@ -755,7 +755,7 @@
             this.fileExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.fileExplorer.Location = new System.Drawing.Point(0, 0);
             this.fileExplorer.Name = "fileExplorer";
-            this.fileExplorer.Size = new System.Drawing.Size(185, 699);
+            this.fileExplorer.Size = new System.Drawing.Size(96, 699);
             this.fileExplorer.SmallImageList = this.iconSet;
             this.fileExplorer.TabIndex = 0;
             this.fileExplorer.UseCompatibleStateImageBehavior = false;

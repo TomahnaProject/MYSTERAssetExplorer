@@ -439,42 +439,53 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
-        VirtualFileExtractionService extractService = new VirtualFileExtractionService();
         private void fileExplorer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(fileExplorer.SelectedItems.Count == 1)
+            if (fileExplorer.SelectedItems.Count == 1)
             {
                 ListViewItem selected = fileExplorer.SelectedItems[0];
-                if (selected.Tag is VirtualFileIndex)
-                {
-                    var file = selected.Tag as VirtualFileIndex;
-                    if(file.Type == FileType.Jpg)
-                    {
-                        var jpgData = extractService.CopyFile(file);
-                        SetImageDataIntoPreviewWindow(jpgData);
-                    }
-                    if (file.Type == FileType.Zap)
-                    {
-                        var converter = new ConversionService();
-                        var zapData = extractService.CopyFile(file);
-                        var jpgData = converter.ConvertFromZapToJpg(zapData);
-                        SetImageDataIntoPreviewWindow(jpgData);
-                    }
-                }
-                else if(selected.Tag is VirtualFileTiledImage)
-                {
-
-                }
+                var imageData = GetDataForImageFile();
+                SetImageDataIntoPreviewWindow(selected.Text, imageData);
+            }
+            else
+            {
+                previewWindow.Image = previewWindow.InitialImage;
             }
         }
 
-        private void SetImageDataIntoPreviewWindow(byte[] imageData)
+        private byte[] GetDataForImageFile()
+        {
+            byte[] imageData = new byte[0];
+            var extractor = new VirtualFileExtractionService();
+            ListViewItem selected = fileExplorer.SelectedItems[0];
+            if (selected.Tag is VirtualFileIndex)
+            {
+                var file = selected.Tag as VirtualFileIndex;
+                imageData = extractor.GetImageDataFromVirtualFile(file);
+            }
+            else if (selected.Tag is VirtualFileTiledImage)
+            {
+                var tiledImage = selected.Tag as VirtualFileTiledImage;
+                imageData = extractor.GetImageDataFromVirtualFileTiledImage(tiledImage);
+            }
+            return imageData;
+        }
+
+        private void SetImageDataIntoPreviewWindow(string imageName, byte[] imageData)
         {
             Bitmap bmp;
             using (var ms = new MemoryStream(imageData))
             {
-                bmp = new Bitmap(ms);
-                previewWindow.Image = bmp;
+                try
+                {
+                    bmp = new Bitmap(ms);
+                    previewWindow.Image = bmp;
+                }
+                catch (Exception ex)
+                {
+                    previewWindow.Image = previewWindow.InitialImage;
+                    WriteToConsole(Color.Red, "ERROR: '" + imageName + "' could not be shown ( " + ex.Message + " )");
+                }
             }
         }
 
