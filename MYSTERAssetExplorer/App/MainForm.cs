@@ -342,7 +342,7 @@ namespace MYSTERAssetExplorer.App
 
         private void extractSelectedFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WriteToConsole(Color.LightBlue, "Extract Selected!");
+            WriteToConsole(Color.LightBlue, "Extracting Selected Files...");
             foreach (ListViewItem item in fileExplorer.SelectedItems)
             {
                 if(item.Tag is VirtualFolder)
@@ -363,7 +363,16 @@ namespace MYSTERAssetExplorer.App
             if (fileExplorer.SelectedItems.Count == 1)
             {
                 ListViewItem selected = fileExplorer.SelectedItems[0];
-                var imageData = GetDataForImageFile();
+                if (selected.Tag is VirtualFolder)
+                    return;
+
+                if (selected.Tag is VirtualFileIndex)
+                {
+                    var file = selected.Tag as VirtualFileIndex;
+                    if (!(file.Type == FileType.Jpg || file.Type == FileType.Zap))
+                        return;
+                }
+                var imageData = GetDataForImageFile(selected);
                 SetImageDataIntoPreviewWindow(selected.Text, imageData);
             }
             else
@@ -372,19 +381,18 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
-        private byte[] GetDataForImageFile()
+        private byte[] GetDataForImageFile(ListViewItem item)
         {
             byte[] imageData = new byte[0];
             var extractor = new VirtualFileExtractionService();
-            ListViewItem selected = fileExplorer.SelectedItems[0];
-            if (selected.Tag is VirtualFileIndex)
+            if (item.Tag is VirtualFileIndex)
             {
-                var file = selected.Tag as VirtualFileIndex;
+                var file = item.Tag as VirtualFileIndex;
                 imageData = extractor.GetImageDataFromVirtualFile(file);
             }
-            else if (selected.Tag is VirtualFileTiledImage)
+            else if (item.Tag is VirtualFileTiledImage)
             {
-                var tiledImage = selected.Tag as VirtualFileTiledImage;
+                var tiledImage = item.Tag as VirtualFileTiledImage;
                 WriteToConsole(Color.Yellow, "Assembling Tiled Image: '" + tiledImage.Name + "'");
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
