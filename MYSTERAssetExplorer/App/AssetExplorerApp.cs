@@ -15,8 +15,8 @@ namespace MYSTERAssetExplorer.App
 {
     public class AssetExplorerApp
     {
-        string M3FileExtension = ".M3A";
-        string M4FileExtension = ".M4B";
+        const string M3FileExtension = ".M3A";
+        const string M4FileExtension = ".M4B";
 
         string _extractionPath;
 
@@ -166,10 +166,12 @@ namespace MYSTERAssetExplorer.App
 
         public List<string> LoadDataFiles()
         {
-            var directory = new DirectoryInfo(_context.DataDirectory);
-            var masks = new[] { "*.m3a", "*.m4b" };
-            var files = masks.SelectMany(directory.EnumerateFiles);
-            return files.Select(x=>x.FullName).ToList();
+            var files = Directory.GetFiles(_context.DataDirectory, "*.*", SearchOption.AllDirectories)
+                .Where(s => 
+                    s.EndsWith(M3FileExtension, StringComparison.OrdinalIgnoreCase) || 
+                    s.EndsWith(M4FileExtension, StringComparison.OrdinalIgnoreCase)
+                );
+            return files.ToList();
         }
     }
 }
