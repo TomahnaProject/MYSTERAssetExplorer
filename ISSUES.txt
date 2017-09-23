@@ -4,3 +4,4 @@
 2) can m4b files and folders be in same parent folder, are there invisible things in dragon unpacker??
 3) shared and common wrong format
 4) last m4b in nested m4b doesn't seem to work right
+5) some m4bs aren't correctly formatted -- need a better way to handle them / display them (they should be extractable themselves if not openable)

@@ -44,7 +44,6 @@ namespace MYSTERAssetExplorer.App
         private void openFolder_Click(object sender, EventArgs e)
         {
             OpenFolder();
-            nodeNumber.Value = 0;
         }
 
         private void OpenFolder()
@@ -60,11 +59,6 @@ namespace MYSTERAssetExplorer.App
             {
                 app.SetWorkingDirectory(openFolderDialog.FileName);
             }
-        }
-
-        private void sortButton_Click(object sender, EventArgs e)
-        {
-            //app.SortDataFiles();
         }
 
         private void WriteToConsole(Color color, string message)
@@ -118,108 +112,22 @@ namespace MYSTERAssetExplorer.App
             //app.SetCurrentSet(imageSet); // hackiness
         }
 
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-            //app.SortDataFiles();
-        }
-
         private void toolStripLabel1_Click_1(object sender, EventArgs e)
         {
             viewer.Show();
         }
 
-        private void fileListing_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //string strItem;
-            //foreach (string selecteditem in fileListing.SelectedItems)
-            //{
-            //    WriteToConsole(selecteditem);
-            //}
-        }
-
         private void nextSelectionButton_Click(object sender, EventArgs e)
         {
-            NextSelection();
-        }
-
-        private void NextSelection()
-        {
-            //if (!Directory.Exists(app.GetWorkspace().RootDir))
-            //    return;
-
-            //var lastSelectedIndex = -1;
-            //if (fileListing.SelectedItems.Count > 0)
-            //{
-            //    var i = fileListing.SelectedItems[fileListing.SelectedItems.Count - 1];
-            //    lastSelectedIndex = fileListing.Items.IndexOf(i);
-            //}
-
-            //fileListing.SelectedItems.Clear();
-            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 1]);
-            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 2]);
-            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 3]);
-            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 4]);
-            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 5]);
-            //fileListing.SelectedItems.Add(fileListing.Items[lastSelectedIndex + 6]);
-
-            //viewer.Show();
-            //viewer.ActivateLoadNode();
-
-            //var nextNode = (int)nodeNumber.Value + 1;
-            //nodeNumber.Value = nextNode;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ConstructPano();
-        }
-
-        private void ConstructPano()
-        {
-            //if (!Directory.Exists(app.GetWorkspace().PanoDir))
-            //    Directory.CreateDirectory(app.GetWorkspace().PanoDir);
-            //int nodeNumber = (int)this.nodeNumber.Value;
-            //var panoName = panoNameInput.Text + "_" + nodeNumber.ToString("D3");
-
-            //WriteToConsole(Color.Yellow, "Building Pano " + panoName);
-            //builder.BuildPanorama(app.GetWorkspace().PanoDir, panoName, app.GetCurrentSet());
-            //WriteToConsole(Color.LimeGreen, "Pano Completed!");
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            QuickBuild();
-        }
-
-        private void QuickBuild()
-        {
-            NextSelection();
-            ConstructPano();
-        }
-
-        private void BuildAllPanos()
-        {
-            int nodeCount = (fileExplorer.Items.Count / 6);
-            int counter = 0;
-            while(counter < nodeCount)
-            {
-                QuickBuild();
-                counter++;
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            BuildAllPanos();
         }
 
         private void nodeListing_AfterSelect(object sender, TreeViewEventArgs e)

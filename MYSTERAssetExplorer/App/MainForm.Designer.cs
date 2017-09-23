@@ -31,14 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
-            this.nextSelectionButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.previewGroup = new System.Windows.Forms.GroupBox();
             this.previewWindow = new System.Windows.Forms.PictureBox();
             this.extractGroup = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.RemoveNode = new System.Windows.Forms.Button();
-            this.AddNode = new System.Windows.Forms.Button();
             this.NodePropertiesGroup = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.listBox3 = new System.Windows.Forms.ListBox();
@@ -128,26 +124,6 @@
             // 
             this.openFolderDialog.FileName = "Select Folder";
             // 
-            // nextSelectionButton
-            // 
-            this.nextSelectionButton.Location = new System.Drawing.Point(0, 0);
-            this.nextSelectionButton.Name = "nextSelectionButton";
-            this.nextSelectionButton.Size = new System.Drawing.Size(100, 22);
-            this.nextSelectionButton.TabIndex = 7;
-            this.nextSelectionButton.Text = "Next";
-            this.nextSelectionButton.UseVisualStyleBackColor = true;
-            this.nextSelectionButton.Click += new System.EventHandler(this.nextSelectionButton_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(0, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(85, 22);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "Previous";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // previewGroup
             // 
             this.previewGroup.Controls.Add(this.previewWindow);
@@ -199,24 +175,6 @@
             this.checkBox1.TabIndex = 27;
             this.checkBox1.Text = "Extract Cube Faces Separately";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // RemoveNode
-            // 
-            this.RemoveNode.Location = new System.Drawing.Point(281, 647);
-            this.RemoveNode.Name = "RemoveNode";
-            this.RemoveNode.Size = new System.Drawing.Size(91, 25);
-            this.RemoveNode.TabIndex = 25;
-            this.RemoveNode.Text = "Remove";
-            this.RemoveNode.UseVisualStyleBackColor = true;
-            // 
-            // AddNode
-            // 
-            this.AddNode.Location = new System.Drawing.Point(193, 647);
-            this.AddNode.Name = "AddNode";
-            this.AddNode.Size = new System.Drawing.Size(82, 25);
-            this.AddNode.TabIndex = 24;
-            this.AddNode.Text = "Add";
-            this.AddNode.UseVisualStyleBackColor = true;
             // 
             // NodePropertiesGroup
             // 
@@ -435,9 +393,9 @@
             this.MenuStrip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openFolder,
-            this.toolStripSeparator3,
-            this.saveButton,
             this.toolStripSeparator1,
+            this.saveButton,
+            this.toolStripSeparator3,
             this.openViewer,
             this.toolStripSeparator4,
             this.aboutButton,
@@ -507,10 +465,6 @@
             // ControlPanel
             // 
             this.ControlPanel.Controls.Add(this.splitContainer2);
-            this.ControlPanel.Controls.Add(this.RemoveNode);
-            this.ControlPanel.Controls.Add(this.AddNode);
-            this.ControlPanel.Controls.Add(this.nextSelectionButton);
-            this.ControlPanel.Controls.Add(this.button2);
             this.ControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ControlPanel.Location = new System.Drawing.Point(0, 0);
             this.ControlPanel.Name = "ControlPanel";
@@ -806,13 +760,11 @@
         private System.Windows.Forms.ToolStripLabel openFolder;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel openViewer;
-        private System.Windows.Forms.Button nextSelectionButton;
         private System.Windows.Forms.TextBox nodeProp_SceneInput;
         private System.Windows.Forms.RichTextBox logOutput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nodeNumber;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TreeView nodeExplorer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel saveButton;
@@ -820,8 +772,6 @@
         private System.Windows.Forms.ToolStripLabel aboutButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripLabel helpButton;
-        private System.Windows.Forms.Button RemoveNode;
-        private System.Windows.Forms.Button AddNode;
         private System.Windows.Forms.GroupBox NodePropertiesGroup;
         private System.Windows.Forms.GroupBox extractGroup;
         private System.Windows.Forms.GroupBox previewGroup;
