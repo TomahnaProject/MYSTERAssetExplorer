@@ -138,6 +138,8 @@
     <Content Include="Resources\folder-closed.ico" />
     <Content Include="Resources\folder-open.ico" />
     <Content Include="Resources\lightning.ico" />
+    <Content Include="Resources\m3.ico" />
+    <Content Include="Resources\m4.ico" />
     <Content Include="Resources\Picture.ico" />
     <Content Include="Resources\red-alert.ico" />
     <Content Include="Resources\script-binary.ico" />

@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace MYSTERAssetExplorer.Core
 {
+    // numbers used for visual icons
     public enum FileType
     {
-        Unknown,
-        Jpg,
-        Bink,
-        Zap,
-        M4B,
-        Binary,
+        // 0 and 1 for open/closed folder icons
+        Unknown = 2,
+        M3A = 3,
+        M4B = 4,
+        Jpg = 5,
+        Zap = 6,
+        Bink = 7,
+        Binary = 8,
     }
 }

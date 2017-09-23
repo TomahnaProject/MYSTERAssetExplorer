@@ -332,8 +332,13 @@ namespace MYSTERAssetExplorer.App
             {
                 if (folder == null)
                     continue;
+
                 item = new ListViewItem(folder.Name, 0);
                 item.Tag = folder;
+                if (folder.Name.Contains(".m4b"))
+                    item.ImageIndex = (int)FileType.M4B;
+                else if (folder.Name.Contains(".m3a"))
+                    item.ImageIndex = (int)FileType.M3A;
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
                     //new ListViewItem.ListViewSubItem(item, "Folder"),
@@ -346,7 +351,7 @@ namespace MYSTERAssetExplorer.App
 
             foreach (var tiledImage in nodeFolderInfo.TiledImages)
             {
-                item = new ListViewItem(tiledImage.Name,8);
+                item = new ListViewItem(tiledImage.Name,9);
                 item.Tag = tiledImage;
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
@@ -361,7 +366,7 @@ namespace MYSTERAssetExplorer.App
 
             foreach (var file in nodeFolderInfo.Files)
             {
-                item = new ListViewItem(file.Name, (int) file.Type + 2);
+                item = new ListViewItem(file.Name, (int) file.Type);
                 item.Tag = file;
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
@@ -408,6 +413,11 @@ namespace MYSTERAssetExplorer.App
                 childNode = new TreeNode(subFolder.Name, 0, 0);
                 childNode.Tag = subFolder;
                 childNode.ImageKey = "folder";
+                if (subFolder.Name.Contains(".m4b"))
+                    childNode.ImageIndex = (int)FileType.M4B;
+                else if (subFolder.Name.Contains(".m3a"))
+                    childNode.ImageIndex = (int)FileType.M3A;
+
                 subSubFolders = subFolder.SubFolders;
                 if (subSubFolders.Count != 0)
                 {
@@ -502,7 +512,7 @@ namespace MYSTERAssetExplorer.App
 
         private void expandAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            folderExplorer.ExpandAll();
+            //folderExplorer.ExpandAll(); // doesn't work well with rev's big data file
         }
     }
 }

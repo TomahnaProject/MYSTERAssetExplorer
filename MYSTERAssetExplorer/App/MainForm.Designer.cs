@@ -36,11 +36,7 @@
             this.previewGroup = new System.Windows.Forms.GroupBox();
             this.previewWindow = new System.Windows.Forms.PictureBox();
             this.extractGroup = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.RemoveNode = new System.Windows.Forms.Button();
             this.AddNode = new System.Windows.Forms.Button();
             this.NodePropertiesGroup = new System.Windows.Forms.GroupBox();
@@ -162,7 +158,7 @@
             this.previewGroup.MinimumSize = new System.Drawing.Size(333, 377);
             this.previewGroup.Name = "previewGroup";
             this.previewGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.previewGroup.Size = new System.Drawing.Size(343, 377);
+            this.previewGroup.Size = new System.Drawing.Size(343, 559);
             this.previewGroup.TabIndex = 28;
             this.previewGroup.TabStop = false;
             this.previewGroup.Text = "Asset Preview";
@@ -177,73 +173,32 @@
             this.previewWindow.Margin = new System.Windows.Forms.Padding(0);
             this.previewWindow.MinimumSize = new System.Drawing.Size(200, 215);
             this.previewWindow.Name = "previewWindow";
-            this.previewWindow.Size = new System.Drawing.Size(343, 362);
+            this.previewWindow.Size = new System.Drawing.Size(343, 544);
             this.previewWindow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.previewWindow.TabIndex = 0;
             this.previewWindow.TabStop = false;
             // 
             // extractGroup
             // 
-            this.extractGroup.Controls.Add(this.button4);
-            this.extractGroup.Controls.Add(this.label5);
-            this.extractGroup.Controls.Add(this.button3);
             this.extractGroup.Controls.Add(this.checkBox1);
-            this.extractGroup.Controls.Add(this.button1);
             this.extractGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.extractGroup.ForeColor = System.Drawing.Color.Gainsboro;
             this.extractGroup.Location = new System.Drawing.Point(0, 0);
             this.extractGroup.Name = "extractGroup";
-            this.extractGroup.Size = new System.Drawing.Size(343, 321);
+            this.extractGroup.Size = new System.Drawing.Size(343, 137);
             this.extractGroup.TabIndex = 27;
             this.extractGroup.TabStop = false;
             this.extractGroup.Text = "Extract Assets";
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(32, 85);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(111, 24);
-            this.button4.TabIndex = 30;
-            this.button4.Text = "Extract This File";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(55, 40);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 14);
-            this.label5.TabIndex = 29;
-            this.label5.Text = "OutputFolder";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(32, 142);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(111, 24);
-            this.button3.TabIndex = 28;
-            this.button3.Text = "Extract All Nodes";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(32, 272);
+            this.checkBox1.Location = new System.Drawing.Point(16, 21);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(186, 18);
             this.checkBox1.TabIndex = 27;
             this.checkBox1.Text = "Extract Cube Faces Separately";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(32, 172);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 24);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Extract This Node";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // RemoveNode
             // 
@@ -281,7 +236,7 @@
             this.NodePropertiesGroup.ForeColor = System.Drawing.Color.Gainsboro;
             this.NodePropertiesGroup.Location = new System.Drawing.Point(0, 0);
             this.NodePropertiesGroup.Name = "NodePropertiesGroup";
-            this.NodePropertiesGroup.Size = new System.Drawing.Size(173, 699);
+            this.NodePropertiesGroup.Size = new System.Drawing.Size(173, 700);
             this.NodePropertiesGroup.TabIndex = 23;
             this.NodePropertiesGroup.TabStop = false;
             this.NodePropertiesGroup.Text = "Node Properties";
@@ -432,7 +387,7 @@
             this.nodeExplorer.Margin = new System.Windows.Forms.Padding(0);
             this.nodeExplorer.MinimumSize = new System.Drawing.Size(100, 215);
             this.nodeExplorer.Name = "nodeExplorer";
-            this.nodeExplorer.Size = new System.Drawing.Size(143, 699);
+            this.nodeExplorer.Size = new System.Drawing.Size(143, 700);
             this.nodeExplorer.TabIndex = 22;
             this.nodeExplorer.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.nodeListing_ItemDrag);
             this.nodeExplorer.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.nodeListing_AfterSelect);
@@ -470,7 +425,7 @@
             this.logOutput.Name = "logOutput";
             this.logOutput.ReadOnly = true;
             this.logOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.logOutput.Size = new System.Drawing.Size(1004, 34);
+            this.logOutput.Size = new System.Drawing.Size(1004, 33);
             this.logOutput.TabIndex = 2;
             this.logOutput.Text = "";
             // 
@@ -559,7 +514,7 @@
             this.ControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ControlPanel.Location = new System.Drawing.Point(0, 0);
             this.ControlPanel.Name = "ControlPanel";
-            this.ControlPanel.Size = new System.Drawing.Size(520, 699);
+            this.ControlPanel.Size = new System.Drawing.Size(520, 700);
             this.ControlPanel.TabIndex = 23;
             // 
             // splitContainer2
@@ -575,7 +530,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(520, 699);
+            this.splitContainer2.Size = new System.Drawing.Size(520, 700);
             this.splitContainer2.SplitterDistance = 173;
             this.splitContainer2.TabIndex = 29;
             // 
@@ -593,8 +548,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.extractGroup);
-            this.splitContainer3.Size = new System.Drawing.Size(343, 699);
-            this.splitContainer3.SplitterDistance = 374;
+            this.splitContainer3.Size = new System.Drawing.Size(343, 700);
+            this.splitContainer3.SplitterDistance = 559;
             this.splitContainer3.TabIndex = 0;
             // 
             // splitContainerFooter
@@ -614,7 +569,7 @@
             // 
             this.splitContainerFooter.Panel2.Controls.Add(this.logOutput);
             this.splitContainerFooter.Size = new System.Drawing.Size(1004, 770);
-            this.splitContainerFooter.SplitterDistance = 732;
+            this.splitContainerFooter.SplitterDistance = 733;
             this.splitContainerFooter.TabIndex = 29;
             // 
             // MainPanel
@@ -625,7 +580,7 @@
             this.MainPanel.Controls.Add(this.splitContainerFileListings);
             this.MainPanel.Location = new System.Drawing.Point(0, 30);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(1004, 699);
+            this.MainPanel.Size = new System.Drawing.Size(1004, 700);
             this.MainPanel.TabIndex = 29;
             // 
             // splitContainerFileListings
@@ -641,7 +596,7 @@
             // splitContainerFileListings.Panel2
             // 
             this.splitContainerFileListings.Panel2.Controls.Add(this.ControlPanel);
-            this.splitContainerFileListings.Size = new System.Drawing.Size(1004, 699);
+            this.splitContainerFileListings.Size = new System.Drawing.Size(1004, 700);
             this.splitContainerFileListings.SplitterDistance = 480;
             this.splitContainerFileListings.TabIndex = 29;
             // 
@@ -658,7 +613,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.nodeExplorer);
-            this.splitContainer1.Size = new System.Drawing.Size(480, 699);
+            this.splitContainer1.Size = new System.Drawing.Size(480, 700);
             this.splitContainer1.SplitterDistance = 333;
             this.splitContainer1.TabIndex = 29;
             // 
@@ -675,7 +630,7 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.fileExplorer);
-            this.splitContainer4.Size = new System.Drawing.Size(333, 699);
+            this.splitContainer4.Size = new System.Drawing.Size(333, 700);
             this.splitContainer4.SplitterDistance = 233;
             this.splitContainer4.TabIndex = 7;
             // 
@@ -693,7 +648,7 @@
             this.folderExplorer.MinimumSize = new System.Drawing.Size(100, 215);
             this.folderExplorer.Name = "folderExplorer";
             this.folderExplorer.SelectedImageIndex = 0;
-            this.folderExplorer.Size = new System.Drawing.Size(233, 699);
+            this.folderExplorer.Size = new System.Drawing.Size(233, 700);
             this.folderExplorer.TabIndex = 23;
             this.folderExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.folderExplorer_NodeMouseClick);
             // 
@@ -734,14 +689,15 @@
             this.iconSet.Images.SetKeyName(0, "folder-closed.ico");
             this.iconSet.Images.SetKeyName(1, "folder-open.ico");
             this.iconSet.Images.SetKeyName(2, "file.ico");
-            this.iconSet.Images.SetKeyName(3, "Picture.ico");
-            this.iconSet.Images.SetKeyName(4, "video.ico");
-            this.iconSet.Images.SetKeyName(5, "lightning.ico");
-            this.iconSet.Images.SetKeyName(6, "archives.ico");
-            this.iconSet.Images.SetKeyName(7, "script-binary.ico");
-            this.iconSet.Images.SetKeyName(8, "tiledimage.ico");
-            this.iconSet.Images.SetKeyName(9, "red-alert.ico");
-            this.iconSet.Images.SetKeyName(10, "zone.png");
+            this.iconSet.Images.SetKeyName(3, "m3.ico");
+            this.iconSet.Images.SetKeyName(4, "m4.ico");
+            this.iconSet.Images.SetKeyName(5, "Picture.ico");
+            this.iconSet.Images.SetKeyName(6, "lightning.ico");
+            this.iconSet.Images.SetKeyName(7, "video.ico");
+            this.iconSet.Images.SetKeyName(8, "script-binary.ico");
+            this.iconSet.Images.SetKeyName(9, "tiledimage.ico");
+            this.iconSet.Images.SetKeyName(10, "red-alert.ico");
+            this.iconSet.Images.SetKeyName(11, "zone.png");
             // 
             // fileExplorer
             // 
@@ -755,7 +711,7 @@
             this.fileExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.fileExplorer.Location = new System.Drawing.Point(0, 0);
             this.fileExplorer.Name = "fileExplorer";
-            this.fileExplorer.Size = new System.Drawing.Size(96, 699);
+            this.fileExplorer.Size = new System.Drawing.Size(96, 700);
             this.fileExplorer.SmallImageList = this.iconSet;
             this.fileExplorer.TabIndex = 0;
             this.fileExplorer.UseCompatibleStateImageBehavior = false;
@@ -853,7 +809,6 @@
         private System.Windows.Forms.Button nextSelectionButton;
         private System.Windows.Forms.TextBox nodeProp_SceneInput;
         private System.Windows.Forms.RichTextBox logOutput;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nodeNumber;
         private System.Windows.Forms.Label label2;
@@ -871,13 +826,11 @@
         private System.Windows.Forms.GroupBox extractGroup;
         private System.Windows.Forms.GroupBox previewGroup;
         private System.Windows.Forms.TextBox nodeProp_ZoneInput;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox previewWindow;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Label label7;
@@ -889,7 +842,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.TreeView folderExplorer;
         private System.Windows.Forms.ListView fileExplorer;
