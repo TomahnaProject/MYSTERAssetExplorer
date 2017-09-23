@@ -128,13 +128,18 @@
     <Content Include="Registry\ExileAssetRegistry.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\alert-triangle-red.ico" />
-    <Content Include="Resources\box-closed-grey.ico" />
-    <Content Include="Resources\bullet-grey.ico" />
+    <Content Include="Resources\archives.ico" />
+    <Content Include="Resources\bullet.ico" />
+    <Content Include="Resources\cube.png" />
     <Content Include="Resources\file.ico" />
-    <Content Include="Resources\folder-closed-grey.ico" />
-    <Content Include="Resources\folder-opened-grey.ico" />
     <None Include="Resources\picture-icon-large.png" />
+    <Content Include="Resources\folder-closed.ico" />
+    <Content Include="Resources\folder-open.ico" />
+    <Content Include="Resources\lightning.ico" />
+    <Content Include="Resources\Picture.ico" />
+    <Content Include="Resources\red-alert.ico" />
+    <Content Include="Resources\script-binary.ico" />
+    <Content Include="Resources\video.ico" />
     <Content Include="Resources\zone.png" />
   </ItemGroup>
   <ItemGroup />
