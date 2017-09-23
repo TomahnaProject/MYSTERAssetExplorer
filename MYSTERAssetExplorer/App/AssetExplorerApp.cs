@@ -132,8 +132,8 @@ namespace MYSTERAssetExplorer.App
         {
             consoleWrite(Color.Yellow, "Indexing Files...");
 
-            var exileFiles = filePaths.Where(x => Path.GetExtension(x).ToUpper() == M3FileExtension);
-            var revFiles = filePaths.Where(x => Path.GetExtension(x).ToUpper() == M4FileExtension);
+            var exileFiles = filePaths.Where(x => Path.GetExtension(x).ToUpper() == M3FileExtension).ToList();
+            var revFiles = filePaths.Where(x => Path.GetExtension(x).ToUpper() == M4FileExtension).ToList();
 
             VirtualFolder exileFolder = new VirtualFolder("Exile");
             VirtualFolder revelationFolder = new VirtualFolder("Revelation");
@@ -141,25 +141,46 @@ namespace MYSTERAssetExplorer.App
             var exileIndexer = new M3AFileIndexingService();
             var revIndexer = new M4BFileIndexingService();
 
-            foreach (var file in exileFiles)
+            Stopwatch eWatch = new Stopwatch();
+            Stopwatch rWatch = new Stopwatch();
+            bool[] exileFinished = new bool[exileFiles.Count()];
+            bool[] revFinished =  new bool[revFiles.Count()];
+            for (int i = 0; i < revFiles.Count(); i++)
             {
-                consoleWrite(Color.Yellow, "Indexing " + Path.GetFileName(file));
+                var index = i;
+                consoleWrite(Color.Yellow, "Indexing " + Path.GetFileName(revFiles[i]));
+                rWatch.Reset(); rWatch.Start();
                 var fileThread = new Thread(() =>
                 {
-                    var indexed = IndexSingleFile(file, exileIndexer);
-                    exileFolder.SubFolders.Add(indexed);
+                    var indexedFolder = IndexSingleFile(revFiles[index], revIndexer);
+                    revelationFolder.SubFolders.Add(indexedFolder);
+                    revFinished[index] = true;
+                    rWatch.Stop();
+                    consoleWrite(Color.Green, Path.GetFileName(revFiles[index]) + " Indexed in " + rWatch.ElapsedMilliseconds + "ms");
                 });
                 fileThread.Start();
             }
-            foreach (var file in revFiles)
+            for (int i = 0; i < exileFiles.Count(); i++)
             {
-                consoleWrite(Color.Yellow, "Indexing " + Path.GetFileName(file));
+                var index = i;
+                consoleWrite(Color.Yellow, "Indexing " + Path.GetFileName(exileFiles[i]));
+                eWatch.Reset(); eWatch.Start();
                 var fileThread = new Thread(() =>
                 {
-                    var indexed = IndexSingleFile(file, revIndexer);
-                    revelationFolder.SubFolders.Add(indexed);
+                    var indexedFolder = IndexSingleFile(exileFiles[index], exileIndexer);
+                    exileFolder.SubFolders.Add(indexedFolder);
+                    exileFinished[index] = true;
+                    eWatch.Stop();
+                    consoleWrite(Color.Green, Path.GetFileName(exileFiles[index]) + " Indexed in " + eWatch.ElapsedMilliseconds + "ms");
                 });
                 fileThread.Start();
+            }
+
+            bool notFinished = true;
+            while(notFinished)
+            {
+                notFinished = !(exileFinished.All(x => x == true) && revFinished.All(x => x == true));
+                Thread.Sleep(1000);
             }
 
             var rootFolder = new VirtualFolder("/");
