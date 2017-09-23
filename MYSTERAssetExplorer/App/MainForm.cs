@@ -333,7 +333,7 @@ namespace MYSTERAssetExplorer.App
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
                     //new ListViewItem.ListViewSubItem(item, "Folder"),
-                    new ListViewItem.ListViewSubItem(item, "")
+                    new ListViewItem.ListViewSubItem(item, ""),
                 };
 
                 item.SubItems.AddRange(subItems);
@@ -347,7 +347,8 @@ namespace MYSTERAssetExplorer.App
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
                     //new ListViewItem.ListViewSubItem(item, "File"),
-                    new ListViewItem.ListViewSubItem(item, Utils.GetBytesReadable(file.End - file.Start))
+                    new ListViewItem.ListViewSubItem(item, Utils.GetBytesReadable(file.End - file.Start)),
+                    new ListViewItem.ListViewSubItem(item, "(" + file.Start + ", " + file.End +")")
                 };
 
                 item.SubItems.AddRange(subItems);
@@ -428,19 +429,27 @@ namespace MYSTERAssetExplorer.App
                     var file = selected.Tag as VirtualFileIndex;
                     if(file.Type == FileType.Jpg)
                     {
-                        var fileData = extractService.CopyFile(file);
-
-                        //var savePath = Path.Combine(Path.GetDirectoryName(file.ContainerFilePath), file.Name);
-                        //File.WriteAllBytes(savePath, fileData);
-
-                        Bitmap bmp;
-                        using (var ms = new MemoryStream(fileData))
-                        {
-                            bmp = new Bitmap(ms);
-                            previewWindow.Image = bmp;
-                        }
+                        var jpgData = extractService.CopyFile(file);
+                        SetImageDataIntoPreviewWindow(jpgData);
+                    }
+                    if (file.Type == FileType.Zap)
+                    {
+                        var converter = new ConversionService();
+                        var zapData = extractService.CopyFile(file);
+                        var jpgData = converter.ConvertFromZapToJpg(zapData);
+                        SetImageDataIntoPreviewWindow(jpgData);
                     }
                 }
+            }
+        }
+
+        private void SetImageDataIntoPreviewWindow(byte[] imageData)
+        {
+            Bitmap bmp;
+            using (var ms = new MemoryStream(imageData))
+            {
+                bmp = new Bitmap(ms);
+                previewWindow.Image = bmp;
             }
         }
     }

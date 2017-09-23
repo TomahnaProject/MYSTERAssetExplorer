@@ -88,6 +88,7 @@
             this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iconSet = new System.Windows.Forms.ImageList(this.components);
+            this.offsetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.previewGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
             this.extractGroup.SuspendLayout();
@@ -693,7 +694,8 @@
             this.fileExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.fileExplorer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileColumn,
-            this.sizeColumn});
+            this.sizeColumn,
+            this.offsetColumn});
             this.fileExplorer.ContextMenuStrip = this.contextMenuFileExplorer;
             this.fileExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
@@ -763,6 +765,10 @@
             this.iconSet.Images.SetKeyName(7, "script-binary.ico");
             this.iconSet.Images.SetKeyName(8, "red-alert.ico");
             this.iconSet.Images.SetKeyName(9, "zone.png");
+            // 
+            // offsetColumn
+            // 
+            this.offsetColumn.Text = "Offset";
             // 
             // MainForm
             // 
@@ -878,6 +884,7 @@
         private System.Windows.Forms.ToolStripMenuItem extractNodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem extractAllChildNodesToolStripMenuItem;
         private System.Windows.Forms.ImageList iconSet;
+        private System.Windows.Forms.ColumnHeader offsetColumn;
     }
 }
 
