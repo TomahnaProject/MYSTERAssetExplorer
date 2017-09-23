@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MYSTMYSTERAssetExplorer.Properties {
+namespace MYSTERAssetExplorer.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace MYSTMYSTERAssetExplorer.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MYSTMYSTERAssetExplorer.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MYSTERAssetExplorer.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,16 @@ namespace MYSTMYSTERAssetExplorer.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap picture_icon_large {
+            get {
+                object obj = ResourceManager.GetObject("picture_icon_large", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using MYSTERAssetExplorer.Core;
+using MYSTERAssetExplorer.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,7 @@ namespace MYSTERAssetExplorer.App
         public MainForm()
         {
             InitializeComponent();
+            previewWindow.InitialImage = Properties.Resources.picture_icon_large;
 
             var uiContext = new UIContext();
             uiContext.WriteToConsole += WriteToConsole;
@@ -327,6 +329,7 @@ namespace MYSTERAssetExplorer.App
                 if (folder == null)
                     continue;
                 item = new ListViewItem(folder.Name, 0);
+                item.Tag = folder;
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
                     //new ListViewItem.ListViewSubItem(item, "Folder"),
@@ -340,6 +343,7 @@ namespace MYSTERAssetExplorer.App
             foreach (var file in nodeFolderInfo.Files)
             {
                 item = new ListViewItem(file.Name, (int) file.Type + 2);
+                item.Tag = file;
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
                     //new ListViewItem.ListViewSubItem(item, "File"),
@@ -387,6 +391,56 @@ namespace MYSTERAssetExplorer.App
                     BuildTreeNode(childNode, subSubFolders);
                 }
                 nodeToAddTo.Nodes.Add(childNode);
+            }
+        }
+
+        private void extractFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void extractSelectedFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WriteToConsole(Color.LightBlue, "Extract Selected!");
+            foreach (ListViewItem item in fileExplorer.SelectedItems)
+            {
+                if(item.Tag is VirtualFolder)
+                {
+                    var folder = item.Tag as VirtualFolder;
+                    WriteToConsole(Color.LightBlue, folder.Name);
+                }
+                else if(item.Tag is VirtualFileIndex)
+                {
+                    var file = item.Tag as VirtualFileIndex;
+                    WriteToConsole(Color.LightBlue, file.Name);
+                }
+            }
+        }
+
+        VirtualFileExtractionService extractService = new VirtualFileExtractionService();
+        private void fileExplorer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(fileExplorer.SelectedItems.Count == 1)
+            {
+                ListViewItem selected = fileExplorer.SelectedItems[0];
+                if (selected.Tag is VirtualFileIndex)
+                {
+                    var file = selected.Tag as VirtualFileIndex;
+                    if(file.Type == FileType.Jpg)
+                    {
+                        var fileData = extractService.CopyFile(file);
+
+                        //var savePath = Path.Combine(Path.GetDirectoryName(file.ContainerFilePath), file.Name);
+                        //File.WriteAllBytes(savePath, fileData);
+
+                        Bitmap bmp;
+                        using (var ms = new MemoryStream(fileData))
+                        {
+                            bmp = new Bitmap(ms);
+                            previewWindow.Image = bmp;
+                        }
+                    }
+                }
             }
         }
     }

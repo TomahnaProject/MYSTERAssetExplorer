@@ -133,6 +133,7 @@
     <Content Include="Resources\file.ico" />
     <Content Include="Resources\folder-closed-grey.ico" />
     <Content Include="Resources\folder-opened-grey.ico" />
+    <None Include="Resources\picture-icon-large.png" />
     <Content Include="Resources\zone.png" />
   </ItemGroup>
   <ItemGroup />

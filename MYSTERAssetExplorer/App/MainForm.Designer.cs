@@ -34,7 +34,7 @@
             this.nextSelectionButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.previewGroup = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.previewWindow = new System.Windows.Forms.PictureBox();
             this.extractGroup = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -89,7 +89,7 @@
             this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iconSet = new System.Windows.Forms.ImageList(this.components);
             this.previewGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
             this.extractGroup.SuspendLayout();
             this.NodePropertiesGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeNumber)).BeginInit();
@@ -151,7 +151,7 @@
             // 
             // previewGroup
             // 
-            this.previewGroup.Controls.Add(this.pictureBox1);
+            this.previewGroup.Controls.Add(this.previewWindow);
             this.previewGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.previewGroup.ForeColor = System.Drawing.Color.Gainsboro;
             this.previewGroup.Location = new System.Drawing.Point(0, 0);
@@ -164,17 +164,20 @@
             this.previewGroup.TabStop = false;
             this.previewGroup.Text = "Asset Preview";
             // 
-            // pictureBox1
+            // previewWindow
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox1.MinimumSize = new System.Drawing.Size(200, 215);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(343, 362);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.previewWindow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.previewWindow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.previewWindow.Image = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.previewWindow.InitialImage = null;
+            this.previewWindow.Location = new System.Drawing.Point(0, 15);
+            this.previewWindow.Margin = new System.Windows.Forms.Padding(0);
+            this.previewWindow.MinimumSize = new System.Drawing.Size(200, 215);
+            this.previewWindow.Name = "previewWindow";
+            this.previewWindow.Size = new System.Drawing.Size(343, 362);
+            this.previewWindow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.previewWindow.TabIndex = 0;
+            this.previewWindow.TabStop = false;
             // 
             // extractGroup
             // 
@@ -683,6 +686,7 @@
             this.extractFolderToolStripMenuItem.Name = "extractFolderToolStripMenuItem";
             this.extractFolderToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.extractFolderToolStripMenuItem.Text = "Extract Folder";
+            this.extractFolderToolStripMenuItem.Click += new System.EventHandler(this.extractFolderToolStripMenuItem_Click);
             // 
             // fileExplorer
             // 
@@ -700,6 +704,7 @@
             this.fileExplorer.TabIndex = 0;
             this.fileExplorer.UseCompatibleStateImageBehavior = false;
             this.fileExplorer.View = System.Windows.Forms.View.Details;
+            this.fileExplorer.SelectedIndexChanged += new System.EventHandler(this.fileExplorer_SelectedIndexChanged);
             // 
             // fileColumn
             // 
@@ -722,6 +727,7 @@
             this.extractSelectedFilesToolStripMenuItem.Name = "extractSelectedFilesToolStripMenuItem";
             this.extractSelectedFilesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.extractSelectedFilesToolStripMenuItem.Text = "Extract Selected Files";
+            this.extractSelectedFilesToolStripMenuItem.Click += new System.EventHandler(this.extractSelectedFilesToolStripMenuItem_Click);
             // 
             // contextMenuNodeExplorer
             // 
@@ -771,7 +777,7 @@
             this.Text = "MYSTER (Exile / Revelation) Asset Explorer";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.previewGroup.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).EndInit();
             this.extractGroup.ResumeLayout(false);
             this.extractGroup.PerformLayout();
             this.NodePropertiesGroup.ResumeLayout(false);
@@ -845,7 +851,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox previewWindow;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox listBox2;

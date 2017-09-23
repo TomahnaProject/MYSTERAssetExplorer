@@ -31,15 +31,13 @@ namespace MYSTERAssetExplorer.Services
             JpgEnd,
             BinkStart,
             BinkEnd,
-            Mb4Start,
         }
 
         public VirtualFolder IndexFile(string filePath)
         {
-            var fileName = Path.GetFileName(filePath);
             List<FileMarker> potentialMarkers = FilePotentialMarkers(filePath);
             List<FileMarker> markers = GetConfirmedMarkers(filePath, potentialMarkers);
-            return CreateListing(markers, fileName);
+            return CreateListing(markers, filePath);
         }
 
         private List<FileMarker> FilePotentialMarkers(string filePath)
@@ -162,10 +160,11 @@ namespace MYSTERAssetExplorer.Services
         }
 
 
-        private VirtualFolder CreateListing(List<FileMarker> markers, string name)
+        private VirtualFolder CreateListing(List<FileMarker> markers, string filePath)
         {
+            var fileName = Path.GetFileName(filePath);
             var fileCount = 0;
-            var folder = new VirtualFolder(name);
+            var folder = new VirtualFolder(fileName);
             FileMarker currentFile = null;
 
             foreach (var marker in markers)
@@ -181,7 +180,7 @@ namespace MYSTERAssetExplorer.Services
                     {
                         fileCount += 1;
                         // add 2 to the ending index to include end of file bytes/marker
-                        folder.Files.Add(new VirtualFileIndex(fileCount, fileCount.ToString("D4"), FileType.Jpg, currentFile.Index, (marker.Index - 1) + 2));
+                        folder.Files.Add(new VirtualFileIndex(fileCount, fileCount.ToString("D4") + ".jpg", FileType.Jpg, currentFile.Index, (marker.Index - 1) + 2, filePath));
                         currentFile = null;
                     }
                 }

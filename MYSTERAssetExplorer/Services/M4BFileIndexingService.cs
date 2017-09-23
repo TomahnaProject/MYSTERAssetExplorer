@@ -273,7 +273,7 @@ namespace MYSTERAssetExplorer.Services
             }
             else
             {
-                var thisFile = new VirtualFileIndex(0, fileNameLowercase, fileType, FileOffset, FileOffset + FileSize);
+                var thisFile = new VirtualFileIndex(0, fileNameLowercase, fileType, FileOffset, FileOffset + FileSize, fileStream.Name);
                 parentFolder.Files.Add(thisFile);
             }
             return index;
