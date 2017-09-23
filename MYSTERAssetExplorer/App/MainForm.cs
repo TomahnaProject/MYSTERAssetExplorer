@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -466,7 +467,12 @@ namespace MYSTERAssetExplorer.App
             else if (selected.Tag is VirtualFileTiledImage)
             {
                 var tiledImage = selected.Tag as VirtualFileTiledImage;
+                WriteToConsole(Color.Yellow, "Assembling Tiled Image: '" + tiledImage.Name + "'");
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
                 imageData = extractor.GetImageDataFromVirtualFileTiledImage(tiledImage);
+                stopwatch.Stop();
+                WriteToConsole(Color.Green, "'"+ tiledImage.Name + "' assembled in " + stopwatch.ElapsedMilliseconds + "ms");
             }
             return imageData;
         }

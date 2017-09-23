@@ -23,7 +23,7 @@ namespace MYSTERAssetExplorer.Services
         public byte[] GetImageDataFromVirtualFileTiledImage(VirtualFileTiledImage tiledImage)
         {
             var stitcher = new TileImageStitcher(this);
-            return stitcher.StitchTiledImage(tiledImage);
+            return stitcher.GetAssembledTiledImage(tiledImage);
         }
 
         public byte[] GetImageDataFromVirtualFile(VirtualFileIndex file)
