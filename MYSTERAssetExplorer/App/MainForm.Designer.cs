@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
             this.nextSelectionButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -75,10 +76,16 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.folderExplorer = new System.Windows.Forms.TreeView();
+            this.contextMenuFolderExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.extractFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileExplorer = new System.Windows.Forms.ListView();
             this.fileColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.sizeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.offsetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.asadasd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuFileExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuNodeExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.previewGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.extractGroup.SuspendLayout();
@@ -111,6 +118,9 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            this.contextMenuFolderExplorer.SuspendLayout();
+            this.contextMenuFileExplorer.SuspendLayout();
+            this.contextMenuNodeExplorer.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFolderDialog
@@ -147,7 +157,7 @@
             this.previewGroup.MinimumSize = new System.Drawing.Size(333, 377);
             this.previewGroup.Name = "previewGroup";
             this.previewGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.previewGroup.Size = new System.Drawing.Size(440, 377);
+            this.previewGroup.Size = new System.Drawing.Size(343, 377);
             this.previewGroup.TabIndex = 28;
             this.previewGroup.TabStop = false;
             this.previewGroup.Text = "Asset Preview";
@@ -160,7 +170,7 @@
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.MinimumSize = new System.Drawing.Size(200, 215);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(440, 362);
+            this.pictureBox1.Size = new System.Drawing.Size(343, 362);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -175,7 +185,7 @@
             this.extractGroup.ForeColor = System.Drawing.Color.Gainsboro;
             this.extractGroup.Location = new System.Drawing.Point(0, 0);
             this.extractGroup.Name = "extractGroup";
-            this.extractGroup.Size = new System.Drawing.Size(440, 321);
+            this.extractGroup.Size = new System.Drawing.Size(343, 321);
             this.extractGroup.TabIndex = 27;
             this.extractGroup.TabStop = false;
             this.extractGroup.Text = "Extract Assets";
@@ -263,7 +273,7 @@
             this.NodePropertiesGroup.ForeColor = System.Drawing.Color.Gainsboro;
             this.NodePropertiesGroup.Location = new System.Drawing.Point(0, 0);
             this.NodePropertiesGroup.Name = "NodePropertiesGroup";
-            this.NodePropertiesGroup.Size = new System.Drawing.Size(222, 699);
+            this.NodePropertiesGroup.Size = new System.Drawing.Size(173, 699);
             this.NodePropertiesGroup.TabIndex = 23;
             this.NodePropertiesGroup.TabStop = false;
             this.NodePropertiesGroup.Text = "Node Properties";
@@ -292,7 +302,7 @@
             this.listBox3.Name = "listBox3";
             this.listBox3.ScrollAlwaysVisible = true;
             this.listBox3.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox3.Size = new System.Drawing.Size(213, 60);
+            this.listBox3.Size = new System.Drawing.Size(164, 60);
             this.listBox3.TabIndex = 27;
             // 
             // label6
@@ -319,7 +329,7 @@
             this.listBox2.Name = "listBox2";
             this.listBox2.ScrollAlwaysVisible = true;
             this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox2.Size = new System.Drawing.Size(213, 242);
+            this.listBox2.Size = new System.Drawing.Size(164, 242);
             this.listBox2.TabIndex = 25;
             // 
             // label4
@@ -346,7 +356,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox1.Size = new System.Drawing.Size(213, 60);
+            this.listBox1.Size = new System.Drawing.Size(164, 60);
             this.listBox1.TabIndex = 23;
             // 
             // label3
@@ -407,13 +417,14 @@
             // 
             this.nodeExplorer.AllowDrop = true;
             this.nodeExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.nodeExplorer.ContextMenuStrip = this.contextMenuNodeExplorer;
             this.nodeExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nodeExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.nodeExplorer.Location = new System.Drawing.Point(0, 0);
             this.nodeExplorer.Margin = new System.Windows.Forms.Padding(0);
             this.nodeExplorer.MinimumSize = new System.Drawing.Size(100, 215);
             this.nodeExplorer.Name = "nodeExplorer";
-            this.nodeExplorer.Size = new System.Drawing.Size(100, 699);
+            this.nodeExplorer.Size = new System.Drawing.Size(143, 699);
             this.nodeExplorer.TabIndex = 22;
             this.nodeExplorer.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.nodeListing_ItemDrag);
             this.nodeExplorer.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.nodeListing_AfterSelect);
@@ -520,7 +531,7 @@
             this.ControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ControlPanel.Location = new System.Drawing.Point(0, 0);
             this.ControlPanel.Name = "ControlPanel";
-            this.ControlPanel.Size = new System.Drawing.Size(666, 699);
+            this.ControlPanel.Size = new System.Drawing.Size(520, 699);
             this.ControlPanel.TabIndex = 23;
             // 
             // splitContainer2
@@ -536,8 +547,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(666, 699);
-            this.splitContainer2.SplitterDistance = 222;
+            this.splitContainer2.Size = new System.Drawing.Size(520, 699);
+            this.splitContainer2.SplitterDistance = 173;
             this.splitContainer2.TabIndex = 29;
             // 
             // splitContainer3
@@ -554,7 +565,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.extractGroup);
-            this.splitContainer3.Size = new System.Drawing.Size(440, 699);
+            this.splitContainer3.Size = new System.Drawing.Size(343, 699);
             this.splitContainer3.SplitterDistance = 374;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -603,7 +614,7 @@
             // 
             this.splitContainerFileListings.Panel2.Controls.Add(this.ControlPanel);
             this.splitContainerFileListings.Size = new System.Drawing.Size(1004, 699);
-            this.splitContainerFileListings.SplitterDistance = 334;
+            this.splitContainerFileListings.SplitterDistance = 480;
             this.splitContainerFileListings.TabIndex = 29;
             // 
             // splitContainer1
@@ -619,8 +630,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.nodeExplorer);
-            this.splitContainer1.Size = new System.Drawing.Size(334, 699);
-            this.splitContainer1.SplitterDistance = 232;
+            this.splitContainer1.Size = new System.Drawing.Size(480, 699);
+            this.splitContainer1.SplitterDistance = 333;
             this.splitContainer1.TabIndex = 29;
             // 
             // splitContainer4
@@ -636,49 +647,94 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.fileExplorer);
-            this.splitContainer4.Size = new System.Drawing.Size(232, 699);
-            this.splitContainer4.SplitterDistance = 101;
+            this.splitContainer4.Size = new System.Drawing.Size(333, 699);
+            this.splitContainer4.SplitterDistance = 144;
             this.splitContainer4.TabIndex = 7;
             // 
             // folderExplorer
             // 
             this.folderExplorer.AllowDrop = true;
             this.folderExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.folderExplorer.ContextMenuStrip = this.contextMenuFolderExplorer;
             this.folderExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.folderExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.folderExplorer.Location = new System.Drawing.Point(0, 0);
             this.folderExplorer.Margin = new System.Windows.Forms.Padding(0);
             this.folderExplorer.MinimumSize = new System.Drawing.Size(100, 215);
             this.folderExplorer.Name = "folderExplorer";
-            this.folderExplorer.Size = new System.Drawing.Size(101, 699);
+            this.folderExplorer.Size = new System.Drawing.Size(144, 699);
             this.folderExplorer.TabIndex = 23;
-            this.folderExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.folderTreeView_NodeMouseClick);
+            this.folderExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.folderExplorer_NodeMouseClick);
+            // 
+            // contextMenuFolderExplorer
+            // 
+            this.contextMenuFolderExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.extractFolderToolStripMenuItem});
+            this.contextMenuFolderExplorer.Name = "contextMenuFolderExplorer";
+            this.contextMenuFolderExplorer.Size = new System.Drawing.Size(146, 26);
+            // 
+            // extractFolderToolStripMenuItem
+            // 
+            this.extractFolderToolStripMenuItem.Name = "extractFolderToolStripMenuItem";
+            this.extractFolderToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.extractFolderToolStripMenuItem.Text = "Extract Folder";
             // 
             // fileExplorer
             // 
             this.fileExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.fileExplorer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileColumn,
-            this.sizeColumn,
-            this.offsetColumn});
+            this.asadasd});
+            this.fileExplorer.ContextMenuStrip = this.contextMenuFileExplorer;
             this.fileExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.fileExplorer.Location = new System.Drawing.Point(0, 0);
             this.fileExplorer.Name = "fileExplorer";
-            this.fileExplorer.Size = new System.Drawing.Size(127, 699);
+            this.fileExplorer.Size = new System.Drawing.Size(185, 699);
             this.fileExplorer.TabIndex = 0;
             this.fileExplorer.UseCompatibleStateImageBehavior = false;
+            this.fileExplorer.View = System.Windows.Forms.View.Details;
             // 
             // fileColumn
             // 
             this.fileColumn.Text = "File";
             // 
-            // sizeColumn
+            // asadasd
             // 
-            this.sizeColumn.Text = "Size";
+            this.asadasd.Text = "Size";
             // 
-            // offsetColumn
+            // contextMenuFileExplorer
             // 
-            this.offsetColumn.Text = "offset";
+            this.contextMenuFileExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.extractSelectedFilesToolStripMenuItem});
+            this.contextMenuFileExplorer.Name = "contextMenuFolderExplorer";
+            this.contextMenuFileExplorer.Size = new System.Drawing.Size(183, 26);
+            // 
+            // extractSelectedFilesToolStripMenuItem
+            // 
+            this.extractSelectedFilesToolStripMenuItem.Name = "extractSelectedFilesToolStripMenuItem";
+            this.extractSelectedFilesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.extractSelectedFilesToolStripMenuItem.Text = "Extract Selected Files";
+            // 
+            // contextMenuNodeExplorer
+            // 
+            this.contextMenuNodeExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.extractNodeToolStripMenuItem,
+            this.extractAllChildNodesToolStripMenuItem});
+            this.contextMenuNodeExplorer.Name = "contextMenuFolderExplorer";
+            this.contextMenuNodeExplorer.Size = new System.Drawing.Size(195, 48);
+            // 
+            // extractNodeToolStripMenuItem
+            // 
+            this.extractNodeToolStripMenuItem.Name = "extractNodeToolStripMenuItem";
+            this.extractNodeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.extractNodeToolStripMenuItem.Text = "Extract Node";
+            // 
+            // extractAllChildNodesToolStripMenuItem
+            // 
+            this.extractAllChildNodesToolStripMenuItem.Name = "extractAllChildNodesToolStripMenuItem";
+            this.extractAllChildNodesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.extractAllChildNodesToolStripMenuItem.Text = "Extract All Child Nodes";
             // 
             // MainForm
             // 
@@ -728,6 +784,9 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
+            this.contextMenuFolderExplorer.ResumeLayout(false);
+            this.contextMenuFileExplorer.ResumeLayout(false);
+            this.contextMenuNodeExplorer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -782,8 +841,14 @@
         private System.Windows.Forms.TreeView folderExplorer;
         private System.Windows.Forms.ListView fileExplorer;
         private System.Windows.Forms.ColumnHeader fileColumn;
-        private System.Windows.Forms.ColumnHeader sizeColumn;
-        private System.Windows.Forms.ColumnHeader offsetColumn;
+        private System.Windows.Forms.ColumnHeader asadasd;
+        private System.Windows.Forms.ContextMenuStrip contextMenuFolderExplorer;
+        private System.Windows.Forms.ToolStripMenuItem extractFolderToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuFileExplorer;
+        private System.Windows.Forms.ToolStripMenuItem extractSelectedFilesToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuNodeExplorer;
+        private System.Windows.Forms.ToolStripMenuItem extractNodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem extractAllChildNodesToolStripMenuItem;
     }
 }
 

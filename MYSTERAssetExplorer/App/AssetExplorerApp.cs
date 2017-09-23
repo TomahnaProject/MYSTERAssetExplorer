@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MYSTERAssetExplorer.App
 {
@@ -15,7 +16,6 @@ namespace MYSTERAssetExplorer.App
         string M3FileExtension = ".M3A";
         string M4FileExtension = ".M4B";
 
-        string _filePath;
         string _extractionPath;
 
         AssetExplorerContext _context;
@@ -26,7 +26,7 @@ namespace MYSTERAssetExplorer.App
         {
             _context = new AssetExplorerContext();
             _context.uiContext = uiContext;
-            _context.files = new VirtualFolder("/");
+            _context.VirtualFiles = new VirtualFolder("/");
             _context.extractor = new VirtualFileExtractionService();
             _context.registryManager = new RegistryManager(uiContext);
             _context.registryPersistence = new RegistryPersistenceService();
@@ -38,32 +38,6 @@ namespace MYSTERAssetExplorer.App
             treeViewManager.RegenTreeView(_context.registryManager.Registry);
             //var fakeReg = _context.registryManager.CreateFakeRegistry();
             //_context.registryManager.Registry.Exile = fakeReg;
-        }
-
-        public void OpenFile(string filePath)
-        {
-            IFileIndexerService indexingService;
-            _filePath = filePath;
-            if (!File.Exists(filePath))
-                throw new Exception("No such file " + filePath);
-
-            if (Path.GetExtension(filePath).ToUpper() == M3FileExtension)
-            {
-                indexingService = new M3AFileIndexingService();
-                _context.files = indexingService.IndexFile(_filePath);
-            }
-            else if (Path.GetExtension(filePath).ToUpper() == M4FileExtension)
-            {
-                indexingService = new M4BFileIndexingService();
-                _context.files = indexingService.IndexFile(_filePath);
-            }
-            else
-            {
-                throw new Exception("NOT A VALID FILE FORMAT");
-            }
-
-
-            //_context.uiContext.ListFiles(fileList);
         }
 
         private void LoadRegistry()
@@ -116,12 +90,49 @@ namespace MYSTERAssetExplorer.App
                 _context.uiContext.WriteToConsole(Color.Green, "Found file " + file);
             }
 
-            foreach(var file in files)
-            {
-                // construct fileListing
-            }
+            IndexFiles(files);
 
+            var folders = new List<VirtualFolder>();
+            var exileFolder = _context.VirtualFiles.SubFolders.FirstOrDefault(x => x.Name == "Exile");
+            var revelationFolder = _context.VirtualFiles.SubFolders.FirstOrDefault(x => x.Name == "Revelation");
+            if (exileFolder != null)
+                folders.Add(exileFolder);
+            if (revelationFolder != null)
+                folders.Add(revelationFolder);
+
+            _context.uiContext.PopulateFolders(folders);
             //_context.workspaceModServ.SetWorkingDirectory(path);
+        }
+
+        private void IndexFiles(List<string> files)
+        {
+            _context.uiContext.WriteToConsole(Color.Yellow, "Indexing Files...");
+            VirtualFolder exileFolder = new VirtualFolder("Exile");
+            VirtualFolder revelationFolder = new VirtualFolder("Revelation");
+            _context.VirtualFiles = new VirtualFolder("/");
+            IFileIndexerService indexingService;
+            foreach (var file in files)
+            {
+                _context.uiContext.WriteToConsole(Color.Yellow, "Indexing " + Path.GetFileName(file));
+                if (Path.GetExtension(file).ToUpper() == M3FileExtension)
+                {
+                    indexingService = new M3AFileIndexingService();
+                    exileFolder.SubFolders.Add(indexingService.IndexFile(file));
+                }
+                else if (Path.GetExtension(file).ToUpper() == M4FileExtension)
+                {
+                    indexingService = new M4BFileIndexingService();
+                    revelationFolder.SubFolders.Add(indexingService.IndexFile(file));
+                }
+                else
+                {
+                    // maybe write to console instead???
+                    throw new Exception("NOT A VALID FILE FORMAT");
+                }
+            }
+                _context.VirtualFiles.SubFolders.Add(exileFolder);
+                _context.VirtualFiles.SubFolders.Add(revelationFolder);
+            _context.uiContext.WriteToConsole(Color.Green, "Indexing Complete!");
         }
 
         public List<string> LoadDataFiles()

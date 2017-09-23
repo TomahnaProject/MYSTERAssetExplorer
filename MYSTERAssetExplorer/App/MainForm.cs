@@ -25,8 +25,8 @@ namespace MYSTERAssetExplorer.App
             var uiContext = new UIContext();
             uiContext.WriteToConsole += WriteToConsole;
             uiContext.ListFiles += FillListView;
-            uiContext.PopulateNodes += FillNodeTreeView;
-            uiContext.PopulateFolders += FillFolderTreeView;
+            uiContext.PopulateNodes += PopulateNodeExplorer;
+            uiContext.PopulateFolders += PopulateFolderExplorer;
             app = new AssetExplorerApp(uiContext);
 
             viewer = new NodeViewer(LoadImageToViewer);
@@ -87,7 +87,7 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
-        private void FillNodeTreeView(TreeNode[] nodes)
+        private void PopulateNodeExplorer(TreeNode[] nodes)
         {
             nodeExplorer.Nodes.Clear();
             nodeExplorer.Nodes.AddRange(nodes);
@@ -314,17 +314,78 @@ namespace MYSTERAssetExplorer.App
             MessageBox.Show(message);
         }
 
-        private void folderTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void folderExplorer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
             fileExplorer.Items.Clear();
-            DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
+            VirtualFolder nodeFolderInfo = (VirtualFolder)newSelected.Tag;
+            ListViewItem.ListViewSubItem[] subItems;
+            ListViewItem item = null;
+
+            foreach (VirtualFolder folder in nodeFolderInfo.SubFolders)
+            {
+                if (folder == null)
+                    continue;
+                item = new ListViewItem(folder.Name, 0);
+                subItems = new ListViewItem.ListViewSubItem[]
+                {
+                    //new ListViewItem.ListViewSubItem(item, "Folder"),
+                    new ListViewItem.ListViewSubItem(item, "")
+                };
+
+                item.SubItems.AddRange(subItems);
+                fileExplorer.Items.Add(item);
+            }
+            foreach (var file in nodeFolderInfo.Files)
+            {
+                item = new ListViewItem(file.Name, 1);
+                subItems = new ListViewItem.ListViewSubItem[]
+                {
+                    //new ListViewItem.ListViewSubItem(item, "File"),
+                    new ListViewItem.ListViewSubItem(item, Utils.GetBytesReadable(file.End - file.Start))
+                };
+
+                item.SubItems.AddRange(subItems);
+                fileExplorer.Items.Add(item);
+            }
+
+            fileExplorer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-        private void FillFolderTreeView(TreeNode[] nodes)
+        private void PopulateFolderExplorer(List<VirtualFolder> folders)
         {
-            nodeExplorer.Nodes.Clear();
-            nodeExplorer.Nodes.AddRange(nodes);
+            foreach(var folder in folders)
+            {
+                if (folder != null)
+                {
+                    var folderNode = new TreeNode(folder.Name);
+                    folderNode.Tag = folder;
+                    BuildTreeNode(folderNode, folder.SubFolders);
+                    folderExplorer.Nodes.Add(folderNode);
+                }
+            }
+        }
+
+        private void BuildTreeNode(TreeNode nodeToAddTo, List<VirtualFolder> subFolders)
+        {
+            TreeNode childNode;
+            List<VirtualFolder> subSubFolders;
+            foreach (var subFolder in subFolders)
+            {
+                if (subFolder == null)
+                {
+                    continue;
+                }
+                childNode = new TreeNode(subFolder.Name, 0, 0);
+                childNode.Tag = subFolder;
+                childNode.ImageKey = "folder";
+                subSubFolders = subFolder.SubFolders;
+                if (subSubFolders.Count != 0)
+                {
+                    BuildTreeNode(childNode, subSubFolders);
+                }
+                nodeToAddTo.Nodes.Add(childNode);
+            }
         }
     }
 }

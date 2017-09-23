@@ -13,6 +13,6 @@ namespace MYSTERAssetExplorer.Services
         Action<Color, string> WriteToConsole { get; set; }
         Action<List<VirtualFileIndex>> ListFiles { get; set; }
         Action<TreeNode[]> PopulateNodes { get; set; }
-        Action<TreeNode[]> PopulateFolders { get; set; }
+        Action<List<VirtualFolder>> PopulateFolders { get; set; }
     }
 }
