@@ -144,12 +144,22 @@ namespace MYSTERAssetExplorer.App
             foreach (var file in exileFiles)
             {
                 consoleWrite(Color.Yellow, "Indexing " + Path.GetFileName(file));
-                exileFolder.SubFolders.Add(IndexSingleFile(file, exileIndexer));
+                var fileThread = new Thread(() =>
+                {
+                    var indexed = IndexSingleFile(file, exileIndexer);
+                    exileFolder.SubFolders.Add(indexed);
+                });
+                fileThread.Start();
             }
             foreach (var file in revFiles)
             {
                 consoleWrite(Color.Yellow, "Indexing " + Path.GetFileName(file));
-                revelationFolder.SubFolders.Add(IndexSingleFile(file, revIndexer));
+                var fileThread = new Thread(() =>
+                {
+                    var indexed = IndexSingleFile(file, revIndexer);
+                    revelationFolder.SubFolders.Add(indexed);
+                });
+                fileThread.Start();
             }
 
             var rootFolder = new VirtualFolder("/");
