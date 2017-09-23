@@ -73,6 +73,7 @@
     <Compile Include="Core\Media.cs" />
     <Compile Include="Core\AssetOrganization\Node.cs" />
     <Compile Include="Core\Sprite.cs" />
+    <Compile Include="Core\VirtualFileTiledImage.cs" />
     <Compile Include="Core\VirtualFolder.cs" />
     <Compile Include="Core\AssetOrganization\Zone.cs" />
     <Compile Include="Program.cs" />

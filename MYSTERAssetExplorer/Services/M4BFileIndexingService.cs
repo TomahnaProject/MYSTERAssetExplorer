@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -211,6 +212,9 @@ namespace MYSTERAssetExplorer.Services
             {
                 index = ReadFileInfo(parentFolder, fileStream, fileStart, index);
             }
+
+            AddAnyTiledImages(parentFolder);
+
             return index;
         }
 
@@ -279,6 +283,36 @@ namespace MYSTERAssetExplorer.Services
                 parentFolder.Files.Add(thisFile);
             }
             return index;
+        }
+
+        private void AddAnyTiledImages(VirtualFolder parentFolder)
+        {
+            string tileLayoutPattern = @"_\d\d_\d\d\.\w\w\w";
+            var matches = parentFolder.Files.Where(x => Regex.IsMatch(x.Name, tileLayoutPattern)).ToList();
+
+            if (matches.Count < 1)
+                return;
+
+            List<VirtualFileTiledImage> tiledImages = new List<VirtualFileTiledImage>();
+            VirtualFileTiledImage tiledImage;
+            foreach(var match in matches)
+            {
+                var startOfName = Regex.Split(match.Name, tileLayoutPattern)[0];
+
+                if(tiledImages.Any(x => x.Name == startOfName))
+                {
+                    tiledImage = tiledImages.FirstOrDefault(x => x.Name == startOfName);
+                }
+                else
+                {
+                    tiledImage = new VirtualFileTiledImage();
+                    tiledImage.Name = startOfName;
+                    tiledImages.Add(tiledImage);
+                }
+                tiledImage.Tiles.Add(match);
+            }
+
+            parentFolder.TiledImages.AddRange(tiledImages);
         }
     }
 }

@@ -343,6 +343,21 @@ namespace MYSTERAssetExplorer.App
                 fileExplorer.Items.Add(item);
             }
 
+            foreach (var tiledImage in nodeFolderInfo.TiledImages)
+            {
+                item = new ListViewItem(tiledImage.Name,5);
+                item.Tag = tiledImage;
+                subItems = new ListViewItem.ListViewSubItem[]
+                {
+                    //new ListViewItem.ListViewSubItem(item, "File"),
+                    new ListViewItem.ListViewSubItem(item, ""),
+                    new ListViewItem.ListViewSubItem(item, tiledImage.Tiles.Count().ToString() + " images")
+                };
+
+                item.SubItems.AddRange(subItems);
+                fileExplorer.Items.Add(item);
+            }
+
             foreach (var file in nodeFolderInfo.Files)
             {
                 item = new ListViewItem(file.Name, (int) file.Type + 2);
