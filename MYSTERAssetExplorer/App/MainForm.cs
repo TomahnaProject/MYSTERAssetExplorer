@@ -336,9 +336,10 @@ namespace MYSTERAssetExplorer.App
                 item.SubItems.AddRange(subItems);
                 fileExplorer.Items.Add(item);
             }
+
             foreach (var file in nodeFolderInfo.Files)
             {
-                item = new ListViewItem(file.Name, 1);
+                item = new ListViewItem(file.Name, (int) file.Type + 2);
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
                     //new ListViewItem.ListViewSubItem(item, "File"),
@@ -349,11 +350,12 @@ namespace MYSTERAssetExplorer.App
                 fileExplorer.Items.Add(item);
             }
 
-            fileExplorer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            //fileExplorer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void PopulateFolderExplorer(List<VirtualFolder> folders)
         {
+            folderExplorer.Nodes.Clear();
             foreach(var folder in folders)
             {
                 if (folder != null)

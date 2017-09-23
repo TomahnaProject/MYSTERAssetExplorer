@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
             this.nextSelectionButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -80,12 +81,13 @@
             this.extractFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileExplorer = new System.Windows.Forms.ListView();
             this.fileColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.asadasd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.sizeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuFileExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuNodeExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iconSet = new System.Windows.Forms.ImageList(this.components);
             this.previewGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.extractGroup.SuspendLayout();
@@ -658,10 +660,13 @@
             this.folderExplorer.ContextMenuStrip = this.contextMenuFolderExplorer;
             this.folderExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.folderExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.folderExplorer.ImageKey = "folder-closed.ico";
+            this.folderExplorer.ImageList = this.iconSet;
             this.folderExplorer.Location = new System.Drawing.Point(0, 0);
             this.folderExplorer.Margin = new System.Windows.Forms.Padding(0);
             this.folderExplorer.MinimumSize = new System.Drawing.Size(100, 215);
             this.folderExplorer.Name = "folderExplorer";
+            this.folderExplorer.SelectedImageIndex = 0;
             this.folderExplorer.Size = new System.Drawing.Size(144, 699);
             this.folderExplorer.TabIndex = 23;
             this.folderExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.folderExplorer_NodeMouseClick);
@@ -684,13 +689,14 @@
             this.fileExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.fileExplorer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileColumn,
-            this.asadasd});
+            this.sizeColumn});
             this.fileExplorer.ContextMenuStrip = this.contextMenuFileExplorer;
             this.fileExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.fileExplorer.Location = new System.Drawing.Point(0, 0);
             this.fileExplorer.Name = "fileExplorer";
             this.fileExplorer.Size = new System.Drawing.Size(185, 699);
+            this.fileExplorer.SmallImageList = this.iconSet;
             this.fileExplorer.TabIndex = 0;
             this.fileExplorer.UseCompatibleStateImageBehavior = false;
             this.fileExplorer.View = System.Windows.Forms.View.Details;
@@ -698,10 +704,11 @@
             // fileColumn
             // 
             this.fileColumn.Text = "File";
+            this.fileColumn.Width = 130;
             // 
-            // asadasd
+            // sizeColumn
             // 
-            this.asadasd.Text = "Size";
+            this.sizeColumn.Text = "Size";
             // 
             // contextMenuFileExplorer
             // 
@@ -727,7 +734,7 @@
             // extractNodeToolStripMenuItem
             // 
             this.extractNodeToolStripMenuItem.Name = "extractNodeToolStripMenuItem";
-            this.extractNodeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.extractNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.extractNodeToolStripMenuItem.Text = "Extract Node";
             // 
             // extractAllChildNodesToolStripMenuItem
@@ -735,6 +742,21 @@
             this.extractAllChildNodesToolStripMenuItem.Name = "extractAllChildNodesToolStripMenuItem";
             this.extractAllChildNodesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.extractAllChildNodesToolStripMenuItem.Text = "Extract All Child Nodes";
+            // 
+            // iconSet
+            // 
+            this.iconSet.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconSet.ImageStream")));
+            this.iconSet.TransparentColor = System.Drawing.Color.Transparent;
+            this.iconSet.Images.SetKeyName(0, "folder-closed.ico");
+            this.iconSet.Images.SetKeyName(1, "folder-open.ico");
+            this.iconSet.Images.SetKeyName(2, "file.ico");
+            this.iconSet.Images.SetKeyName(3, "Picture.ico");
+            this.iconSet.Images.SetKeyName(4, "video.ico");
+            this.iconSet.Images.SetKeyName(5, "lightning.ico");
+            this.iconSet.Images.SetKeyName(6, "archives.ico");
+            this.iconSet.Images.SetKeyName(7, "script-binary.ico");
+            this.iconSet.Images.SetKeyName(8, "red-alert.ico");
+            this.iconSet.Images.SetKeyName(9, "zone.png");
             // 
             // MainForm
             // 
@@ -841,7 +863,7 @@
         private System.Windows.Forms.TreeView folderExplorer;
         private System.Windows.Forms.ListView fileExplorer;
         private System.Windows.Forms.ColumnHeader fileColumn;
-        private System.Windows.Forms.ColumnHeader asadasd;
+        private System.Windows.Forms.ColumnHeader sizeColumn;
         private System.Windows.Forms.ContextMenuStrip contextMenuFolderExplorer;
         private System.Windows.Forms.ToolStripMenuItem extractFolderToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuFileExplorer;
@@ -849,6 +871,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuNodeExplorer;
         private System.Windows.Forms.ToolStripMenuItem extractNodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem extractAllChildNodesToolStripMenuItem;
+        private System.Windows.Forms.ImageList iconSet;
     }
 }
 

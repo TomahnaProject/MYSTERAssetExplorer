@@ -8,11 +8,11 @@ namespace MYSTERAssetExplorer.Core
 {
     public enum FileType
     {
+        Unknown,
         Jpg,
         Bink,
         Zap,
         M4B,
         Binary,
-        Unknown,
     }
 }

@@ -127,7 +127,15 @@
     <Content Include="Registry\ExileAssetRegistry.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\alert-triangle-red.ico" />
+    <Content Include="Resources\box-closed-grey.ico" />
+    <Content Include="Resources\bullet-grey.ico" />
+    <Content Include="Resources\file.ico" />
+    <Content Include="Resources\folder-closed-grey.ico" />
+    <Content Include="Resources\folder-opened-grey.ico" />
+    <Content Include="Resources\zone.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
