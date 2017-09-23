@@ -345,7 +345,7 @@ namespace MYSTERAssetExplorer.App
 
             foreach (var tiledImage in nodeFolderInfo.TiledImages)
             {
-                item = new ListViewItem(tiledImage.Name,5);
+                item = new ListViewItem(tiledImage.Name,8);
                 item.Tag = tiledImage;
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
@@ -460,6 +460,10 @@ namespace MYSTERAssetExplorer.App
                         var jpgData = converter.ConvertFromZapToJpg(zapData);
                         SetImageDataIntoPreviewWindow(jpgData);
                     }
+                }
+                else if(selected.Tag is VirtualFileTiledImage)
+                {
+
                 }
             }
         }

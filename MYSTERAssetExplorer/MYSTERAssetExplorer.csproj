@@ -140,6 +140,7 @@
     <Content Include="Resources\Picture.ico" />
     <Content Include="Resources\red-alert.ico" />
     <Content Include="Resources\script-binary.ico" />
+    <Content Include="Resources\tiledimage.ico" />
     <Content Include="Resources\video.ico" />
     <Content Include="Resources\zone.png" />
   </ItemGroup>

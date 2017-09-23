@@ -739,8 +739,9 @@
             this.iconSet.Images.SetKeyName(5, "lightning.ico");
             this.iconSet.Images.SetKeyName(6, "archives.ico");
             this.iconSet.Images.SetKeyName(7, "script-binary.ico");
-            this.iconSet.Images.SetKeyName(8, "red-alert.ico");
-            this.iconSet.Images.SetKeyName(9, "zone.png");
+            this.iconSet.Images.SetKeyName(8, "tiledimage.ico");
+            this.iconSet.Images.SetKeyName(9, "red-alert.ico");
+            this.iconSet.Images.SetKeyName(10, "zone.png");
             // 
             // fileExplorer
             // 
