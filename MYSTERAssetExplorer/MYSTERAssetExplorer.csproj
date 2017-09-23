@@ -77,6 +77,7 @@
     <Compile Include="Core\AssetOrganization\Zone.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registry\ZoneDefs.cs" />
     <Compile Include="RichTextBoxExtensions.cs" />
     <Compile Include="Services\ConversionService.cs" />
     <Compile Include="Services\IFileIndexerService.cs" />

@@ -57,6 +57,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.nodeExplorer = new System.Windows.Forms.TreeView();
+            this.contextMenuNodeExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutput = new System.Windows.Forms.RichTextBox();
             this.MenuStrip = new System.Windows.Forms.ToolStrip();
             this.openFolder = new System.Windows.Forms.ToolStripLabel();
@@ -78,22 +81,22 @@
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.folderExplorer = new System.Windows.Forms.TreeView();
             this.contextMenuFolderExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.collapseAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expandAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iconSet = new System.Windows.Forms.ImageList(this.components);
             this.fileExplorer = new System.Windows.Forms.ListView();
             this.fileColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.sizeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.offsetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuFileExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuNodeExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iconSet = new System.Windows.Forms.ImageList(this.components);
-            this.offsetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.previewGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
             this.extractGroup.SuspendLayout();
             this.NodePropertiesGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeNumber)).BeginInit();
+            this.contextMenuNodeExplorer.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.ControlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -123,7 +126,6 @@
             this.splitContainer4.SuspendLayout();
             this.contextMenuFolderExplorer.SuspendLayout();
             this.contextMenuFileExplorer.SuspendLayout();
-            this.contextMenuNodeExplorer.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFolderDialog
@@ -438,6 +440,26 @@
             this.nodeExplorer.DragEnter += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragEnter);
             this.nodeExplorer.DragOver += new System.Windows.Forms.DragEventHandler(this.nodeListing_DragOver);
             // 
+            // contextMenuNodeExplorer
+            // 
+            this.contextMenuNodeExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.extractNodeToolStripMenuItem,
+            this.extractAllChildNodesToolStripMenuItem});
+            this.contextMenuNodeExplorer.Name = "contextMenuFolderExplorer";
+            this.contextMenuNodeExplorer.Size = new System.Drawing.Size(195, 48);
+            // 
+            // extractNodeToolStripMenuItem
+            // 
+            this.extractNodeToolStripMenuItem.Name = "extractNodeToolStripMenuItem";
+            this.extractNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.extractNodeToolStripMenuItem.Text = "Extract Node";
+            // 
+            // extractAllChildNodesToolStripMenuItem
+            // 
+            this.extractAllChildNodesToolStripMenuItem.Name = "extractAllChildNodesToolStripMenuItem";
+            this.extractAllChildNodesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.extractAllChildNodesToolStripMenuItem.Text = "Extract All Child Nodes";
+            // 
             // logOutput
             // 
             this.logOutput.BackColor = System.Drawing.Color.Black;
@@ -678,9 +700,25 @@
             // contextMenuFolderExplorer
             // 
             this.contextMenuFolderExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.collapseAllToolStripMenuItem,
+            this.expandAllToolStripMenuItem,
             this.extractFolderToolStripMenuItem});
             this.contextMenuFolderExplorer.Name = "contextMenuFolderExplorer";
-            this.contextMenuFolderExplorer.Size = new System.Drawing.Size(146, 26);
+            this.contextMenuFolderExplorer.Size = new System.Drawing.Size(146, 70);
+            // 
+            // collapseAllToolStripMenuItem
+            // 
+            this.collapseAllToolStripMenuItem.Name = "collapseAllToolStripMenuItem";
+            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.collapseAllToolStripMenuItem.Text = "Collapse All";
+            this.collapseAllToolStripMenuItem.Click += new System.EventHandler(this.collapseAllToolStripMenuItem_Click);
+            // 
+            // expandAllToolStripMenuItem
+            // 
+            this.expandAllToolStripMenuItem.Name = "expandAllToolStripMenuItem";
+            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.expandAllToolStripMenuItem.Text = "Expand All";
+            this.expandAllToolStripMenuItem.Click += new System.EventHandler(this.expandAllToolStripMenuItem_Click);
             // 
             // extractFolderToolStripMenuItem
             // 
@@ -688,6 +726,21 @@
             this.extractFolderToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.extractFolderToolStripMenuItem.Text = "Extract Folder";
             this.extractFolderToolStripMenuItem.Click += new System.EventHandler(this.extractFolderToolStripMenuItem_Click);
+            // 
+            // iconSet
+            // 
+            this.iconSet.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconSet.ImageStream")));
+            this.iconSet.TransparentColor = System.Drawing.Color.Transparent;
+            this.iconSet.Images.SetKeyName(0, "folder-closed.ico");
+            this.iconSet.Images.SetKeyName(1, "folder-open.ico");
+            this.iconSet.Images.SetKeyName(2, "file.ico");
+            this.iconSet.Images.SetKeyName(3, "Picture.ico");
+            this.iconSet.Images.SetKeyName(4, "video.ico");
+            this.iconSet.Images.SetKeyName(5, "lightning.ico");
+            this.iconSet.Images.SetKeyName(6, "archives.ico");
+            this.iconSet.Images.SetKeyName(7, "script-binary.ico");
+            this.iconSet.Images.SetKeyName(8, "red-alert.ico");
+            this.iconSet.Images.SetKeyName(9, "zone.png");
             // 
             // fileExplorer
             // 
@@ -717,6 +770,10 @@
             // 
             this.sizeColumn.Text = "Size";
             // 
+            // offsetColumn
+            // 
+            this.offsetColumn.Text = "Offset";
+            // 
             // contextMenuFileExplorer
             // 
             this.contextMenuFileExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -730,45 +787,6 @@
             this.extractSelectedFilesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.extractSelectedFilesToolStripMenuItem.Text = "Extract Selected Files";
             this.extractSelectedFilesToolStripMenuItem.Click += new System.EventHandler(this.extractSelectedFilesToolStripMenuItem_Click);
-            // 
-            // contextMenuNodeExplorer
-            // 
-            this.contextMenuNodeExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.extractNodeToolStripMenuItem,
-            this.extractAllChildNodesToolStripMenuItem});
-            this.contextMenuNodeExplorer.Name = "contextMenuFolderExplorer";
-            this.contextMenuNodeExplorer.Size = new System.Drawing.Size(195, 48);
-            // 
-            // extractNodeToolStripMenuItem
-            // 
-            this.extractNodeToolStripMenuItem.Name = "extractNodeToolStripMenuItem";
-            this.extractNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.extractNodeToolStripMenuItem.Text = "Extract Node";
-            // 
-            // extractAllChildNodesToolStripMenuItem
-            // 
-            this.extractAllChildNodesToolStripMenuItem.Name = "extractAllChildNodesToolStripMenuItem";
-            this.extractAllChildNodesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.extractAllChildNodesToolStripMenuItem.Text = "Extract All Child Nodes";
-            // 
-            // iconSet
-            // 
-            this.iconSet.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconSet.ImageStream")));
-            this.iconSet.TransparentColor = System.Drawing.Color.Transparent;
-            this.iconSet.Images.SetKeyName(0, "folder-closed.ico");
-            this.iconSet.Images.SetKeyName(1, "folder-open.ico");
-            this.iconSet.Images.SetKeyName(2, "file.ico");
-            this.iconSet.Images.SetKeyName(3, "Picture.ico");
-            this.iconSet.Images.SetKeyName(4, "video.ico");
-            this.iconSet.Images.SetKeyName(5, "lightning.ico");
-            this.iconSet.Images.SetKeyName(6, "archives.ico");
-            this.iconSet.Images.SetKeyName(7, "script-binary.ico");
-            this.iconSet.Images.SetKeyName(8, "red-alert.ico");
-            this.iconSet.Images.SetKeyName(9, "zone.png");
-            // 
-            // offsetColumn
-            // 
-            this.offsetColumn.Text = "Offset";
             // 
             // MainForm
             // 
@@ -789,6 +807,7 @@
             this.NodePropertiesGroup.ResumeLayout(false);
             this.NodePropertiesGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeNumber)).EndInit();
+            this.contextMenuNodeExplorer.ResumeLayout(false);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.ControlPanel.ResumeLayout(false);
@@ -820,7 +839,6 @@
             this.splitContainer4.ResumeLayout(false);
             this.contextMenuFolderExplorer.ResumeLayout(false);
             this.contextMenuFileExplorer.ResumeLayout(false);
-            this.contextMenuNodeExplorer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -885,6 +903,8 @@
         private System.Windows.Forms.ToolStripMenuItem extractAllChildNodesToolStripMenuItem;
         private System.Windows.Forms.ImageList iconSet;
         private System.Windows.Forms.ColumnHeader offsetColumn;
+        private System.Windows.Forms.ToolStripMenuItem collapseAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem expandAllToolStripMenuItem;
     }
 }
 

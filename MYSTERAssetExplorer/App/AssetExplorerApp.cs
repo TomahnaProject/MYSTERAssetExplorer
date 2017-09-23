@@ -2,10 +2,12 @@
 using MYSTERAssetExplorer.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -85,13 +87,36 @@ namespace MYSTERAssetExplorer.App
 
             var files = LoadDataFiles();
 
-            foreach(var file in files)
+            foreach (var file in files)
             {
                 _context.uiContext.WriteToConsole(Color.Green, "Found file " + file);
             }
 
-            IndexFiles(files);
+            IndexAndShowFiles(files);
+        }
 
+        private void IndexAndShowFiles(List<string> filePaths)
+        {
+            _context.uiContext.WriteToConsole(Color.Orange, "Beginning Indexing Thread");
+
+            var indexThread = new Thread(() =>
+            {
+                var rootFolder = IndexFiles(filePaths, _context.uiContext.WriteToConsole);
+                IndexingCompleted(rootFolder);
+            });
+            indexThread.Start();
+        }
+
+        private void IndexingCompleted(VirtualFolder rootFolder)
+        {
+            _context.uiContext.WriteToConsole(Color.Green, "Indexing Complete!");
+            _context.VirtualFiles = rootFolder;
+
+            PopulateFolders();
+        }
+
+        private void PopulateFolders()
+        {
             var folders = new List<VirtualFolder>();
             var exileFolder = _context.VirtualFiles.SubFolders.FirstOrDefault(x => x.Name == "Exile");
             var revelationFolder = _context.VirtualFiles.SubFolders.FirstOrDefault(x => x.Name == "Revelation");
@@ -101,38 +126,42 @@ namespace MYSTERAssetExplorer.App
                 folders.Add(revelationFolder);
 
             _context.uiContext.PopulateFolders(folders);
-            //_context.workspaceModServ.SetWorkingDirectory(path);
         }
 
-        private void IndexFiles(List<string> files)
+        private VirtualFolder IndexFiles(List<string> filePaths, Action<Color, string> consoleWrite)
         {
-            _context.uiContext.WriteToConsole(Color.Yellow, "Indexing Files...");
+            consoleWrite(Color.Yellow, "Indexing Files...");
+
+            var exileFiles = filePaths.Where(x => Path.GetExtension(x).ToUpper() == M3FileExtension);
+            var revFiles = filePaths.Where(x => Path.GetExtension(x).ToUpper() == M4FileExtension);
+
             VirtualFolder exileFolder = new VirtualFolder("Exile");
             VirtualFolder revelationFolder = new VirtualFolder("Revelation");
-            _context.VirtualFiles = new VirtualFolder("/");
-            IFileIndexerService indexingService;
-            foreach (var file in files)
+
+            var exileIndexer = new M3AFileIndexingService();
+            var revIndexer = new M4BFileIndexingService();
+
+            foreach (var file in exileFiles)
             {
-                _context.uiContext.WriteToConsole(Color.Yellow, "Indexing " + Path.GetFileName(file));
-                if (Path.GetExtension(file).ToUpper() == M3FileExtension)
-                {
-                    indexingService = new M3AFileIndexingService();
-                    exileFolder.SubFolders.Add(indexingService.IndexFile(file));
-                }
-                else if (Path.GetExtension(file).ToUpper() == M4FileExtension)
-                {
-                    indexingService = new M4BFileIndexingService();
-                    revelationFolder.SubFolders.Add(indexingService.IndexFile(file));
-                }
-                else
-                {
-                    // maybe write to console instead???
-                    throw new Exception("NOT A VALID FILE FORMAT");
-                }
+                consoleWrite(Color.Yellow, "Indexing " + Path.GetFileName(file));
+                exileFolder.SubFolders.Add(IndexSingleFile(file, exileIndexer));
             }
-                _context.VirtualFiles.SubFolders.Add(exileFolder);
-                _context.VirtualFiles.SubFolders.Add(revelationFolder);
-            _context.uiContext.WriteToConsole(Color.Green, "Indexing Complete!");
+            foreach (var file in revFiles)
+            {
+                consoleWrite(Color.Yellow, "Indexing " + Path.GetFileName(file));
+                revelationFolder.SubFolders.Add(IndexSingleFile(file, revIndexer));
+            }
+
+            var rootFolder = new VirtualFolder("/");
+            rootFolder.SubFolders.Add(exileFolder);
+            rootFolder.SubFolders.Add(revelationFolder);
+            return rootFolder;
+        }
+
+        private VirtualFolder IndexSingleFile(string filePath, IFileIndexerService indexingService)
+        {
+            var indexedFile = indexingService.IndexFile(filePath);
+            return indexedFile;
         }
 
         public List<string> LoadDataFiles()

@@ -23,7 +23,10 @@ namespace MYSTERAssetExplorer.App
         {
             InitializeComponent();
             previewWindow.InitialImage = Properties.Resources.picture_icon_large;
+        }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
             var uiContext = new UIContext();
             uiContext.WriteToConsole += WriteToConsole;
             uiContext.ListFiles += FillListView;
@@ -33,10 +36,7 @@ namespace MYSTERAssetExplorer.App
 
             viewer = new NodeViewer(LoadImageToViewer);
             builder = new PanoBuilder();
-        }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
             //viewer.Show();
         }
 
@@ -68,7 +68,10 @@ namespace MYSTERAssetExplorer.App
 
         private void WriteToConsole(Color color, string message)
         {
-            logOutput.AppendText(message + "\r\n",color);
+            Invoke(new Action(() =>
+            {
+                logOutput.AppendText(message + "\r\n", color);
+            }));
         }
 
         private void FillListView(List<VirtualFileIndex> files)
@@ -360,17 +363,20 @@ namespace MYSTERAssetExplorer.App
 
         private void PopulateFolderExplorer(List<VirtualFolder> folders)
         {
-            folderExplorer.Nodes.Clear();
-            foreach(var folder in folders)
+            Invoke(new Action(() =>
             {
-                if (folder != null)
+                folderExplorer.Nodes.Clear();
+                foreach (var folder in folders)
                 {
-                    var folderNode = new TreeNode(folder.Name);
-                    folderNode.Tag = folder;
-                    BuildTreeNode(folderNode, folder.SubFolders);
-                    folderExplorer.Nodes.Add(folderNode);
+                    if (folder != null)
+                    {
+                        var folderNode = new TreeNode(folder.Name);
+                        folderNode.Tag = folder;
+                        BuildTreeNode(folderNode, folder.SubFolders);
+                        folderExplorer.Nodes.Add(folderNode);
+                    }
                 }
-            }
+            }));
         }
 
         private void BuildTreeNode(TreeNode nodeToAddTo, List<VirtualFolder> subFolders)
@@ -451,6 +457,16 @@ namespace MYSTERAssetExplorer.App
                 bmp = new Bitmap(ms);
                 previewWindow.Image = bmp;
             }
+        }
+
+        private void collapseAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            folderExplorer.CollapseAll();
+        }
+
+        private void expandAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            folderExplorer.ExpandAll();
         }
     }
 }
