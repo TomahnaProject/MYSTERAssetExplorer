@@ -18,8 +18,6 @@ namespace MYSTERAssetExplorer.App
         const string M3FileExtension = ".M3A";
         const string M4FileExtension = ".M4B";
 
-        string _extractionPath;
-
         AssetExplorerContext _context;
 
         RegistryTreeViewManager treeViewManager;
@@ -76,7 +74,7 @@ namespace MYSTERAssetExplorer.App
         //    _context.workspaceModServ.currentSet = imageSet;
         //}
 
-        public void SetWorkingDirectory(string path)
+        public void SetDataDirectory(string path)
         {
             var dir = Path.GetDirectoryName(path);
             _context.uiContext.WriteToConsole(Color.Orange, "Opening Folder " + dir);
@@ -203,6 +201,21 @@ namespace MYSTERAssetExplorer.App
                     s.EndsWith(M4FileExtension, StringComparison.OrdinalIgnoreCase)
                 );
             return files.ToList();
+        }
+
+        public void SetExtractionDirectory(string path)
+        {
+            _context.ExtractionDirectory = path;
+        }
+
+        public string GetExtractionDirectory()
+        {
+            return _context.ExtractionDirectory;
+        }
+
+        public string GetDataDirectory()
+        {
+            return _context.DataDirectory;
         }
     }
 }

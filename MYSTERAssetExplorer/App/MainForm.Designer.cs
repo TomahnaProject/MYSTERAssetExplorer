@@ -83,6 +83,7 @@
             this.offsetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuFileExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.previewGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
             this.extractGroup.SuspendLayout();
@@ -808,6 +809,7 @@
         private System.Windows.Forms.ColumnHeader offsetColumn;
         private System.Windows.Forms.ToolStripMenuItem collapseAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem expandAllToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog extractFileDialog;
     }
 }
 

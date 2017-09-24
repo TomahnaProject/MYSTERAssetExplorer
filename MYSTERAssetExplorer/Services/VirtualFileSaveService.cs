@@ -10,15 +10,18 @@ namespace MYSTERAssetExplorer.Services
 {
     public class VirtualFileSaveService
     {
-        public void SaveFile(string filePath, VirtualFileIndex file, byte[] data)
+        public void SaveFile(string filePath, string fileName, FileType type, byte[] data)
         {
             string extension = "";
-            if (file.Type == FileType.Jpg)
+            if (type == FileType.Jpg)
                 extension = ".jpg";
-            else if (file.Type == FileType.Bink)
+            else if (type == FileType.Bink)
                 extension = ".bik";
 
-            var savePath = Path.Combine(filePath, file.Name + extension);
+            if (!fileName.Contains(extension))
+                fileName += extension;
+
+            var savePath = Path.Combine(filePath, fileName);
             File.WriteAllBytes(savePath, data);
         }
     }

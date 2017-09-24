@@ -54,10 +54,11 @@ namespace MYSTERAssetExplorer.App
             openFolderDialog.ReadOnlyChecked = true;
             openFolderDialog.CheckFileExists = false;
             openFolderDialog.ValidateNames = false;
+            openFolderDialog.InitialDirectory = app.GetDataDirectory();
 
             if (openFolderDialog.ShowDialog() == DialogResult.OK)
             {
-                app.SetWorkingDirectory(openFolderDialog.FileName);
+                app.SetDataDirectory(openFolderDialog.FileName);
             }
         }
 
@@ -342,19 +343,65 @@ namespace MYSTERAssetExplorer.App
 
         private void extractSelectedFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WriteToConsole(Color.LightBlue, "Extracting Selected Files...");
-            foreach (ListViewItem item in fileExplorer.SelectedItems)
+            extractFileDialog.InitialDirectory = app.GetExtractionDirectory();
+            extractFileDialog.FileName = "SelectedFiles";
+            extractFileDialog.Title = "Save As";
+            if (extractFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if(item.Tag is VirtualFolder)
+                var extractionPath = Path.GetDirectoryName(extractFileDialog.FileName);
+                app.SetExtractionDirectory(extractionPath);
+
+                if (extractionPath.Length < 1)
                 {
-                    var folder = item.Tag as VirtualFolder;
-                    WriteToConsole(Color.LightBlue, folder.Name);
+                    MessageBox.Show("leave a name in the filename field (doesn't matter what, it won't be used)");
+                    return;
                 }
-                else if(item.Tag is VirtualFileIndex)
+
+                WriteToConsole(Color.LightBlue, "Extracting Selected Files to " + extractionPath);
+
+                List<VirtualFileIndex> files = new List<VirtualFileIndex>();
+                List<VirtualFileTiledImage> tiledImages = new List<VirtualFileTiledImage>();
+
+                foreach (ListViewItem item in fileExplorer.SelectedItems)
                 {
-                    var file = item.Tag as VirtualFileIndex;
-                    WriteToConsole(Color.LightBlue, file.Name);
+                    if (item.Tag is VirtualFileIndex)
+                        files.Add(item.Tag as VirtualFileIndex);
+                    else if (item.Tag is VirtualFileTiledImage)
+                        tiledImages.Add(item.Tag as VirtualFileTiledImage);
                 }
+                ExtractFiles(extractionPath, files);
+                ExtractTiledImages(extractionPath, tiledImages);
+            }
+        }
+
+        private void ExtractFiles(string extractionPath, List<VirtualFileIndex> files)
+        {
+            var saveService = new VirtualFileSaveService();
+            var extractor = new VirtualFileExtractionService();
+            foreach (var file in files)
+            {
+                WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
+                var fileData = extractor.CopyFile(file);
+                var fileType = file.Type;
+
+                if (file.Type == FileType.Zap)
+                {
+                    fileData = ConversionService.ConvertFromZapToJpg(fileData);
+                    fileType = FileType.Jpg;
+                }
+                saveService.SaveFile(extractionPath, file.Name, fileType, fileData);
+            }
+        }
+
+        private void ExtractTiledImages(string extractionPath, List<VirtualFileTiledImage> tiledImages)
+        {
+            var saveService = new VirtualFileSaveService();
+            var extractor = new VirtualFileExtractionService();
+            foreach (var tiledImage in tiledImages)
+            {
+                WriteToConsole(Color.LightBlue, "Extracting " + tiledImage.Name);
+                var fileData = extractor.GetImageDataFromVirtualFileTiledImage(tiledImage);
+                saveService.SaveFile(extractionPath, tiledImage.Name, FileType.Jpg, fileData);
             }
         }
 

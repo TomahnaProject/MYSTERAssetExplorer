@@ -10,6 +10,7 @@ namespace MYSTERAssetExplorer.App
     public class AssetExplorerContext
     {
         public string DataDirectory { get; set; }
+        public string ExtractionDirectory { get; set; }
         public string CurrentNode { get; set; }
 
         public VirtualFolder VirtualFiles;
