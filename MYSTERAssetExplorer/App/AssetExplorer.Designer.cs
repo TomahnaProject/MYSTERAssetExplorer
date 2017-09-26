@@ -1,6 +1,6 @@
 ﻿namespace MYSTERAssetExplorer.App
 {
-    partial class MainForm
+    partial class AssetExplorer
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssetExplorer));
             this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
             this.previewGroup = new System.Windows.Forms.GroupBox();
             this.previewWindow = new System.Windows.Forms.PictureBox();

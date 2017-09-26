@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.loadButton = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.nodeExplorer = new System.Windows.Forms.TreeView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -53,6 +52,7 @@
             this.loadRegistry = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveRegistry = new System.Windows.Forms.ToolStripLabel();
+            this.SaveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,16 +70,6 @@
             this.MainPanel.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // loadButton
-            // 
-            this.loadButton.Location = new System.Drawing.Point(219, 31);
-            this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(75, 23);
-            this.loadButton.TabIndex = 17;
-            this.loadButton.Text = "Load";
-            this.loadButton.UseVisualStyleBackColor = true;
-            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
             // 
             // splitContainer1
             // 
@@ -142,7 +132,7 @@
             // 
             // NodePropertiesGroup
             // 
-            this.NodePropertiesGroup.Controls.Add(this.loadButton);
+            this.NodePropertiesGroup.Controls.Add(this.SaveButton);
             this.NodePropertiesGroup.Controls.Add(this.label3);
             this.NodePropertiesGroup.Controls.Add(this.nodeProp_ZoneInput);
             this.NodePropertiesGroup.Controls.Add(this.nodeNumber);
@@ -348,6 +338,16 @@
             this.saveRegistry.Size = new System.Drawing.Size(76, 22);
             this.saveRegistry.Text = "Save Registry";
             // 
+            // SaveButton
+            // 
+            this.SaveButton.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.SaveButton.Location = new System.Drawing.Point(213, 34);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(97, 33);
+            this.SaveButton.TabIndex = 21;
+            this.SaveButton.Text = "Save Changes";
+            this.SaveButton.UseVisualStyleBackColor = false;
+            // 
             // NodeViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -393,7 +393,6 @@
         private System.Windows.Forms.PictureBox bottomBox;
         private System.Windows.Forms.PictureBox leftBox;
         private System.Windows.Forms.PictureBox frontBox;
-        private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView nodeExplorer;
         private System.Windows.Forms.Panel MainPanel;
@@ -412,5 +411,6 @@
         private System.Windows.Forms.ToolStripLabel saveRegistry;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.Button SaveButton;
     }
 }

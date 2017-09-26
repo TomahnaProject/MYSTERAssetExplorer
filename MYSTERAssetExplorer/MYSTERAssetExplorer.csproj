@@ -49,11 +49,11 @@
   <ItemGroup>
     <Compile Include="App\AssetExplorerContext.cs" />
     <Compile Include="App\AssetExplorerApp.cs" />
-    <Compile Include="App\MainForm.cs">
+    <Compile Include="App\AssetExplorer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="App\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="App\AssetExplorer.Designer.cs">
+      <DependentUpon>AssetExplorer.cs</DependentUpon>
     </Compile>
     <Compile Include="App\NodeViewer.cs">
       <SubType>Form</SubType>
@@ -96,8 +96,8 @@
     <Compile Include="Services\PanoBuilder.cs" />
     <Compile Include="Services\RegistryManager.cs" />
     <Compile Include="Utils.cs" />
-    <EmbeddedResource Include="App\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="App\AssetExplorer.resx">
+      <DependentUpon>AssetExplorer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\NodeViewer.resx">
       <DependentUpon>NodeViewer.cs</DependentUpon>

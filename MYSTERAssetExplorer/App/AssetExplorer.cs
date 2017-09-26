@@ -14,13 +14,13 @@ using System.Windows.Forms;
 
 namespace MYSTERAssetExplorer.App
 {
-    public partial class MainForm : Form
+    public partial class AssetExplorer : Form
     {
         AssetExplorerApp app;
         NodeViewer viewer;
         PanoBuilder builder;
 
-        public MainForm()
+        public AssetExplorer()
         {
             InitializeComponent();
             previewWindow.InitialImage = Properties.Resources.picture_icon_large;
@@ -35,7 +35,7 @@ namespace MYSTERAssetExplorer.App
             uiContext.PopulateFolders += PopulateFolderExplorer;
             app = new AssetExplorerApp(uiContext);
 
-            viewer = new NodeViewer(LoadImageToViewer);
+            viewer = new NodeViewer(app);
             builder = new PanoBuilder();
 
             //viewer.Show();

@@ -16,7 +16,7 @@ namespace MYSTERAssetExplorer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new App.MainForm());
+            Application.Run(new App.AssetExplorer());
         }
     }
 }

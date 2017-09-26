@@ -33,19 +33,19 @@ namespace MYSTERAssetExplorer.App
             treeViewManager = new RegistryTreeViewManager(uiContext);
 
             LoadRegistry();
-
-            treeViewManager.RegenTreeView(_context.registryManager.Registry);
-            //var fakeReg = _context.registryManager.CreateFakeRegistry();
-            //_context.registryManager.Registry.Exile = fakeReg;
         }
 
-        private void LoadRegistry()
+        public void LoadRegistry()
         {
             _context.uiContext.WriteToConsole(Color.Orange, "Loading Registry...");
             var registry = _context.registryPersistence.GetRegistryFromDisk();
             _context.registryManager.Registry = registry;
             treeViewManager.RegenTreeView(_context.registryManager.Registry);
             _context.uiContext.WriteToConsole(Color.Green, "Registry Loaded Successfully!");
+
+            // temporary, just so I have something to look at
+            var fakeReg = _context.registryManager.CreateFakeRegistry();
+            _context.registryManager.Registry.Exile = fakeReg;
         }
 
         public void SaveRegistry()
