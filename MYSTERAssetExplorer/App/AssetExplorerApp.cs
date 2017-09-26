@@ -27,7 +27,6 @@ namespace MYSTERAssetExplorer.App
             _context = new AssetExplorerContext();
             _context.uiContext = uiContext;
             _context.VirtualFiles = new VirtualFolder("/");
-            _context.extractor = new VirtualFileExtractionService();
             _context.registryManager = new RegistryManager(uiContext);
             _context.registryPersistence = new RegistryPersistenceService();
 
@@ -216,6 +215,43 @@ namespace MYSTERAssetExplorer.App
         public string GetDataDirectory()
         {
             return _context.DataDirectory;
+        }
+
+        public void FindFile()
+        {
+            //FindExileFile();
+            FindRevFile();
+        }
+
+        public void FindExileFile()
+        {
+            var lookupService = new FileLookupService(_context.VirtualFiles);
+            var address = new VirtualFileAddress(GameEnum.Exile.ToString(), "Edanna", "SP", "010", "2312.jpg");
+            bool fileFound;
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var file = lookupService.GetFile(out fileFound, address);
+            stopwatch.Stop();
+            _context.uiContext.WriteToConsole(Color.Cyan, "Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
+            if (fileFound)
+            {
+                _context.uiContext.WriteToConsole(Color.Cyan, file.Name + " found in " + stopwatch.ElapsedMilliseconds + " ms");
+            }
+        }
+        public void FindRevFile()
+        {
+            var lookupService = new FileLookupService(_context.VirtualFiles);
+            var address = new VirtualFileAddress(GameEnum.Revelation.ToString(), "Haven", "Gate", "010", "front_01_01.jpg");
+            bool fileFound;
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var file = lookupService.GetFile(out fileFound, address);
+            stopwatch.Stop();
+            _context.uiContext.WriteToConsole(Color.Cyan, "Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
+            if (fileFound)
+            {
+                _context.uiContext.WriteToConsole(Color.Cyan, file.Name + " found in " + stopwatch.ElapsedMilliseconds + " ms");
+            }
         }
     }
 }

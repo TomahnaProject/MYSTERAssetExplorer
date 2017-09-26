@@ -67,6 +67,7 @@
     <Compile Include="Core\CubeMapImageSet.cs" />
     <Compile Include="Core\AssetOrganization\AssetRegistry.cs" />
     <Compile Include="Core\AssetOrganization\Scene.cs" />
+    <Compile Include="Core\VirtualFileAddress.cs" />
     <Compile Include="Core\ZoneMappings.cs" />
     <Compile Include="Core\Vector3.cs" />
     <Compile Include="Core\VirtualFileIndex.cs" />

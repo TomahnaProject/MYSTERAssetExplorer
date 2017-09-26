@@ -8,34 +8,159 @@ namespace MYSTERAssetExplorer.Services
 {
     public class FileLookupService
     {
-        VirtualFolder rootFolder;
+        VirtualFolder RootFolder;
 
-        private void ExampleUse()
+        public FileLookupService(VirtualFolder rootFolder)
         {
-            bool couldFind = false;
-            var file = GetFile(out couldFind, "Exile","Amateria","Cave","010","0001.jpg");
+            RootFolder = rootFolder;
         }
 
-        public VirtualFileIndex GetFile(out bool couldFind, string game, string scene, string zone, string node, string image)
+        public VirtualFileIndex GetFile(out bool couldFind, VirtualFileAddress address)
         {
             couldFind = false;
             VirtualFileIndex file = null;
 
+            var gameFolder = RootFolder.SubFolders.FirstOrDefault(
+                x => string.Equals(x.Name, address.Game, StringComparison.OrdinalIgnoreCase));
 
-            var gameFolder = rootFolder.SubFolders.FirstOrDefault(x => string.Equals(x.Name, game, StringComparison.OrdinalIgnoreCase));
-            gameFolder.SubFolders.Where(x=>x.Name == "SceneName");
+            var game = (GameEnum)Enum.Parse(typeof(GameEnum), address.Game, true);
+            if (game == GameEnum.Exile)
+            {
+                file = GetExileFile(out couldFind, gameFolder, address);
+            }
+            else if (game == GameEnum.Revelation)
+            {
+                file = GetRevelationFile(out couldFind, gameFolder, address);
+            }
 
-            couldFind = true;
+            if(file != null)
+                couldFind = true;
             return file;
         }
 
-        //public VirtualFileIndex GetExileFile(out bool couldFind, string game, string scene, string zone, string node, string image)
-        //{
-        //    String oemString = Enum.GetName(typeof(GroupTypes), GroupTypes.OEM);
-        //}
-        //public VirtualFileIndex GetRevelationFile(out bool couldFind, string game, string scene, string zone, string node, string image)
-        //{
+        public VirtualFileIndex GetExileFile(out bool couldFind, VirtualFolder gameFolder, VirtualFileAddress address)
+        {
+            var sceneName = (ExileSceneProperName)Enum.Parse(typeof(ExileSceneProperName), address.Scene, true);
+            var sceneCode = ((ExileSceneCode)sceneName).ToString();
 
-        //}
+            Type type = null;
+            if (sceneName == ExileSceneProperName.Amateria)
+                type = typeof(ExileAmateriaZoneCode);
+            else if (sceneName == ExileSceneProperName.Edanna)
+                type = typeof(ExileEdannaZoneCode);
+            else if (sceneName == ExileSceneProperName.Jnanin)
+                type = typeof(ExileJnaninZoneCode);
+            else if (sceneName == ExileSceneProperName.Narayan)
+                type = typeof(ExileNarayanZoneCode);
+            else if (sceneName == ExileSceneProperName.Tomahna)
+                type = typeof(ExileTomahnaZoneCode);
+            else if (sceneName == ExileSceneProperName.Voltaic)
+                type = typeof(ExileVoltaicZoneCode);
+
+            var zoneName = Enum.Parse(type, address.Zone, true);
+            string zoneCode = zoneName.ToString();
+
+            var fileName = sceneCode + zoneCode + "nodes.m3a";
+
+            if(gameFolder != null)
+            {
+                var dataFile = gameFolder.SubFolders.FirstOrDefault(x => x.Name == fileName);
+
+                if(dataFile != null)
+                {
+                    var file = dataFile.Files.FirstOrDefault(x => x.Name == address.FileName);
+                    if(file!=null)
+                    {
+                        couldFind = true;
+                        return file;
+                    }
+                }
+            }
+
+            couldFind = false;
+            return null;
+        }
+
+        public VirtualFileIndex GetRevelationFile(out bool couldFind, VirtualFolder gameFolder, VirtualFileAddress address)
+        {
+            var sceneName = (RevelationScene)Enum.Parse(typeof(RevelationScene), address.Scene, true);
+            int sceneCode = (int)sceneName;
+            string sceneCodeStr = "w" + sceneCode.ToString("D1");
+
+            Type type = null;
+            if (sceneName == RevelationScene.TomahnaNight)
+                type = typeof(RevelationTomahnaZone);
+            else if (sceneName == RevelationScene.Haven)
+                type = typeof(RevelationHavenZone);
+            else if (sceneName == RevelationScene.Spire)
+                type = typeof(RevelationSpireZone);
+            else if (sceneName == RevelationScene.Serenia)
+                type = typeof(RevelationSereniaZone);
+            else if (sceneName == RevelationScene.TomahnaDay)
+                type = typeof(RevelationTomahnaZone);
+            //else if (sceneName == RevelationScene.Menu)
+            //    type = typeof(RevelationTomahnaZone);
+
+            var zoneName = Enum.Parse(type, address.Zone, true);
+            int zoneCode = (int)zoneName;
+            string zoneCodeStr = "z" + zoneCode.ToString("D2");
+            string nodeCodeStr = "n" + address.Node;
+
+            if (gameFolder != null)
+            {
+                var dataFile = GetSubFolder(gameFolder, "data.m4b");
+                if (dataFile != null)
+                {
+                    var global = GetSubFolder(dataFile, "global");
+                    if (global != null)
+                    {
+                        var sceneFolder = GetSubFolder(global, sceneCodeStr);
+                        if (sceneFolder != null)
+                        {
+                            var zoneFolder = GetSubFolder(sceneFolder, zoneCodeStr);
+                            if (zoneFolder != null)
+                            {
+                                var nodeFolder = GetSubFolder(zoneFolder, nodeCodeStr);
+                                if (nodeFolder != null)
+                                {
+                                    var filename = sceneCodeStr + zoneCodeStr + nodeCodeStr + ".m4b";
+                                    var fileNameFolder = GetSubFolder(nodeFolder, filename);
+                                    if (fileNameFolder != null)
+                                    {
+                                        var cubeFolder = GetSubFolder(fileNameFolder, "cube");
+                                        if (cubeFolder != null)
+                                        {
+                                            var layerDefaultFolder = GetSubFolder(cubeFolder, "layer_default.m4b");
+                                            if (layerDefaultFolder != null)
+                                            {
+                                                var setDefaultFolder = GetSubFolder(layerDefaultFolder, "set_default");
+                                                if(setDefaultFolder != null)
+                                                {
+                                                    // finally the files
+                                                    var file = setDefaultFolder.Files.FirstOrDefault(x => x.Name == address.FileName);
+                                                    if (file != null)
+                                                    {
+                                                        couldFind = true;
+                                                        return file;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            couldFind = false;
+            return null;
+        }
+
+        private VirtualFolder GetSubFolder(VirtualFolder parentFolder, string name)
+        {
+            return parentFolder.SubFolders.FirstOrDefault(x => x.Name == name);
+        }
     }
 }

@@ -5,6 +5,13 @@ using System.Text;
 
 namespace MYSTERAssetExplorer.Core
 {
+    public class ZoneMap
+    {
+
+        public string Scene { get; set; }
+
+    }
+
     // numbers are explicitly set because they are used in mapping from a nice name to the proper folder structure
     public enum GameEnum
     {
@@ -67,7 +74,7 @@ namespace MYSTERAssetExplorer.Core
     }
     public enum ExileNarayanZoneCode
     {
-        NA = 1, //NArayanCHamber
+        CH = 1, //NArayanCHamber
     }
     public enum ExileTomahnaZoneCode
     {

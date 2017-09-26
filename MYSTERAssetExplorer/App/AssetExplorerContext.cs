@@ -9,17 +9,16 @@ namespace MYSTERAssetExplorer.App
 {
     public class AssetExplorerContext
     {
-        public string DataDirectory { get; set; }
-        public string ExtractionDirectory { get; set; }
-        public string CurrentNode { get; set; }
-
-        public VirtualFolder VirtualFiles;
-        public RegistryManager registryManager;
-        public RegistryPersistenceService registryPersistence;
+        //UI
         public IUIContext uiContext;
 
-        // i may want to remove these
-        //public List<IMedia> Files { get; set; }
-        public VirtualFileExtractionService extractor;
+        // Asset Explorer
+        public VirtualFolder VirtualFiles;
+        public string DataDirectory { get; set; }
+        public string ExtractionDirectory { get; set; }
+
+        // Node Viewer
+        public RegistryManager registryManager;
+        public RegistryPersistenceService registryPersistence;
     }
 }
