@@ -201,7 +201,7 @@ namespace MYSTERAssetExplorer.App
                 {
                     if (folder != null)
                     {
-                        var folderNode = new TreeNode(folder.Name);
+                        var folderNode = new TreeNode(folder.Name, 0, 1);
                         folderNode.Tag = folder;
                         BuildTreeNode(folderNode, folder.SubFolders);
                         folderExplorer.Nodes.Add(folderNode);
@@ -214,19 +214,33 @@ namespace MYSTERAssetExplorer.App
         {
             TreeNode childNode;
             List<VirtualFolder> subSubFolders;
+            int iconIndex = 0;
+            int selecedIndex = 0;
             foreach (var subFolder in subFolders)
             {
                 if (subFolder == null)
                 {
                     continue;
                 }
-                childNode = new TreeNode(subFolder.Name, 0, 0);
-                childNode.Tag = subFolder;
-                childNode.ImageKey = "folder";
+
                 if (subFolder.Name.Contains(".m4b"))
-                    childNode.ImageIndex = (int)FileType.M4B;
+                {
+                    iconIndex = (int)FileType.M4B;
+                    selecedIndex = iconIndex;
+                }
                 else if (subFolder.Name.Contains(".m3a"))
-                    childNode.ImageIndex = (int)FileType.M3A;
+                {
+                    iconIndex = (int)FileType.M3A;
+                    selecedIndex = iconIndex;
+                }
+                else
+                {
+                    // normal folder
+                    iconIndex = 0;
+                    selecedIndex = 1;
+                }
+                childNode = new TreeNode(subFolder.Name, iconIndex, selecedIndex);
+                childNode.Tag = subFolder;
 
                 subSubFolders = subFolder.SubFolders;
                 if (subSubFolders.Count != 0)
@@ -382,6 +396,18 @@ namespace MYSTERAssetExplorer.App
         private void findFileButton_Click_1(object sender, EventArgs e)
         {
             app.FindFile();
+        }
+
+        private void folderExplorer_AfterExpand(object sender, TreeViewEventArgs e)
+        {
+            if(e.Node.ImageIndex == 0)
+            e.Node.ImageIndex = 1;
+        }
+
+        private void folderExplorer_AfterCollapse(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.ImageIndex == 1)
+                e.Node.ImageIndex = 0;
         }
     }
 }

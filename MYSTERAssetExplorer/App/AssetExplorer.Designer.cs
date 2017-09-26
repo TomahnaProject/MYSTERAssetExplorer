@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssetExplorer));
             this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
             this.previewGroup = new System.Windows.Forms.GroupBox();
+            this.previewPanel = new System.Windows.Forms.Panel();
             this.previewWindow = new System.Windows.Forms.PictureBox();
             this.contextMenuNodeExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,8 +63,8 @@
             this.contextMenuFileExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.previewPanel = new System.Windows.Forms.Panel();
             this.previewGroup.SuspendLayout();
+            this.previewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
             this.contextMenuNodeExplorer.SuspendLayout();
             this.MenuStrip.SuspendLayout();
@@ -82,7 +83,6 @@
             this.Folder_File.SuspendLayout();
             this.contextMenuFolderExplorer.SuspendLayout();
             this.contextMenuFileExplorer.SuspendLayout();
-            this.previewPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFolderDialog
@@ -103,6 +103,17 @@
             this.previewGroup.TabIndex = 28;
             this.previewGroup.TabStop = false;
             this.previewGroup.Text = "Asset Preview";
+            // 
+            // previewPanel
+            // 
+            this.previewPanel.AutoScroll = true;
+            this.previewPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.previewPanel.Controls.Add(this.previewWindow);
+            this.previewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.previewPanel.Location = new System.Drawing.Point(1, 16);
+            this.previewPanel.Name = "previewPanel";
+            this.previewPanel.Size = new System.Drawing.Size(535, 630);
+            this.previewPanel.TabIndex = 1;
             // 
             // previewWindow
             // 
@@ -295,6 +306,8 @@
             this.folderExplorer.SelectedImageIndex = 0;
             this.folderExplorer.Size = new System.Drawing.Size(229, 647);
             this.folderExplorer.TabIndex = 23;
+            this.folderExplorer.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.folderExplorer_AfterCollapse);
+            this.folderExplorer.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.folderExplorer_AfterExpand);
             this.folderExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.folderExplorer_NodeMouseClick);
             // 
             // contextMenuFolderExplorer
@@ -392,18 +405,7 @@
             this.extractSelectedFilesToolStripMenuItem.Text = "Extract Selected Files";
             this.extractSelectedFilesToolStripMenuItem.Click += new System.EventHandler(this.extractSelectedFilesToolStripMenuItem_Click);
             // 
-            // previewPanel
-            // 
-            this.previewPanel.AutoScroll = true;
-            this.previewPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.previewPanel.Controls.Add(this.previewWindow);
-            this.previewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.previewPanel.Location = new System.Drawing.Point(1, 16);
-            this.previewPanel.Name = "previewPanel";
-            this.previewPanel.Size = new System.Drawing.Size(535, 630);
-            this.previewPanel.TabIndex = 1;
-            // 
-            // MainForm
+            // AssetExplorer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -412,10 +414,11 @@
             this.Controls.Add(this.Main_Footer);
             this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Name = "MainForm";
+            this.Name = "AssetExplorer";
             this.Text = "MYSTER (Exile / Revelation) Asset Explorer";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.previewGroup.ResumeLayout(false);
+            this.previewPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).EndInit();
             this.contextMenuNodeExplorer.ResumeLayout(false);
             this.MenuStrip.ResumeLayout(false);
@@ -436,7 +439,6 @@
             this.Folder_File.ResumeLayout(false);
             this.contextMenuFolderExplorer.ResumeLayout(false);
             this.contextMenuFileExplorer.ResumeLayout(false);
-            this.previewPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
