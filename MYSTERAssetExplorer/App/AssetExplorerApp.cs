@@ -15,8 +15,8 @@ namespace MYSTERAssetExplorer.App
 {
     public class AssetExplorerApp
     {
-        const string M3FileExtension = ".M3A";
-        const string M4FileExtension = ".M4B";
+        public string M3A_FileExtension { get { return _context.M3A_FileExtension; } }
+        public string M4B_FileExtension { get { return _context.M4B_FileExtension; } }
 
         AssetExplorerContext _context;
 
@@ -130,8 +130,8 @@ namespace MYSTERAssetExplorer.App
         {
             consoleWrite(Color.Yellow, "Indexing Files...");
 
-            var exileFiles = filePaths.Where(x => Path.GetExtension(x).ToUpper() == M3FileExtension).ToList();
-            var revFiles = filePaths.Where(x => Path.GetExtension(x).ToUpper() == M4FileExtension).ToList();
+            var exileFiles = filePaths.Where(x => Path.GetExtension(x).ToLower() == _context.M3A_FileExtension).ToList();
+            var revFiles = filePaths.Where(x => Path.GetExtension(x).ToLower() == _context.M4B_FileExtension).ToList();
 
             VirtualFolder exileFolder = new VirtualFolder("Exile");
             VirtualFolder revelationFolder = new VirtualFolder("Revelation");
@@ -197,8 +197,8 @@ namespace MYSTERAssetExplorer.App
         {
             var files = Directory.GetFiles(_context.DataDirectory, "*.*", SearchOption.AllDirectories)
                 .Where(s => 
-                    s.EndsWith(M3FileExtension, StringComparison.OrdinalIgnoreCase) || 
-                    s.EndsWith(M4FileExtension, StringComparison.OrdinalIgnoreCase)
+                    s.EndsWith(_context.M3A_FileExtension, StringComparison.OrdinalIgnoreCase) || 
+                    s.EndsWith(_context.M4B_FileExtension, StringComparison.OrdinalIgnoreCase)
                 );
             return files.ToList();
         }

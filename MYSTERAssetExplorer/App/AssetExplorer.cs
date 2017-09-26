@@ -145,9 +145,9 @@ namespace MYSTERAssetExplorer.App
 
                 item = new ListViewItem(folder.Name, 0);
                 item.Tag = folder;
-                if (folder.Name.Contains(".m4b"))
+                if (folder.Name.CaseInsensitiveContains(app.M4B_FileExtension))
                     item.ImageIndex = (int)FileType.M4B;
-                else if (folder.Name.Contains(".m3a"))
+                else if (folder.Name.Contains(app.M3A_FileExtension))
                     item.ImageIndex = (int)FileType.M3A;
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
@@ -223,12 +223,12 @@ namespace MYSTERAssetExplorer.App
                     continue;
                 }
 
-                if (subFolder.Name.Contains(".m4b"))
+                if (subFolder.Name.CaseInsensitiveContains(app.M4B_FileExtension))
                 {
                     iconIndex = (int)FileType.M4B;
                     selecedIndex = iconIndex;
                 }
-                else if (subFolder.Name.Contains(".m3a"))
+                else if (subFolder.Name.CaseInsensitiveContains(app.M3A_FileExtension))
                 {
                     iconIndex = (int)FileType.M3A;
                     selecedIndex = iconIndex;
