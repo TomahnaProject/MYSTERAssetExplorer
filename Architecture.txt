@@ -1,0 +1,17 @@
+
+
+may want to arrange the core so it has core level interfaces (so like IVirtualFile)
+
+problem with the lookup service is that it wants virtual file index, and I can't return a tileset
+plus there is the issue of a m4b file being both a folder and file, how would extraction work?
+
+
+
+may want to have a division in the core:
+
+- model (classes defining packets of data) 
+- operations (classes defining packets of abilities)
+
+so an m3a indexing operation could then be uses by a generic indexing service
+
+I might be overthinking/overengineering here
