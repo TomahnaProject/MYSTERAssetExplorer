@@ -1,4 +1,5 @@
 ﻿using MYSTERAssetExplorer.Core;
+using MYSTERAssetExplorer.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +15,20 @@ namespace MYSTERAssetExplorer.App
     public partial class NodeViewer : Form
     {
         AssetExplorerApp app;
-        public NodeViewer(AssetExplorerApp app)
+        public NodeViewer()
         {
             InitializeComponent();
-            this.app = app;
+        }
 
+        public void RegisterWithUIContext(IUIContext uiContext)
+        {
+            uiContext.PopulateNodes += PopulateNodeExplorer;
+        }
+
+        public void Launch(AssetExplorerApp app)
+        {
+            this.Show();
+            this.app = app;
             app.LoadRegistry();
         }
 

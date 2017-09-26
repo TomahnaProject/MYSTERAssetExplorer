@@ -149,7 +149,11 @@
     <Content Include="Resources\video.ico" />
     <Content Include="Resources\zone.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Core\Interfaces\" />
+    <Folder Include="Core\Model\" />
+    <Folder Include="Core\Operations\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

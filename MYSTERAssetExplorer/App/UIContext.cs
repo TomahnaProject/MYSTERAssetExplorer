@@ -11,8 +11,8 @@ namespace MYSTERAssetExplorer.App
 {
     public class UIContext : IUIContext
     {
-        // Asset Explorer
 
+        // Asset Explorer
         public Action<Color, string> WriteToConsole { get; set; }
         public Action<List<VirtualFolder>> PopulateFolders { get; set; }
         public Action<List<VirtualFileIndex>> ListFiles { get; set; }

@@ -23,7 +23,7 @@ namespace MYSTERAssetExplorer.App
             games.Add(new TreeNode("Exile", exileNodes.ToArray()));
             var revNodes = NodesForAssetRegistry(registry.Revelation);
             games.Add(new TreeNode("Revelation", revNodes.ToArray()));
-            //_uiContext.PopulateNodes(games.ToArray());
+            _uiContext.PopulateNodes(games.ToArray());
         }
 
         private List<TreeNode> NodesForAssetRegistry(AssetRegistry registry)

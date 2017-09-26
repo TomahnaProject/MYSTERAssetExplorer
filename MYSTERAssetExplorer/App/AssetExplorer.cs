@@ -31,14 +31,14 @@ namespace MYSTERAssetExplorer.App
             var uiContext = new UIContext();
             uiContext.WriteToConsole += WriteToConsole;
             uiContext.ListFiles += FillListView;
-            //uiContext.PopulateNodes += PopulateNodeExplorer;
             uiContext.PopulateFolders += PopulateFolderExplorer;
+
+            viewer = new NodeViewer();
+            viewer.RegisterWithUIContext(uiContext);
+
             app = new AssetExplorerApp(uiContext);
 
-            viewer = new NodeViewer(app);
-            builder = new PanoBuilder();
-
-            //viewer.Show();
+            builder = new PanoBuilder(); // to be removed and place within the assetexplorerapp class
         }
 
         private void openFolder_Click(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace MYSTERAssetExplorer.App
 
         private void launchNodeViewer_Click(object sender, EventArgs e)
         {
-            viewer.Show();
+            viewer.Launch(app);
         }
 
         private void LoadImageToViewer()

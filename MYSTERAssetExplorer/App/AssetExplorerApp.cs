@@ -43,9 +43,10 @@ namespace MYSTERAssetExplorer.App
             treeViewManager.RegenTreeView(_context.registryManager.Registry);
             _context.uiContext.WriteToConsole(Color.Green, "Registry Loaded Successfully!");
 
-            // temporary, just so I have something to look at
+            //temporary, just so I have something to look at
             var fakeReg = _context.registryManager.CreateFakeRegistry();
             _context.registryManager.Registry.Exile = fakeReg;
+            treeViewManager.RegenTreeView(_context.registryManager.Registry);
         }
 
         public void SaveRegistry()
