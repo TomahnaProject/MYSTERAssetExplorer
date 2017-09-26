@@ -70,7 +70,8 @@ namespace MYSTERAssetExplorer.Core
         IS = 2, //ISland
         LL = 3, //LibrasLever
         SS = 4, //SpiderSpinner
-        WW = 5, //WheelsofWonder
+        TO = 5, //TrackHOuse
+        WW = 6, //WheelsofWonder
     }
     public enum ExileNarayanZoneCode
     {
