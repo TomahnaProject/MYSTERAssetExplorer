@@ -379,12 +379,12 @@
             // fileColumn
             // 
             this.fileColumn.Text = "File";
-            this.fileColumn.Width = 84;
+            this.fileColumn.Width = 89;
             // 
             // sizeColumn
             // 
             this.sizeColumn.Text = "Size";
-            this.sizeColumn.Width = 41;
+            this.sizeColumn.Width = 49;
             // 
             // offsetColumn
             // 

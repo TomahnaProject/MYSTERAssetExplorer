@@ -42,11 +42,11 @@ namespace MYSTERAssetExplorer.App
                 {
                     var zoneName = zone.FirstOrDefault().Zone;
                     var zone_tNodes = new List<TreeNode>();
-                    var orderedNodes = zone.OrderBy(x => x.Id);
+                    var orderedNodes = zone.OrderBy(x => x.Number);
 
                     foreach (var node in orderedNodes)
                     {
-                        var nodeName = node.Id.ToString();
+                        var nodeName = node.Number;
                         zone_tNodes.Add(new TreeNode(nodeName));
                     }
                     scene_tNodes.Add(new TreeNode(zoneName, zone_tNodes.ToArray()));

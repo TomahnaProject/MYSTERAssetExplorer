@@ -33,6 +33,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NodePropertiesGroup = new System.Windows.Forms.GroupBox();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.nodeProp_ZoneInput = new System.Windows.Forms.TextBox();
             this.nodeNumber = new System.Windows.Forms.NumericUpDown();
@@ -52,7 +53,6 @@
             this.loadRegistry = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveRegistry = new System.Windows.Forms.ToolStripLabel();
-            this.SaveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -147,6 +147,16 @@
             this.NodePropertiesGroup.TabIndex = 24;
             this.NodePropertiesGroup.TabStop = false;
             this.NodePropertiesGroup.Text = "Node Properties";
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.SaveButton.Location = new System.Drawing.Point(213, 34);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(97, 33);
+            this.SaveButton.TabIndex = 21;
+            this.SaveButton.Text = "Save Changes";
+            this.SaveButton.UseVisualStyleBackColor = false;
             // 
             // label3
             // 
@@ -326,6 +336,7 @@
             this.loadRegistry.Name = "loadRegistry";
             this.loadRegistry.Size = new System.Drawing.Size(78, 22);
             this.loadRegistry.Text = "Load Registry";
+            this.loadRegistry.Click += new System.EventHandler(this.loadRegistry_Click);
             // 
             // toolStripSeparator1
             // 
@@ -337,16 +348,7 @@
             this.saveRegistry.Name = "saveRegistry";
             this.saveRegistry.Size = new System.Drawing.Size(76, 22);
             this.saveRegistry.Text = "Save Registry";
-            // 
-            // SaveButton
-            // 
-            this.SaveButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.SaveButton.Location = new System.Drawing.Point(213, 34);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(97, 33);
-            this.SaveButton.TabIndex = 21;
-            this.SaveButton.Text = "Save Changes";
-            this.SaveButton.UseVisualStyleBackColor = false;
+            this.saveRegistry.Click += new System.EventHandler(this.saveRegistry_Click);
             // 
             // NodeViewer
             // 

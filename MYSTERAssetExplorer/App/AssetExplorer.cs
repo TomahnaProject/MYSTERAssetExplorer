@@ -37,6 +37,7 @@ namespace MYSTERAssetExplorer.App
             viewer.RegisterWithUIContext(uiContext);
 
             app = new AssetExplorerApp(uiContext);
+           // viewer.Launch(app);
 
             builder = new PanoBuilder(); // to be removed and place within the assetexplorerapp class
         }

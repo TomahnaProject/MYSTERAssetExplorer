@@ -21,23 +21,23 @@ namespace MYSTERAssetExplorer
         private Bitmap StichCubeMap(CubeMapImageSet imageSet)
         {
             // grab the image size from first image loaded into the image set
-            var first = Utils.LoadBitmapToMemory(imageSet.Back);
+            var first = Utils.LoadBitmapToMemory(imageSet.Back.File);
             var size = first.Size;
             if (size.Height != size.Width)
                 throw new Exception("Images must have an aspect ratio of 1:1 to build a panorama");
 
             // this is the order the pano's are built in left to right
             List<Bitmap> images = new List<Bitmap>();
-            images.Add(Utils.LoadBitmapToMemory(imageSet.Left));
-            images.Add(Utils.LoadBitmapToMemory(imageSet.Front));
-            images.Add(Utils.LoadBitmapToMemory(imageSet.Right));
-            images.Add(Utils.LoadBitmapToMemory(imageSet.Back));
+            images.Add(Utils.LoadBitmapToMemory(imageSet.Left.File));
+            images.Add(Utils.LoadBitmapToMemory(imageSet.Front.File));
+            images.Add(Utils.LoadBitmapToMemory(imageSet.Right.File));
+            images.Add(Utils.LoadBitmapToMemory(imageSet.Back.File));
 
             // need to flip the bottom/top images so pano is in correct format
-            Bitmap bottom = Utils.LoadBitmapToMemory(imageSet.Bottom);
+            Bitmap bottom = Utils.LoadBitmapToMemory(imageSet.Bottom.File);
             bottom.RotateFlip(RotateFlipType.Rotate90FlipNone);
             images.Add(bottom);
-            Bitmap top = Utils.LoadBitmapToMemory(imageSet.Top);
+            Bitmap top = Utils.LoadBitmapToMemory(imageSet.Top.File);
             top.RotateFlip(RotateFlipType.Rotate270FlipNone);
             images.Add(top);
 

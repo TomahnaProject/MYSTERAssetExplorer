@@ -23,16 +23,16 @@ namespace MYSTERAssetExplorer.Services
             var node01 = new Node();
             node01.Scene = "MA";
             node01.Zone = "TO";
-            node01.Id = 1;
+            node01.Number = "010";
 
             var cubeMap = new CubeMapImageSet();
-            cubeMap.Back = "a";
-            cubeMap.Bottom = "b";
-            cubeMap.Front = "c";
-            cubeMap.Left = "d";
-            cubeMap.Right = "e";
-            cubeMap.Top = "f";
-            node01.CubeMap = cubeMap;
+            cubeMap.Back.File = "a";
+            cubeMap.Bottom.File = "b";
+            cubeMap.Front.File = "c";
+            cubeMap.Left.File = "d";
+            cubeMap.Right.File = "e";
+            cubeMap.Top.File = "f";
+            node01.CubeMaps.Color = cubeMap;
 
             registry.Nodes.Add(node01);
             return registry;

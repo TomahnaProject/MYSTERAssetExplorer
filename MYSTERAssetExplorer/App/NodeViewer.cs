@@ -49,12 +49,24 @@ namespace MYSTERAssetExplorer.App
             if (!Utils.CheckAllFilesExist(CubeMapImageSet.GetAsFileList(imageSet)))
                 return;
 
-            backBox.Image = Utils.LoadBitmapToMemory(imageSet.Back);
-            bottomBox.Image = Utils.LoadBitmapToMemory(imageSet.Bottom);
-            frontBox.Image = Utils.LoadBitmapToMemory(imageSet.Front);
-            leftBox.Image = Utils.LoadBitmapToMemory(imageSet.Left);
-            rightBox.Image = Utils.LoadBitmapToMemory( imageSet.Right);
-            topBox.Image = Utils.LoadBitmapToMemory(imageSet.Top);
+            // use extraction service to 
+
+            backBox.Image = Utils.LoadBitmapToMemory(imageSet.Back.File);
+            bottomBox.Image = Utils.LoadBitmapToMemory(imageSet.Bottom.File);
+            frontBox.Image = Utils.LoadBitmapToMemory(imageSet.Front.File);
+            leftBox.Image = Utils.LoadBitmapToMemory(imageSet.Left.File);
+            rightBox.Image = Utils.LoadBitmapToMemory( imageSet.Right.File);
+            topBox.Image = Utils.LoadBitmapToMemory(imageSet.Top.File);
+        }
+
+        private void loadRegistry_Click(object sender, EventArgs e)
+        {
+            app.LoadRegistry();
+        }
+
+        private void saveRegistry_Click(object sender, EventArgs e)
+        {
+            app.SaveRegistry();
         }
 
         //private void nodeListing_DragDrop(object sender, DragEventArgs e)

@@ -31,8 +31,6 @@ namespace MYSTERAssetExplorer.App
             _context.registryPersistence = new RegistryPersistenceService();
 
             treeViewManager = new RegistryTreeViewManager(uiContext);
-
-            LoadRegistry();
         }
 
         public void LoadRegistry()
