@@ -44,19 +44,47 @@ namespace MYSTERAssetExplorer.App
             nodeExplorer.Nodes.AddRange(nodes);
         }
 
-        public void SetNode(CubeMapImageSet imageSet)
-        {            
-            if (!Utils.CheckAllFilesExist(CubeMapImageSet.GetAsFileList(imageSet)))
+        public void SetNode(Node node)
+        {
+            if (node == null)
                 return;
 
+            // load up the form with this node's data
+            // load up the images
             // use extraction service to 
 
-            backBox.Image = Utils.LoadBitmapToMemory(imageSet.Back.File);
-            bottomBox.Image = Utils.LoadBitmapToMemory(imageSet.Bottom.File);
-            frontBox.Image = Utils.LoadBitmapToMemory(imageSet.Front.File);
-            leftBox.Image = Utils.LoadBitmapToMemory(imageSet.Left.File);
-            rightBox.Image = Utils.LoadBitmapToMemory( imageSet.Right.File);
-            topBox.Image = Utils.LoadBitmapToMemory(imageSet.Top.File);
+            SetImages(node);
+        }
+
+        public void SetImages(Node node)
+        {
+            // some kind of check to validate images?
+            var imageSet = node.CubeMaps.Color;
+
+            backBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Back.File));
+            bottomBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Bottom.File));
+            frontBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Front.File));
+            leftBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Left.File));
+            rightBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Right.File));
+            topBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Top.File));
+
+            //backBox.Image = Utils.LoadBitmapToMemory(imageSet.Back.File);
+            //bottomBox.Image = Utils.LoadBitmapToMemory(imageSet.Bottom.File);
+            //frontBox.Image = Utils.LoadBitmapToMemory(imageSet.Front.File);
+            //leftBox.Image = Utils.LoadBitmapToMemory(imageSet.Left.File);
+            //rightBox.Image = Utils.LoadBitmapToMemory( imageSet.Right.File);
+            //topBox.Image = Utils.LoadBitmapToMemory(imageSet.Top.File);
+        }
+
+        private byte[] LookupFileImageData(Node node, string fileName)
+        {
+            var fileAddress = new VirtualFileAddress(GameEnum.Exile.ToString(), node.Scene, node.Zone, node.Number, fileName);
+            var file = app.FindFile(fileAddress);
+            if(file !=  null)
+            {
+                return app.GetDataForFile(file);
+            }
+            return new byte[0];
         }
 
         private void loadRegistry_Click(object sender, EventArgs e)
@@ -67,6 +95,13 @@ namespace MYSTERAssetExplorer.App
         private void saveRegistry_Click(object sender, EventArgs e)
         {
             app.SaveRegistry();
+        }
+
+        private void nodeExplorer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode newSelected = e.Node;
+            Node selectedCubeNode = (Node) newSelected.Tag;
+            SetNode(selectedCubeNode);
         }
 
         //private void nodeListing_DragDrop(object sender, DragEventArgs e)

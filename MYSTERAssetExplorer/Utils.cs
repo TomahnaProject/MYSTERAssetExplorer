@@ -93,5 +93,14 @@ namespace MYSTERAssetExplorer
                 return new Bitmap(memoryStream);
             }
         }
+
+        public static Bitmap LoadBitmapFromMemory(byte[] imageData)
+        {
+            Bitmap bmp;
+            using (var ms = new MemoryStream(imageData))
+            {
+                return new Bitmap(ms);
+            }
+        }
     }
 }

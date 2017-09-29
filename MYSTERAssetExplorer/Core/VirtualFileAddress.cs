@@ -7,12 +7,12 @@ namespace MYSTERAssetExplorer.Core
 {
     public class VirtualFileAddress
     {
-        public VirtualFileAddress(string game, string scene, string zone, string node, string fileName)
+        public VirtualFileAddress(string game, string scene, string zone, string nodeNumber, string fileName)
         {
             Game = game;
             Scene = scene;
             Zone = zone;
-            Node = node;
+            Node = nodeNumber;
             FileName = fileName;
         }
         public string Game { get; set; }

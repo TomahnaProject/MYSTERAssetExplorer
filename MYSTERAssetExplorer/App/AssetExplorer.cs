@@ -285,26 +285,7 @@ namespace MYSTERAssetExplorer.App
                 {
                     files.Add(item.Tag as IVirtualFile);
                 }
-                ExtractFiles(extractionPath, files);
-            }
-        }
-
-        private void ExtractFiles(string extractionPath, List<IVirtualFile> files)
-        {
-            var saveService = new VirtualFileSaveService();
-            var extractor = new VirtualFileExtractionService();
-            foreach (var file in files)
-            {
-                WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
-                var fileData = extractor.GetDataForVirtualFile(file);
-                var savefileType = file.ContentDetails.Type;
-
-                if (file.ContentDetails.Type == FileType.Zap)
-                {
-                    fileData = ConversionService.ConvertFromZapToJpg(fileData);
-                    savefileType = FileType.Jpg;
-                }
-                saveService.SaveFile(extractionPath, file.Name, savefileType, fileData);
+                app.ExtractFiles(extractionPath, files);
             }
         }
 
@@ -335,7 +316,6 @@ namespace MYSTERAssetExplorer.App
         private byte[] GetDataForImageFile(ListViewItem item)
         {
             byte[] imageData = new byte[0];
-            var extractor = new VirtualFileExtractionService();
             if (item.Tag is IVirtualFile)
             {
                 var file = item.Tag as IVirtualFile;
@@ -345,13 +325,13 @@ namespace MYSTERAssetExplorer.App
                     WriteToConsole(Color.Yellow, "Assembling Tiled Image: '" + file.Name + "'");
                     var stopwatch = new Stopwatch();
                     stopwatch.Start();
-                    imageData = extractor.GetDataForVirtualFile(file);
+                    imageData = app.GetDataForFile(file);
                     stopwatch.Stop();
                     WriteToConsole(Color.Green, "'" + file.Name + "' assembled in " + stopwatch.ElapsedMilliseconds + "ms");
                 }
                 else
                 {
-                    imageData = extractor.GetDataForVirtualFile(file);
+                    imageData = app.GetDataForFile(file);
                 }
 
             }
@@ -360,19 +340,15 @@ namespace MYSTERAssetExplorer.App
 
         private void SetImageDataIntoPreviewWindow(string imageName, byte[] imageData)
         {
-            Bitmap bmp;
-            using (var ms = new MemoryStream(imageData))
+            try
             {
-                try
-                {
-                    bmp = new Bitmap(ms);
-                    previewWindow.Image = bmp;
-                }
-                catch (Exception ex)
-                {
-                    previewWindow.Image = previewWindow.InitialImage;
-                    WriteToConsole(Color.Red, "ERROR: '" + imageName + "' could not be shown ( " + ex.Message + " )");
-                }
+                Bitmap bmp = Utils.LoadBitmapFromMemory(imageData);
+                previewWindow.Image = bmp;
+            }
+            catch (Exception ex)
+            {
+                previewWindow.Image = previewWindow.InitialImage;
+                WriteToConsole(Color.Red, "ERROR: '" + imageName + "' could not be shown ( " + ex.Message + " )");
             }
         }
 

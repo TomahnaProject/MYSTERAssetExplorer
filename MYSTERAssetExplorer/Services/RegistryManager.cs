@@ -21,17 +21,17 @@ namespace MYSTERAssetExplorer.Services
         {
             var registry = new AssetRegistry();
             var node01 = new Node();
-            node01.Scene = "MA";
+            node01.Scene = "Amateria";
             node01.Zone = "TO";
             node01.Number = "010";
 
             var cubeMap = new CubeMapImageSet();
-            cubeMap.Back.File = "a";
-            cubeMap.Bottom.File = "b";
-            cubeMap.Front.File = "c";
-            cubeMap.Left.File = "d";
-            cubeMap.Right.File = "e";
-            cubeMap.Top.File = "f";
+            cubeMap.Back.File = "0001.jpg";
+            cubeMap.Bottom.File = "0002.jpg";
+            cubeMap.Front.File = "0003.jpg";
+            cubeMap.Left.File = "0004.jpg";
+            cubeMap.Right.File = "0005.jpg";
+            cubeMap.Top.File = "0006.jpg";
             node01.CubeMaps.Color = cubeMap;
 
             registry.Nodes.Add(node01);

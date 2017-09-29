@@ -47,7 +47,9 @@ namespace MYSTERAssetExplorer.App
                     foreach (var node in orderedNodes)
                     {
                         var nodeName = node.Number;
-                        zone_tNodes.Add(new TreeNode(nodeName));
+                        var treeNode = new TreeNode(nodeName);
+                        treeNode.Tag = node;
+                        zone_tNodes.Add(treeNode);
                     }
                     scene_tNodes.Add(new TreeNode(zoneName, zone_tNodes.ToArray()));
                 }

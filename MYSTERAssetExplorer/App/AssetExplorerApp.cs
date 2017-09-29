@@ -54,24 +54,6 @@ namespace MYSTERAssetExplorer.App
             _context.uiContext.WriteToConsole(Color.Green, "Registry Saved!");
         }
 
-        public void ExtractFiles(string folderPath)
-        {
-            //_extractionPath = folderPath;
-            //if (!Directory.Exists(folderPath))
-            //    return;
-            //_context.extractor.Extract(_filePath, _context.files, _extractionPath);
-
-        }
-
-        //public CubeMapImageSet GetCurrentSet() // hackiness
-        //{
-        //    return _context.workspaceModServ.currentSet;
-        //}
-        //public void SetCurrentSet(CubeMapImageSet imageSet) // hackiness
-        //{
-        //    _context.workspaceModServ.currentSet = imageSet;
-        //}
-
         public void SetDataDirectory(string path)
         {
             var dir = Path.GetDirectoryName(path);
@@ -216,6 +198,38 @@ namespace MYSTERAssetExplorer.App
             return _context.DataDirectory;
         }
 
+        public void ExtractFiles(string extractionPath, List<IVirtualFile> files)
+        {
+            var saveService = new VirtualFileSaveService();
+            var extractor = new VirtualFileExtractionService();
+            foreach (var file in files)
+            {
+                _context.uiContext.WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
+                var fileData = extractor.GetDataForVirtualFile(file);
+                var savefileType = file.ContentDetails.Type;
+
+                if (file.ContentDetails.Type == FileType.Zap)
+                {
+                    fileData = ConversionService.ConvertFromZapToJpg(fileData);
+                    savefileType = FileType.Jpg;
+                }
+                saveService.SaveFile(extractionPath, file.Name, savefileType, fileData);
+            }
+        }
+
+        public byte[] GetDataForFile(IVirtualFile file)
+        {
+            var extractor = new VirtualFileExtractionService();
+            return extractor.GetDataForVirtualFile(file);
+        }
+
+        public IVirtualFile FindFile(VirtualFileAddress address)
+        {
+            var lookup = new FileLookupService(_context.VirtualFiles);
+            bool couldFind = false;
+            return lookup.GetFile(out couldFind, address);
+        }
+        
         public void FindFile()
         {
             FindExileFile();
@@ -240,6 +254,7 @@ namespace MYSTERAssetExplorer.App
                 _context.uiContext.WriteToConsole(Color.Red, "File not found. Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
             }
         }
+
         public void FindRevFile()
         {
             var lookupService = new FileLookupService(_context.VirtualFiles);
