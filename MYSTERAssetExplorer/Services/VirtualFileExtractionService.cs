@@ -10,46 +10,55 @@ namespace MYSTERAssetExplorer.Services
 {
     public class VirtualFileExtractionService
     {
-        internal void Extract(string _filePath, VirtualFolder folder, string folderPath)
+        public byte[] GetDataForVirtualFile(IVirtualFile file)
         {
-            //var fileSaveService = new VirtualFileSaveService();
-            //foreach (var file in folder.SubFolders)
-            //{
-            //    var data = CopyFile(_filePath, file);
-            //    fileSaveService.SaveFile(folderPath, file, data);
-            //}
+            if(file.ContentDetails is ArchiveIndex)
+            {
+                return GetImageDataForArchive(file.ContentDetails as ArchiveIndex);
+            }
+            else if(file.ContentDetails is TiledImage)
+            {
+                return GetImageDataForTiledImage(file.ContentDetails as TiledImage);
+            }
+            else
+            {
+                return new byte[0];
+            }
         }
 
-        public byte[] GetImageDataFromVirtualFileTiledImage(VirtualFileTiledImage tiledImage)
+        private byte[] GetImageDataForTiledImage(TiledImage tiledImage)
         {
             var stitcher = new TileImageStitcher(this);
             return stitcher.GetAssembledTiledImage(tiledImage);
         }
 
-        public byte[] GetImageDataFromVirtualFile(VirtualFileIndex file)
+        private byte[] GetImageDataForArchive(ArchiveIndex archiveImage)
         {
-            if (file.Type == FileType.Jpg)
+            if (archiveImage.Type == FileType.Jpg)
             {
-                var jpgData = CopyFile(file);
+                var jpgData = CopyFileDataFromArchive(archiveImage);
                 return jpgData;
             }
-            if (file.Type == FileType.Zap)
+            else if (archiveImage.Type == FileType.Zap)
             {
-                var zapData = CopyFile(file);
+                var zapData = CopyFileDataFromArchive(archiveImage);
                 var jpgData = ConversionService.ConvertFromZapToJpg(zapData);
                 return jpgData;
             }
-            return new byte[0];
+            else
+            {
+                return new byte[0];
+            }
         }
 
-        public byte[] CopyFile(VirtualFileIndex file)
+        private byte[] CopyFileDataFromArchive(ArchiveIndex archiveIndex)
         {
-            int bufferSize = (int)(file.End - file.Start) +1; // assuming that any given file never has more bytes that max int size
+            int bufferSize = (int)(archiveIndex.End - archiveIndex.Start) +1; // assuming that any given file never has more bytes that max int size
             byte[] buffer = new byte[bufferSize];
-            FileStream fileStream = new FileStream(file.ContainerFilePath, FileMode.Open, FileAccess.Read);
+            FileStream fileStream = new FileStream(archiveIndex.ArchiveFilePath, FileMode.Open, FileAccess.Read);
             try
             {
-                    fileStream.Seek(file.Start, SeekOrigin.Begin);
+                    fileStream.Seek(archiveIndex.Start, SeekOrigin.Begin);
                     fileStream.Read(buffer, 0, bufferSize);
             }
             finally

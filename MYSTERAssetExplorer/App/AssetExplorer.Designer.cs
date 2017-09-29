@@ -63,6 +63,7 @@
             this.contextMenuFileExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.findFileButton = new System.Windows.Forms.ToolStripLabel();
             this.previewGroup.SuspendLayout();
             this.previewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
@@ -175,7 +176,8 @@
             this.toolStripSeparator4,
             this.aboutButton,
             this.toolStripSeparator5,
-            this.helpButton});
+            this.helpButton,
+            this.findFileButton});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(1004, 25);
@@ -405,6 +407,13 @@
             this.extractSelectedFilesToolStripMenuItem.Text = "Extract Selected Files";
             this.extractSelectedFilesToolStripMenuItem.Click += new System.EventHandler(this.extractSelectedFilesToolStripMenuItem_Click);
             // 
+            // findFileButton
+            // 
+            this.findFileButton.Name = "findFileButton";
+            this.findFileButton.Size = new System.Drawing.Size(51, 22);
+            this.findFileButton.Text = "Find File";
+            this.findFileButton.Click += new System.EventHandler(this.FindFileButton_Click);
+            // 
             // AssetExplorer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -477,6 +486,7 @@
         private System.Windows.Forms.ToolStripMenuItem expandAllToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog extractFileDialog;
         private System.Windows.Forms.Panel previewPanel;
+        private System.Windows.Forms.ToolStripLabel findFileButton;
     }
 }
 

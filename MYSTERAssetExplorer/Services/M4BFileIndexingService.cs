@@ -18,7 +18,7 @@ namespace MYSTERAssetExplorer.Services
 
         public readonly byte[] UbiSoftHeader = new byte[] { 0x55, 0x42, 0x49, 0x5F, 0x42, 0x46, 0x5F, 0x53, 0x49, 0x47 };
 
-        public VirtualFolder IndexFile(string filePath)
+        public IVirtualFolder IndexFile(string filePath)
         {
             VirtualFolder builtFolder;
             var fileName = Path.GetFileName(filePath);
@@ -279,7 +279,7 @@ namespace MYSTERAssetExplorer.Services
             {
                 var totalStartOffset = fileStart + FileOffset;
                 var totalEndOffset = fileStart + FileOffset + FileSize;
-                var thisFile = new VirtualFileIndex(0, fileNameLowercase, fileType, totalStartOffset, totalEndOffset, fileStream.Name);
+                var thisFile = new VirtualFile(fileNameLowercase, new ArchiveIndex(fileStream.Name, fileType, totalStartOffset, totalEndOffset));
                 parentFolder.Files.Add(thisFile);
             }
             return index;
@@ -293,26 +293,30 @@ namespace MYSTERAssetExplorer.Services
             if (matches.Count < 1)
                 return;
 
-            List<VirtualFileTiledImage> tiledImages = new List<VirtualFileTiledImage>();
-            VirtualFileTiledImage tiledImage;
+            List<IVirtualFile> tiledImages = new List<IVirtualFile>();
+            TiledImage tiledImage;
             foreach(var match in matches)
             {
                 var startOfName = Regex.Split(match.Name, tileLayoutPattern)[0];
 
                 if(tiledImages.Any(x => x.Name == startOfName))
                 {
-                    tiledImage = tiledImages.FirstOrDefault(x => x.Name == startOfName);
+                    // add to existing
+                    var existing = tiledImages.FirstOrDefault(x => x.Name == startOfName);
+                    tiledImage = existing.ContentDetails as TiledImage;
                 }
                 else
                 {
-                    tiledImage = new VirtualFileTiledImage();
-                    tiledImage.Name = startOfName;
-                    tiledImages.Add(tiledImage);
+                    // create a new one
+                    tiledImage = new TiledImage();
+                    tiledImage.Type = FileType.Jpg;
+                    var file = new VirtualFile(startOfName, tiledImage);
+                    tiledImages.Add(file);
                 }
                 tiledImage.Tiles.Add(match);
             }
 
-            parentFolder.TiledImages.AddRange(tiledImages);
+            parentFolder.Files.InsertRange(0, tiledImages);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MYSTERAssetExplorer.App
         public IUIContext uiContext;
 
         // Asset Explorer
-        public VirtualFolder VirtualFiles;
+        public IVirtualFolder VirtualFiles;
         public string DataDirectory { get; set; }
         public string ExtractionDirectory { get; set; }
 

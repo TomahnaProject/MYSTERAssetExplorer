@@ -14,7 +14,7 @@ namespace MYSTERAssetExplorer.Services
     {
         class Tile
         {
-            public VirtualFileIndex File { get; set; }
+            public IVirtualFile TileFile { get; set; }
             public int PositionX { get; set; }
             public int PositionY { get; set; }
             public Bitmap Bmp { get; set; }
@@ -26,23 +26,23 @@ namespace MYSTERAssetExplorer.Services
             Extractor = extractor;
         }
 
-        public byte[] GetAssembledTiledImage(VirtualFileTiledImage image)
+        public byte[] GetAssembledTiledImage(TiledImage image)
         {
             List<Tile> tiles = GetTiles(image);
             byte[] imageData = ConstructTiledImage(tiles);
             return imageData;
         }
 
-        private List<Tile> GetTiles(VirtualFileTiledImage image)
+        private List<Tile> GetTiles(TiledImage image)
         {
             List<Tile> tiles = new List<Tile>();
             foreach (var tileFile in image.Tiles)
             {
                 var tile = new Tile();
-                tile.File = tileFile;
+                tile.TileFile = tileFile;
                 tile.PositionX = int.Parse(tileFile.Name[tileFile.Name.Length - 8].ToString());
                 tile.PositionY = int.Parse(tileFile.Name[tileFile.Name.Length - 5].ToString());
-                var imageData = Extractor.GetImageDataFromVirtualFile(tileFile);
+                var imageData = Extractor.GetDataForVirtualFile(tileFile);
 
                 using (var ms = new MemoryStream(imageData))
                 {

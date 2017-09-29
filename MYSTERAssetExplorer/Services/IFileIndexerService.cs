@@ -8,6 +8,6 @@ namespace MYSTERAssetExplorer.Services
 {
     public interface IFileIndexerService
     {
-        VirtualFolder IndexFile(string filePath);
+        IVirtualFolder IndexFile(string filePath);
     }
 }

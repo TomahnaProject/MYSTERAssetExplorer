@@ -65,13 +65,12 @@
     <Compile Include="Core\AssetOrganization\GameRegistry.cs" />
     <Compile Include="Core\AssetOrganization\CubeMapImageSet.cs" />
     <Compile Include="Core\AssetOrganization\AssetRegistry.cs" />
+    <Compile Include="Core\IVirtualFileContentDetails.cs" />
     <Compile Include="Core\VirtualFileAddress.cs" />
-    <Compile Include="Core\VirtualFileEntry.cs" />
     <Compile Include="Core\ZoneMappings.cs" />
-    <Compile Include="Core\VirtualFileIndex.cs" />
+    <Compile Include="Core\VirtualFile.cs" />
     <Compile Include="Core\FileType.cs" />
     <Compile Include="Core\AssetOrganization\Node.cs" />
-    <Compile Include="Core\VirtualFileTiledImage.cs" />
     <Compile Include="Core\VirtualFolder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

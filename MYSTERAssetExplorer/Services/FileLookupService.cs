@@ -8,17 +8,17 @@ namespace MYSTERAssetExplorer.Services
 {
     public class FileLookupService
     {
-        VirtualFolder RootFolder;
+        IVirtualFolder RootFolder;
 
-        public FileLookupService(VirtualFolder rootFolder)
+        public FileLookupService(IVirtualFolder rootFolder)
         {
             RootFolder = rootFolder;
         }
 
-        public VirtualFileIndex GetFile(out bool couldFind, VirtualFileAddress address)
+        public IVirtualFile GetFile(out bool couldFind, VirtualFileAddress address)
         {
             couldFind = false;
-            VirtualFileIndex file = null;
+            IVirtualFile file = null;
 
             var gameFolder = RootFolder.SubFolders.FirstOrDefault(
                 x => string.Equals(x.Name, address.Game, StringComparison.OrdinalIgnoreCase));
@@ -38,7 +38,7 @@ namespace MYSTERAssetExplorer.Services
             return file;
         }
 
-        public VirtualFileIndex GetExileFile(out bool couldFind, VirtualFolder gameFolder, VirtualFileAddress address)
+        public IVirtualFile GetExileFile(out bool couldFind, IVirtualFolder gameFolder, VirtualFileAddress address)
         {
             var sceneName = (ExileSceneProperName)Enum.Parse(typeof(ExileSceneProperName), address.Scene, true);
             var sceneCode = ((ExileSceneCode)sceneName).ToString();
@@ -81,7 +81,7 @@ namespace MYSTERAssetExplorer.Services
             return null;
         }
 
-        public VirtualFileIndex GetRevelationFile(out bool couldFind, VirtualFolder gameFolder, VirtualFileAddress address)
+        public IVirtualFile GetRevelationFile(out bool couldFind, IVirtualFolder gameFolder, VirtualFileAddress address)
         {
             var sceneName = (RevelationScene)Enum.Parse(typeof(RevelationScene), address.Scene, true);
             int sceneCode = (int)sceneName;
@@ -158,7 +158,7 @@ namespace MYSTERAssetExplorer.Services
             return null;
         }
 
-        private VirtualFolder GetSubFolder(VirtualFolder parentFolder, string name)
+        private IVirtualFolder GetSubFolder(IVirtualFolder parentFolder, string name)
         {
             return parentFolder.SubFolders.FirstOrDefault(x => x.Name == name);
         }

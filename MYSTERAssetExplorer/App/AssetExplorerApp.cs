@@ -113,7 +113,7 @@ namespace MYSTERAssetExplorer.App
 
         private void PopulateFolders()
         {
-            var folders = new List<VirtualFolder>();
+            var folders = new List<IVirtualFolder>();
             var exileFolder = _context.VirtualFiles.SubFolders.FirstOrDefault(x => x.Name == "Exile");
             var revelationFolder = _context.VirtualFiles.SubFolders.FirstOrDefault(x => x.Name == "Revelation");
             if (exileFolder != null)
@@ -185,7 +185,7 @@ namespace MYSTERAssetExplorer.App
             return rootFolder;
         }
 
-        private VirtualFolder IndexSingleFile(string filePath, IFileIndexerService indexingService)
+        private IVirtualFolder IndexSingleFile(string filePath, IFileIndexerService indexingService)
         {
             var indexedFile = indexingService.IndexFile(filePath);
             return indexedFile;
@@ -218,38 +218,44 @@ namespace MYSTERAssetExplorer.App
 
         public void FindFile()
         {
-            //FindExileFile();
+            FindExileFile();
             FindRevFile();
         }
 
         public void FindExileFile()
         {
             var lookupService = new FileLookupService(_context.VirtualFiles);
-            var address = new VirtualFileAddress(GameEnum.Exile.ToString(), "Edanna", "SP", "010", "2312.jpg");
+            var address = new VirtualFileAddress(GameEnum.Exile.ToString(), "Edanna", "SP", "010", "0012.jpg");
             bool fileFound;
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             var file = lookupService.GetFile(out fileFound, address);
             stopwatch.Stop();
-            _context.uiContext.WriteToConsole(Color.Cyan, "Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
             if (fileFound)
             {
                 _context.uiContext.WriteToConsole(Color.Cyan, file.Name + " found in " + stopwatch.ElapsedMilliseconds + " ms");
+            }
+            else
+            {
+                _context.uiContext.WriteToConsole(Color.Red, "File not found. Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
             }
         }
         public void FindRevFile()
         {
             var lookupService = new FileLookupService(_context.VirtualFiles);
-            var address = new VirtualFileAddress(GameEnum.Revelation.ToString(), "Haven", "Gate", "010", "front_01_01.jpg");
+            var address = new VirtualFileAddress(GameEnum.Revelation.ToString(), "Haven", "Gate", "010", "front");
             bool fileFound;
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             var file = lookupService.GetFile(out fileFound, address);
             stopwatch.Stop();
-            _context.uiContext.WriteToConsole(Color.Cyan, "Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
             if (fileFound)
             {
                 _context.uiContext.WriteToConsole(Color.Cyan, file.Name + " found in " + stopwatch.ElapsedMilliseconds + " ms");
+            }
+            else
+            {
+                _context.uiContext.WriteToConsole(Color.Red, "File not found. Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
             }
         }
     }

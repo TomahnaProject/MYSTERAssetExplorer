@@ -11,8 +11,8 @@ namespace MYSTERAssetExplorer.Services
     public interface IUIContext
     {
         Action<Color, string> WriteToConsole { get; set; }
-        Action<List<VirtualFileIndex>> ListFiles { get; set; }
+        Action<List<IVirtualFile>> ListFiles { get; set; }
         Action<TreeNode[]> PopulateNodes { get; set; }
-        Action<List<VirtualFolder>> PopulateFolders { get; set; }
+        Action<List<IVirtualFolder>> PopulateFolders { get; set; }
     }
 }

@@ -14,8 +14,8 @@ namespace MYSTERAssetExplorer.App
 
         // Asset Explorer
         public Action<Color, string> WriteToConsole { get; set; }
-        public Action<List<VirtualFolder>> PopulateFolders { get; set; }
-        public Action<List<VirtualFileIndex>> ListFiles { get; set; }
+        public Action<List<IVirtualFolder>> PopulateFolders { get; set; }
+        public Action<List<IVirtualFile>> ListFiles { get; set; }
 
         // Node Viewer
         public Action<TreeNode[]> PopulateNodes { get; set; }

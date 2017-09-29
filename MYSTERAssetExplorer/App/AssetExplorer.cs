@@ -71,7 +71,7 @@ namespace MYSTERAssetExplorer.App
             }));
         }
 
-        private void FillListView(List<VirtualFileIndex> files)
+        private void FillListView(List<IVirtualFile> files)
         {
             fileExplorer.Items.Clear();
 
@@ -80,8 +80,8 @@ namespace MYSTERAssetExplorer.App
                 var item = new ListViewItem(file.Name, 1);
                 var subItems = new ListViewItem.ListViewSubItem[]
                 {
-                    new ListViewItem.ListViewSubItem(item, (file.End - file.Start).ToString()),
-                    new ListViewItem.ListViewSubItem(item, file.Start.ToString())
+                    //new ListViewItem.ListViewSubItem(item, (file.End - file.Start).ToString()),
+                    //new ListViewItem.ListViewSubItem(item, file.Start.ToString())
                 };
 
                 item.SubItems.AddRange(subItems);
@@ -135,11 +135,11 @@ namespace MYSTERAssetExplorer.App
         {
             TreeNode newSelected = e.Node;
             fileExplorer.Items.Clear();
-            VirtualFolder nodeFolderInfo = (VirtualFolder)newSelected.Tag;
+            IVirtualFolder nodeFolderInfo = (IVirtualFolder)newSelected.Tag;
             ListViewItem.ListViewSubItem[] subItems;
             ListViewItem item = null;
 
-            foreach (VirtualFolder folder in nodeFolderInfo.SubFolders)
+            foreach (IVirtualFolder folder in nodeFolderInfo.SubFolders)
             {
                 if (folder == null)
                     continue;
@@ -152,23 +152,7 @@ namespace MYSTERAssetExplorer.App
                     item.ImageIndex = (int)FileType.M3A;
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
-                    //new ListViewItem.ListViewSubItem(item, "Folder"),
                     new ListViewItem.ListViewSubItem(item, ""),
-                };
-
-                item.SubItems.AddRange(subItems);
-                fileExplorer.Items.Add(item);
-            }
-
-            foreach (var tiledImage in nodeFolderInfo.TiledImages)
-            {
-                item = new ListViewItem(tiledImage.Name,9);
-                item.Tag = tiledImage;
-                subItems = new ListViewItem.ListViewSubItem[]
-                {
-                    //new ListViewItem.ListViewSubItem(item, "File"),
-                    new ListViewItem.ListViewSubItem(item, ""),
-                    new ListViewItem.ListViewSubItem(item, tiledImage.Tiles.Count().ToString() + " images")
                 };
 
                 item.SubItems.AddRange(subItems);
@@ -177,14 +161,31 @@ namespace MYSTERAssetExplorer.App
 
             foreach (var file in nodeFolderInfo.Files)
             {
-                item = new ListViewItem(file.Name, (int) file.Type);
+                item = new ListViewItem(file.Name, (int) file.ContentDetails.Type);
                 item.Tag = file;
-                subItems = new ListViewItem.ListViewSubItem[]
+                if(file.ContentDetails is ArchiveIndex)
                 {
-                    //new ListViewItem.ListViewSubItem(item, "File"),
-                    new ListViewItem.ListViewSubItem(item, Utils.GetBytesReadable(file.End - file.Start)),
-                    new ListViewItem.ListViewSubItem(item, "(" + file.Start + ", " + file.End +")")
-                };
+                    var archiveIndex = file.ContentDetails as ArchiveIndex;
+                    subItems = new ListViewItem.ListViewSubItem[]
+                    {
+                        new ListViewItem.ListViewSubItem(item, Utils.GetBytesReadable(archiveIndex.End - archiveIndex.Start)),
+                        new ListViewItem.ListViewSubItem(item, "(" + archiveIndex.Start + ", " + archiveIndex.End +")")
+                    };
+                }
+                else if (file.ContentDetails is TiledImage)
+                {
+                    item.ImageIndex = 9;
+                    var tiledImage = file.ContentDetails as TiledImage;
+                    subItems = new ListViewItem.ListViewSubItem[]
+                    {
+                        new ListViewItem.ListViewSubItem(item, ""),
+                        new ListViewItem.ListViewSubItem(item, tiledImage.Tiles.Count().ToString() + " images")
+                    };
+                }
+                else
+                {
+                    subItems = new ListViewItem.ListViewSubItem[0];
+                }
 
                 item.SubItems.AddRange(subItems);
                 fileExplorer.Items.Add(item);
@@ -193,7 +194,7 @@ namespace MYSTERAssetExplorer.App
             //fileExplorer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-        private void PopulateFolderExplorer(List<VirtualFolder> folders)
+        private void PopulateFolderExplorer(List<IVirtualFolder> folders)
         {
             Invoke(new Action(() =>
             {
@@ -211,10 +212,10 @@ namespace MYSTERAssetExplorer.App
             }));
         }
 
-        private void BuildTreeNode(TreeNode nodeToAddTo, List<VirtualFolder> subFolders)
+        private void BuildTreeNode(TreeNode nodeToAddTo, List<IVirtualFolder> subFolders)
         {
             TreeNode childNode;
-            List<VirtualFolder> subSubFolders;
+            List<IVirtualFolder> subSubFolders;
             int iconIndex = 0;
             int selecedIndex = 0;
             foreach (var subFolder in subFolders)
@@ -243,12 +244,15 @@ namespace MYSTERAssetExplorer.App
                 childNode = new TreeNode(subFolder.Name, iconIndex, selecedIndex);
                 childNode.Tag = subFolder;
 
-                subSubFolders = subFolder.SubFolders;
-                if (subSubFolders.Count != 0)
+                if(subFolder is VirtualFolder)
                 {
-                    BuildTreeNode(childNode, subSubFolders);
+                    subSubFolders = (subFolder as VirtualFolder).SubFolders;
+                    if (subSubFolders.Count != 0)
+                    {
+                        BuildTreeNode(childNode, subSubFolders);
+                    }
+                    nodeToAddTo.Nodes.Add(childNode);
                 }
-                nodeToAddTo.Nodes.Add(childNode);
             }
         }
 
@@ -275,49 +279,32 @@ namespace MYSTERAssetExplorer.App
 
                 WriteToConsole(Color.LightBlue, "Extracting Selected Files to " + extractionPath);
 
-                List<VirtualFileIndex> files = new List<VirtualFileIndex>();
-                List<VirtualFileTiledImage> tiledImages = new List<VirtualFileTiledImage>();
+                List<IVirtualFile> files = new List<IVirtualFile>();
 
                 foreach (ListViewItem item in fileExplorer.SelectedItems)
                 {
-                    if (item.Tag is VirtualFileIndex)
-                        files.Add(item.Tag as VirtualFileIndex);
-                    else if (item.Tag is VirtualFileTiledImage)
-                        tiledImages.Add(item.Tag as VirtualFileTiledImage);
+                    files.Add(item.Tag as IVirtualFile);
                 }
                 ExtractFiles(extractionPath, files);
-                ExtractTiledImages(extractionPath, tiledImages);
             }
         }
 
-        private void ExtractFiles(string extractionPath, List<VirtualFileIndex> files)
+        private void ExtractFiles(string extractionPath, List<IVirtualFile> files)
         {
             var saveService = new VirtualFileSaveService();
             var extractor = new VirtualFileExtractionService();
             foreach (var file in files)
             {
                 WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
-                var fileData = extractor.CopyFile(file);
-                var fileType = file.Type;
+                var fileData = extractor.GetDataForVirtualFile(file);
+                var savefileType = file.ContentDetails.Type;
 
-                if (file.Type == FileType.Zap)
+                if (file.ContentDetails.Type == FileType.Zap)
                 {
                     fileData = ConversionService.ConvertFromZapToJpg(fileData);
-                    fileType = FileType.Jpg;
+                    savefileType = FileType.Jpg;
                 }
-                saveService.SaveFile(extractionPath, file.Name, fileType, fileData);
-            }
-        }
-
-        private void ExtractTiledImages(string extractionPath, List<VirtualFileTiledImage> tiledImages)
-        {
-            var saveService = new VirtualFileSaveService();
-            var extractor = new VirtualFileExtractionService();
-            foreach (var tiledImage in tiledImages)
-            {
-                WriteToConsole(Color.LightBlue, "Extracting " + tiledImage.Name);
-                var fileData = extractor.GetImageDataFromVirtualFileTiledImage(tiledImage);
-                saveService.SaveFile(extractionPath, tiledImage.Name, FileType.Jpg, fileData);
+                saveService.SaveFile(extractionPath, file.Name, savefileType, fileData);
             }
         }
 
@@ -329,10 +316,11 @@ namespace MYSTERAssetExplorer.App
                 if (selected.Tag is VirtualFolder)
                     return;
 
-                if (selected.Tag is VirtualFileIndex)
+                if (selected.Tag is IVirtualFile)
                 {
-                    var file = selected.Tag as VirtualFileIndex;
-                    if (!(file.Type == FileType.Jpg || file.Type == FileType.Zap))
+                    var file = selected.Tag as IVirtualFile;
+                    if (!(file.ContentDetails.Type == FileType.Jpg || 
+                        file.ContentDetails.Type == FileType.Zap))
                         return;
                 }
                 var imageData = GetDataForImageFile(selected);
@@ -348,20 +336,24 @@ namespace MYSTERAssetExplorer.App
         {
             byte[] imageData = new byte[0];
             var extractor = new VirtualFileExtractionService();
-            if (item.Tag is VirtualFileIndex)
+            if (item.Tag is IVirtualFile)
             {
-                var file = item.Tag as VirtualFileIndex;
-                imageData = extractor.GetImageDataFromVirtualFile(file);
-            }
-            else if (item.Tag is VirtualFileTiledImage)
-            {
-                var tiledImage = item.Tag as VirtualFileTiledImage;
-                WriteToConsole(Color.Yellow, "Assembling Tiled Image: '" + tiledImage.Name + "'");
-                var stopwatch = new Stopwatch();
-                stopwatch.Start();
-                imageData = extractor.GetImageDataFromVirtualFileTiledImage(tiledImage);
-                stopwatch.Stop();
-                WriteToConsole(Color.Green, "'"+ tiledImage.Name + "' assembled in " + stopwatch.ElapsedMilliseconds + "ms");
+                var file = item.Tag as IVirtualFile;
+
+                if(file.ContentDetails is TiledImage)
+                {
+                    WriteToConsole(Color.Yellow, "Assembling Tiled Image: '" + file.Name + "'");
+                    var stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    imageData = extractor.GetDataForVirtualFile(file);
+                    stopwatch.Stop();
+                    WriteToConsole(Color.Green, "'" + file.Name + "' assembled in " + stopwatch.ElapsedMilliseconds + "ms");
+                }
+                else
+                {
+                    imageData = extractor.GetDataForVirtualFile(file);
+                }
+
             }
             return imageData;
         }
@@ -394,11 +386,6 @@ namespace MYSTERAssetExplorer.App
             //folderExplorer.ExpandAll(); // doesn't work well with rev's big data file
         }
 
-        private void findFileButton_Click_1(object sender, EventArgs e)
-        {
-            app.FindFile();
-        }
-
         private void folderExplorer_AfterExpand(object sender, TreeViewEventArgs e)
         {
             if(e.Node.ImageIndex == 0)
@@ -409,6 +396,11 @@ namespace MYSTERAssetExplorer.App
         {
             if (e.Node.ImageIndex == 1)
                 e.Node.ImageIndex = 0;
+        }
+
+        private void FindFileButton_Click(object sender, EventArgs e)
+        {
+            app.FindFile();
         }
     }
 }
