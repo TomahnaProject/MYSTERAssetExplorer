@@ -29,7 +29,7 @@ namespace MYSTERAssetExplorer.App
         {
             this.Show();
             this.app = app;
-            app.LoadRegistry();
+            app.LoadRegistry();;
         }
 
         private void NodeViewer_FormClosing(object sender, FormClosingEventArgs e)

@@ -217,6 +217,32 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
+        public void ExtractFolder(string extractionPath, IVirtualFolder folder)
+        {
+            var saveService = new VirtualFileSaveService();
+            var extractor = new VirtualFileExtractionService();
+
+            var thisFolderPath = saveService.SaveFolder(extractionPath, folder.Name);
+
+            foreach (var file in folder.Files)
+            {
+                _context.uiContext.WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
+                var fileData = extractor.GetDataForVirtualFile(file);
+                var savefileType = file.ContentDetails.Type;
+
+                if (file.ContentDetails.Type == FileType.Zap)
+                {
+                    fileData = ConversionService.ConvertFromZapToJpg(fileData);
+                    savefileType = FileType.Jpg;
+                }
+                saveService.SaveFile(thisFolderPath, file.Name, savefileType, fileData);
+            }
+            foreach (var subFolder in folder.SubFolders)
+            {
+                ExtractFolder(thisFolderPath, subFolder);
+            }
+        }
+
         public byte[] GetDataForFile(IVirtualFile file)
         {
             var extractor = new VirtualFileExtractionService();

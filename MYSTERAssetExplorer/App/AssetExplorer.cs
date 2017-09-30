@@ -258,14 +258,36 @@ namespace MYSTERAssetExplorer.App
 
         private void extractFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            extractFileDialog.InitialDirectory = app.GetExtractionDirectory();
+            extractFileDialog.FileName = "SelectedFolder";
+            extractFileDialog.Title = "Save Folder";
+            if (extractFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var extractionPath = Path.GetDirectoryName(extractFileDialog.FileName);
+                app.SetExtractionDirectory(extractionPath);
 
+                if (extractionPath.Length < 1)
+                {
+                    MessageBox.Show("leave a name in the filename field (doesn't matter what, it won't be used)");
+                    return;
+                }
+
+                var node = folderExplorer.SelectedNode;
+                if (node.Tag is IVirtualFolder)
+                {
+                    var folder = node.Tag as IVirtualFolder;
+
+                    WriteToConsole(Color.LightBlue, "Extracting folder '" + folder.Name + "' to " + extractionPath);
+                    app.ExtractFolder(extractionPath, folder);
+                }
+            }
         }
 
         private void extractSelectedFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             extractFileDialog.InitialDirectory = app.GetExtractionDirectory();
             extractFileDialog.FileName = "SelectedFiles";
-            extractFileDialog.Title = "Save As";
+            extractFileDialog.Title = "Save Files";
             if (extractFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var extractionPath = Path.GetDirectoryName(extractFileDialog.FileName);
@@ -283,7 +305,10 @@ namespace MYSTERAssetExplorer.App
 
                 foreach (ListViewItem item in fileExplorer.SelectedItems)
                 {
-                    files.Add(item.Tag as IVirtualFile);
+                    if(item.Tag is IVirtualFile)
+                    {
+                        files.Add(item.Tag as IVirtualFile);
+                    }
                 }
                 app.ExtractFiles(extractionPath, files);
             }

@@ -24,5 +24,16 @@ namespace MYSTERAssetExplorer.Services
             var savePath = Path.Combine(filePath, fileName);
             File.WriteAllBytes(savePath, data);
         }
+
+        public string SaveFolder(string filePath, string folderName)
+        {
+            string path = "";
+            if(Directory.Exists(filePath))
+            {
+                path = Path.Combine(filePath, folderName);
+                Directory.CreateDirectory(path);
+            }
+            return path;
+        }
     }
 }
