@@ -13,10 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{0281F826
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MYSTERAssetExplorer", "MYSTERAssetExplorer\MYSTERAssetExplorer.csproj", "{4C8F15E9-7AB0-4220-8E4E-7CB241DCA561}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubePositionSolver", "CubePositionSolver\CubePositionSolver.csproj", "{F6E0DFA0-5E80-4AFA-947D-A77409640A15}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubePositionSolverTests", "CubePositionSolverTests\CubePositionSolverTests.csproj", "{2BEC32D2-1CF5-47C4-A072-A8358320CD98}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,14 +23,6 @@ Global
 		{4C8F15E9-7AB0-4220-8E4E-7CB241DCA561}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C8F15E9-7AB0-4220-8E4E-7CB241DCA561}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C8F15E9-7AB0-4220-8E4E-7CB241DCA561}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6E0DFA0-5E80-4AFA-947D-A77409640A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6E0DFA0-5E80-4AFA-947D-A77409640A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6E0DFA0-5E80-4AFA-947D-A77409640A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6E0DFA0-5E80-4AFA-947D-A77409640A15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BEC32D2-1CF5-47C4-A072-A8358320CD98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BEC32D2-1CF5-47C4-A072-A8358320CD98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BEC32D2-1CF5-47C4-A072-A8358320CD98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BEC32D2-1CF5-47C4-A072-A8358320CD98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

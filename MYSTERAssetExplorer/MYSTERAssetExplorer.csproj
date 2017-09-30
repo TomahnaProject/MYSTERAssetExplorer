@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\myster_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -129,6 +132,7 @@
     <Content Include="Resources\archives.ico" />
     <Content Include="Resources\bullet.ico" />
     <Content Include="Resources\cube.png" />
+    <Content Include="Resources\cubes.ico" />
     <Content Include="Resources\file.ico" />
     <None Include="Resources\picture-icon-large.png" />
     <Content Include="Resources\folder-closed.ico" />
@@ -136,6 +140,8 @@
     <Content Include="Resources\lightning.ico" />
     <Content Include="Resources\m3.ico" />
     <Content Include="Resources\m4.ico" />
+    <Content Include="Resources\myster_icon.ico" />
+    <Content Include="Resources\myster_icon.png" />
     <Content Include="Resources\Picture.ico" />
     <Content Include="Resources\red-alert.ico" />
     <Content Include="Resources\script-binary.ico" />

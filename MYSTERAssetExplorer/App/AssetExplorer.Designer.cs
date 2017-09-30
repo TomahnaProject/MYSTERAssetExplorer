@@ -46,6 +46,7 @@
             this.aboutButton = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.helpButton = new System.Windows.Forms.ToolStripLabel();
+            this.findFileButton = new System.Windows.Forms.ToolStripLabel();
             this.Main_Footer = new System.Windows.Forms.SplitContainer();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.Files_Preview = new System.Windows.Forms.SplitContainer();
@@ -63,7 +64,6 @@
             this.contextMenuFileExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.findFileButton = new System.Windows.Forms.ToolStripLabel();
             this.previewGroup.SuspendLayout();
             this.previewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
@@ -226,6 +226,13 @@
             this.helpButton.Size = new System.Drawing.Size(35, 22);
             this.helpButton.Text = "Help!";
             this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
+            // 
+            // findFileButton
+            // 
+            this.findFileButton.Name = "findFileButton";
+            this.findFileButton.Size = new System.Drawing.Size(51, 22);
+            this.findFileButton.Text = "Find File";
+            this.findFileButton.Click += new System.EventHandler(this.FindFileButton_Click);
             // 
             // Main_Footer
             // 
@@ -407,13 +414,6 @@
             this.extractSelectedFilesToolStripMenuItem.Text = "Extract Selected Files";
             this.extractSelectedFilesToolStripMenuItem.Click += new System.EventHandler(this.extractSelectedFilesToolStripMenuItem_Click);
             // 
-            // findFileButton
-            // 
-            this.findFileButton.Name = "findFileButton";
-            this.findFileButton.Size = new System.Drawing.Size(51, 22);
-            this.findFileButton.Text = "Find File";
-            this.findFileButton.Click += new System.EventHandler(this.FindFileButton_Click);
-            // 
             // AssetExplorer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -423,6 +423,7 @@
             this.Controls.Add(this.Main_Footer);
             this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AssetExplorer";
             this.Text = "MYSTER (Exile / Revelation) Asset Explorer";
             this.Load += new System.EventHandler(this.MainForm_Load);

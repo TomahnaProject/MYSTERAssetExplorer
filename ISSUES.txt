@@ -1,7 +1,18 @@
 
+Important Issues:
+- m3a bink files not ripped correctly
+- need to get ogg files out of sb0 files
+- run extraction on separate thread to prevent UI blocking
 
-1) m3a bink files not ripped correctly
-2) can m4b files and folders be in same parent folder, are there invisible things in dragon unpacker??
-3) shared and common wrong format
-4) last m4b in nested m4b doesn't seem to work right
-5) some m4bs aren't correctly formatted -- need a better way to handle them / display them (they should be extractable themselves if not openable)
+- last m4b in nested m4b doesn't seem to be indexed correctly (waternight.m4b or something has blank contents)
+- shared and common .m4b wrong format, at the least make more clear they fail to open (since may not be able to figure out how to open)
+- some m4bs aren't correctly formatted -- need a better way to handle them / display them (they should be extractable themselves if not openable)
+
+Nit-picks
+- double clicking folder in file explorer should open that folder (in folder explorer & file explorer)
+
+
+Questions:
+
+- an M4B CAN have both files and subfolders in the same directory.
+DragonUnpacker seemed to work on the assumption that a folder had one or the other. Need to confirm DUP was neglecting to show certain files
