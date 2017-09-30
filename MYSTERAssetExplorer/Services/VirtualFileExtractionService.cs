@@ -14,7 +14,7 @@ namespace MYSTERAssetExplorer.Services
         {
             if(file.ContentDetails is ArchiveIndex)
             {
-                return GetImageDataForArchive(file.ContentDetails as ArchiveIndex);
+                return GetFileDataFromArchive(file.ContentDetails as ArchiveIndex);
             }
             else if(file.ContentDetails is TiledImage)
             {
@@ -32,22 +32,18 @@ namespace MYSTERAssetExplorer.Services
             return stitcher.GetAssembledTiledImage(tiledImage);
         }
 
-        private byte[] GetImageDataForArchive(ArchiveIndex archiveImage)
+        private byte[] GetFileDataFromArchive(ArchiveIndex archivedFile)
         {
-            if (archiveImage.Type == FileType.Jpg)
+            if (archivedFile.Type == FileType.Zap)
             {
-                var jpgData = CopyFileDataFromArchive(archiveImage);
-                return jpgData;
-            }
-            else if (archiveImage.Type == FileType.Zap)
-            {
-                var zapData = CopyFileDataFromArchive(archiveImage);
+                var zapData = CopyFileDataFromArchive(archivedFile);
                 var jpgData = ConversionService.ConvertFromZapToJpg(zapData);
                 return jpgData;
             }
             else
             {
-                return new byte[0];
+                var fileData = CopyFileDataFromArchive(archivedFile);
+                return fileData;
             }
         }
 
