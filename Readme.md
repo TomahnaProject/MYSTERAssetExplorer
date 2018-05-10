@@ -2,12 +2,13 @@
 
 ## An asset explorer for the games Myst 3 and Myst 4
 
+Released under the MIT license.
 
 ## Features
 - Load ALL the data in one go! Stick all the data files from both Exile and Rev in one folder and you can load them all at one time for easy browsing.
 - Easily browse through nested .m4b and find interesting stuff without any extracting!
 - .zap files are viewable, and extract as normal .jpg images
-- Automatic assembly of Revelation’s tiled cubemap faces
+- Automatic assembly of Revelationâ€™s tiled cubemap faces
 
 ![Screenshot](screenshot.jpg "MYSTER Asset Explorer")
 
