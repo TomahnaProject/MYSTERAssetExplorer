@@ -26,6 +26,11 @@ namespace MYSTERAssetExplorer.App
         {
             _context = new AssetExplorerContext();
             _context.uiContext = uiContext;
+            _context.CacheDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "IndexCache");
+            if (!Directory.Exists(_context.CacheDirectory))
+                Directory.CreateDirectory(_context.CacheDirectory);
+
+            _context.CacheService = new CacheSerializationService();
             _context.VirtualFiles = new VirtualFolder("/");
             _context.registryManager = new RegistryManager(uiContext);
             _context.registryPersistence = new RegistryPersistenceService();
@@ -125,33 +130,63 @@ namespace MYSTERAssetExplorer.App
             bool[] revFinished =  new bool[revFiles.Count()];
             for (int i = 0; i < revFiles.Count(); i++)
             {
-                var index = i;
-                consoleWrite(Color.Yellow, "Indexing " + Path.GetFileName(revFiles[i]));
-                rWatch.Reset(); rWatch.Start();
-                var fileThread = new Thread(() =>
+                var filePath = revFiles[i];
+                var fileName = Path.GetFileName(filePath);
+                var cacheFileName = fileName.Replace(M4B_FileExtension, ".index");
+
+                if (_context.CacheDirectory.Contains(cacheFileName))
                 {
-                    var indexedFolder = IndexSingleFile(revFiles[index], revIndexer);
-                    revelationFolder.SubFolders.Add(indexedFolder);
-                    revFinished[index] = true;
-                    rWatch.Stop();
-                    consoleWrite(Color.Green, Path.GetFileName(revFiles[index]) + " Indexed in " + rWatch.ElapsedMilliseconds + "ms");
-                });
-                fileThread.Start();
+                    // check for a cached copy so indexing only needs to be done the first time a file is loaded
+                    consoleWrite(Color.Yellow, "Loading cached index for " + fileName);
+                    var cacheText = File.ReadAllText(Path.Combine(_context.CacheDirectory, cacheFileName));
+                    IVirtualFolder indexedFile = _context.CacheService.DeserializeIndexedFolder(cacheText);
+                    revelationFolder.SubFolders.Add(indexedFile);
+                }
+                else
+                {
+                    var threadAccessibleIndex = i;
+                    consoleWrite(Color.Yellow, "Indexing " + fileName);
+                    rWatch.Reset(); rWatch.Start();
+                    //var fileThread = new Thread(() =>
+                    //{
+                        IVirtualFolder indexedFile = revIndexer.IndexFile(filePath);
+                        revelationFolder.SubFolders.Add(indexedFile);
+                        revFinished[threadAccessibleIndex] = true;
+                        rWatch.Stop();
+                        consoleWrite(Color.Green, fileName + " Indexed in " + rWatch.ElapsedMilliseconds + "ms");
+                        var serializedIndex = _context.CacheService.SerializeIndexedFolder(indexedFile as VirtualFolder);
+                        File.WriteAllText(Path.Combine(_context.CacheDirectory, ""),serializedIndex);
+                    //});
+                    //fileThread.Start();
+                }
             }
             for (int i = 0; i < exileFiles.Count(); i++)
             {
-                var index = i;
-                consoleWrite(Color.Yellow, "Indexing " + Path.GetFileName(exileFiles[i]));
-                eWatch.Reset(); eWatch.Start();
-                var fileThread = new Thread(() =>
+                var fileName = Path.GetFileName(exileFiles[i]);
+                var cacheFileName = fileName.Replace(M3A_FileExtension, ".index");
+                if (_context.CacheDirectory.Contains(cacheFileName))
                 {
-                    var indexedFolder = IndexSingleFile(exileFiles[index], exileIndexer);
-                    exileFolder.SubFolders.Add(indexedFolder);
-                    exileFinished[index] = true;
-                    eWatch.Stop();
-                    consoleWrite(Color.Green, Path.GetFileName(exileFiles[index]) + " Indexed in " + eWatch.ElapsedMilliseconds + "ms");
-                });
-                fileThread.Start();
+                    // check for a cached copy so indexing only needs to be done the first time a file is loaded
+                    consoleWrite(Color.Yellow, "Loading cached index for " + fileName);
+                    var cacheText = File.ReadAllText(Path.Combine(_context.CacheDirectory, cacheFileName));
+                    IVirtualFolder indexedFile = _context.CacheService.DeserializeIndexedFolder(cacheText);
+                    exileFolder.SubFolders.Add(indexedFile);
+                }
+                else
+                {
+                    var threadAccessibleIndex = i;
+                    consoleWrite(Color.Yellow, "Indexing " + fileName);
+                    eWatch.Reset(); eWatch.Start();
+                    var fileThread = new Thread(() =>
+                    {
+                        IVirtualFolder indexedFile = exileIndexer.IndexFile(exileFiles[threadAccessibleIndex]);
+                        exileFolder.SubFolders.Add(indexedFile);
+                        exileFinished[threadAccessibleIndex] = true;
+                        eWatch.Stop();
+                        consoleWrite(Color.Green, fileName + " Indexed in " + eWatch.ElapsedMilliseconds + "ms");
+                    });
+                    fileThread.Start();
+                }
             }
 
             bool notFinished = true;
@@ -165,12 +200,6 @@ namespace MYSTERAssetExplorer.App
             rootFolder.SubFolders.Add(exileFolder);
             rootFolder.SubFolders.Add(revelationFolder);
             return rootFolder;
-        }
-
-        private IVirtualFolder IndexSingleFile(string filePath, IFileIndexerService indexingService)
-        {
-            var indexedFile = indexingService.IndexFile(filePath);
-            return indexedFile;
         }
 
         public List<string> LoadDataFiles()

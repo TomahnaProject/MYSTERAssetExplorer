@@ -26,14 +26,14 @@ namespace MYSTERAssetExplorer.Services
             Extractor = extractor;
         }
 
-        public byte[] GetAssembledTiledImage(TiledImage image)
+        public byte[] GetAssembledTiledImage(VirtualFileTiledImage image)
         {
             List<Tile> tiles = GetTiles(image);
             byte[] imageData = ConstructTiledImage(tiles);
             return imageData;
         }
 
-        private List<Tile> GetTiles(TiledImage image)
+        private List<Tile> GetTiles(VirtualFileTiledImage image)
         {
             List<Tile> tiles = new List<Tile>();
             foreach (var tileFile in image.Tiles)

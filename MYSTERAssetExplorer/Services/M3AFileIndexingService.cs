@@ -180,7 +180,7 @@ namespace MYSTERAssetExplorer.Services
                     {
                         fileCount += 1;
                         // add 2 to the ending index to include end of file bytes/marker
-                        var archiveIndex = new ArchiveIndex(filePath, FileType.Jpg, currentFile.Index, (marker.Index - 1) + 2);
+                        var archiveIndex = new VirtualFileArchive(filePath, FileType.Jpg, currentFile.Index, (marker.Index - 1) + 2);
                         folder.Files.Add(new VirtualFile(fileCount.ToString("D4") + ".jpg", archiveIndex));
                         currentFile = null;
                     }

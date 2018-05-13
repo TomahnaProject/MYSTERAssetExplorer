@@ -279,7 +279,7 @@ namespace MYSTERAssetExplorer.Services
             {
                 var totalStartOffset = fileStart + FileOffset;
                 var totalEndOffset = fileStart + FileOffset + FileSize;
-                var thisFile = new VirtualFile(fileNameLowercase, new ArchiveIndex(fileStream.Name, fileType, totalStartOffset, totalEndOffset));
+                var thisFile = new VirtualFile(fileNameLowercase, new VirtualFileArchive(fileStream.Name, fileType, totalStartOffset, totalEndOffset));
                 parentFolder.Files.Add(thisFile);
             }
             return index;
@@ -294,7 +294,7 @@ namespace MYSTERAssetExplorer.Services
                 return;
 
             List<IVirtualFile> tiledImages = new List<IVirtualFile>();
-            TiledImage tiledImage;
+            VirtualFileTiledImage tiledImage;
             foreach(var match in matches)
             {
                 var startOfName = Regex.Split(match.Name, tileLayoutPattern)[0];
@@ -303,12 +303,12 @@ namespace MYSTERAssetExplorer.Services
                 {
                     // add to existing
                     var existing = tiledImages.FirstOrDefault(x => x.Name == startOfName);
-                    tiledImage = existing.ContentDetails as TiledImage;
+                    tiledImage = existing.ContentDetails as VirtualFileTiledImage;
                 }
                 else
                 {
                     // create a new one
-                    tiledImage = new TiledImage();
+                    tiledImage = new VirtualFileTiledImage();
                     tiledImage.Type = FileType.Jpg;
                     var file = new VirtualFile(startOfName, tiledImage);
                     tiledImages.Add(file);

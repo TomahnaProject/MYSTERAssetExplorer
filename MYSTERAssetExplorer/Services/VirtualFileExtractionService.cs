@@ -12,13 +12,13 @@ namespace MYSTERAssetExplorer.Services
     {
         public byte[] GetDataForVirtualFile(IVirtualFile file)
         {
-            if(file.ContentDetails is ArchiveIndex)
+            if(file.ContentDetails is VirtualFileArchive)
             {
-                return GetFileDataFromArchive(file.ContentDetails as ArchiveIndex);
+                return GetFileDataFromArchive(file.ContentDetails as VirtualFileArchive);
             }
-            else if(file.ContentDetails is TiledImage)
+            else if(file.ContentDetails is VirtualFileTiledImage)
             {
-                return GetImageDataForTiledImage(file.ContentDetails as TiledImage);
+                return GetImageDataForTiledImage(file.ContentDetails as VirtualFileTiledImage);
             }
             else
             {
@@ -26,13 +26,13 @@ namespace MYSTERAssetExplorer.Services
             }
         }
 
-        private byte[] GetImageDataForTiledImage(TiledImage tiledImage)
+        private byte[] GetImageDataForTiledImage(VirtualFileTiledImage tiledImage)
         {
             var stitcher = new TileImageStitcher(this);
             return stitcher.GetAssembledTiledImage(tiledImage);
         }
 
-        private byte[] GetFileDataFromArchive(ArchiveIndex archivedFile)
+        private byte[] GetFileDataFromArchive(VirtualFileArchive archivedFile)
         {
             if (archivedFile.Type == FileType.Zap)
             {
@@ -47,7 +47,7 @@ namespace MYSTERAssetExplorer.Services
             }
         }
 
-        private byte[] CopyFileDataFromArchive(ArchiveIndex archiveIndex)
+        private byte[] CopyFileDataFromArchive(VirtualFileArchive archiveIndex)
         {
             int bufferSize = (int)(archiveIndex.End - archiveIndex.Start) +1; // assuming that any given file never has more bytes that max int size
             byte[] buffer = new byte[bufferSize];

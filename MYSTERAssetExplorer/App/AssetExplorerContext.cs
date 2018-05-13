@@ -17,8 +17,10 @@ namespace MYSTERAssetExplorer.App
 
         // Asset Explorer
         public IVirtualFolder VirtualFiles;
+        public string CacheDirectory { get; set; }
         public string DataDirectory { get; set; }
         public string ExtractionDirectory { get; set; }
+        public CacheSerializationService CacheService { get; set; }
 
         // Node Viewer
         public RegistryManager registryManager;

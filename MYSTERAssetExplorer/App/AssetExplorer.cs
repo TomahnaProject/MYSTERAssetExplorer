@@ -163,19 +163,19 @@ namespace MYSTERAssetExplorer.App
             {
                 item = new ListViewItem(file.Name, (int) file.ContentDetails.Type);
                 item.Tag = file;
-                if(file.ContentDetails is ArchiveIndex)
+                if(file.ContentDetails is VirtualFileArchive)
                 {
-                    var archiveIndex = file.ContentDetails as ArchiveIndex;
+                    var archiveIndex = file.ContentDetails as VirtualFileArchive;
                     subItems = new ListViewItem.ListViewSubItem[]
                     {
                         new ListViewItem.ListViewSubItem(item, Utils.GetBytesReadable(archiveIndex.End - archiveIndex.Start)),
                         new ListViewItem.ListViewSubItem(item, "(" + archiveIndex.Start + ", " + archiveIndex.End +")")
                     };
                 }
-                else if (file.ContentDetails is TiledImage)
+                else if (file.ContentDetails is VirtualFileTiledImage)
                 {
                     item.ImageIndex = 9;
-                    var tiledImage = file.ContentDetails as TiledImage;
+                    var tiledImage = file.ContentDetails as VirtualFileTiledImage;
                     subItems = new ListViewItem.ListViewSubItem[]
                     {
                         new ListViewItem.ListViewSubItem(item, ""),
@@ -345,7 +345,7 @@ namespace MYSTERAssetExplorer.App
             {
                 var file = item.Tag as IVirtualFile;
 
-                if(file.ContentDetails is TiledImage)
+                if(file.ContentDetails is VirtualFileTiledImage)
                 {
                     WriteToConsole(Color.Yellow, "Assembling Tiled Image: '" + file.Name + "'");
                     var stopwatch = new Stopwatch();

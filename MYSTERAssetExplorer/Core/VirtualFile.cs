@@ -6,13 +6,6 @@ using System.Threading.Tasks;
 
 namespace MYSTERAssetExplorer.Core
 {
-    public interface IVirtualFile
-    {
-        string Name { get; }
-        //string ParentPath { get; }
-        IVirtualFileContentDetails ContentDetails { get; }
-    }
-
     // meant to be read only; once the indexer figures out what/where a file is, then it shouldn't change around
     public class VirtualFile : IVirtualFile
     {
