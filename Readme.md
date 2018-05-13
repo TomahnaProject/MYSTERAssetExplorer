@@ -1,4 +1,4 @@
-# MYSTER Asset Explorer
+﻿# MYSTER Asset Explorer
 
 ## An asset explorer for the games Myst 3 and Myst 4
 
@@ -14,21 +14,35 @@ Released under the MIT license.
 
 
 ## Known Issues
-- Bink extraction from Exile (m3a) works incorrectly. Most videos will extract but have glitches or errors
-- Does not handle extracting sound/music from sb0 files (only matters for Revelation)
-- Might still be buggy/rough around the edges.
-- Last m4b in nested m4b doesn't seem to be indexed correctly (waternight.m4b or something has blank contents)
-- Shared and common .m4b wrong format, at the least make more clear they fail to open (since may not be able to figure out how to open)
-- Some m4bs aren't correctly formatted -- need a better way to handle them / display them (they should be extractable themselves if not openable)
+- Indexing the data files can be painfully slow if the hard drive is slow.
+- Bink extraction from Exile DOES NOT work correctly at the moment. You will get videos with glitches.
+
+## Things To Fix:
+- Add check for hard disk speed. If slow disk then load each file into memory prior to indexing. Do this sequentially (multithreading will cause it to eat up all available memory). That or throttle multithreading somehow.
+- Bink extraction for Exile
+- Sound extraction from Revelation (sb0 files)
 
 ## UX Issues
 - double clicking folder in file explorer should open that folder (in folder explorer & file explorer)
 - Extraction causes UI Blocking, should be moved to separate thread
 
-## Questions
-
+# Things to Check
+- Last m4b in nested m4b doesn't seem to be indexed correctly (waternight.m4b or something has blank contents)
+- Shared and common .m4b wrong format, at the least make more clear they fail to open (since may not be able to figure out how to open)
+- Some m4bs aren't correctly formatted -- need a better way to handle them / display them (they should be extractable themselves if not openable)
 - Apparently M4B CAN have both files and subfolders in the same directory.
 DragonUnpacker seemed to work on the assumption that a folder had one or the other. Need to confirm DUP was neglecting to show certain files
+
+## Features To Implement:
+- add index caching (so it only needs to happen first time loading a given file)
+- add way to do virtual filepath lookups to get a file and it's data (e.g. data.mb4/folder/sub.mb4/anotherfolder/anothersub.mb4/cube/front.jpg)
+- add way auto detect cubemaps / separate files into probable nodes
+- add drag and drop for files into node viewer
+- add export cubemap as single image (in various formats)
+- add batch export all node cubemaps
+- add ability to sort on file listing
+- add vlc video/audio player
+- add 3d cubemap viewer
 
 ## Future Development
 
