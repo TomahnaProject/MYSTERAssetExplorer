@@ -403,5 +403,17 @@ namespace MYSTERAssetExplorer.App
         {
             app.FindFile();
         }
+
+        private void fileExplorer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A && e.Control)
+            {
+                fileExplorer.MultiSelect = true;
+                foreach (ListViewItem item in fileExplorer.Items)
+                {
+                    item.Selected = true;
+                }
+            }
+        }
     }
 }

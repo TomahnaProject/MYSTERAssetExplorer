@@ -384,6 +384,7 @@
             this.fileExplorer.UseCompatibleStateImageBehavior = false;
             this.fileExplorer.View = System.Windows.Forms.View.Details;
             this.fileExplorer.SelectedIndexChanged += new System.EventHandler(this.fileExplorer_SelectedIndexChanged);
+            this.fileExplorer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fileExplorer_KeyDown);
             // 
             // fileColumn
             // 
