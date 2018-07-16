@@ -36,7 +36,7 @@ namespace MYSTERAssetExplorer.Services
         public void AddNode(GameEnum game, Node node)
         {
             var reg = GetCorrectRegistry(game);
-            reg.Nodes.Add(node);
+            reg.AddNode(node);
         }
 
         public void RemoveNode(GameEnum game, Node node)

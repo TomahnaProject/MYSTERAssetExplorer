@@ -14,6 +14,19 @@ namespace MYSTERAssetExplorer.Core
             Nodes = new List<Node>();
         }
 
+        public void AddNode(Node node)
+        {
+            var existingNode = Nodes.Where(x =>
+                x.Scene.ToUpper() == node.Scene.ToUpper() &&
+                x.Zone.ToUpper() == node.Zone.ToUpper() &&
+                x.Number.ToUpper() == node.Number.ToUpper()
+            ).FirstOrDefault();
+           
+            if(existingNode != null)
+                Nodes.Remove(existingNode);
+            Nodes.Add(node);
+        }
+
         public List<Node> GetNodesByScene(string sceneName)
         {
             return Nodes.Where(x => x.Scene == sceneName).ToList();

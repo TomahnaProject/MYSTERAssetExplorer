@@ -37,6 +37,10 @@
             this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bottomImage = new System.Windows.Forms.Panel();
+            this.leftImage = new System.Windows.Forms.Panel();
+            this.rightImage = new System.Windows.Forms.Panel();
+            this.backImage = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NodePropertiesGroup = new System.Windows.Forms.GroupBox();
@@ -70,19 +74,13 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.frontImage = new System.Windows.Forms.Panel();
+            this.topImage = new System.Windows.Forms.Panel();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.nodeViewerMenuStrip = new System.Windows.Forms.ToolStrip();
             this.loadRegistry = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveRegistry = new System.Windows.Forms.ToolStripLabel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.topImage = new System.Windows.Forms.Panel();
-            this.frontImage = new System.Windows.Forms.Panel();
-            this.backImage = new System.Windows.Forms.Panel();
-            this.rightImage = new System.Windows.Forms.Panel();
-            this.leftImage = new System.Windows.Forms.Panel();
-            this.bottomImage = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -119,8 +117,6 @@
             this.splitContainer1.Panel2.Controls.Add(this.leftImage);
             this.splitContainer1.Panel2.Controls.Add(this.rightImage);
             this.splitContainer1.Panel2.Controls.Add(this.backImage);
-            this.splitContainer1.Panel2.Controls.Add(this.panel5);
-            this.splitContainer1.Panel2.Controls.Add(this.panel4);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
@@ -184,6 +180,58 @@
             this.removeNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.removeNodeToolStripMenuItem.Text = "Remove Node";
             this.removeNodeToolStripMenuItem.Click += new System.EventHandler(this.removeNodeToolStripMenuItem_Click);
+            // 
+            // bottomImage
+            // 
+            this.bottomImage.AllowDrop = true;
+            this.bottomImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.bottomImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bottomImage.Location = new System.Drawing.Point(331, 651);
+            this.bottomImage.Name = "bottomImage";
+            this.bottomImage.Size = new System.Drawing.Size(320, 320);
+            this.bottomImage.TabIndex = 32;
+            this.bottomImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.bottomImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.bottomImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // leftImage
+            // 
+            this.leftImage.AllowDrop = true;
+            this.leftImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.leftImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.leftImage.Location = new System.Drawing.Point(11, 331);
+            this.leftImage.Name = "leftImage";
+            this.leftImage.Size = new System.Drawing.Size(320, 320);
+            this.leftImage.TabIndex = 34;
+            this.leftImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.leftImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.leftImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // rightImage
+            // 
+            this.rightImage.AllowDrop = true;
+            this.rightImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.rightImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.rightImage.Location = new System.Drawing.Point(651, 331);
+            this.rightImage.Name = "rightImage";
+            this.rightImage.Size = new System.Drawing.Size(320, 320);
+            this.rightImage.TabIndex = 33;
+            this.rightImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.rightImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.rightImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // backImage
+            // 
+            this.backImage.AllowDrop = true;
+            this.backImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.backImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backImage.Location = new System.Drawing.Point(971, 331);
+            this.backImage.Name = "backImage";
+            this.backImage.Size = new System.Drawing.Size(320, 320);
+            this.backImage.TabIndex = 32;
+            this.backImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.backImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.backImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
             // 
             // pictureBox1
             // 
@@ -536,6 +584,32 @@
             this.listBox2.Size = new System.Drawing.Size(288, 264);
             this.listBox2.TabIndex = 25;
             // 
+            // frontImage
+            // 
+            this.frontImage.AllowDrop = true;
+            this.frontImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.frontImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.frontImage.Location = new System.Drawing.Point(331, 331);
+            this.frontImage.Name = "frontImage";
+            this.frontImage.Size = new System.Drawing.Size(320, 320);
+            this.frontImage.TabIndex = 31;
+            this.frontImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.frontImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.frontImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // topImage
+            // 
+            this.topImage.AllowDrop = true;
+            this.topImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.topImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.topImage.Location = new System.Drawing.Point(331, 11);
+            this.topImage.Name = "topImage";
+            this.topImage.Size = new System.Drawing.Size(320, 320);
+            this.topImage.TabIndex = 30;
+            this.topImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.topImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.topImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
             // MainPanel
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -579,110 +653,6 @@
             this.saveRegistry.Size = new System.Drawing.Size(76, 22);
             this.saveRegistry.Text = "Save Registry";
             this.saveRegistry.Click += new System.EventHandler(this.saveRegistry_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.AllowDrop = true;
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(1028, 685);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(89, 90);
-            this.panel4.TabIndex = 28;
-            this.panel4.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.panel4.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.panel4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
-            // 
-            // panel5
-            // 
-            this.panel5.AllowDrop = true;
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Location = new System.Drawing.Point(1170, 685);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(89, 90);
-            this.panel5.TabIndex = 29;
-            this.panel5.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.panel5.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.panel5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
-            // 
-            // topImage
-            // 
-            this.topImage.AllowDrop = true;
-            this.topImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
-            this.topImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.topImage.Location = new System.Drawing.Point(331, 11);
-            this.topImage.Name = "topImage";
-            this.topImage.Size = new System.Drawing.Size(320, 320);
-            this.topImage.TabIndex = 30;
-            this.topImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.topImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.topImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
-            // 
-            // frontImage
-            // 
-            this.frontImage.AllowDrop = true;
-            this.frontImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
-            this.frontImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.frontImage.Location = new System.Drawing.Point(331, 331);
-            this.frontImage.Name = "frontImage";
-            this.frontImage.Size = new System.Drawing.Size(320, 320);
-            this.frontImage.TabIndex = 31;
-            this.frontImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.frontImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.frontImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
-            // 
-            // backImage
-            // 
-            this.backImage.AllowDrop = true;
-            this.backImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
-            this.backImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.backImage.Location = new System.Drawing.Point(971, 331);
-            this.backImage.Name = "backImage";
-            this.backImage.Size = new System.Drawing.Size(320, 320);
-            this.backImage.TabIndex = 32;
-            this.backImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.backImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.backImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
-            // 
-            // rightImage
-            // 
-            this.rightImage.AllowDrop = true;
-            this.rightImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
-            this.rightImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.rightImage.Location = new System.Drawing.Point(651, 331);
-            this.rightImage.Name = "rightImage";
-            this.rightImage.Size = new System.Drawing.Size(320, 320);
-            this.rightImage.TabIndex = 33;
-            this.rightImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.rightImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.rightImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
-            // 
-            // leftImage
-            // 
-            this.leftImage.AllowDrop = true;
-            this.leftImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
-            this.leftImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.leftImage.Location = new System.Drawing.Point(11, 331);
-            this.leftImage.Name = "leftImage";
-            this.leftImage.Size = new System.Drawing.Size(320, 320);
-            this.leftImage.TabIndex = 34;
-            this.leftImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.leftImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.leftImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
-            // 
-            // bottomImage
-            // 
-            this.bottomImage.AllowDrop = true;
-            this.bottomImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
-            this.bottomImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bottomImage.Location = new System.Drawing.Point(331, 651);
-            this.bottomImage.Name = "bottomImage";
-            this.bottomImage.Size = new System.Drawing.Size(320, 320);
-            this.bottomImage.TabIndex = 32;
-            this.bottomImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.bottomImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.bottomImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
             // 
             // NodeViewer
             // 
@@ -771,8 +741,6 @@
         private System.Windows.Forms.ComboBox nodeProp_ClassificationInput;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox nodeProp_NumberInput;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel topImage;
         private System.Windows.Forms.Panel frontImage;
         private System.Windows.Forms.Panel backImage;
