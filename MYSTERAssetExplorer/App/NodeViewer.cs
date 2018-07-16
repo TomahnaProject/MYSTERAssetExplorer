@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using static MYSTERAssetExplorer.Core.CubeMapImageSet;
 using static MYSTERAssetExplorer.Core.Node;
 
 namespace MYSTERAssetExplorer.App
@@ -93,12 +94,19 @@ namespace MYSTERAssetExplorer.App
             // some kind of check to validate images?
             var imageSet = node.CubeMaps.Color;
 
-            backBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Back.File));
-            bottomBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Bottom.File));
-            frontBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Front.File));
-            leftBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Left.File));
-            rightBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Right.File));
-            topBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Top.File));
+            backImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Back.File));
+            bottomImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Bottom.File));
+            frontImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Front.File));
+            leftImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Left.File));
+            rightImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Right.File));
+            topImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Top.File));
+
+            backImage.Tag = imageSet.Back.File;
+            bottomImage.Tag = imageSet.Bottom.File;
+            frontImage.Tag = imageSet.Front.File;
+            leftImage.Tag = imageSet.Left.File;
+            rightImage.Tag = imageSet.Right.File;
+            topImage.Tag = imageSet.Top.File;
         }
 
         private byte[] LookupFileImageData(Node node, string fileName)
@@ -169,6 +177,53 @@ namespace MYSTERAssetExplorer.App
         private void contextMenuNodeExplorer_Opening(object sender, CancelEventArgs e)
         {
 
+        }
+
+        private void picBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            Control c = (Control)sender;
+            c.Select();
+            var imageName = (string)c.Tag;
+            if (!string.IsNullOrEmpty(imageName))
+            {
+                c.DoDragDrop(imageName, DragDropEffects.Copy);
+            }
+        }
+
+        private void picBox_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Text) &&
+                (e.AllowedEffect & DragDropEffects.Copy) != 0)
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void picBox_DragDrop(object sender, DragEventArgs e)
+        {
+            string imageFileName = e.Data.GetData(DataFormats.Text).ToString();
+            if (selectedNode == null)
+                return;
+
+            var cubeFace = new CubeFace() { File = imageFileName };
+            if (sender == backImage)
+                selectedNode.CubeMaps.Color.Back = cubeFace;
+            if (sender == bottomImage)
+                selectedNode.CubeMaps.Color.Bottom = cubeFace;
+            if (sender == frontImage)
+                selectedNode.CubeMaps.Color.Front = cubeFace;
+            if (sender == leftImage)
+                selectedNode.CubeMaps.Color.Left = cubeFace;
+            if (sender == rightImage)
+                selectedNode.CubeMaps.Color.Right = cubeFace;
+            if (sender == topImage)
+                selectedNode.CubeMaps.Color.Top = cubeFace;
+
+            PopulateImages(selectedNode);
         }
 
         //private void nodeListing_DragDrop(object sender, DragEventArgs e)

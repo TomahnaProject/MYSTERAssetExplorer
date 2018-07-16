@@ -22,7 +22,8 @@ namespace MYSTERAssetExplorer.App
         public AssetExplorer()
         {
             InitializeComponent();
-            previewWindow.InitialImage = Properties.Resources.picture_icon_large;
+            previewPanel.Tag = "";
+            previewPanel.BackgroundImage = Properties.Resources.picture_icon_large;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -45,7 +46,7 @@ namespace MYSTERAssetExplorer.App
             nodeApp.MainApp = app;
 
             //TODO removed and place within the assetexplorerapp class
-            builder = new PanoBuilder(); 
+            builder = new PanoBuilder();
         }
 
         private void openFolder_Click(object sender, EventArgs e)
@@ -81,7 +82,7 @@ namespace MYSTERAssetExplorer.App
         {
             fileExplorer.Items.Clear();
 
-            foreach(var file in files)
+            foreach (var file in files)
             {
                 var item = new ListViewItem(file.Name, 1);
                 var subItems = new ListViewItem.ListViewSubItem[]
@@ -167,9 +168,9 @@ namespace MYSTERAssetExplorer.App
 
             foreach (var file in nodeFolderInfo.Files)
             {
-                item = new ListViewItem(file.Name, (int) file.ContentDetails.Type);
+                item = new ListViewItem(file.Name, (int)file.ContentDetails.Type);
                 item.Tag = file;
-                if(file.ContentDetails is VirtualFileArchive)
+                if (file.ContentDetails is VirtualFileArchive)
                 {
                     var archiveIndex = file.ContentDetails as VirtualFileArchive;
                     subItems = new ListViewItem.ListViewSubItem[]
@@ -250,7 +251,7 @@ namespace MYSTERAssetExplorer.App
                 childNode = new TreeNode(subFolder.Name, iconIndex, selecedIndex);
                 childNode.Tag = subFolder;
 
-                if(subFolder is VirtualFolder)
+                if (subFolder is VirtualFolder)
                 {
                     subSubFolders = (subFolder as VirtualFolder).SubFolders;
                     if (subSubFolders.Count != 0)
@@ -311,7 +312,7 @@ namespace MYSTERAssetExplorer.App
 
                 foreach (ListViewItem item in fileExplorer.SelectedItems)
                 {
-                    if(item.Tag is IVirtualFile)
+                    if (item.Tag is IVirtualFile)
                     {
                         files.Add(item.Tag as IVirtualFile);
                     }
@@ -331,7 +332,7 @@ namespace MYSTERAssetExplorer.App
                 if (selected.Tag is IVirtualFile)
                 {
                     var file = selected.Tag as IVirtualFile;
-                    if (!(file.ContentDetails.Type == FileType.Jpg || 
+                    if (!(file.ContentDetails.Type == FileType.Jpg ||
                         file.ContentDetails.Type == FileType.Zap))
                         return;
                 }
@@ -340,7 +341,8 @@ namespace MYSTERAssetExplorer.App
             }
             else
             {
-                previewWindow.Image = previewWindow.InitialImage;
+                previewPanel.Tag = "";
+                previewPanel.BackgroundImage = Properties.Resources.picture_icon_large;
             }
         }
 
@@ -351,7 +353,7 @@ namespace MYSTERAssetExplorer.App
             {
                 var file = item.Tag as IVirtualFile;
 
-                if(file.ContentDetails is VirtualFileTiledImage)
+                if (file.ContentDetails is VirtualFileTiledImage)
                 {
                     WriteToConsole(Color.Yellow, "Assembling Tiled Image: '" + file.Name + "'");
                     var stopwatch = new Stopwatch();
@@ -374,11 +376,13 @@ namespace MYSTERAssetExplorer.App
             try
             {
                 Bitmap bmp = Utils.LoadBitmapFromMemory(imageData);
-                previewWindow.Image = bmp;
+                previewPanel.BackgroundImage = bmp;
+                previewPanel.Tag = imageName;
             }
             catch (Exception ex)
             {
-                previewWindow.Image = previewWindow.InitialImage;
+                previewPanel.Tag = "";
+                previewPanel.BackgroundImage = Properties.Resources.picture_icon_large;
                 WriteToConsole(Color.Red, "ERROR: '" + imageName + "' could not be shown ( " + ex.Message + " )");
             }
         }
@@ -395,8 +399,8 @@ namespace MYSTERAssetExplorer.App
 
         private void folderExplorer_AfterExpand(object sender, TreeViewEventArgs e)
         {
-            if(e.Node.ImageIndex == 0)
-            e.Node.ImageIndex = 1;
+            if (e.Node.ImageIndex == 0)
+                e.Node.ImageIndex = 1;
         }
 
         private void folderExplorer_AfterCollapse(object sender, TreeViewEventArgs e)
@@ -421,5 +425,22 @@ namespace MYSTERAssetExplorer.App
                 }
             }
         }
+
+        private void startDrag_MouseDown(object sender, MouseEventArgs e)
+        {
+            Control c = (Control)sender;
+            c.Select();
+            var imageName = (string)c.Tag;
+            if (!string.IsNullOrEmpty(imageName))
+            {
+                c.DoDragDrop(imageName, DragDropEffects.Copy);
+            }
+            imageName = (string)previewPanel.Tag;
+            if (!string.IsNullOrEmpty(imageName))
+            {
+                c.DoDragDrop(imageName, DragDropEffects.Copy);
+            }
+        }
+
     }
 }

@@ -33,7 +33,6 @@
             this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
             this.previewGroup = new System.Windows.Forms.GroupBox();
             this.previewPanel = new System.Windows.Forms.Panel();
-            this.previewWindow = new System.Windows.Forms.PictureBox();
             this.logOutput = new System.Windows.Forms.RichTextBox();
             this.MenuStrip = new System.Windows.Forms.ToolStrip();
             this.openFolder = new System.Windows.Forms.ToolStripLabel();
@@ -62,8 +61,6 @@
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.previewGroup.SuspendLayout();
-            this.previewPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Main_Footer)).BeginInit();
             this.Main_Footer.Panel1.SuspendLayout();
@@ -105,27 +102,14 @@
             // 
             this.previewPanel.AutoScroll = true;
             this.previewPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.previewPanel.Controls.Add(this.previewWindow);
+            this.previewPanel.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.previewPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.previewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.previewPanel.Location = new System.Drawing.Point(1, 16);
             this.previewPanel.Name = "previewPanel";
             this.previewPanel.Size = new System.Drawing.Size(535, 630);
             this.previewPanel.TabIndex = 1;
-            // 
-            // previewWindow
-            // 
-            this.previewWindow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.previewWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.previewWindow.Image = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
-            this.previewWindow.InitialImage = null;
-            this.previewWindow.Location = new System.Drawing.Point(0, 0);
-            this.previewWindow.Margin = new System.Windows.Forms.Padding(0);
-            this.previewWindow.MinimumSize = new System.Drawing.Size(200, 215);
-            this.previewWindow.Name = "previewWindow";
-            this.previewWindow.Size = new System.Drawing.Size(535, 630);
-            this.previewWindow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.previewWindow.TabIndex = 0;
-            this.previewWindow.TabStop = false;
+            this.previewPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.startDrag_MouseDown);
             // 
             // logOutput
             // 
@@ -302,26 +286,26 @@
             this.expandAllToolStripMenuItem,
             this.extractFolderToolStripMenuItem});
             this.contextMenuFolderExplorer.Name = "contextMenuFolderExplorer";
-            this.contextMenuFolderExplorer.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuFolderExplorer.Size = new System.Drawing.Size(146, 70);
             // 
             // collapseAllToolStripMenuItem
             // 
             this.collapseAllToolStripMenuItem.Name = "collapseAllToolStripMenuItem";
-            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.collapseAllToolStripMenuItem.Text = "Collapse All";
             this.collapseAllToolStripMenuItem.Click += new System.EventHandler(this.collapseAllToolStripMenuItem_Click);
             // 
             // expandAllToolStripMenuItem
             // 
             this.expandAllToolStripMenuItem.Name = "expandAllToolStripMenuItem";
-            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.expandAllToolStripMenuItem.Text = "Expand All";
             this.expandAllToolStripMenuItem.Click += new System.EventHandler(this.expandAllToolStripMenuItem_Click);
             // 
             // extractFolderToolStripMenuItem
             // 
             this.extractFolderToolStripMenuItem.Name = "extractFolderToolStripMenuItem";
-            this.extractFolderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.extractFolderToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.extractFolderToolStripMenuItem.Text = "Extract Folder";
             this.extractFolderToolStripMenuItem.Click += new System.EventHandler(this.extractFolderToolStripMenuItem_Click);
             // 
@@ -361,6 +345,7 @@
             this.fileExplorer.View = System.Windows.Forms.View.Details;
             this.fileExplorer.SelectedIndexChanged += new System.EventHandler(this.fileExplorer_SelectedIndexChanged);
             this.fileExplorer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fileExplorer_KeyDown);
+            this.fileExplorer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.startDrag_MouseDown);
             // 
             // fileColumn
             // 
@@ -405,8 +390,6 @@
             this.Text = "MYSTER (Exile / Revelation) Asset Explorer";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.previewGroup.ResumeLayout(false);
-            this.previewPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).EndInit();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.Main_Footer.Panel1.ResumeLayout(false);
@@ -441,7 +424,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripLabel helpButton;
         private System.Windows.Forms.GroupBox previewGroup;
-        private System.Windows.Forms.PictureBox previewWindow;
         private System.Windows.Forms.SplitContainer Main_Footer;
         private System.Windows.Forms.SplitContainer Files_Preview;
         private System.Windows.Forms.Panel MainPanel;

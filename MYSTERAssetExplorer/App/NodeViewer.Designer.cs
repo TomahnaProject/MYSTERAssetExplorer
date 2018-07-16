@@ -34,9 +34,9 @@
             this.nodeExplorer = new System.Windows.Forms.TreeView();
             this.contextMenuNodeExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NodePropertiesGroup = new System.Windows.Forms.GroupBox();
@@ -69,18 +69,20 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.topBox = new System.Windows.Forms.PictureBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.leftBox = new System.Windows.Forms.PictureBox();
-            this.frontBox = new System.Windows.Forms.PictureBox();
-            this.rightBox = new System.Windows.Forms.PictureBox();
-            this.backBox = new System.Windows.Forms.PictureBox();
-            this.bottomBox = new System.Windows.Forms.PictureBox();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.nodeViewerMenuStrip = new System.Windows.Forms.ToolStrip();
             this.loadRegistry = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveRegistry = new System.Windows.Forms.ToolStripLabel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.topImage = new System.Windows.Forms.Panel();
+            this.frontImage = new System.Windows.Forms.Panel();
+            this.backImage = new System.Windows.Forms.Panel();
+            this.rightImage = new System.Windows.Forms.Panel();
+            this.leftImage = new System.Windows.Forms.Panel();
+            this.bottomImage = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -97,12 +99,6 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.topBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.leftBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.frontBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rightBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.backBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bottomBox)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.nodeViewerMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -119,18 +115,20 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.bottomImage);
+            this.splitContainer1.Panel2.Controls.Add(this.leftImage);
+            this.splitContainer1.Panel2.Controls.Add(this.rightImage);
+            this.splitContainer1.Panel2.Controls.Add(this.backImage);
+            this.splitContainer1.Panel2.Controls.Add(this.panel5);
+            this.splitContainer1.Panel2.Controls.Add(this.panel4);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.panel3);
-            this.splitContainer1.Panel2.Controls.Add(this.topBox);
             this.splitContainer1.Panel2.Controls.Add(this.listBox2);
-            this.splitContainer1.Panel2.Controls.Add(this.leftBox);
-            this.splitContainer1.Panel2.Controls.Add(this.frontBox);
-            this.splitContainer1.Panel2.Controls.Add(this.rightBox);
-            this.splitContainer1.Panel2.Controls.Add(this.backBox);
-            this.splitContainer1.Panel2.Controls.Add(this.bottomBox);
+            this.splitContainer1.Panel2.Controls.Add(this.frontImage);
+            this.splitContainer1.Panel2.Controls.Add(this.topImage);
             this.splitContainer1.Size = new System.Drawing.Size(1549, 803);
             this.splitContainer1.SplitterDistance = 253;
             this.splitContainer1.TabIndex = 18;
@@ -168,13 +166,6 @@
             this.addNodeToolStripMenuItem.Text = "Add Node";
             this.addNodeToolStripMenuItem.Click += new System.EventHandler(this.addNodeToolStripMenuItem_Click);
             // 
-            // removeNodeToolStripMenuItem
-            // 
-            this.removeNodeToolStripMenuItem.Name = "removeNodeToolStripMenuItem";
-            this.removeNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.removeNodeToolStripMenuItem.Text = "Remove Node";
-            this.removeNodeToolStripMenuItem.Click += new System.EventHandler(this.removeNodeToolStripMenuItem_Click);
-            // 
             // extractNodeToolStripMenuItem
             // 
             this.extractNodeToolStripMenuItem.Name = "extractNodeToolStripMenuItem";
@@ -186,6 +177,13 @@
             this.extractAllChildNodesToolStripMenuItem.Name = "extractAllChildNodesToolStripMenuItem";
             this.extractAllChildNodesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.extractAllChildNodesToolStripMenuItem.Text = "Extract All Child Nodes";
+            // 
+            // removeNodeToolStripMenuItem
+            // 
+            this.removeNodeToolStripMenuItem.Name = "removeNodeToolStripMenuItem";
+            this.removeNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.removeNodeToolStripMenuItem.Text = "Remove Node";
+            this.removeNodeToolStripMenuItem.Click += new System.EventHandler(this.removeNodeToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
@@ -524,18 +522,6 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // topBox
-            // 
-            this.topBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.topBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.topBox.Location = new System.Drawing.Point(331, 11);
-            this.topBox.Margin = new System.Windows.Forms.Padding(0);
-            this.topBox.Name = "topBox";
-            this.topBox.Size = new System.Drawing.Size(320, 320);
-            this.topBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.topBox.TabIndex = 16;
-            this.topBox.TabStop = false;
-            // 
             // listBox2
             // 
             this.listBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
@@ -549,66 +535,6 @@
             this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBox2.Size = new System.Drawing.Size(288, 264);
             this.listBox2.TabIndex = 25;
-            // 
-            // leftBox
-            // 
-            this.leftBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.leftBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.leftBox.Location = new System.Drawing.Point(11, 331);
-            this.leftBox.Margin = new System.Windows.Forms.Padding(0);
-            this.leftBox.Name = "leftBox";
-            this.leftBox.Size = new System.Drawing.Size(320, 320);
-            this.leftBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.leftBox.TabIndex = 12;
-            this.leftBox.TabStop = false;
-            // 
-            // frontBox
-            // 
-            this.frontBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.frontBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.frontBox.Location = new System.Drawing.Point(331, 331);
-            this.frontBox.Margin = new System.Windows.Forms.Padding(0);
-            this.frontBox.Name = "frontBox";
-            this.frontBox.Size = new System.Drawing.Size(320, 320);
-            this.frontBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.frontBox.TabIndex = 11;
-            this.frontBox.TabStop = false;
-            // 
-            // rightBox
-            // 
-            this.rightBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.rightBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rightBox.Location = new System.Drawing.Point(651, 331);
-            this.rightBox.Margin = new System.Windows.Forms.Padding(0);
-            this.rightBox.Name = "rightBox";
-            this.rightBox.Size = new System.Drawing.Size(320, 320);
-            this.rightBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.rightBox.TabIndex = 14;
-            this.rightBox.TabStop = false;
-            // 
-            // backBox
-            // 
-            this.backBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.backBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.backBox.Location = new System.Drawing.Point(971, 331);
-            this.backBox.Margin = new System.Windows.Forms.Padding(0);
-            this.backBox.Name = "backBox";
-            this.backBox.Size = new System.Drawing.Size(320, 320);
-            this.backBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.backBox.TabIndex = 15;
-            this.backBox.TabStop = false;
-            // 
-            // bottomBox
-            // 
-            this.bottomBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.bottomBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.bottomBox.Location = new System.Drawing.Point(331, 651);
-            this.bottomBox.Margin = new System.Windows.Forms.Padding(0);
-            this.bottomBox.Name = "bottomBox";
-            this.bottomBox.Size = new System.Drawing.Size(320, 320);
-            this.bottomBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.bottomBox.TabIndex = 13;
-            this.bottomBox.TabStop = false;
             // 
             // MainPanel
             // 
@@ -654,6 +580,110 @@
             this.saveRegistry.Text = "Save Registry";
             this.saveRegistry.Click += new System.EventHandler(this.saveRegistry_Click);
             // 
+            // panel4
+            // 
+            this.panel4.AllowDrop = true;
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Location = new System.Drawing.Point(1028, 685);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(89, 90);
+            this.panel4.TabIndex = 28;
+            this.panel4.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.panel4.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.panel4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // panel5
+            // 
+            this.panel5.AllowDrop = true;
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Location = new System.Drawing.Point(1170, 685);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(89, 90);
+            this.panel5.TabIndex = 29;
+            this.panel5.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.panel5.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.panel5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // topImage
+            // 
+            this.topImage.AllowDrop = true;
+            this.topImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.topImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.topImage.Location = new System.Drawing.Point(331, 11);
+            this.topImage.Name = "topImage";
+            this.topImage.Size = new System.Drawing.Size(320, 320);
+            this.topImage.TabIndex = 30;
+            this.topImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.topImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.topImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // frontImage
+            // 
+            this.frontImage.AllowDrop = true;
+            this.frontImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.frontImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.frontImage.Location = new System.Drawing.Point(331, 331);
+            this.frontImage.Name = "frontImage";
+            this.frontImage.Size = new System.Drawing.Size(320, 320);
+            this.frontImage.TabIndex = 31;
+            this.frontImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.frontImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.frontImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // backImage
+            // 
+            this.backImage.AllowDrop = true;
+            this.backImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.backImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backImage.Location = new System.Drawing.Point(971, 331);
+            this.backImage.Name = "backImage";
+            this.backImage.Size = new System.Drawing.Size(320, 320);
+            this.backImage.TabIndex = 32;
+            this.backImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.backImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.backImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // rightImage
+            // 
+            this.rightImage.AllowDrop = true;
+            this.rightImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.rightImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.rightImage.Location = new System.Drawing.Point(651, 331);
+            this.rightImage.Name = "rightImage";
+            this.rightImage.Size = new System.Drawing.Size(320, 320);
+            this.rightImage.TabIndex = 33;
+            this.rightImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.rightImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.rightImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // leftImage
+            // 
+            this.leftImage.AllowDrop = true;
+            this.leftImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.leftImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.leftImage.Location = new System.Drawing.Point(11, 331);
+            this.leftImage.Name = "leftImage";
+            this.leftImage.Size = new System.Drawing.Size(320, 320);
+            this.leftImage.TabIndex = 34;
+            this.leftImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.leftImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.leftImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // bottomImage
+            // 
+            this.bottomImage.AllowDrop = true;
+            this.bottomImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.bottomImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bottomImage.Location = new System.Drawing.Point(331, 651);
+            this.bottomImage.Name = "bottomImage";
+            this.bottomImage.Size = new System.Drawing.Size(320, 320);
+            this.bottomImage.TabIndex = 32;
+            this.bottomImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.bottomImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.bottomImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
             // NodeViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -687,12 +717,6 @@
             this.panel3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.topBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.leftBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.frontBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rightBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.backBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bottomBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
             this.nodeViewerMenuStrip.ResumeLayout(false);
             this.nodeViewerMenuStrip.PerformLayout();
@@ -702,13 +726,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox topBox;
-        private System.Windows.Forms.PictureBox backBox;
-        private System.Windows.Forms.PictureBox rightBox;
-        private System.Windows.Forms.PictureBox bottomBox;
-        private System.Windows.Forms.PictureBox leftBox;
-        private System.Windows.Forms.PictureBox frontBox;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView nodeExplorer;
         private System.Windows.Forms.Panel MainPanel;
@@ -754,5 +771,13 @@
         private System.Windows.Forms.ComboBox nodeProp_ClassificationInput;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox nodeProp_NumberInput;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel topImage;
+        private System.Windows.Forms.Panel frontImage;
+        private System.Windows.Forms.Panel backImage;
+        private System.Windows.Forms.Panel bottomImage;
+        private System.Windows.Forms.Panel leftImage;
+        private System.Windows.Forms.Panel rightImage;
     }
 }
