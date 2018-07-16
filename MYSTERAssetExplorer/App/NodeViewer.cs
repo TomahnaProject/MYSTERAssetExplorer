@@ -19,6 +19,8 @@ namespace MYSTERAssetExplorer.App
         public NodeViewerApp App { get; private set; }
         Node selectedNode;
 
+        PanoBuilder panoBuilder = new PanoBuilder();
+
         public NodeViewer()
         {
             InitializeComponent();
@@ -224,6 +226,40 @@ namespace MYSTERAssetExplorer.App
                 selectedNode.CubeMaps.Color.Top = cubeFace;
 
             PopulateImages(selectedNode);
+        }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            if (selectedNode == null)
+                return;
+
+            openFolderDialog.FileName = "Select Folder";
+            openFolderDialog.CheckPathExists = true;
+            openFolderDialog.ShowReadOnly = false;
+            openFolderDialog.ReadOnlyChecked = true;
+            openFolderDialog.CheckFileExists = false;
+            openFolderDialog.ValidateNames = false;
+
+            if (openFolderDialog.ShowDialog() == DialogResult.OK)
+            {
+                RunExport(Path.GetDirectoryName(openFolderDialog.FileName));
+            }
+        }
+
+        public void RunExport(string outputDir)
+        {
+            var images = new PanoImages();
+
+            var imageSet = selectedNode.CubeMaps.Color;
+
+            images.Back = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Back.File), true);
+            images.Bottom = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Bottom.File), true);
+            images.Front = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Front.File), true);
+            images.Left = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Left.File), true);
+            images.Right = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Right.File), true);
+            images.Top = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Top.File), true);
+
+            panoBuilder.BuildPanorama(outputDir, selectedNode.Scene + selectedNode.Zone + selectedNode.Number, images);
         }
 
         //private void nodeListing_DragDrop(object sender, DragEventArgs e)

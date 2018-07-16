@@ -81,6 +81,7 @@
             this.loadRegistry = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveRegistry = new System.Windows.Forms.ToolStripLabel();
+            this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -572,6 +573,7 @@
             this.exportButton.TabIndex = 0;
             this.exportButton.Text = "Export Panorama";
             this.exportButton.UseVisualStyleBackColor = false;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
             // 
             // listBox2
             // 
@@ -657,6 +659,10 @@
             this.saveRegistry.Size = new System.Drawing.Size(76, 22);
             this.saveRegistry.Text = "Save Registry";
             this.saveRegistry.Click += new System.EventHandler(this.saveRegistry_Click);
+            // 
+            // openFolderDialog
+            // 
+            this.openFolderDialog.FileName = "Select Folder";
             // 
             // NodeViewer
             // 
@@ -752,5 +758,6 @@
         private System.Windows.Forms.Panel leftImage;
         private System.Windows.Forms.Panel rightImage;
         protected System.Windows.Forms.GroupBox NodePropertiesGroup;
+        private System.Windows.Forms.OpenFileDialog openFolderDialog;
     }
 }

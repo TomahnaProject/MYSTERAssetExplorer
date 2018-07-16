@@ -21,8 +21,6 @@ namespace MYSTERAssetExplorer.App
         AssetExplorerContext _context;
         public NodeViewerApp NodeApp;
 
-        PanoBuilder panoBuilder = new PanoBuilder();
-
         public Action<Color, string> WriteToConsole { get; set; }
         public Action<List<IVirtualFile>> ListFiles { get; set; }
         public Action<List<IVirtualFolder>> PopulateFolders { get; set; }

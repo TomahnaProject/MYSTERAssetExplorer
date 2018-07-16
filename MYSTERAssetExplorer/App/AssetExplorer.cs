@@ -438,6 +438,5 @@ namespace MYSTERAssetExplorer.App
                 c.DoDragDrop(imageName, DragDropEffects.Copy);
             }
         }
-
     }
 }

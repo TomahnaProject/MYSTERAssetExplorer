@@ -94,10 +94,14 @@ namespace MYSTERAssetExplorer
             }
         }
 
-        public static Bitmap LoadBitmapFromMemory(byte[] imageData)
+        public static Bitmap LoadBitmapFromMemory(byte[] imageData, bool returnNull = false)
         {
             if (imageData == null || imageData.Length < 1)
+            {
+                if (returnNull == true)
+                    return null;
                 return Properties.Resources.picture_icon_large;
+            }
 
             Bitmap bmp;
             using (var ms = new MemoryStream(imageData))
