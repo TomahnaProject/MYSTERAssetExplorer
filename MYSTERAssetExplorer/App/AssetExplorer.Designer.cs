@@ -146,6 +146,7 @@
             // 
             // openFolder
             // 
+            this.openFolder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openFolder.Name = "openFolder";
             this.openFolder.Size = new System.Drawing.Size(72, 22);
             this.openFolder.Text = "Open Folder";

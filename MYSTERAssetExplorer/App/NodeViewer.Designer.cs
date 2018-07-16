@@ -72,7 +72,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.exportButton = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.frontImage = new System.Windows.Forms.Panel();
             this.topImage = new System.Windows.Forms.Panel();
@@ -116,6 +116,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.bottomImage);
             this.splitContainer1.Panel2.Controls.Add(this.leftImage);
             this.splitContainer1.Panel2.Controls.Add(this.rightImage);
+            this.splitContainer1.Panel2.Controls.Add(this.topImage);
             this.splitContainer1.Panel2.Controls.Add(this.backImage);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
@@ -124,8 +125,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.panel3);
             this.splitContainer1.Panel2.Controls.Add(this.listBox2);
             this.splitContainer1.Panel2.Controls.Add(this.frontImage);
-            this.splitContainer1.Panel2.Controls.Add(this.topImage);
-            this.splitContainer1.Size = new System.Drawing.Size(1549, 803);
+            this.splitContainer1.Size = new System.Drawing.Size(1549, 865);
             this.splitContainer1.SplitterDistance = 253;
             this.splitContainer1.TabIndex = 18;
             // 
@@ -138,9 +138,9 @@
             this.nodeExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.nodeExplorer.Location = new System.Drawing.Point(0, 0);
             this.nodeExplorer.Margin = new System.Windows.Forms.Padding(0);
-            this.nodeExplorer.MinimumSize = new System.Drawing.Size(100, 215);
+            this.nodeExplorer.MinimumSize = new System.Drawing.Size(100, 231);
             this.nodeExplorer.Name = "nodeExplorer";
-            this.nodeExplorer.Size = new System.Drawing.Size(253, 803);
+            this.nodeExplorer.Size = new System.Drawing.Size(253, 865);
             this.nodeExplorer.TabIndex = 23;
             this.nodeExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.nodeExplorer_NodeMouseClick);
             // 
@@ -186,7 +186,7 @@
             this.bottomImage.AllowDrop = true;
             this.bottomImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.bottomImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bottomImage.Location = new System.Drawing.Point(331, 651);
+            this.bottomImage.Location = new System.Drawing.Point(330, 660);
             this.bottomImage.Name = "bottomImage";
             this.bottomImage.Size = new System.Drawing.Size(320, 320);
             this.bottomImage.TabIndex = 32;
@@ -199,7 +199,7 @@
             this.leftImage.AllowDrop = true;
             this.leftImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.leftImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.leftImage.Location = new System.Drawing.Point(11, 331);
+            this.leftImage.Location = new System.Drawing.Point(10, 340);
             this.leftImage.Name = "leftImage";
             this.leftImage.Size = new System.Drawing.Size(320, 320);
             this.leftImage.TabIndex = 34;
@@ -212,7 +212,7 @@
             this.rightImage.AllowDrop = true;
             this.rightImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.rightImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.rightImage.Location = new System.Drawing.Point(651, 331);
+            this.rightImage.Location = new System.Drawing.Point(650, 340);
             this.rightImage.Name = "rightImage";
             this.rightImage.Size = new System.Drawing.Size(320, 320);
             this.rightImage.TabIndex = 33;
@@ -225,7 +225,7 @@
             this.backImage.AllowDrop = true;
             this.backImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.backImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.backImage.Location = new System.Drawing.Point(971, 331);
+            this.backImage.Location = new System.Drawing.Point(970, 340);
             this.backImage.Name = "backImage";
             this.backImage.Size = new System.Drawing.Size(320, 320);
             this.backImage.TabIndex = 32;
@@ -237,10 +237,10 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(971, 46);
+            this.pictureBox1.Location = new System.Drawing.Point(971, 36);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(288, 264);
+            this.pictureBox1.Size = new System.Drawing.Size(288, 284);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
@@ -250,7 +250,7 @@
             this.panel1.Controls.Add(this.NodePropertiesGroup);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(325, 325);
+            this.panel1.Size = new System.Drawing.Size(324, 334);
             this.panel1.TabIndex = 18;
             // 
             // NodePropertiesGroup
@@ -280,134 +280,135 @@
             this.NodePropertiesGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NodePropertiesGroup.ForeColor = System.Drawing.Color.Gainsboro;
             this.NodePropertiesGroup.Location = new System.Drawing.Point(0, 0);
+            this.NodePropertiesGroup.Margin = new System.Windows.Forms.Padding(1);
             this.NodePropertiesGroup.Name = "NodePropertiesGroup";
-            this.NodePropertiesGroup.Size = new System.Drawing.Size(325, 325);
+            this.NodePropertiesGroup.Size = new System.Drawing.Size(324, 334);
             this.NodePropertiesGroup.TabIndex = 24;
             this.NodePropertiesGroup.TabStop = false;
             this.NodePropertiesGroup.Text = "Node Identity";
             // 
             // nodeProp_NumberInput
             // 
-            this.nodeProp_NumberInput.Location = new System.Drawing.Point(9, 111);
+            this.nodeProp_NumberInput.Location = new System.Drawing.Point(9, 120);
             this.nodeProp_NumberInput.Name = "nodeProp_NumberInput";
-            this.nodeProp_NumberInput.Size = new System.Drawing.Size(184, 20);
+            this.nodeProp_NumberInput.Size = new System.Drawing.Size(184, 22);
             this.nodeProp_NumberInput.TabIndex = 37;
             // 
             // nodeProp_Depth
             // 
             this.nodeProp_Depth.DecimalPlaces = 1;
-            this.nodeProp_Depth.Location = new System.Drawing.Point(222, 290);
+            this.nodeProp_Depth.Location = new System.Drawing.Point(228, 293);
             this.nodeProp_Depth.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
             this.nodeProp_Depth.Name = "nodeProp_Depth";
-            this.nodeProp_Depth.Size = new System.Drawing.Size(74, 20);
+            this.nodeProp_Depth.Size = new System.Drawing.Size(74, 22);
             this.nodeProp_Depth.TabIndex = 36;
             // 
             // nodeProp_ClassificationInput
             // 
             this.nodeProp_ClassificationInput.FormattingEnabled = true;
-            this.nodeProp_ClassificationInput.Location = new System.Drawing.Point(9, 150);
+            this.nodeProp_ClassificationInput.Location = new System.Drawing.Point(9, 162);
             this.nodeProp_ClassificationInput.Name = "nodeProp_ClassificationInput";
-            this.nodeProp_ClassificationInput.Size = new System.Drawing.Size(184, 21);
+            this.nodeProp_ClassificationInput.Size = new System.Drawing.Size(184, 22);
             this.nodeProp_ClassificationInput.TabIndex = 35;
             // 
             // nodeProp_rotationZ
             // 
             this.nodeProp_rotationZ.DecimalPlaces = 1;
-            this.nodeProp_rotationZ.Location = new System.Drawing.Point(86, 200);
+            this.nodeProp_rotationZ.Location = new System.Drawing.Point(92, 207);
             this.nodeProp_rotationZ.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
             this.nodeProp_rotationZ.Name = "nodeProp_rotationZ";
-            this.nodeProp_rotationZ.Size = new System.Drawing.Size(74, 20);
+            this.nodeProp_rotationZ.Size = new System.Drawing.Size(74, 22);
             this.nodeProp_rotationZ.TabIndex = 34;
             // 
             // label_PosZ
             // 
             this.label_PosZ.AutoSize = true;
-            this.label_PosZ.Location = new System.Drawing.Point(7, 292);
+            this.label_PosZ.Location = new System.Drawing.Point(9, 295);
             this.label_PosZ.Name = "label_PosZ";
-            this.label_PosZ.Size = new System.Drawing.Size(14, 13);
+            this.label_PosZ.Size = new System.Drawing.Size(13, 14);
             this.label_PosZ.TabIndex = 33;
             this.label_PosZ.Text = "Z";
             // 
             // label_PosY
             // 
             this.label_PosY.AutoSize = true;
-            this.label_PosY.Location = new System.Drawing.Point(7, 266);
+            this.label_PosY.Location = new System.Drawing.Point(9, 271);
             this.label_PosY.Name = "label_PosY";
-            this.label_PosY.Size = new System.Drawing.Size(14, 13);
+            this.label_PosY.Size = new System.Drawing.Size(13, 14);
             this.label_PosY.TabIndex = 32;
             this.label_PosY.Text = "Y";
             // 
             // label_PosX
             // 
             this.label_PosX.AutoSize = true;
-            this.label_PosX.Location = new System.Drawing.Point(7, 240);
+            this.label_PosX.Location = new System.Drawing.Point(9, 249);
             this.label_PosX.Name = "label_PosX";
-            this.label_PosX.Size = new System.Drawing.Size(14, 13);
+            this.label_PosX.Size = new System.Drawing.Size(13, 14);
             this.label_PosX.TabIndex = 31;
             this.label_PosX.Text = "X";
             // 
             // nodeProp_PosZ
             // 
             this.nodeProp_PosZ.DecimalPlaces = 1;
-            this.nodeProp_PosZ.Location = new System.Drawing.Point(27, 290);
+            this.nodeProp_PosZ.Location = new System.Drawing.Point(26, 293);
             this.nodeProp_PosZ.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
             this.nodeProp_PosZ.Name = "nodeProp_PosZ";
-            this.nodeProp_PosZ.Size = new System.Drawing.Size(74, 20);
+            this.nodeProp_PosZ.Size = new System.Drawing.Size(74, 22);
             this.nodeProp_PosZ.TabIndex = 30;
             // 
             // nodeProp_PosY
             // 
             this.nodeProp_PosY.DecimalPlaces = 1;
-            this.nodeProp_PosY.Location = new System.Drawing.Point(27, 264);
+            this.nodeProp_PosY.Location = new System.Drawing.Point(26, 269);
             this.nodeProp_PosY.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
             this.nodeProp_PosY.Name = "nodeProp_PosY";
-            this.nodeProp_PosY.Size = new System.Drawing.Size(74, 20);
+            this.nodeProp_PosY.Size = new System.Drawing.Size(74, 22);
             this.nodeProp_PosY.TabIndex = 29;
             // 
             // nodeProp_PosX
             // 
             this.nodeProp_PosX.DecimalPlaces = 1;
-            this.nodeProp_PosX.Location = new System.Drawing.Point(27, 238);
+            this.nodeProp_PosX.Location = new System.Drawing.Point(26, 245);
             this.nodeProp_PosX.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
             this.nodeProp_PosX.Name = "nodeProp_PosX";
-            this.nodeProp_PosX.Size = new System.Drawing.Size(74, 20);
+            this.nodeProp_PosX.Size = new System.Drawing.Size(74, 22);
             this.nodeProp_PosX.TabIndex = 28;
             // 
             // label_DepthRange
             // 
             this.label_DepthRange.AutoSize = true;
-            this.label_DepthRange.Location = new System.Drawing.Point(219, 274);
+            this.label_DepthRange.Location = new System.Drawing.Point(225, 271);
             this.label_DepthRange.Name = "label_DepthRange";
-            this.label_DepthRange.Size = new System.Drawing.Size(71, 13);
+            this.label_DepthRange.Size = new System.Drawing.Size(77, 14);
             this.label_DepthRange.TabIndex = 27;
             this.label_DepthRange.Text = "Depth Range";
             // 
             // mapTypeDepth
             // 
             this.mapTypeDepth.AutoSize = true;
-            this.mapTypeDepth.Location = new System.Drawing.Point(223, 250);
+            this.mapTypeDepth.Location = new System.Drawing.Point(228, 245);
             this.mapTypeDepth.Name = "mapTypeDepth";
-            this.mapTypeDepth.Size = new System.Drawing.Size(78, 17);
+            this.mapTypeDepth.Size = new System.Drawing.Size(85, 18);
             this.mapTypeDepth.TabIndex = 26;
             this.mapTypeDepth.TabStop = true;
             this.mapTypeDepth.Text = "Depth Map";
@@ -416,9 +417,9 @@
             // mapTypeColor
             // 
             this.mapTypeColor.AutoSize = true;
-            this.mapTypeColor.Location = new System.Drawing.Point(223, 227);
+            this.mapTypeColor.Location = new System.Drawing.Point(228, 226);
             this.mapTypeColor.Name = "mapTypeColor";
-            this.mapTypeColor.Size = new System.Drawing.Size(73, 17);
+            this.mapTypeColor.Size = new System.Drawing.Size(80, 18);
             this.mapTypeColor.TabIndex = 25;
             this.mapTypeColor.TabStop = true;
             this.mapTypeColor.Text = "Color Map";
@@ -427,36 +428,36 @@
             // label_Classification
             // 
             this.label_Classification.AutoSize = true;
-            this.label_Classification.Location = new System.Drawing.Point(9, 134);
+            this.label_Classification.Location = new System.Drawing.Point(9, 144);
             this.label_Classification.Name = "label_Classification";
-            this.label_Classification.Size = new System.Drawing.Size(68, 13);
+            this.label_Classification.Size = new System.Drawing.Size(79, 14);
             this.label_Classification.TabIndex = 24;
             this.label_Classification.Text = "Classification";
             // 
             // label_Rotation
             // 
             this.label_Rotation.AutoSize = true;
-            this.label_Rotation.Location = new System.Drawing.Point(9, 202);
+            this.label_Rotation.Location = new System.Drawing.Point(9, 209);
             this.label_Rotation.Name = "label_Rotation";
-            this.label_Rotation.Size = new System.Drawing.Size(71, 13);
+            this.label_Rotation.Size = new System.Drawing.Size(77, 14);
             this.label_Rotation.TabIndex = 23;
             this.label_Rotation.Text = "Yaw Rotation";
             // 
             // label_Position
             // 
             this.label_Position.AutoSize = true;
-            this.label_Position.Location = new System.Drawing.Point(7, 222);
+            this.label_Position.Location = new System.Drawing.Point(23, 228);
             this.label_Position.Name = "label_Position";
-            this.label_Position.Size = new System.Drawing.Size(44, 13);
+            this.label_Position.Size = new System.Drawing.Size(51, 14);
             this.label_Position.TabIndex = 22;
             this.label_Position.Text = "Position";
             // 
             // SaveButton
             // 
             this.SaveButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.SaveButton.Location = new System.Drawing.Point(213, 34);
+            this.SaveButton.Location = new System.Drawing.Point(213, 37);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(97, 33);
+            this.SaveButton.Size = new System.Drawing.Size(97, 36);
             this.SaveButton.TabIndex = 21;
             this.SaveButton.Text = "Save Changes";
             this.SaveButton.UseVisualStyleBackColor = false;
@@ -465,50 +466,51 @@
             // label_Scene
             // 
             this.label_Scene.AutoSize = true;
-            this.label_Scene.Location = new System.Drawing.Point(9, 17);
+            this.label_Scene.Location = new System.Drawing.Point(9, 18);
             this.label_Scene.Name = "label_Scene";
-            this.label_Scene.Size = new System.Drawing.Size(38, 13);
+            this.label_Scene.Size = new System.Drawing.Size(39, 14);
             this.label_Scene.TabIndex = 20;
             this.label_Scene.Text = "Scene";
             // 
             // nodeProp_ZoneInput
             // 
-            this.nodeProp_ZoneInput.Location = new System.Drawing.Point(9, 72);
+            this.nodeProp_ZoneInput.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nodeProp_ZoneInput.Location = new System.Drawing.Point(9, 78);
             this.nodeProp_ZoneInput.Name = "nodeProp_ZoneInput";
-            this.nodeProp_ZoneInput.Size = new System.Drawing.Size(184, 20);
+            this.nodeProp_ZoneInput.Size = new System.Drawing.Size(184, 21);
             this.nodeProp_ZoneInput.TabIndex = 19;
             // 
             // nodeProp_SceneInput
             // 
-            this.nodeProp_SceneInput.Location = new System.Drawing.Point(9, 33);
+            this.nodeProp_SceneInput.Location = new System.Drawing.Point(9, 36);
             this.nodeProp_SceneInput.Name = "nodeProp_SceneInput";
-            this.nodeProp_SceneInput.Size = new System.Drawing.Size(184, 20);
+            this.nodeProp_SceneInput.Size = new System.Drawing.Size(184, 22);
             this.nodeProp_SceneInput.TabIndex = 8;
             // 
             // label_Number
             // 
             this.label_Number.AutoSize = true;
-            this.label_Number.Location = new System.Drawing.Point(9, 95);
+            this.label_Number.Location = new System.Drawing.Point(9, 102);
             this.label_Number.Name = "label_Number";
-            this.label_Number.Size = new System.Drawing.Size(44, 13);
+            this.label_Number.Size = new System.Drawing.Size(50, 14);
             this.label_Number.TabIndex = 18;
             this.label_Number.Text = "Number";
             // 
             // label_Zone
             // 
             this.label_Zone.AutoSize = true;
-            this.label_Zone.Location = new System.Drawing.Point(9, 56);
+            this.label_Zone.Location = new System.Drawing.Point(9, 60);
             this.label_Zone.Name = "label_Zone";
-            this.label_Zone.Size = new System.Drawing.Size(32, 13);
+            this.label_Zone.Size = new System.Drawing.Size(34, 14);
             this.label_Zone.TabIndex = 9;
             this.label_Zone.Text = "Zone";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.groupBox1);
-            this.panel2.Location = new System.Drawing.Point(6, 654);
+            this.panel2.Location = new System.Drawing.Point(5, 663);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(325, 325);
+            this.panel2.Size = new System.Drawing.Size(325, 350);
             this.panel2.TabIndex = 25;
             // 
             // groupBox1
@@ -517,36 +519,36 @@
             this.groupBox1.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(325, 325);
+            this.groupBox1.Size = new System.Drawing.Size(325, 350);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(680, 20);
+            this.label6.Location = new System.Drawing.Point(680, 22);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(96, 13);
+            this.label6.Size = new System.Drawing.Size(110, 14);
             this.label6.TabIndex = 26;
             this.label6.Text = "Associated Images";
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.groupBox2);
-            this.panel3.Location = new System.Drawing.Point(654, 654);
+            this.panel3.Location = new System.Drawing.Point(656, 666);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(325, 325);
+            this.panel3.Size = new System.Drawing.Size(325, 350);
             this.panel3.TabIndex = 26;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.exportButton);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(325, 325);
+            this.groupBox2.Size = new System.Drawing.Size(325, 350);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Export";
@@ -554,34 +556,36 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(29, 19);
+            this.checkBox1.Location = new System.Drawing.Point(29, 20);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(106, 17);
+            this.checkBox1.Size = new System.Drawing.Size(118, 18);
             this.checkBox1.TabIndex = 21;
             this.checkBox1.Text = "Separate Images";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // exportButton
             // 
-            this.button1.Location = new System.Drawing.Point(29, 67);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(261, 54);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.exportButton.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.exportButton.Location = new System.Drawing.Point(29, 72);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(261, 58);
+            this.exportButton.TabIndex = 0;
+            this.exportButton.Text = "Export Panorama";
+            this.exportButton.UseVisualStyleBackColor = false;
             // 
             // listBox2
             // 
             this.listBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.listBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(683, 46);
+            this.listBox2.ItemHeight = 14;
+            this.listBox2.Location = new System.Drawing.Point(683, 50);
             this.listBox2.Margin = new System.Windows.Forms.Padding(0);
             this.listBox2.MinimumSize = new System.Drawing.Size(100, 4);
             this.listBox2.Name = "listBox2";
             this.listBox2.ScrollAlwaysVisible = true;
             this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox2.Size = new System.Drawing.Size(288, 264);
+            this.listBox2.Size = new System.Drawing.Size(288, 270);
             this.listBox2.TabIndex = 25;
             // 
             // frontImage
@@ -589,7 +593,7 @@
             this.frontImage.AllowDrop = true;
             this.frontImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.frontImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.frontImage.Location = new System.Drawing.Point(331, 331);
+            this.frontImage.Location = new System.Drawing.Point(330, 340);
             this.frontImage.Name = "frontImage";
             this.frontImage.Size = new System.Drawing.Size(320, 320);
             this.frontImage.TabIndex = 31;
@@ -602,7 +606,7 @@
             this.topImage.AllowDrop = true;
             this.topImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.topImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.topImage.Location = new System.Drawing.Point(331, 11);
+            this.topImage.Location = new System.Drawing.Point(330, 20);
             this.topImage.Name = "topImage";
             this.topImage.Size = new System.Drawing.Size(320, 320);
             this.topImage.TabIndex = 30;
@@ -616,10 +620,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainPanel.Controls.Add(this.splitContainer1);
-            this.MainPanel.Location = new System.Drawing.Point(0, 24);
+            this.MainPanel.Location = new System.Drawing.Point(0, 26);
             this.MainPanel.Margin = new System.Windows.Forms.Padding(0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(1549, 803);
+            this.MainPanel.Size = new System.Drawing.Size(1549, 865);
             this.MainPanel.TabIndex = 18;
             // 
             // nodeViewerMenuStrip
@@ -656,12 +660,13 @@
             // 
             // NodeViewer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(1549, 827);
+            this.ClientSize = new System.Drawing.Size(1549, 891);
             this.Controls.Add(this.nodeViewerMenuStrip);
             this.Controls.Add(this.MainPanel);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Gainsboro;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
@@ -700,7 +705,6 @@
         private System.Windows.Forms.TreeView nodeExplorer;
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox NodePropertiesGroup;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label_Scene;
         private System.Windows.Forms.TextBox nodeProp_ZoneInput;
@@ -739,7 +743,7 @@
         private System.Windows.Forms.NumericUpDown nodeProp_PosX;
         private System.Windows.Forms.NumericUpDown nodeProp_Depth;
         private System.Windows.Forms.ComboBox nodeProp_ClassificationInput;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.TextBox nodeProp_NumberInput;
         private System.Windows.Forms.Panel topImage;
         private System.Windows.Forms.Panel frontImage;
@@ -747,5 +751,6 @@
         private System.Windows.Forms.Panel bottomImage;
         private System.Windows.Forms.Panel leftImage;
         private System.Windows.Forms.Panel rightImage;
+        protected System.Windows.Forms.GroupBox NodePropertiesGroup;
     }
 }

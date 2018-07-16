@@ -44,9 +44,6 @@ namespace MYSTERAssetExplorer.App
             // very important, swap references so they can communicate
             app.NodeApp = nodeApp;
             nodeApp.MainApp = app;
-
-            //TODO removed and place within the assetexplorerapp class
-            builder = new PanoBuilder();
         }
 
         private void openFolder_Click(object sender, EventArgs e)
