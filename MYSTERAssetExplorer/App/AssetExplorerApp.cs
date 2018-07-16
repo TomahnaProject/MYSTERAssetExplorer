@@ -19,60 +19,43 @@ namespace MYSTERAssetExplorer.App
         public string M4B_FileExtension { get { return _context.M4B_FileExtension; } }
 
         AssetExplorerContext _context;
+        public NodeViewerApp NodeApp;
 
-        RegistryTreeViewManager treeViewManager;
+        public Action<Color, string> WriteToConsole { get; set; }
+        public Action<List<IVirtualFile>> ListFiles { get; set; }
+        public Action<List<IVirtualFolder>> PopulateFolders { get; set; }
 
-        public AssetExplorerApp(IUIContext uiContext)
+        public AssetExplorerApp()
         {
             _context = new AssetExplorerContext();
-            _context.uiContext = uiContext;
             _context.CacheDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "IndexCache");
             if (!Directory.Exists(_context.CacheDirectory))
                 Directory.CreateDirectory(_context.CacheDirectory);
 
             _context.CacheService = new CacheSerializationService();
             _context.VirtualFiles = new VirtualFolder("/");
-            _context.registryManager = new RegistryManager(uiContext);
-            _context.registryPersistence = new RegistryPersistenceService();
 
-            treeViewManager = new RegistryTreeViewManager(uiContext);
         }
 
-        public void LoadRegistry()
+        public void LaunchNodeViewer()
         {
-            _context.uiContext.WriteToConsole(Color.Orange, "Loading Registry...");
-            var registry = _context.registryPersistence.GetRegistryFromDisk();
-            _context.registryManager.Registry = registry;
-            treeViewManager.RegenTreeView(_context.registryManager.Registry);
-            _context.uiContext.WriteToConsole(Color.Green, "Registry Loaded Successfully!");
-
-            //temporary, just so I have something to look at
-            var fakeReg = _context.registryManager.CreateFakeRegistry();
-            _context.registryManager.Registry.Exile = fakeReg;
-            treeViewManager.RegenTreeView(_context.registryManager.Registry);
-        }
-
-        public void SaveRegistry()
-        {
-            _context.uiContext.WriteToConsole(Color.Orange, "Saving Registry...");
-            _context.registryPersistence.SaveRegistryToDisk(_context.registryManager.Registry);
-            _context.uiContext.WriteToConsole(Color.Green, "Registry Saved!");
+            NodeApp.Launch();
         }
 
         public void SetDataDirectory(string path)
         {
             var dir = Path.GetDirectoryName(path);
-            _context.uiContext.WriteToConsole(Color.Orange, "Opening Folder " + dir);
+            WriteToConsole(Color.Orange, "Opening Folder " + dir);
 
             if (!Directory.Exists(dir))
-                _context.uiContext.WriteToConsole(Color.Red, "The following path is invalid: \"" + dir + "\"");
+                WriteToConsole(Color.Red, "The following path is invalid: \"" + dir + "\"");
             _context.DataDirectory = dir;
 
             var files = LoadDataFiles();
 
             foreach (var file in files)
             {
-                _context.uiContext.WriteToConsole(Color.Green, "Found file " + file);
+                WriteToConsole(Color.Green, "Found file " + file);
             }
 
             IndexAndShowFiles(files);
@@ -80,11 +63,11 @@ namespace MYSTERAssetExplorer.App
 
         private void IndexAndShowFiles(List<string> filePaths)
         {
-            _context.uiContext.WriteToConsole(Color.Orange, "Beginning Indexing Thread");
+            WriteToConsole(Color.Orange, "Beginning Indexing Thread");
 
             var indexThread = new Thread(() =>
             {
-                var rootFolder = IndexFiles(filePaths, _context.uiContext.WriteToConsole);
+                var rootFolder = IndexFiles(filePaths, WriteToConsole);
                 IndexingCompleted(rootFolder);
             });
             indexThread.Start();
@@ -92,13 +75,13 @@ namespace MYSTERAssetExplorer.App
 
         private void IndexingCompleted(VirtualFolder rootFolder)
         {
-            _context.uiContext.WriteToConsole(Color.Green, "Indexing Complete!");
+            WriteToConsole(Color.Green, "Indexing Complete!");
             _context.VirtualFiles = rootFolder;
 
-            PopulateFolders();
+            InitializeFolders();
         }
 
-        private void PopulateFolders()
+        private void InitializeFolders()
         {
             var folders = new List<IVirtualFolder>();
             var exileFolder = _context.VirtualFiles.SubFolders.FirstOrDefault(x => x.Name == "Exile");
@@ -108,7 +91,7 @@ namespace MYSTERAssetExplorer.App
             if (revelationFolder != null)
                 folders.Add(revelationFolder);
 
-            _context.uiContext.PopulateFolders(folders);
+            PopulateFolders(folders);
         }
 
         private VirtualFolder IndexFiles(List<string> filePaths, Action<Color, string> consoleWrite)
@@ -233,7 +216,7 @@ namespace MYSTERAssetExplorer.App
             var extractor = new VirtualFileExtractionService();
             foreach (var file in files)
             {
-                _context.uiContext.WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
+                WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
                 var fileData = extractor.GetDataForVirtualFile(file);
                 var savefileType = file.ContentDetails.Type;
 
@@ -255,7 +238,7 @@ namespace MYSTERAssetExplorer.App
 
             foreach (var file in folder.Files)
             {
-                _context.uiContext.WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
+                WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
                 var fileData = extractor.GetDataForVirtualFile(file);
                 var savefileType = file.ContentDetails.Type;
 
@@ -302,11 +285,11 @@ namespace MYSTERAssetExplorer.App
             stopwatch.Stop();
             if (fileFound)
             {
-                _context.uiContext.WriteToConsole(Color.Cyan, file.Name + " found in " + stopwatch.ElapsedMilliseconds + " ms");
+                WriteToConsole(Color.Cyan, file.Name + " found in " + stopwatch.ElapsedMilliseconds + " ms");
             }
             else
             {
-                _context.uiContext.WriteToConsole(Color.Red, "File not found. Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
+                WriteToConsole(Color.Red, "File not found. Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
             }
         }
 
@@ -321,11 +304,11 @@ namespace MYSTERAssetExplorer.App
             stopwatch.Stop();
             if (fileFound)
             {
-                _context.uiContext.WriteToConsole(Color.Cyan, file.Name + " found in " + stopwatch.ElapsedMilliseconds + " ms");
+                WriteToConsole(Color.Cyan, file.Name + " found in " + stopwatch.ElapsedMilliseconds + " ms");
             }
             else
             {
-                _context.uiContext.WriteToConsole(Color.Red, "File not found. Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
+                WriteToConsole(Color.Red, "File not found. Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
             }
         }
     }

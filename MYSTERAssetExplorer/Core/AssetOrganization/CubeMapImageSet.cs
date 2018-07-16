@@ -35,7 +35,7 @@ namespace MYSTERAssetExplorer.Core
 
         public static string[] GetAsFileList(CubeMapImageSet imageSet)
         {
-            // alphabetical order (which is the order of the images that come out of dragon unpacker's hyper-ripper)
+            // alphabetical order (which comes from the sequential order of the files ripped from the m3a files)
             string[] array = new string[6];
             array[0] = imageSet.Back.File;
             array[1] = imageSet.Bottom.File;

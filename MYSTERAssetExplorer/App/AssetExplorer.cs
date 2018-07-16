@@ -17,7 +17,6 @@ namespace MYSTERAssetExplorer.App
     public partial class AssetExplorer : Form
     {
         AssetExplorerApp app;
-        NodeViewer viewer;
         PanoBuilder builder;
 
         public AssetExplorer()
@@ -28,18 +27,25 @@ namespace MYSTERAssetExplorer.App
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            var uiContext = new UIContext();
-            uiContext.WriteToConsole += WriteToConsole;
-            uiContext.ListFiles += FillListView;
-            uiContext.PopulateFolders += PopulateFolderExplorer;
+            ApplicationEntryBootstrap();
+        }
 
-            viewer = new NodeViewer();
-            viewer.RegisterWithUIContext(uiContext);
+        public void ApplicationEntryBootstrap()
+        {
+            var nodeViewer = new NodeViewer();
+            var nodeApp = nodeViewer.App;
 
-            app = new AssetExplorerApp(uiContext);
-           // viewer.Launch(app);
+            app = new AssetExplorerApp();
+            app.WriteToConsole += WriteToConsole;
+            app.ListFiles += FillListView;
+            app.PopulateFolders += PopulateFolderExplorer;
 
-            builder = new PanoBuilder(); // to be removed and place within the assetexplorerapp class
+            // very important, swap references so they can communicate
+            app.NodeApp = nodeApp;
+            nodeApp.MainApp = app;
+
+            //TODO removed and place within the assetexplorerapp class
+            builder = new PanoBuilder(); 
         }
 
         private void openFolder_Click(object sender, EventArgs e)
@@ -91,7 +97,7 @@ namespace MYSTERAssetExplorer.App
 
         private void launchNodeViewer_Click(object sender, EventArgs e)
         {
-            viewer.Launch(app);
+            app.LaunchNodeViewer();
         }
 
         private void LoadImageToViewer()
@@ -110,7 +116,7 @@ namespace MYSTERAssetExplorer.App
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            app.SaveRegistry();
+            //app.SaveRegistry();
             //todo check if everything went okay
             MessageBox.Show("registry changes have been saved");
         }

@@ -8,13 +8,26 @@ namespace MYSTERAssetExplorer.Services
 {
     public class RegistryManager
     {
-        private IUIContext uiContext;
         public GameRegistry Registry { get; set; }
 
-        public RegistryManager(IUIContext context)
+        public RegistryManager()
         {
-            uiContext = context;
             Registry = new GameRegistry();
+        }
+
+        public void AddNode(GameIdentity game, Node node)
+        {
+            AssetRegistry reg;
+            switch (game)
+            {
+                case GameIdentity.Revelation:
+                    reg = Registry.Revelation;
+                    break;
+                default:
+                    reg = Registry.Exile;
+                    break;
+            }
+            reg.Nodes.Add(node);
         }
 
         public AssetRegistry CreateFakeRegistry()
@@ -36,7 +49,6 @@ namespace MYSTERAssetExplorer.Services
 
             registry.Nodes.Add(node01);
             return registry;
-
         }
     }
 }

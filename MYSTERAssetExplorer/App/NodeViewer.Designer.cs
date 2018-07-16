@@ -28,32 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NodeViewer));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.nodeExplorer = new System.Windows.Forms.TreeView();
+            this.contextMenuNodeExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NodePropertiesGroup = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.nodeProp_NumberInput = new System.Windows.Forms.TextBox();
+            this.nodeProp_Depth = new System.Windows.Forms.NumericUpDown();
+            this.nodeProp_ClassificationInput = new System.Windows.Forms.ComboBox();
+            this.nodeProp_rotationZ = new System.Windows.Forms.NumericUpDown();
+            this.label_PosZ = new System.Windows.Forms.Label();
+            this.label_PosY = new System.Windows.Forms.Label();
+            this.label_PosX = new System.Windows.Forms.Label();
+            this.nodeProp_PosZ = new System.Windows.Forms.NumericUpDown();
+            this.nodeProp_PosY = new System.Windows.Forms.NumericUpDown();
+            this.nodeProp_PosX = new System.Windows.Forms.NumericUpDown();
+            this.label_DepthRange = new System.Windows.Forms.Label();
+            this.mapTypeDepth = new System.Windows.Forms.RadioButton();
+            this.mapTypeColor = new System.Windows.Forms.RadioButton();
+            this.label_Classification = new System.Windows.Forms.Label();
+            this.label_Rotation = new System.Windows.Forms.Label();
+            this.label_Position = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label_Scene = new System.Windows.Forms.Label();
             this.nodeProp_ZoneInput = new System.Windows.Forms.TextBox();
-            this.nodeNumber = new System.Windows.Forms.NumericUpDown();
             this.nodeProp_SceneInput = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_Number = new System.Windows.Forms.Label();
+            this.label_Zone = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.topBox = new System.Windows.Forms.PictureBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.leftBox = new System.Windows.Forms.PictureBox();
@@ -62,7 +77,7 @@
             this.backBox = new System.Windows.Forms.PictureBox();
             this.bottomBox = new System.Windows.Forms.PictureBox();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.nodeViewerMenuStrip = new System.Windows.Forms.ToolStrip();
             this.loadRegistry = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveRegistry = new System.Windows.Forms.ToolStripLabel();
@@ -70,12 +85,16 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.contextMenuNodeExplorer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.NodePropertiesGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nodeNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeProp_Depth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeProp_rotationZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeProp_PosZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeProp_PosY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeProp_PosX)).BeginInit();
             this.panel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.topBox)).BeginInit();
@@ -85,7 +104,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.backBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bottomBox)).BeginInit();
             this.MainPanel.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.nodeViewerMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -120,6 +139,7 @@
             // 
             this.nodeExplorer.AllowDrop = true;
             this.nodeExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.nodeExplorer.ContextMenuStrip = this.contextMenuNodeExplorer;
             this.nodeExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nodeExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.nodeExplorer.Location = new System.Drawing.Point(0, 0);
@@ -129,6 +149,43 @@
             this.nodeExplorer.Size = new System.Drawing.Size(253, 803);
             this.nodeExplorer.TabIndex = 23;
             this.nodeExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.nodeExplorer_NodeMouseClick);
+            // 
+            // contextMenuNodeExplorer
+            // 
+            this.contextMenuNodeExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addNodeToolStripMenuItem,
+            this.extractNodeToolStripMenuItem,
+            this.extractAllChildNodesToolStripMenuItem,
+            this.removeNodeToolStripMenuItem});
+            this.contextMenuNodeExplorer.Name = "contextMenuFolderExplorer";
+            this.contextMenuNodeExplorer.Size = new System.Drawing.Size(195, 92);
+            this.contextMenuNodeExplorer.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuNodeExplorer_Opening);
+            // 
+            // addNodeToolStripMenuItem
+            // 
+            this.addNodeToolStripMenuItem.Name = "addNodeToolStripMenuItem";
+            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.addNodeToolStripMenuItem.Text = "Add Node";
+            this.addNodeToolStripMenuItem.Click += new System.EventHandler(this.addNodeToolStripMenuItem_Click);
+            // 
+            // removeNodeToolStripMenuItem
+            // 
+            this.removeNodeToolStripMenuItem.Name = "removeNodeToolStripMenuItem";
+            this.removeNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.removeNodeToolStripMenuItem.Text = "Remove Node";
+            this.removeNodeToolStripMenuItem.Click += new System.EventHandler(this.removeNodeToolStripMenuItem_Click);
+            // 
+            // extractNodeToolStripMenuItem
+            // 
+            this.extractNodeToolStripMenuItem.Name = "extractNodeToolStripMenuItem";
+            this.extractNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.extractNodeToolStripMenuItem.Text = "Extract Node";
+            // 
+            // extractAllChildNodesToolStripMenuItem
+            // 
+            this.extractAllChildNodesToolStripMenuItem.Name = "extractAllChildNodesToolStripMenuItem";
+            this.extractAllChildNodesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.extractAllChildNodesToolStripMenuItem.Text = "Extract All Child Nodes";
             // 
             // pictureBox1
             // 
@@ -152,19 +209,28 @@
             // 
             // NodePropertiesGroup
             // 
-            this.NodePropertiesGroup.Controls.Add(this.label8);
-            this.NodePropertiesGroup.Controls.Add(this.radioButton2);
-            this.NodePropertiesGroup.Controls.Add(this.radioButton1);
-            this.NodePropertiesGroup.Controls.Add(this.label7);
-            this.NodePropertiesGroup.Controls.Add(this.label5);
-            this.NodePropertiesGroup.Controls.Add(this.label4);
+            this.NodePropertiesGroup.Controls.Add(this.nodeProp_NumberInput);
+            this.NodePropertiesGroup.Controls.Add(this.nodeProp_Depth);
+            this.NodePropertiesGroup.Controls.Add(this.nodeProp_ClassificationInput);
+            this.NodePropertiesGroup.Controls.Add(this.nodeProp_rotationZ);
+            this.NodePropertiesGroup.Controls.Add(this.label_PosZ);
+            this.NodePropertiesGroup.Controls.Add(this.label_PosY);
+            this.NodePropertiesGroup.Controls.Add(this.label_PosX);
+            this.NodePropertiesGroup.Controls.Add(this.nodeProp_PosZ);
+            this.NodePropertiesGroup.Controls.Add(this.nodeProp_PosY);
+            this.NodePropertiesGroup.Controls.Add(this.nodeProp_PosX);
+            this.NodePropertiesGroup.Controls.Add(this.label_DepthRange);
+            this.NodePropertiesGroup.Controls.Add(this.mapTypeDepth);
+            this.NodePropertiesGroup.Controls.Add(this.mapTypeColor);
+            this.NodePropertiesGroup.Controls.Add(this.label_Classification);
+            this.NodePropertiesGroup.Controls.Add(this.label_Rotation);
+            this.NodePropertiesGroup.Controls.Add(this.label_Position);
             this.NodePropertiesGroup.Controls.Add(this.SaveButton);
-            this.NodePropertiesGroup.Controls.Add(this.label3);
+            this.NodePropertiesGroup.Controls.Add(this.label_Scene);
             this.NodePropertiesGroup.Controls.Add(this.nodeProp_ZoneInput);
-            this.NodePropertiesGroup.Controls.Add(this.nodeNumber);
             this.NodePropertiesGroup.Controls.Add(this.nodeProp_SceneInput);
-            this.NodePropertiesGroup.Controls.Add(this.label2);
-            this.NodePropertiesGroup.Controls.Add(this.label1);
+            this.NodePropertiesGroup.Controls.Add(this.label_Number);
+            this.NodePropertiesGroup.Controls.Add(this.label_Zone);
             this.NodePropertiesGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NodePropertiesGroup.ForeColor = System.Drawing.Color.Gainsboro;
             this.NodePropertiesGroup.Location = new System.Drawing.Point(0, 0);
@@ -172,65 +238,172 @@
             this.NodePropertiesGroup.Size = new System.Drawing.Size(325, 325);
             this.NodePropertiesGroup.TabIndex = 24;
             this.NodePropertiesGroup.TabStop = false;
-            this.NodePropertiesGroup.Text = "Node Properties";
+            this.NodePropertiesGroup.Text = "Node Identity";
             // 
-            // label8
+            // nodeProp_NumberInput
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 265);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 13);
-            this.label8.TabIndex = 27;
-            this.label8.Text = "Depth Range";
+            this.nodeProp_NumberInput.Location = new System.Drawing.Point(9, 111);
+            this.nodeProp_NumberInput.Name = "nodeProp_NumberInput";
+            this.nodeProp_NumberInput.Size = new System.Drawing.Size(184, 20);
+            this.nodeProp_NumberInput.TabIndex = 37;
             // 
-            // radioButton2
+            // nodeProp_Depth
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(213, 227);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(78, 17);
-            this.radioButton2.TabIndex = 26;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Depth Map";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.nodeProp_Depth.DecimalPlaces = 1;
+            this.nodeProp_Depth.Location = new System.Drawing.Point(222, 290);
+            this.nodeProp_Depth.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.nodeProp_Depth.Name = "nodeProp_Depth";
+            this.nodeProp_Depth.Size = new System.Drawing.Size(74, 20);
+            this.nodeProp_Depth.TabIndex = 36;
             // 
-            // radioButton1
+            // nodeProp_ClassificationInput
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(213, 204);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(73, 17);
-            this.radioButton1.TabIndex = 25;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Color Map";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.nodeProp_ClassificationInput.FormattingEnabled = true;
+            this.nodeProp_ClassificationInput.Location = new System.Drawing.Point(9, 150);
+            this.nodeProp_ClassificationInput.Name = "nodeProp_ClassificationInput";
+            this.nodeProp_ClassificationInput.Size = new System.Drawing.Size(184, 21);
+            this.nodeProp_ClassificationInput.TabIndex = 35;
             // 
-            // label7
+            // nodeProp_rotationZ
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 216);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(68, 13);
-            this.label7.TabIndex = 24;
-            this.label7.Text = "Classification";
+            this.nodeProp_rotationZ.DecimalPlaces = 1;
+            this.nodeProp_rotationZ.Location = new System.Drawing.Point(86, 200);
+            this.nodeProp_rotationZ.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.nodeProp_rotationZ.Name = "nodeProp_rotationZ";
+            this.nodeProp_rotationZ.Size = new System.Drawing.Size(74, 20);
+            this.nodeProp_rotationZ.TabIndex = 34;
             // 
-            // label5
+            // label_PosZ
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 185);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
-            this.label5.TabIndex = 23;
-            this.label5.Text = "Yaw Rotation";
+            this.label_PosZ.AutoSize = true;
+            this.label_PosZ.Location = new System.Drawing.Point(7, 292);
+            this.label_PosZ.Name = "label_PosZ";
+            this.label_PosZ.Size = new System.Drawing.Size(14, 13);
+            this.label_PosZ.TabIndex = 33;
+            this.label_PosZ.Text = "Z";
             // 
-            // label4
+            // label_PosY
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 151);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 13);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Position";
+            this.label_PosY.AutoSize = true;
+            this.label_PosY.Location = new System.Drawing.Point(7, 266);
+            this.label_PosY.Name = "label_PosY";
+            this.label_PosY.Size = new System.Drawing.Size(14, 13);
+            this.label_PosY.TabIndex = 32;
+            this.label_PosY.Text = "Y";
+            // 
+            // label_PosX
+            // 
+            this.label_PosX.AutoSize = true;
+            this.label_PosX.Location = new System.Drawing.Point(7, 240);
+            this.label_PosX.Name = "label_PosX";
+            this.label_PosX.Size = new System.Drawing.Size(14, 13);
+            this.label_PosX.TabIndex = 31;
+            this.label_PosX.Text = "X";
+            // 
+            // nodeProp_PosZ
+            // 
+            this.nodeProp_PosZ.DecimalPlaces = 1;
+            this.nodeProp_PosZ.Location = new System.Drawing.Point(27, 290);
+            this.nodeProp_PosZ.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.nodeProp_PosZ.Name = "nodeProp_PosZ";
+            this.nodeProp_PosZ.Size = new System.Drawing.Size(74, 20);
+            this.nodeProp_PosZ.TabIndex = 30;
+            // 
+            // nodeProp_PosY
+            // 
+            this.nodeProp_PosY.DecimalPlaces = 1;
+            this.nodeProp_PosY.Location = new System.Drawing.Point(27, 264);
+            this.nodeProp_PosY.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.nodeProp_PosY.Name = "nodeProp_PosY";
+            this.nodeProp_PosY.Size = new System.Drawing.Size(74, 20);
+            this.nodeProp_PosY.TabIndex = 29;
+            // 
+            // nodeProp_PosX
+            // 
+            this.nodeProp_PosX.DecimalPlaces = 1;
+            this.nodeProp_PosX.Location = new System.Drawing.Point(27, 238);
+            this.nodeProp_PosX.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.nodeProp_PosX.Name = "nodeProp_PosX";
+            this.nodeProp_PosX.Size = new System.Drawing.Size(74, 20);
+            this.nodeProp_PosX.TabIndex = 28;
+            // 
+            // label_DepthRange
+            // 
+            this.label_DepthRange.AutoSize = true;
+            this.label_DepthRange.Location = new System.Drawing.Point(219, 274);
+            this.label_DepthRange.Name = "label_DepthRange";
+            this.label_DepthRange.Size = new System.Drawing.Size(71, 13);
+            this.label_DepthRange.TabIndex = 27;
+            this.label_DepthRange.Text = "Depth Range";
+            // 
+            // mapTypeDepth
+            // 
+            this.mapTypeDepth.AutoSize = true;
+            this.mapTypeDepth.Location = new System.Drawing.Point(223, 250);
+            this.mapTypeDepth.Name = "mapTypeDepth";
+            this.mapTypeDepth.Size = new System.Drawing.Size(78, 17);
+            this.mapTypeDepth.TabIndex = 26;
+            this.mapTypeDepth.TabStop = true;
+            this.mapTypeDepth.Text = "Depth Map";
+            this.mapTypeDepth.UseVisualStyleBackColor = true;
+            // 
+            // mapTypeColor
+            // 
+            this.mapTypeColor.AutoSize = true;
+            this.mapTypeColor.Location = new System.Drawing.Point(223, 227);
+            this.mapTypeColor.Name = "mapTypeColor";
+            this.mapTypeColor.Size = new System.Drawing.Size(73, 17);
+            this.mapTypeColor.TabIndex = 25;
+            this.mapTypeColor.TabStop = true;
+            this.mapTypeColor.Text = "Color Map";
+            this.mapTypeColor.UseVisualStyleBackColor = true;
+            // 
+            // label_Classification
+            // 
+            this.label_Classification.AutoSize = true;
+            this.label_Classification.Location = new System.Drawing.Point(9, 134);
+            this.label_Classification.Name = "label_Classification";
+            this.label_Classification.Size = new System.Drawing.Size(68, 13);
+            this.label_Classification.TabIndex = 24;
+            this.label_Classification.Text = "Classification";
+            // 
+            // label_Rotation
+            // 
+            this.label_Rotation.AutoSize = true;
+            this.label_Rotation.Location = new System.Drawing.Point(9, 202);
+            this.label_Rotation.Name = "label_Rotation";
+            this.label_Rotation.Size = new System.Drawing.Size(71, 13);
+            this.label_Rotation.TabIndex = 23;
+            this.label_Rotation.Text = "Yaw Rotation";
+            // 
+            // label_Position
+            // 
+            this.label_Position.AutoSize = true;
+            this.label_Position.Location = new System.Drawing.Point(7, 222);
+            this.label_Position.Name = "label_Position";
+            this.label_Position.Size = new System.Drawing.Size(44, 13);
+            this.label_Position.TabIndex = 22;
+            this.label_Position.Text = "Position";
             // 
             // SaveButton
             // 
@@ -241,59 +414,48 @@
             this.SaveButton.TabIndex = 21;
             this.SaveButton.Text = "Save Changes";
             this.SaveButton.UseVisualStyleBackColor = false;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // label3
+            // label_Scene
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "Scene";
+            this.label_Scene.AutoSize = true;
+            this.label_Scene.Location = new System.Drawing.Point(9, 17);
+            this.label_Scene.Name = "label_Scene";
+            this.label_Scene.Size = new System.Drawing.Size(38, 13);
+            this.label_Scene.TabIndex = 20;
+            this.label_Scene.Text = "Scene";
             // 
             // nodeProp_ZoneInput
             // 
-            this.nodeProp_ZoneInput.Location = new System.Drawing.Point(9, 78);
+            this.nodeProp_ZoneInput.Location = new System.Drawing.Point(9, 72);
             this.nodeProp_ZoneInput.Name = "nodeProp_ZoneInput";
             this.nodeProp_ZoneInput.Size = new System.Drawing.Size(184, 20);
             this.nodeProp_ZoneInput.TabIndex = 19;
             // 
-            // nodeNumber
-            // 
-            this.nodeNumber.Location = new System.Drawing.Point(9, 118);
-            this.nodeNumber.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.nodeNumber.Name = "nodeNumber";
-            this.nodeNumber.Size = new System.Drawing.Size(184, 20);
-            this.nodeNumber.TabIndex = 17;
-            // 
             // nodeProp_SceneInput
             // 
-            this.nodeProp_SceneInput.Location = new System.Drawing.Point(9, 34);
+            this.nodeProp_SceneInput.Location = new System.Drawing.Point(9, 33);
             this.nodeProp_SceneInput.Name = "nodeProp_SceneInput";
             this.nodeProp_SceneInput.Size = new System.Drawing.Size(184, 20);
             this.nodeProp_SceneInput.TabIndex = 8;
             // 
-            // label2
+            // label_Number
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Number";
+            this.label_Number.AutoSize = true;
+            this.label_Number.Location = new System.Drawing.Point(9, 95);
+            this.label_Number.Name = "label_Number";
+            this.label_Number.Size = new System.Drawing.Size(44, 13);
+            this.label_Number.TabIndex = 18;
+            this.label_Number.Text = "Number";
             // 
-            // label1
+            // label_Zone
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Zone";
+            this.label_Zone.AutoSize = true;
+            this.label_Zone.Location = new System.Drawing.Point(9, 56);
+            this.label_Zone.Name = "label_Zone";
+            this.label_Zone.Size = new System.Drawing.Size(32, 13);
+            this.label_Zone.TabIndex = 9;
+            this.label_Zone.Text = "Zone";
             // 
             // panel2
             // 
@@ -305,7 +467,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -313,17 +474,6 @@
             this.groupBox1.Size = new System.Drawing.Size(325, 325);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Export Options";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 35);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(106, 17);
-            this.checkBox1.TabIndex = 21;
-            this.checkBox1.Text = "Separate Images";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -344,7 +494,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.checkBox2);
+            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
@@ -352,17 +503,26 @@
             this.groupBox2.Size = new System.Drawing.Size(325, 325);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Export Options";
+            this.groupBox2.Text = "Export";
             // 
-            // checkBox2
+            // checkBox1
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(15, 35);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(106, 17);
-            this.checkBox2.TabIndex = 21;
-            this.checkBox2.Text = "Separate Images";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(29, 19);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(106, 17);
+            this.checkBox1.TabIndex = 21;
+            this.checkBox1.Text = "Separate Images";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(29, 67);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(261, 54);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // topBox
             // 
@@ -462,18 +622,18 @@
             this.MainPanel.Size = new System.Drawing.Size(1549, 803);
             this.MainPanel.TabIndex = 18;
             // 
-            // toolStrip1
+            // nodeViewerMenuStrip
             // 
-            this.toolStrip1.BackColor = System.Drawing.Color.Gray;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nodeViewerMenuStrip.BackColor = System.Drawing.Color.Gray;
+            this.nodeViewerMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadRegistry,
             this.toolStripSeparator1,
             this.saveRegistry});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1549, 25);
-            this.toolStrip1.TabIndex = 25;
-            this.toolStrip1.Text = "toolStrip1";
+            this.nodeViewerMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.nodeViewerMenuStrip.Name = "nodeViewerMenuStrip";
+            this.nodeViewerMenuStrip.Size = new System.Drawing.Size(1549, 25);
+            this.nodeViewerMenuStrip.TabIndex = 25;
+            this.nodeViewerMenuStrip.Text = "toolStrip1";
             // 
             // loadRegistry
             // 
@@ -500,7 +660,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(1549, 827);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.nodeViewerMenuStrip);
             this.Controls.Add(this.MainPanel);
             this.ForeColor = System.Drawing.Color.Gainsboro;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -513,14 +673,17 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.contextMenuNodeExplorer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.NodePropertiesGroup.ResumeLayout(false);
             this.NodePropertiesGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nodeNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeProp_Depth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeProp_rotationZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeProp_PosZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeProp_PosY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeProp_PosX)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -531,8 +694,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.backBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bottomBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.nodeViewerMenuStrip.ResumeLayout(false);
+            this.nodeViewerMenuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -552,13 +715,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox NodePropertiesGroup;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_Scene;
         private System.Windows.Forms.TextBox nodeProp_ZoneInput;
-        private System.Windows.Forms.NumericUpDown nodeNumber;
         private System.Windows.Forms.TextBox nodeProp_SceneInput;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.Label label_Number;
+        private System.Windows.Forms.Label label_Zone;
+        private System.Windows.Forms.ToolStrip nodeViewerMenuStrip;
         private System.Windows.Forms.ToolStripLabel loadRegistry;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel saveRegistry;
@@ -568,14 +730,29 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label_Rotation;
+        private System.Windows.Forms.Label label_Position;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label_Classification;
+        private System.Windows.Forms.RadioButton mapTypeDepth;
+        private System.Windows.Forms.RadioButton mapTypeColor;
+        private System.Windows.Forms.Label label_DepthRange;
+        private System.Windows.Forms.ContextMenuStrip contextMenuNodeExplorer;
+        private System.Windows.Forms.ToolStripMenuItem extractNodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem extractAllChildNodesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addNodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeNodeToolStripMenuItem;
+        private System.Windows.Forms.NumericUpDown nodeProp_rotationZ;
+        private System.Windows.Forms.Label label_PosZ;
+        private System.Windows.Forms.Label label_PosY;
+        private System.Windows.Forms.Label label_PosX;
+        private System.Windows.Forms.NumericUpDown nodeProp_PosZ;
+        private System.Windows.Forms.NumericUpDown nodeProp_PosY;
+        private System.Windows.Forms.NumericUpDown nodeProp_PosX;
+        private System.Windows.Forms.NumericUpDown nodeProp_Depth;
+        private System.Windows.Forms.ComboBox nodeProp_ClassificationInput;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox nodeProp_NumberInput;
     }
 }

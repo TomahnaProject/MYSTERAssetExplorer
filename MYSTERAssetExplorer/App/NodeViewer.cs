@@ -9,27 +9,30 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using static MYSTERAssetExplorer.Core.Node;
 
 namespace MYSTERAssetExplorer.App
 {
     public partial class NodeViewer : Form
     {
-        AssetExplorerApp app;
+        public NodeViewerApp App { get; private set; }
+        Node selectedNode;
+
         public NodeViewer()
         {
             InitializeComponent();
+
+            nodeProp_ClassificationInput.DataSource = Enum.GetValues(typeof(Node.NodeType));
+
+            App = new NodeViewerApp();
+            App.PopulateNodes += PopulateNodeExplorer;
+            App.Launch += Launch;
         }
 
-        public void RegisterWithUIContext(IUIContext uiContext)
-        {
-            uiContext.PopulateNodes += PopulateNodeExplorer;
-        }
-
-        public void Launch(AssetExplorerApp app)
+        public void Launch()
         {
             this.Show();
-            this.app = app;
-            app.LoadRegistry();;
+            App.LoadRegistry();;
         }
 
         private void NodeViewer_FormClosing(object sender, FormClosingEventArgs e)
@@ -44,19 +47,48 @@ namespace MYSTERAssetExplorer.App
             nodeExplorer.Nodes.AddRange(nodes);
         }
 
-        public void SetNode(Node node)
+        public void Populate(Node node)
         {
             if (node == null)
                 return;
 
-            // load up the form with this node's data
+            PopulateFields(node);
             // load up the images
             // use extraction service to 
 
-            SetImages(node);
+            PopulateImages(node);
         }
 
-        public void SetImages(Node node)
+        public void SaveFields(Node node)
+        {
+            node.Scene = nodeProp_SceneInput.Text;
+            node.Zone = nodeProp_ZoneInput.Text;
+            node.Number = nodeProp_NumberInput.Text;
+            //NodeType type;
+            //Enum.TryParse<NodeType>(nodeProp_ClassificationInput.SelectedValue.ToString(), out type);
+            node.Type = (NodeType) nodeProp_ClassificationInput.SelectedValue;
+            node.Rotation.Yaw = (double) nodeProp_rotationZ.Value;
+            node.Position.X = (double)nodeProp_PosX.Value;
+            node.Position.Y = (double)nodeProp_PosY.Value;
+            node.Position.Z = (double)nodeProp_PosZ.Value;
+            node.CubeMaps.DepthRange = (double)nodeProp_Depth.Value;
+        }
+
+        public void PopulateFields(Node node)
+        {
+            nodeProp_SceneInput.Text = node.Scene;
+            nodeProp_ZoneInput.Text = node.Zone;
+            nodeProp_NumberInput.Text = node.Number;
+            nodeProp_ClassificationInput.SelectedItem = node.Type;
+            nodeProp_rotationZ.Value = (decimal)node.Rotation.Yaw;
+            nodeProp_PosX.Value = (decimal)node.Position.X;
+            nodeProp_PosY.Value = (decimal)node.Position.Y;
+            nodeProp_PosZ.Value = (decimal)node.Position.Z;
+            nodeProp_Depth.Value = (decimal)node.CubeMaps.DepthRange;
+            mapTypeColor.Select();
+        }
+
+        public void PopulateImages(Node node)
         {
             // some kind of check to validate images?
             var imageSet = node.CubeMaps.Color;
@@ -67,41 +99,59 @@ namespace MYSTERAssetExplorer.App
             leftBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Left.File));
             rightBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Right.File));
             topBox.Image = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Top.File));
-
-            //backBox.Image = Utils.LoadBitmapToMemory(imageSet.Back.File);
-            //bottomBox.Image = Utils.LoadBitmapToMemory(imageSet.Bottom.File);
-            //frontBox.Image = Utils.LoadBitmapToMemory(imageSet.Front.File);
-            //leftBox.Image = Utils.LoadBitmapToMemory(imageSet.Left.File);
-            //rightBox.Image = Utils.LoadBitmapToMemory( imageSet.Right.File);
-            //topBox.Image = Utils.LoadBitmapToMemory(imageSet.Top.File);
         }
 
         private byte[] LookupFileImageData(Node node, string fileName)
         {
             var fileAddress = new VirtualFileAddress(GameEnum.Exile.ToString(), node.Scene, node.Zone, node.Number, fileName);
-            var file = app.FindFile(fileAddress);
+            var file = App.FindFile(fileAddress);
             if(file !=  null)
             {
-                return app.GetDataForFile(file);
+                return App.GetDataForFile(file);
             }
             return new byte[0];
         }
 
         private void loadRegistry_Click(object sender, EventArgs e)
         {
-            app.LoadRegistry();
+            App.LoadRegistry();
         }
 
         private void saveRegistry_Click(object sender, EventArgs e)
         {
-            app.SaveRegistry();
+            App.SaveRegistry();
         }
 
         private void nodeExplorer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
             Node selectedCubeNode = (Node) newSelected.Tag;
-            SetNode(selectedCubeNode);
+            selectedNode = selectedCubeNode;
+            Populate(selectedCubeNode);
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            if (selectedNode == null)
+                selectedNode = new Node();
+
+            SaveFields(selectedNode);
+        }
+
+        private void addNodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var node = nodeExplorer.SelectedNode;
+            App.RefreshRegistryTree();
+        }
+
+        private void removeNodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contextMenuNodeExplorer_Opening(object sender, CancelEventArgs e)
+        {
+
         }
 
         //private void nodeListing_DragDrop(object sender, DragEventArgs e)

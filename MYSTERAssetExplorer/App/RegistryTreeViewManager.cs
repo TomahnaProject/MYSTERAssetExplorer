@@ -10,10 +10,10 @@ namespace MYSTERAssetExplorer.App
 {
     public class RegistryTreeViewManager
     {
-        IUIContext _uiContext;
-        public RegistryTreeViewManager(IUIContext uiContext)
+        public Action<TreeNode[]> PopulateNodes { get; set; }
+
+        public RegistryTreeViewManager()
         {
-            _uiContext = uiContext;
         }
 
         public void RegenTreeView(GameRegistry registry)
@@ -23,7 +23,7 @@ namespace MYSTERAssetExplorer.App
             games.Add(new TreeNode("Exile", exileNodes.ToArray()));
             var revNodes = NodesForAssetRegistry(registry.Revelation);
             games.Add(new TreeNode("Revelation", revNodes.ToArray()));
-            _uiContext.PopulateNodes(games.ToArray());
+            PopulateNodes(games.ToArray());
         }
 
         private List<TreeNode> NodesForAssetRegistry(AssetRegistry registry)

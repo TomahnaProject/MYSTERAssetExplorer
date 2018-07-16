@@ -17,14 +17,14 @@ namespace MYSTERAssetExplorer.Core
         }
 
         [Serializable]
-        public class NodeRotator
+        public class NodeRotation
         {
             [XmlAttribute]
             public double Yaw { get; set; }
         }
 
         [Serializable]
-        public class NodeTranslator
+        public class NodeTranslation
         {
             [XmlAttribute]
             public double X { get; set; }
@@ -42,7 +42,7 @@ namespace MYSTERAssetExplorer.Core
         }
 
         [Serializable]
-        public class NodeMaps
+        public class NodeCubeMaps
         {
             [XmlAttribute]
             public double DepthRange { get; set; }
@@ -60,18 +60,18 @@ namespace MYSTERAssetExplorer.Core
         public NodeType Type { get; set; }
 
         // for photogrammetry purposes
-        public NodeTranslator Position { get; set; }
-        public NodeRotator Rotation { get; set; }
+        public NodeTranslation Position { get; set; }
+        public NodeRotation Rotation { get; set; }
 
-        public NodeMaps CubeMaps { get; set; }
+        public NodeCubeMaps CubeMaps { get; set; }
         public List<NodeSprite> Sprites { get; set; }
 
         public Node()
         {
-            Position = new NodeTranslator();
-            Rotation = new NodeRotator();
+            Position = new NodeTranslation();
+            Rotation = new NodeRotation();
             Sprites = new List<NodeSprite>();
-            CubeMaps = new NodeMaps();
+            CubeMaps = new NodeCubeMaps();
             CubeMaps.Color = new CubeMapImageSet();
          }
     }

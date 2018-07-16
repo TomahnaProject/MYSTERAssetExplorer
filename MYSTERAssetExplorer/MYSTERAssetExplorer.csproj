@@ -64,11 +64,13 @@
     <Compile Include="App\NodeViewer.Designer.cs">
       <DependentUpon>NodeViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\NodeViewerApp.cs" />
+    <Compile Include="App\NodeViewerContext.cs" />
     <Compile Include="App\RegistryTreeViewManager.cs" />
-    <Compile Include="App\UIContext.cs" />
     <Compile Include="Core\AssetOrganization\GameRegistry.cs" />
     <Compile Include="Core\AssetOrganization\CubeMapImageSet.cs" />
     <Compile Include="Core\AssetOrganization\AssetRegistry.cs" />
+    <Compile Include="Core\GameIdentity.cs" />
     <Compile Include="Core\IVirtualFile.cs" />
     <Compile Include="Core\IVirtualFileContentDetails.cs" />
     <Compile Include="Core\IVirtualFolder.cs" />
@@ -93,7 +95,6 @@
     <Compile Include="Services\VirtualFileExtractionService.cs" />
     <Compile Include="Services\M3AFileIndexingService.cs" />
     <Compile Include="Services\VirtualFileSaveService.cs" />
-    <Compile Include="Services\IUIContext.cs" />
     <Compile Include="Services\NodeFaceValidator.cs" />
     <Compile Include="Services\AssetRegistrySerializationService.cs" />
     <Compile Include="Services\PanoBuilder.cs" />

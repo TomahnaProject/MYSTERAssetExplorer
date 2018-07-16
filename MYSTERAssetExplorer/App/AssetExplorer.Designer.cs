@@ -34,9 +34,6 @@
             this.previewGroup = new System.Windows.Forms.GroupBox();
             this.previewPanel = new System.Windows.Forms.Panel();
             this.previewWindow = new System.Windows.Forms.PictureBox();
-            this.contextMenuNodeExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutput = new System.Windows.Forms.RichTextBox();
             this.MenuStrip = new System.Windows.Forms.ToolStrip();
             this.openFolder = new System.Windows.Forms.ToolStripLabel();
@@ -67,7 +64,6 @@
             this.previewGroup.SuspendLayout();
             this.previewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
-            this.contextMenuNodeExplorer.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Main_Footer)).BeginInit();
             this.Main_Footer.Panel1.SuspendLayout();
@@ -130,26 +126,6 @@
             this.previewWindow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.previewWindow.TabIndex = 0;
             this.previewWindow.TabStop = false;
-            // 
-            // contextMenuNodeExplorer
-            // 
-            this.contextMenuNodeExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.extractNodeToolStripMenuItem,
-            this.extractAllChildNodesToolStripMenuItem});
-            this.contextMenuNodeExplorer.Name = "contextMenuFolderExplorer";
-            this.contextMenuNodeExplorer.Size = new System.Drawing.Size(195, 48);
-            // 
-            // extractNodeToolStripMenuItem
-            // 
-            this.extractNodeToolStripMenuItem.Name = "extractNodeToolStripMenuItem";
-            this.extractNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.extractNodeToolStripMenuItem.Text = "Extract Node";
-            // 
-            // extractAllChildNodesToolStripMenuItem
-            // 
-            this.extractAllChildNodesToolStripMenuItem.Name = "extractAllChildNodesToolStripMenuItem";
-            this.extractAllChildNodesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.extractAllChildNodesToolStripMenuItem.Text = "Extract All Child Nodes";
             // 
             // logOutput
             // 
@@ -326,26 +302,26 @@
             this.expandAllToolStripMenuItem,
             this.extractFolderToolStripMenuItem});
             this.contextMenuFolderExplorer.Name = "contextMenuFolderExplorer";
-            this.contextMenuFolderExplorer.Size = new System.Drawing.Size(146, 70);
+            this.contextMenuFolderExplorer.Size = new System.Drawing.Size(153, 92);
             // 
             // collapseAllToolStripMenuItem
             // 
             this.collapseAllToolStripMenuItem.Name = "collapseAllToolStripMenuItem";
-            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.collapseAllToolStripMenuItem.Text = "Collapse All";
             this.collapseAllToolStripMenuItem.Click += new System.EventHandler(this.collapseAllToolStripMenuItem_Click);
             // 
             // expandAllToolStripMenuItem
             // 
             this.expandAllToolStripMenuItem.Name = "expandAllToolStripMenuItem";
-            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.expandAllToolStripMenuItem.Text = "Expand All";
             this.expandAllToolStripMenuItem.Click += new System.EventHandler(this.expandAllToolStripMenuItem_Click);
             // 
             // extractFolderToolStripMenuItem
             // 
             this.extractFolderToolStripMenuItem.Name = "extractFolderToolStripMenuItem";
-            this.extractFolderToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.extractFolderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.extractFolderToolStripMenuItem.Text = "Extract Folder";
             this.extractFolderToolStripMenuItem.Click += new System.EventHandler(this.extractFolderToolStripMenuItem_Click);
             // 
@@ -431,7 +407,6 @@
             this.previewGroup.ResumeLayout(false);
             this.previewPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).EndInit();
-            this.contextMenuNodeExplorer.ResumeLayout(false);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.Main_Footer.Panel1.ResumeLayout(false);
@@ -479,9 +454,6 @@
         private System.Windows.Forms.ToolStripMenuItem extractFolderToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuFileExplorer;
         private System.Windows.Forms.ToolStripMenuItem extractSelectedFilesToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextMenuNodeExplorer;
-        private System.Windows.Forms.ToolStripMenuItem extractNodeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem extractAllChildNodesToolStripMenuItem;
         private System.Windows.Forms.ImageList iconSet;
         private System.Windows.Forms.ColumnHeader offsetColumn;
         private System.Windows.Forms.ToolStripMenuItem collapseAllToolStripMenuItem;
