@@ -32,6 +32,16 @@ namespace MYSTERAssetExplorer.App
             MainApp.WriteToConsole(color, message);
         }
 
+        public void AddNodeToRegistry(GameEnum game, Node node)
+        {
+            registryManager.AddNode(game, node);
+        }
+
+        public void RemoveNodeFromRegistry(GameEnum game, Node node)
+        {
+            registryManager.RemoveNode(game, node);
+        }
+
         public void RefreshRegistryTree()
         {
             // PopulateNodes is null during construction, so assign the handler here before it's used

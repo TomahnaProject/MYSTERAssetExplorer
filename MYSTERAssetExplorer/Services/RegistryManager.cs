@@ -15,19 +15,38 @@ namespace MYSTERAssetExplorer.Services
             Registry = new GameRegistry();
         }
 
-        public void AddNode(GameIdentity game, Node node)
+        public AssetRegistry GetCorrectRegistry(GameEnum game)
         {
             AssetRegistry reg;
             switch (game)
             {
-                case GameIdentity.Revelation:
+                case GameEnum.Exile:
+                    reg = Registry.Exile;
+                    break;
+                case GameEnum.Revelation:
                     reg = Registry.Revelation;
                     break;
                 default:
                     reg = Registry.Exile;
                     break;
             }
+            return reg;
+        }
+
+        public void AddNode(GameEnum game, Node node)
+        {
+            var reg = GetCorrectRegistry(game);
             reg.Nodes.Add(node);
+        }
+
+        public void RemoveNode(GameEnum game, Node node)
+        {
+            var reg = GetCorrectRegistry(game);
+            Node match = reg.Nodes.Where(x =>
+                x.Scene == node.Scene &&
+                x.Zone == x.Zone &&
+                x.Number == node.Number).FirstOrDefault();
+            reg.Nodes.Remove(match);
         }
 
         public AssetRegistry CreateFakeRegistry()

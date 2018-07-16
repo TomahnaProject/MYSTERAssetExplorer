@@ -70,7 +70,6 @@
     <Compile Include="Core\AssetOrganization\GameRegistry.cs" />
     <Compile Include="Core\AssetOrganization\CubeMapImageSet.cs" />
     <Compile Include="Core\AssetOrganization\AssetRegistry.cs" />
-    <Compile Include="Core\GameIdentity.cs" />
     <Compile Include="Core\IVirtualFile.cs" />
     <Compile Include="Core\IVirtualFileContentDetails.cs" />
     <Compile Include="Core\IVirtualFolder.cs" />

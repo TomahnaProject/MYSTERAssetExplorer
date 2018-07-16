@@ -40,6 +40,12 @@ namespace MYSTERAssetExplorer.Services
 
         public IVirtualFile GetExileFile(out bool couldFind, IVirtualFolder gameFolder, VirtualFileAddress address)
         {
+            if (string.IsNullOrEmpty(address.Scene))
+            {
+                couldFind = false;
+                return null;
+            }
+
             var sceneName = (ExileSceneProperName)Enum.Parse(typeof(ExileSceneProperName), address.Scene, true);
             var sceneCode = ((ExileSceneCode)sceneName).ToString();
 

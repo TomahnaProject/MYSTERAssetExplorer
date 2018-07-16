@@ -59,7 +59,7 @@ namespace MYSTERAssetExplorer.App
             PopulateImages(node);
         }
 
-        public void SaveFields(Node node)
+        public void WriteInputToNode(Node node)
         {
             node.Scene = nodeProp_SceneInput.Text;
             node.Zone = nodeProp_ZoneInput.Text;
@@ -125,9 +125,9 @@ namespace MYSTERAssetExplorer.App
         private void nodeExplorer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
-            Node selectedCubeNode = (Node) newSelected.Tag;
-            selectedNode = selectedCubeNode;
-            Populate(selectedCubeNode);
+            Node selectedNodeEntry = (Node) newSelected.Tag;
+            selectedNode = selectedNodeEntry;
+            Populate(selectedNodeEntry);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -135,7 +135,15 @@ namespace MYSTERAssetExplorer.App
             if (selectedNode == null)
                 selectedNode = new Node();
 
-            SaveFields(selectedNode);
+            WriteInputToNode(selectedNode);
+
+            if (nodeExplorer.SelectedNode == null)
+                return;
+            var nodePath = nodeExplorer.SelectedNode.FullPath;
+            var gameType = nodePath.Contains("Exile") ? GameEnum.Exile : GameEnum.Revelation;
+
+            App.AddNodeToRegistry(gameType, selectedNode);
+            App.RefreshRegistryTree();
         }
 
         private void addNodeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -146,7 +154,16 @@ namespace MYSTERAssetExplorer.App
 
         private void removeNodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (nodeExplorer.SelectedNode == null)
+                return;
+            if(nodeExplorer.SelectedNode.Tag is Node)
+            {
+                var selectedNode = (Node)nodeExplorer.SelectedNode.Tag;
+                var nodePath = nodeExplorer.SelectedNode.FullPath;
+                var gameType = nodePath.Contains("Exile") ? GameEnum.Exile : GameEnum.Revelation;
+                App.RemoveNodeFromRegistry(gameType, selectedNode);
+                App.RefreshRegistryTree();
+            }
         }
 
         private void contextMenuNodeExplorer_Opening(object sender, CancelEventArgs e)
