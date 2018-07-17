@@ -3,6 +3,7 @@ using MYSTERAssetExplorer.Core;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,14 @@ namespace MYSTERAssetExplorer
             var image = StichCubeMap(images);
             var finalSavePath = Path.Combine(outputDirectory, name + ".jpg");
 
-            image.Save(finalSavePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+            long quality = 100;
+            using (EncoderParameters encoderParameters = new EncoderParameters(1))
+            using (EncoderParameter encoderParameter = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality))
+            {
+                ImageCodecInfo codecInfo = ImageCodecInfo.GetImageDecoders().First(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
+                encoderParameters.Param[0] = encoderParameter;
+                image.Save(finalSavePath, codecInfo, encoderParameters);
+            }
         }
 
         private Bitmap GetOneValidImage(PanoImages images)
