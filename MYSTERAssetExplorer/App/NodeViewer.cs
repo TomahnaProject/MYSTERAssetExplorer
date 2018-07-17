@@ -135,12 +135,11 @@ namespace MYSTERAssetExplorer.App
 
             WriteInputToNode(App.SelectedNode);
 
-            if (nodeExplorer.SelectedNode == null)
-                return;
-            var nodePath = nodeExplorer.SelectedNode.FullPath;
-            var gameType = nodePath.Contains("Exile") ? GameEnum.Exile : GameEnum.Revelation;
+            // temporary hack to get save to work without selecting something
+            //var nodePath = nodeExplorer.SelectedNode.FullPath;
+            //var gameType = nodePath.Contains("Exile") ? GameEnum.Exile : GameEnum.Revelation;
 
-            App.AddNodeToRegistry(gameType, App.SelectedNode);
+            App.AddNodeToRegistry(GameEnum.Exile, App.SelectedNode);
             App.RefreshRegistryTree();
         }
 
