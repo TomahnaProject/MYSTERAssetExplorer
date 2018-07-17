@@ -60,6 +60,7 @@
             this.contextMenuFileExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.sendToNodeViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.previewGroup.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Main_Footer)).BeginInit();
@@ -366,16 +367,24 @@
             // contextMenuFileExplorer
             // 
             this.contextMenuFileExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.extractSelectedFilesToolStripMenuItem});
+            this.extractSelectedFilesToolStripMenuItem,
+            this.sendToNodeViewerToolStripMenuItem});
             this.contextMenuFileExplorer.Name = "contextMenuFolderExplorer";
-            this.contextMenuFileExplorer.Size = new System.Drawing.Size(183, 26);
+            this.contextMenuFileExplorer.Size = new System.Drawing.Size(188, 70);
             // 
             // extractSelectedFilesToolStripMenuItem
             // 
             this.extractSelectedFilesToolStripMenuItem.Name = "extractSelectedFilesToolStripMenuItem";
-            this.extractSelectedFilesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.extractSelectedFilesToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.extractSelectedFilesToolStripMenuItem.Text = "Extract Selected Files";
             this.extractSelectedFilesToolStripMenuItem.Click += new System.EventHandler(this.extractSelectedFilesToolStripMenuItem_Click);
+            // 
+            // sendToNodeViewerToolStripMenuItem
+            // 
+            this.sendToNodeViewerToolStripMenuItem.Name = "sendToNodeViewerToolStripMenuItem";
+            this.sendToNodeViewerToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.sendToNodeViewerToolStripMenuItem.Text = "Send To Node Viewer";
+            this.sendToNodeViewerToolStripMenuItem.Click += new System.EventHandler(this.sendToNodeViewerToolStripMenuItem_Click);
             // 
             // AssetExplorer
             // 
@@ -444,6 +453,7 @@
         private System.Windows.Forms.SaveFileDialog extractFileDialog;
         private System.Windows.Forms.Panel previewPanel;
         private System.Windows.Forms.ToolStripLabel findFileButton;
+        private System.Windows.Forms.ToolStripMenuItem sendToNodeViewerToolStripMenuItem;
     }
 }
 

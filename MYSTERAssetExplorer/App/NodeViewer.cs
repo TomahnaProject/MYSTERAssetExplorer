@@ -1,4 +1,5 @@
 ﻿using MYSTERAssetExplorer.Core;
+using MYSTERAssetExplorer.Core.Model;
 using MYSTERAssetExplorer.Services;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,6 @@ namespace MYSTERAssetExplorer.App
     public partial class NodeViewer : Form
     {
         public NodeViewerApp App { get; private set; }
-        Node selectedNode;
-
-        PanoBuilder panoBuilder = new PanoBuilder();
 
         public NodeViewer()
         {
@@ -29,6 +27,7 @@ namespace MYSTERAssetExplorer.App
 
             App = new NodeViewerApp();
             App.PopulateNodes += PopulateNodeExplorer;
+            App.PopulateImages += PopulateImages;
             App.Launch += Launch;
         }
 
@@ -96,12 +95,12 @@ namespace MYSTERAssetExplorer.App
             // some kind of check to validate images?
             var imageSet = node.CubeMaps.Color;
 
-            backImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Back.File));
-            bottomImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Bottom.File));
-            frontImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Front.File));
-            leftImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Left.File));
-            rightImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Right.File));
-            topImage.BackgroundImage = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Top.File));
+            backImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Back.File));
+            bottomImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Bottom.File));
+            frontImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Front.File));
+            leftImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Left.File));
+            rightImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Right.File));
+            topImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Top.File));
 
             backImage.Tag = imageSet.Back.File;
             bottomImage.Tag = imageSet.Bottom.File;
@@ -109,17 +108,6 @@ namespace MYSTERAssetExplorer.App
             leftImage.Tag = imageSet.Left.File;
             rightImage.Tag = imageSet.Right.File;
             topImage.Tag = imageSet.Top.File;
-        }
-
-        private byte[] LookupFileImageData(Node node, string fileName)
-        {
-            var fileAddress = new VirtualFileAddress(GameEnum.Exile.ToString(), node.Scene, node.Zone, node.Number, fileName);
-            var file = App.FindFile(fileAddress);
-            if(file !=  null)
-            {
-                return App.GetDataForFile(file);
-            }
-            return new byte[0];
         }
 
         private void loadRegistry_Click(object sender, EventArgs e)
@@ -136,23 +124,23 @@ namespace MYSTERAssetExplorer.App
         {
             TreeNode newSelected = e.Node;
             Node selectedNodeEntry = (Node) newSelected.Tag;
-            selectedNode = selectedNodeEntry;
+            App.SetSelectedNode(selectedNodeEntry);
             Populate(selectedNodeEntry);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (selectedNode == null)
-                selectedNode = new Node();
+            if (App.SelectedNode == null)
+                App.SetSelectedNode(new Node());
 
-            WriteInputToNode(selectedNode);
+            WriteInputToNode(App.SelectedNode);
 
             if (nodeExplorer.SelectedNode == null)
                 return;
             var nodePath = nodeExplorer.SelectedNode.FullPath;
             var gameType = nodePath.Contains("Exile") ? GameEnum.Exile : GameEnum.Revelation;
 
-            App.AddNodeToRegistry(gameType, selectedNode);
+            App.AddNodeToRegistry(gameType, App.SelectedNode);
             App.RefreshRegistryTree();
         }
 
@@ -208,29 +196,29 @@ namespace MYSTERAssetExplorer.App
         private void picBox_DragDrop(object sender, DragEventArgs e)
         {
             string imageFileName = e.Data.GetData(DataFormats.Text).ToString();
-            if (selectedNode == null)
+            if (App.SelectedNode == null)
                 return;
 
             var cubeFace = new CubeFace() { File = imageFileName };
             if (sender == backImage)
-                selectedNode.CubeMaps.Color.Back = cubeFace;
+                App.SelectedNode.CubeMaps.Color.Back = cubeFace;
             if (sender == bottomImage)
-                selectedNode.CubeMaps.Color.Bottom = cubeFace;
+                App.SelectedNode.CubeMaps.Color.Bottom = cubeFace;
             if (sender == frontImage)
-                selectedNode.CubeMaps.Color.Front = cubeFace;
+                App.SelectedNode.CubeMaps.Color.Front = cubeFace;
             if (sender == leftImage)
-                selectedNode.CubeMaps.Color.Left = cubeFace;
+                App.SelectedNode.CubeMaps.Color.Left = cubeFace;
             if (sender == rightImage)
-                selectedNode.CubeMaps.Color.Right = cubeFace;
+                App.SelectedNode.CubeMaps.Color.Right = cubeFace;
             if (sender == topImage)
-                selectedNode.CubeMaps.Color.Top = cubeFace;
+                App.SelectedNode.CubeMaps.Color.Top = cubeFace;
 
-            PopulateImages(selectedNode);
+            PopulateImages(App.SelectedNode);
         }
 
         private void exportButton_Click(object sender, EventArgs e)
         {
-            if (selectedNode == null)
+            if (App.SelectedNode == null)
                 return;
 
             openFolderDialog.FileName = "Select Folder";
@@ -242,25 +230,20 @@ namespace MYSTERAssetExplorer.App
 
             if (openFolderDialog.ShowDialog() == DialogResult.OK)
             {
-                RunExport(Path.GetDirectoryName(openFolderDialog.FileName));
+                App.RunExport(Path.GetDirectoryName(openFolderDialog.FileName));
             }
         }
 
-        public void RunExport(string outputDir)
-        {
-            var images = new PanoImages();
+        //public void SetImage(CubeFaceEnum face, IVirtualFile file)
+        //{
+        //    if(CubeFaceEnum.Back)
+        //        backImage.BackgroundImage = file.
+        //}
 
-            var imageSet = selectedNode.CubeMaps.Color;
 
-            images.Back = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Back.File), true);
-            images.Bottom = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Bottom.File), true);
-            images.Front = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Front.File), true);
-            images.Left = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Left.File), true);
-            images.Right = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Right.File), true);
-            images.Top = Utils.LoadBitmapFromMemory(LookupFileImageData(selectedNode, imageSet.Top.File), true);
 
-            panoBuilder.BuildPanorama(outputDir, selectedNode.Scene + selectedNode.Zone + selectedNode.Number, images);
-        }
+
+
 
         //private void nodeListing_DragDrop(object sender, DragEventArgs e)
         //{

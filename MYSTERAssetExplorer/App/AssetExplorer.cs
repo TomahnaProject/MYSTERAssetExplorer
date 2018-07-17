@@ -438,5 +438,19 @@ namespace MYSTERAssetExplorer.App
                 c.DoDragDrop(imageName, DragDropEffects.Copy);
             }
         }
+
+        private void sendToNodeViewerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<IVirtualFile> files = new List<IVirtualFile>();
+
+            foreach (ListViewItem item in fileExplorer.SelectedItems)
+            {
+                if (item.Tag is IVirtualFile)
+                {
+                    files.Add(item.Tag as IVirtualFile);
+                }
+            }
+            app.SendImagesToNodeViewer(files);
+        }
     }
 }

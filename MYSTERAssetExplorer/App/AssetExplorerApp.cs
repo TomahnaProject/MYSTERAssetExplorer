@@ -311,5 +311,10 @@ namespace MYSTERAssetExplorer.App
                 WriteToConsole(Color.Red, "File not found. Lookup took " + stopwatch.ElapsedMilliseconds + " ms");
             }
         }
+
+        internal void SendImagesToNodeViewer(List<IVirtualFile> files)
+        {
+            NodeApp.SendImages(files);
+        }
     }
 }
