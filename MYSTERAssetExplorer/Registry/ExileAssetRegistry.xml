@@ -1,3 +1,680 @@
-﻿<AssetRegistry>
-  <Nodes />
+<?xml version="1.0" encoding="utf-16"?>
+<AssetRegistry xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Nodes>
+    <Node Scene="Amateria" Zone="TO" Number="016" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back />
+          <Bottom />
+          <Front File="0006.jpg" />
+          <Left />
+          <Right />
+          <Top File="0006.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="020" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0011.jpg" />
+          <Bottom File="0012.jpg" />
+          <Front File="0013.jpg" />
+          <Left File="0014.jpg" />
+          <Right File="0015.jpg" />
+          <Top File="0016.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="010" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0001.jpg" />
+          <Bottom File="0002.jpg" />
+          <Front File="0003.jpg" />
+          <Left File="0004.jpg" />
+          <Right File="0005.jpg" />
+          <Top File="0006.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="030" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0022.jpg" />
+          <Bottom File="0023.jpg" />
+          <Front File="0024.jpg" />
+          <Left File="0025.jpg" />
+          <Right File="0026.jpg" />
+          <Top File="0027.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="040" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0037.jpg" />
+          <Bottom File="0038.jpg" />
+          <Front File="0039.jpg" />
+          <Left File="0040.jpg" />
+          <Right File="0041.jpg" />
+          <Top File="0042.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="050" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0050.jpg" />
+          <Bottom File="0051.jpg" />
+          <Front File="0052.jpg" />
+          <Left File="0053.jpg" />
+          <Right File="0054.jpg" />
+          <Top File="0055.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="060" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0058.jpg" />
+          <Bottom File="0059.jpg" />
+          <Front File="0060.jpg" />
+          <Left File="0061.jpg" />
+          <Right File="0062.jpg" />
+          <Top File="0063.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="070" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0065.jpg" />
+          <Bottom File="0066.jpg" />
+          <Front File="0067.jpg" />
+          <Left File="0068.jpg" />
+          <Right File="0069.jpg" />
+          <Top File="0070.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="090" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0088.jpg" />
+          <Bottom File="0089.jpg" />
+          <Front File="0090.jpg" />
+          <Left File="0091.jpg" />
+          <Right File="0092.jpg" />
+          <Top File="0093.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="140" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0138.jpg" />
+          <Bottom File="0139.jpg" />
+          <Front File="0140.jpg" />
+          <Left File="0141.jpg" />
+          <Right File="0142.jpg" />
+          <Top File="0143.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="150" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0149.jpg" />
+          <Bottom File="0150.jpg" />
+          <Front File="0151.jpg" />
+          <Left File="0152.jpg" />
+          <Right File="0153.jpg" />
+          <Top File="0154.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="160" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0159.jpg" />
+          <Bottom File="0160.jpg" />
+          <Front File="0161.jpg" />
+          <Left File="0162.jpg" />
+          <Right File="0163.jpg" />
+          <Top File="0164.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="170" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0165.jpg" />
+          <Bottom File="0166.jpg" />
+          <Front File="0167.jpg" />
+          <Left File="0168.jpg" />
+          <Right File="0169.jpg" />
+          <Top File="0170.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="180" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0175.jpg" />
+          <Bottom File="0176.jpg" />
+          <Front File="0177.jpg" />
+          <Left File="0178.jpg" />
+          <Right File="0179.jpg" />
+          <Top File="0180.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="190" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0182.jpg" />
+          <Bottom File="0183.jpg" />
+          <Front File="0184.jpg" />
+          <Left File="0185.jpg" />
+          <Right File="0186.jpg" />
+          <Top File="0187.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="200" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0189.jpg" />
+          <Bottom File="0190.jpg" />
+          <Front File="0191.jpg" />
+          <Left File="0192.jpg" />
+          <Right File="0193.jpg" />
+          <Top File="0194.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="210" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0197.jpg" />
+          <Bottom File="0198.jpg" />
+          <Front File="0199.jpg" />
+          <Left File="0200.jpg" />
+          <Right File="0201.jpg" />
+          <Top File="0202.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="220" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0204.jpg" />
+          <Bottom File="0205.jpg" />
+          <Front File="0206.jpg" />
+          <Left File="0207.jpg" />
+          <Right File="0208.jpg" />
+          <Top File="0209.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="230" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0210.jpg" />
+          <Bottom File="0211.jpg" />
+          <Front File="0212.jpg" />
+          <Left File="0213.jpg" />
+          <Right File="0214.jpg" />
+          <Top File="0215.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="250" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0226.jpg" />
+          <Bottom File="0227.jpg" />
+          <Front File="0228.jpg" />
+          <Left File="0229.jpg" />
+          <Right File="0230.jpg" />
+          <Top File="0231.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="260" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0234.jpg" />
+          <Bottom File="0235.jpg" />
+          <Front File="0236.jpg" />
+          <Left File="0237.jpg" />
+          <Right File="0238.jpg" />
+          <Top File="0239.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="011" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0242.jpg" />
+          <Bottom File="0243.jpg" />
+          <Front File="0244.jpg" />
+          <Left File="0245.jpg" />
+          <Right File="0246.jpg" />
+          <Top File="0247.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="021" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0249.jpg" />
+          <Bottom File="0250.jpg" />
+          <Front File="0251.jpg" />
+          <Left File="0252.jpg" />
+          <Right File="0253.jpg" />
+          <Top File="0254.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="031" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0256.jpg" />
+          <Bottom File="0257.jpg" />
+          <Front File="0258.jpg" />
+          <Left File="0259.jpg" />
+          <Right File="0260.jpg" />
+          <Top File="0261.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="041" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0263.jpg" />
+          <Bottom File="0264.jpg" />
+          <Front File="0265.jpg" />
+          <Left File="0266.jpg" />
+          <Right File="0267.jpg" />
+          <Top File="0268.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="051" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0271.jpg" />
+          <Bottom File="0272.jpg" />
+          <Front File="0273.jpg" />
+          <Left File="0274.jpg" />
+          <Right File="0275.jpg" />
+          <Top File="0276.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="061" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0279.jpg" />
+          <Bottom File="0280.jpg" />
+          <Front File="0281.jpg" />
+          <Left File="0282.jpg" />
+          <Right File="0283.jpg" />
+          <Top File="0284.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="080" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0073.jpg" />
+          <Bottom File="0074.jpg" />
+          <Front File="0075.jpg" />
+          <Left File="0076.jpg" />
+          <Right File="0077.jpg" />
+          <Top File="0078.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="071" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0285.jpg" />
+          <Bottom File="0286.jpg" />
+          <Front File="0287.jpg" />
+          <Left File="0288.jpg" />
+          <Right File="0289.jpg" />
+          <Top File="0290.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="081" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0291.jpg" />
+          <Bottom File="0292.jpg" />
+          <Front File="0293.jpg" />
+          <Left File="0294.jpg" />
+          <Right File="0295.jpg" />
+          <Top File="0296.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="130" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0132.jpg" />
+          <Bottom File="0133.jpg" />
+          <Front File="0134.jpg" />
+          <Left File="0135.jpg" />
+          <Right File="0136.jpg" />
+          <Top File="0137.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="120" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0121.jpg" />
+          <Bottom File="0122.jpg" />
+          <Front File="0123.jpg" />
+          <Left File="0124.jpg" />
+          <Right File="0125.jpg" />
+          <Top File="0126.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="100" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0097.jpg" />
+          <Bottom File="0098.jpg" />
+          <Front File="0099.jpg" />
+          <Left File="0100.jpg" />
+          <Right File="0101.jpg" />
+          <Top File="0102.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="110" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0108.jpg" />
+          <Bottom File="0109.jpg" />
+          <Front File="0110.jpg" />
+          <Left File="0111.jpg" />
+          <Right File="0112.jpg" />
+          <Top File="0113.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="091" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0298.jpg" />
+          <Bottom File="0299.jpg" />
+          <Front File="0300.jpg" />
+          <Left File="0301.jpg" />
+          <Right File="0302.jpg" />
+          <Top File="0303.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="101" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0305.jpg" />
+          <Bottom File="0306.jpg" />
+          <Front File="0307.jpg" />
+          <Left File="0308.jpg" />
+          <Right File="0309.jpg" />
+          <Top File="0310.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="111" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0312.jpg" />
+          <Bottom File="0313.jpg" />
+          <Front File="0314.jpg" />
+          <Left File="0315.jpg" />
+          <Right File="0316.jpg" />
+          <Top File="0317.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="121" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0319.jpg" />
+          <Bottom File="0320.jpg" />
+          <Front File="0321.jpg" />
+          <Left File="0322.jpg" />
+          <Right File="0323.jpg" />
+          <Top File="0324.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="131" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0326.jpg" />
+          <Bottom File="0327.jpg" />
+          <Front File="0328.jpg" />
+          <Left File="0329.jpg" />
+          <Right File="0330.jpg" />
+          <Top File="0331.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="240" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0216.jpg" />
+          <Bottom File="0217.jpg" />
+          <Front File="0218.jpg" />
+          <Left File="0219.jpg" />
+          <Right File="0220.jpg" />
+          <Top File="0221.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="241" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0336.jpg" />
+          <Bottom File="0337.jpg" />
+          <Front File="0338.jpg" />
+          <Left File="0339.jpg" />
+          <Right File="0340.jpg" />
+          <Top File="0341.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="251" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0345.jpg" />
+          <Bottom File="0346.jpg" />
+          <Front File="0347.jpg" />
+          <Left File="0348.jpg" />
+          <Right File="0349.jpg" />
+          <Top File="0350.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="092" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0352.jpg" />
+          <Bottom File="0353.jpg" />
+          <Front File="0354.jpg" />
+          <Left File="0355.jpg" />
+          <Right File="0356.jpg" />
+          <Top File="0357.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="242" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0358.jpg" />
+          <Bottom File="0359.jpg" />
+          <Front File="0360.jpg" />
+          <Left File="0361.jpg" />
+          <Right File="0362.jpg" />
+          <Top File="0363.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Narayan" Zone="CH" Number="252" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0365.jpg" />
+          <Bottom File="0366.jpg" />
+          <Front File="0367.jpg" />
+          <Left File="0368.jpg" />
+          <Right File="0369.jpg" />
+          <Top File="0370.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+  </Nodes>
 </AssetRegistry>
