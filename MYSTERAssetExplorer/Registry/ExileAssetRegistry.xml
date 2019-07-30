@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <AssetRegistry xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Nodes>
-    <Node Scene="Amateria" Zone="TO" Number="016" Type="Normal">
-      <Position X="0" Y="0" Z="0" />
-      <Rotation Yaw="0" />
-      <CubeMaps DepthRange="0">
-        <Color>
-          <Back />
-          <Bottom />
-          <Front File="0006.jpg" />
-          <Left />
-          <Right />
-          <Top File="0006.jpg" />
-        </Color>
-      </CubeMaps>
-      <Sprites />
-    </Node>
     <Node Scene="Narayan" Zone="CH" Number="020" Type="Normal">
       <Position X="0" Y="0" Z="0" />
       <Rotation Yaw="0" />
@@ -672,6 +657,561 @@
           <Left File="0368.jpg" />
           <Right File="0369.jpg" />
           <Top File="0370.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="020" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0008.jpg" />
+          <Bottom File="0009.jpg" />
+          <Front File="0010.jpg" />
+          <Left File="0011.jpg" />
+          <Right File="0012.jpg" />
+          <Top File="0013.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="030" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0016.jpg" />
+          <Bottom File="0017.jpg" />
+          <Front File="0018.jpg" />
+          <Left File="0019.jpg" />
+          <Right File="0020.jpg" />
+          <Top File="0021.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="040" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0024.jpg" />
+          <Bottom File="0025.jpg" />
+          <Front File="0026.jpg" />
+          <Left File="0027.jpg" />
+          <Right File="0028.jpg" />
+          <Top File="0029.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="010" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0001.jpg" />
+          <Bottom File="0002.jpg" />
+          <Front File="0003.jpg" />
+          <Left File="0004.jpg" />
+          <Right File="0005.jpg" />
+          <Top File="0006.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="050" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0030.jpg" />
+          <Bottom File="0031.jpg" />
+          <Front File="0032.jpg" />
+          <Left File="0033.jpg" />
+          <Right File="0034.jpg" />
+          <Top File="0035.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="060" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0036.jpg" />
+          <Bottom File="0037.jpg" />
+          <Front File="0038.jpg" />
+          <Left File="0039.jpg" />
+          <Right File="0040.jpg" />
+          <Top File="0041.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="070" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0042.jpg" />
+          <Bottom File="0043.jpg" />
+          <Front File="0044.jpg" />
+          <Left File="0045.jpg" />
+          <Right File="0046.jpg" />
+          <Top File="0047.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="080" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0049.jpg" />
+          <Bottom File="0050.jpg" />
+          <Front File="0051.jpg" />
+          <Left File="0052.jpg" />
+          <Right File="0053.jpg" />
+          <Top File="0054.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="090" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0056.jpg" />
+          <Bottom File="0057.jpg" />
+          <Front File="0058.jpg" />
+          <Left File="0059.jpg" />
+          <Right File="0060.jpg" />
+          <Top File="0061.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="100" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0063.jpg" />
+          <Bottom File="0064.jpg" />
+          <Front File="0065.jpg" />
+          <Left File="0066.jpg" />
+          <Right File="0067.jpg" />
+          <Top File="0068.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Edanna" Zone="DR" Number="110" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0070.jpg" />
+          <Bottom File="0071.jpg" />
+          <Front File="0072.jpg" />
+          <Left File="0073.jpg" />
+          <Right File="0074.jpg" />
+          <Top File="0075.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Tomahna" Zone="HO" Number="010" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0003.jpg" />
+          <Bottom File="0004.jpg" />
+          <Front File="0005.jpg" />
+          <Left File="0006.jpg" />
+          <Right File="0007.jpg" />
+          <Top File="0008.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Tomahna" Zone="HO" Number="020" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0009.jpg" />
+          <Bottom File="0010.jpg" />
+          <Front File="0011.jpg" />
+          <Left File="0012.jpg" />
+          <Right File="0013.jpg" />
+          <Top File="0014.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Tomahna" Zone="HO" Number="030" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0015.jpg" />
+          <Bottom File="0016.jpg" />
+          <Front File="0017.jpg" />
+          <Left File="0018.jpg" />
+          <Right File="0019.jpg" />
+          <Top File="0020.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Tomahna" Zone="HO" Number="040" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0021.jpg" />
+          <Bottom File="0022.jpg" />
+          <Front File="0023.jpg" />
+          <Left File="0024.jpg" />
+          <Right File="0025.jpg" />
+          <Top File="0026.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Tomahna" Zone="HO" Number="050" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0033.jpg" />
+          <Bottom File="0034.jpg" />
+          <Front File="0035.jpg" />
+          <Left File="0036.jpg" />
+          <Right File="0037.jpg" />
+          <Top File="0038.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Tomahna" Zone="HO" Number="051" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0039.jpg" />
+          <Bottom File="0040.jpg" />
+          <Front File="0041.jpg" />
+          <Left File="0042.jpg" />
+          <Right File="0043.jpg" />
+          <Top File="0044.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Tomahna" Zone="HB" Number="010" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0001.jpg" />
+          <Bottom File="0002.jpg" />
+          <Front File="0003.jpg" />
+          <Left File="0004.jpg" />
+          <Right File="0005.jpg" />
+          <Top File="0006.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Amateria" Zone="TO" Number="020" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0007.jpg" />
+          <Bottom File="0008.jpg" />
+          <Front File="0009.jpg" />
+          <Left File="0010.jpg" />
+          <Right File="0011.jpg" />
+          <Top File="0012.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Amateria" Zone="TO" Number="010" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0001.jpg" />
+          <Bottom File="0002.jpg" />
+          <Front File="0003.jpg" />
+          <Left File="0004.jpg" />
+          <Right File="0005.jpg" />
+          <Top File="0006.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="010" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0007.jpg" />
+          <Bottom File="0008.jpg" />
+          <Front File="0009.jpg" />
+          <Left File="0010.jpg" />
+          <Right File="0011.jpg" />
+          <Top File="0012.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="011" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0001.jpg" />
+          <Bottom File="0002.jpg" />
+          <Front File="0003.jpg" />
+          <Left File="0004.jpg" />
+          <Right File="0005.jpg" />
+          <Top File="0006.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="012" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0013.jpg" />
+          <Bottom File="0014.jpg" />
+          <Front File="0015.jpg" />
+          <Left File="0016.jpg" />
+          <Right File="0017.jpg" />
+          <Top File="0018.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="013" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0012.jpg" />
+          <Bottom File="0013.jpg" />
+          <Front File="0014.jpg" />
+          <Left File="0015.jpg" />
+          <Right File="0018.jpg" />
+          <Top File="0019.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="020" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0093.jpg" />
+          <Bottom File="0094.jpg" />
+          <Front File="0095.jpg" />
+          <Left File="0096.jpg" />
+          <Right File="0097.jpg" />
+          <Top File="0098.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="021" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0099.jpg" />
+          <Bottom File="0100.jpg" />
+          <Front File="0101.jpg" />
+          <Left File="0102.jpg" />
+          <Right File="0103.jpg" />
+          <Top File="0104.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="030" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0131.jpg" />
+          <Bottom File="0132.jpg" />
+          <Front File="0133.jpg" />
+          <Left File="0134.jpg" />
+          <Right File="0135.jpg" />
+          <Top File="0136.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="031" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0137.jpg" />
+          <Bottom File="0138.jpg" />
+          <Front File="0139.jpg" />
+          <Left File="0140.jpg" />
+          <Right File="0141.jpg" />
+          <Top File="0142.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="080" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0237.jpg" />
+          <Bottom File="0238.jpg" />
+          <Front File="0239.jpg" />
+          <Left File="0240.jpg" />
+          <Right File="0241.jpg" />
+          <Top File="0242.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="081" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0243.jpg" />
+          <Bottom File="0244.jpg" />
+          <Front File="0245.jpg" />
+          <Left File="0246.jpg" />
+          <Right File="0247.jpg" />
+          <Top File="0248.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="040" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0154.jpg" />
+          <Bottom File="0155.jpg" />
+          <Front File="0156.jpg" />
+          <Left File="0157.jpg" />
+          <Right File="0158.jpg" />
+          <Top File="0159.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="041" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0160.jpg" />
+          <Bottom File="0161.jpg" />
+          <Front File="0162.jpg" />
+          <Left File="0163.jpg" />
+          <Right File="0164.jpg" />
+          <Top File="0165.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="050" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0178.jpg" />
+          <Bottom File="0179.jpg" />
+          <Front File="0180.jpg" />
+          <Left File="0181.jpg" />
+          <Right File="0182.jpg" />
+          <Top File="0183.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="060" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0189.jpg" />
+          <Bottom File="0190.jpg" />
+          <Front File="0191.jpg" />
+          <Left File="0192.jpg" />
+          <Right File="0193.jpg" />
+          <Top File="0194.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="061" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0195.jpg" />
+          <Bottom File="0196.jpg" />
+          <Front File="0197.jpg" />
+          <Left File="0198.jpg" />
+          <Right File="0199.jpg" />
+          <Top File="0200.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="070" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0215.jpg" />
+          <Bottom File="0216.jpg" />
+          <Front File="0217.jpg" />
+          <Left File="0218.jpg" />
+          <Right File="0219.jpg" />
+          <Top File="0220.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+    <Node Scene="Jnanin" Zone="OS" Number="071" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="0221.jpg" />
+          <Bottom File="0222.jpg" />
+          <Front File="0223.jpg" />
+          <Left File="0224.jpg" />
+          <Right File="0225.jpg" />
+          <Top File="0226.jpg" />
         </Color>
       </CubeMaps>
       <Sprites />
