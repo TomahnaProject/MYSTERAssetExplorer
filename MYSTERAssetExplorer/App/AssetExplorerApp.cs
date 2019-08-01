@@ -138,7 +138,7 @@ namespace MYSTERAssetExplorer.App
                         rWatch.Stop();
                         consoleWrite(Color.Green, fileName + " Indexed in " + rWatch.ElapsedMilliseconds + "ms");
                         var serializedIndex = _context.CacheService.SerializeIndexedFolder(indexedFile as VirtualFolder);
-                        File.WriteAllText(Path.Combine(_context.CacheDirectory, ""),serializedIndex);
+                        //File.WriteAllText(Path.Combine(_context.CacheDirectory, ""),serializedIndex);
                     //});
                     //fileThread.Start();
                 }

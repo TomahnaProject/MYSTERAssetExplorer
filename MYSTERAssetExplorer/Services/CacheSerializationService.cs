@@ -12,7 +12,8 @@ namespace MYSTERAssetExplorer.Services
     {
         public string SerializeIndexedFolder(IVirtualFolder folder)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return "blank";
         }
 
 
