@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using MYSTERAssetExplorer.Core;
 using MYSTERAssetExplorer.Core.Model;
+using System.IO;
 
 namespace MYSTERAssetExplorer.App
 {
@@ -59,17 +60,22 @@ namespace MYSTERAssetExplorer.App
             ExportCubemap(fileSavePath, SelectedNode);
         }
 
+        public CubemapImages GetCubemapImagesForImageSet(Node node, CubeMapImageSet imageSet)
+        {
+            var data = new CubemapImages();
+            data.Back = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Back.File));
+            data.Bottom = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Bottom.File));
+            data.Front = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Front.File));
+            data.Left = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Left.File));
+            data.Right = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Right.File));
+            data.Top = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Top.File));
+            return data;
+        }
+
         public void ExportCubemap(string fileSavePath, Node node)
         {
             var imageSet = node.CubeMaps.Color;
-
-            var images = new CubemapImages();
-            images.Back = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Back.File), true);
-            images.Bottom = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Bottom.File), true);
-            images.Front = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Front.File), true);
-            images.Left = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Left.File), true);
-            images.Right = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Right.File), true);
-            images.Top = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Top.File), true);
+            CubemapImages images = GetCubemapImagesForImageSet(node, imageSet);
 
             Bitmap cubemap = new CubeMapBuilder().ConstructCubemap(images);
             ImageSaveService.Save(fileSavePath, cubemap);

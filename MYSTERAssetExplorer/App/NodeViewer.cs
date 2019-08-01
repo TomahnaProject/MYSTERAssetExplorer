@@ -94,13 +94,14 @@ namespace MYSTERAssetExplorer.App
         {
             // some kind of check to validate images?
             var imageSet = node.CubeMaps.Color;
+            CubemapImages data = App.GetCubemapImagesForImageSet(node, imageSet);
 
-            backImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Back.File));
-            bottomImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Bottom.File));
-            frontImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Front.File));
-            leftImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Left.File));
-            rightImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Right.File));
-            topImage.BackgroundImage = Utils.LoadBitmapFromMemory(App.LookupFileImageData(node, imageSet.Top.File));
+            backImage.BackgroundImage = data.Back;
+            bottomImage.BackgroundImage = data.Bottom;
+            frontImage.BackgroundImage = data.Front;
+            leftImage.BackgroundImage = data.Left;
+            rightImage.BackgroundImage = data.Right;
+            topImage.BackgroundImage = data.Top;
 
             backImage.Tag = imageSet.Back.File;
             bottomImage.Tag = imageSet.Bottom.File;
