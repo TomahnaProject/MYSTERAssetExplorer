@@ -75,18 +75,29 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.exportButton = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.frontImage = new System.Windows.Forms.Panel();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.nodeViewerMenuStrip = new System.Windows.Forms.ToolStrip();
             this.loadRegistry = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveRegistry = new System.Windows.Forms.ToolStripLabel();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.fileNameLabel_Bottom = new System.Windows.Forms.Label();
+            this.fileNameLabel_Left = new System.Windows.Forms.Label();
+            this.fileNameLabel_Right = new System.Windows.Forms.Label();
+            this.fileNameLabel_Top = new System.Windows.Forms.Label();
+            this.fileNameLabel_Back = new System.Windows.Forms.Label();
+            this.frontImage = new System.Windows.Forms.Panel();
+            this.fileNameLabel_Front = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.contextMenuNodeExplorer.SuspendLayout();
+            this.bottomImage.SuspendLayout();
+            this.leftImage.SuspendLayout();
+            this.rightImage.SuspendLayout();
+            this.topImage.SuspendLayout();
+            this.backImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.NodePropertiesGroup.SuspendLayout();
@@ -100,6 +111,7 @@
             this.groupBox2.SuspendLayout();
             this.MainPanel.SuspendLayout();
             this.nodeViewerMenuStrip.SuspendLayout();
+            this.frontImage.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -114,6 +126,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.frontImage);
             this.splitContainer1.Panel2.Controls.Add(this.bottomImage);
             this.splitContainer1.Panel2.Controls.Add(this.leftImage);
             this.splitContainer1.Panel2.Controls.Add(this.rightImage);
@@ -125,7 +138,6 @@
             this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.panel3);
             this.splitContainer1.Panel2.Controls.Add(this.listBox2);
-            this.splitContainer1.Panel2.Controls.Add(this.frontImage);
             this.splitContainer1.Size = new System.Drawing.Size(1549, 865);
             this.splitContainer1.SplitterDistance = 253;
             this.splitContainer1.TabIndex = 18;
@@ -187,6 +199,7 @@
             this.bottomImage.AllowDrop = true;
             this.bottomImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.bottomImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bottomImage.Controls.Add(this.fileNameLabel_Bottom);
             this.bottomImage.Location = new System.Drawing.Point(330, 660);
             this.bottomImage.Name = "bottomImage";
             this.bottomImage.Size = new System.Drawing.Size(320, 320);
@@ -200,6 +213,7 @@
             this.leftImage.AllowDrop = true;
             this.leftImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.leftImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.leftImage.Controls.Add(this.fileNameLabel_Left);
             this.leftImage.Location = new System.Drawing.Point(10, 340);
             this.leftImage.Name = "leftImage";
             this.leftImage.Size = new System.Drawing.Size(320, 320);
@@ -213,6 +227,7 @@
             this.rightImage.AllowDrop = true;
             this.rightImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.rightImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.rightImage.Controls.Add(this.fileNameLabel_Right);
             this.rightImage.Location = new System.Drawing.Point(650, 340);
             this.rightImage.Name = "rightImage";
             this.rightImage.Size = new System.Drawing.Size(320, 320);
@@ -226,6 +241,7 @@
             this.topImage.AllowDrop = true;
             this.topImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.topImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.topImage.Controls.Add(this.fileNameLabel_Top);
             this.topImage.Location = new System.Drawing.Point(330, 20);
             this.topImage.Name = "topImage";
             this.topImage.Size = new System.Drawing.Size(320, 320);
@@ -239,6 +255,7 @@
             this.backImage.AllowDrop = true;
             this.backImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
             this.backImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backImage.Controls.Add(this.fileNameLabel_Back);
             this.backImage.Location = new System.Drawing.Point(970, 340);
             this.backImage.Name = "backImage";
             this.backImage.Size = new System.Drawing.Size(320, 320);
@@ -603,19 +620,6 @@
             this.listBox2.Size = new System.Drawing.Size(288, 270);
             this.listBox2.TabIndex = 25;
             // 
-            // frontImage
-            // 
-            this.frontImage.AllowDrop = true;
-            this.frontImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
-            this.frontImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.frontImage.Location = new System.Drawing.Point(330, 340);
-            this.frontImage.Name = "frontImage";
-            this.frontImage.Size = new System.Drawing.Size(320, 320);
-            this.frontImage.TabIndex = 31;
-            this.frontImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.frontImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.frontImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
-            // 
             // MainPanel
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -660,6 +664,80 @@
             this.saveRegistry.Text = "Save Registry";
             this.saveRegistry.Click += new System.EventHandler(this.saveRegistry_Click);
             // 
+            // fileNameLabel_Bottom
+            // 
+            this.fileNameLabel_Bottom.AutoSize = true;
+            this.fileNameLabel_Bottom.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Bottom.Location = new System.Drawing.Point(6, 6);
+            this.fileNameLabel_Bottom.Name = "fileNameLabel_Bottom";
+            this.fileNameLabel_Bottom.Size = new System.Drawing.Size(46, 14);
+            this.fileNameLabel_Bottom.TabIndex = 0;
+            this.fileNameLabel_Bottom.Text = "Bottom";
+            // 
+            // fileNameLabel_Left
+            // 
+            this.fileNameLabel_Left.AutoSize = true;
+            this.fileNameLabel_Left.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Left.Location = new System.Drawing.Point(7, 9);
+            this.fileNameLabel_Left.Name = "fileNameLabel_Left";
+            this.fileNameLabel_Left.Size = new System.Drawing.Size(26, 14);
+            this.fileNameLabel_Left.TabIndex = 1;
+            this.fileNameLabel_Left.Text = "Left";
+            // 
+            // fileNameLabel_Right
+            // 
+            this.fileNameLabel_Right.AutoSize = true;
+            this.fileNameLabel_Right.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Right.Location = new System.Drawing.Point(6, 9);
+            this.fileNameLabel_Right.Name = "fileNameLabel_Right";
+            this.fileNameLabel_Right.Size = new System.Drawing.Size(35, 14);
+            this.fileNameLabel_Right.TabIndex = 2;
+            this.fileNameLabel_Right.Text = "Right";
+            // 
+            // fileNameLabel_Top
+            // 
+            this.fileNameLabel_Top.AutoSize = true;
+            this.fileNameLabel_Top.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Top.Location = new System.Drawing.Point(10, 2);
+            this.fileNameLabel_Top.Name = "fileNameLabel_Top";
+            this.fileNameLabel_Top.Size = new System.Drawing.Size(26, 14);
+            this.fileNameLabel_Top.TabIndex = 2;
+            this.fileNameLabel_Top.Text = "Top";
+            // 
+            // fileNameLabel_Back
+            // 
+            this.fileNameLabel_Back.AutoSize = true;
+            this.fileNameLabel_Back.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Back.Location = new System.Drawing.Point(6, 9);
+            this.fileNameLabel_Back.Name = "fileNameLabel_Back";
+            this.fileNameLabel_Back.Size = new System.Drawing.Size(32, 14);
+            this.fileNameLabel_Back.TabIndex = 2;
+            this.fileNameLabel_Back.Text = "Back";
+            // 
+            // frontImage
+            // 
+            this.frontImage.AllowDrop = true;
+            this.frontImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.frontImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.frontImage.Controls.Add(this.fileNameLabel_Front);
+            this.frontImage.Location = new System.Drawing.Point(330, 340);
+            this.frontImage.Name = "frontImage";
+            this.frontImage.Size = new System.Drawing.Size(320, 320);
+            this.frontImage.TabIndex = 31;
+            this.frontImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.frontImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.frontImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // fileNameLabel_Front
+            // 
+            this.fileNameLabel_Front.AutoSize = true;
+            this.fileNameLabel_Front.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Front.Location = new System.Drawing.Point(10, 9);
+            this.fileNameLabel_Front.Name = "fileNameLabel_Front";
+            this.fileNameLabel_Front.Size = new System.Drawing.Size(35, 14);
+            this.fileNameLabel_Front.TabIndex = 1;
+            this.fileNameLabel_Front.Text = "Front";
+            // 
             // NodeViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -681,6 +759,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.contextMenuNodeExplorer.ResumeLayout(false);
+            this.bottomImage.ResumeLayout(false);
+            this.bottomImage.PerformLayout();
+            this.leftImage.ResumeLayout(false);
+            this.leftImage.PerformLayout();
+            this.rightImage.ResumeLayout(false);
+            this.rightImage.PerformLayout();
+            this.topImage.ResumeLayout(false);
+            this.topImage.PerformLayout();
+            this.backImage.ResumeLayout(false);
+            this.backImage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.NodePropertiesGroup.ResumeLayout(false);
@@ -697,6 +785,8 @@
             this.MainPanel.ResumeLayout(false);
             this.nodeViewerMenuStrip.ResumeLayout(false);
             this.nodeViewerMenuStrip.PerformLayout();
+            this.frontImage.ResumeLayout(false);
+            this.frontImage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -748,12 +838,18 @@
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.TextBox nodeProp_NumberInput;
         private System.Windows.Forms.Panel topImage;
-        private System.Windows.Forms.Panel frontImage;
         private System.Windows.Forms.Panel backImage;
         private System.Windows.Forms.Panel bottomImage;
         private System.Windows.Forms.Panel leftImage;
         private System.Windows.Forms.Panel rightImage;
         protected System.Windows.Forms.GroupBox NodePropertiesGroup;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Label fileNameLabel_Bottom;
+        private System.Windows.Forms.Label fileNameLabel_Left;
+        private System.Windows.Forms.Label fileNameLabel_Right;
+        private System.Windows.Forms.Label fileNameLabel_Top;
+        private System.Windows.Forms.Label fileNameLabel_Back;
+        private System.Windows.Forms.Panel frontImage;
+        private System.Windows.Forms.Label fileNameLabel_Front;
     }
 }
