@@ -204,9 +204,9 @@
             this.bottomImage.Name = "bottomImage";
             this.bottomImage.Size = new System.Drawing.Size(320, 320);
             this.bottomImage.TabIndex = 32;
-            this.bottomImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.bottomImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.bottomImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            this.bottomImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragDrop);
+            this.bottomImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
+            this.bottomImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
             // 
             // leftImage
             // 
@@ -218,9 +218,9 @@
             this.leftImage.Name = "leftImage";
             this.leftImage.Size = new System.Drawing.Size(320, 320);
             this.leftImage.TabIndex = 34;
-            this.leftImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.leftImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.leftImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            this.leftImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragDrop);
+            this.leftImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
+            this.leftImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
             // 
             // rightImage
             // 
@@ -232,9 +232,9 @@
             this.rightImage.Name = "rightImage";
             this.rightImage.Size = new System.Drawing.Size(320, 320);
             this.rightImage.TabIndex = 33;
-            this.rightImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.rightImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.rightImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            this.rightImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragDrop);
+            this.rightImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
+            this.rightImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
             // 
             // topImage
             // 
@@ -246,9 +246,9 @@
             this.topImage.Name = "topImage";
             this.topImage.Size = new System.Drawing.Size(320, 320);
             this.topImage.TabIndex = 30;
-            this.topImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.topImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.topImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            this.topImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragDrop);
+            this.topImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
+            this.topImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
             // 
             // backImage
             // 
@@ -260,9 +260,9 @@
             this.backImage.Name = "backImage";
             this.backImage.Size = new System.Drawing.Size(320, 320);
             this.backImage.TabIndex = 32;
-            this.backImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.backImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.backImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            this.backImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragDrop);
+            this.backImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
+            this.backImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
             // 
             // pictureBox1
             // 
@@ -724,9 +724,9 @@
             this.frontImage.Name = "frontImage";
             this.frontImage.Size = new System.Drawing.Size(320, 320);
             this.frontImage.TabIndex = 31;
-            this.frontImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.frontImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.frontImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            this.frontImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragDrop);
+            this.frontImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
+            this.frontImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
             // 
             // fileNameLabel_Front
             // 
