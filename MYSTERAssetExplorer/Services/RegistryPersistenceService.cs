@@ -12,7 +12,7 @@ namespace MYSTERAssetExplorer.Services
     {
         const string templateRegistryXML = @"<AssetRegistry><Nodes /></AssetRegistry>";
 
-        const string regDir = "Registry";
+        const string regDir = "RegistryFiles";
         string exileRegistryFilePath = Path.Combine(regDir, "ExileAssetRegistry.xml");
         string revelationRegistryFilePath = Path.Combine(regDir, "RevelationAssetRegistry.xml");
 

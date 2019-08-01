@@ -130,10 +130,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Registry\RevelationAssetRegistry.xml">
+    <Content Include="RegistryFiles\RevelationAssetRegistry.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Registry\ExileAssetRegistry.xml">
+    <Content Include="RegistryFiles\ExileAssetRegistry.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\archives.ico" />
