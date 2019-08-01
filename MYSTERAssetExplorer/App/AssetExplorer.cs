@@ -200,6 +200,8 @@ namespace MYSTERAssetExplorer.App
 
         private void PopulateFolderExplorer(List<IVirtualFolder> folders)
         {
+            folders.Sort((x, y) => string.Compare(x.Name, y.Name));
+
             Invoke(new Action(() =>
             {
                 folderExplorer.Nodes.Clear();
@@ -218,6 +220,8 @@ namespace MYSTERAssetExplorer.App
 
         private void BuildTreeNode(TreeNode nodeToAddTo, List<IVirtualFolder> subFolders)
         {
+            subFolders.Sort((x, y) => string.Compare(x.Name, y.Name));
+
             TreeNode childNode;
             List<IVirtualFolder> subSubFolders;
             int iconIndex = 0;
