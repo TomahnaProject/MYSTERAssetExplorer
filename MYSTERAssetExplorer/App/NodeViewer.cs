@@ -111,7 +111,7 @@ namespace MYSTERAssetExplorer.App
 
             fileNameLabel_Back.Text = "Back: " + imageSet.Back.File;
             fileNameLabel_Bottom.Text = "Bottom: " + imageSet.Bottom.File;
-            fileNameLabel_Front.Text = "Front: " + imageSet.Back.File;
+            fileNameLabel_Front.Text = "Front: " + imageSet.Front.File;
             fileNameLabel_Left.Text = "Left: " + imageSet.Left.File;
             fileNameLabel_Right.Text = "Right: " + imageSet.Right.File;
             fileNameLabel_Top.Text = "Top: " + imageSet.Top.File;
