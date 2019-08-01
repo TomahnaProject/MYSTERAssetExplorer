@@ -89,6 +89,7 @@
     <Compile Include="Services\ConversionService.cs" />
     <Compile Include="Services\FileLookupService.cs" />
     <Compile Include="Services\IFileIndexerService.cs" />
+    <Compile Include="Services\ImageSaveService.cs" />
     <Compile Include="Services\M4BFileIndexingService.cs" />
     <Compile Include="Services\RegistryPersistenceService.cs" />
     <Compile Include="Services\TileImageStitcher.cs" />
@@ -97,7 +98,7 @@
     <Compile Include="Services\VirtualFileSaveService.cs" />
     <Compile Include="Services\NodeFaceValidator.cs" />
     <Compile Include="Services\AssetRegistrySerializationService.cs" />
-    <Compile Include="Services\PanoBuilder.cs" />
+    <Compile Include="Services\CubeMapBuilder.cs" />
     <Compile Include="Services\RegistryManager.cs" />
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="App\AssetExplorer.resx">

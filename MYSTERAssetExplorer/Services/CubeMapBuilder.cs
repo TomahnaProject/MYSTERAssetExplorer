@@ -12,7 +12,7 @@ using static MYSTERAssetExplorer.Core.CubeMapImageSet;
 
 namespace MYSTERAssetExplorer
 {
-    public class PanoImages
+    public class CubemapImages
     {
         public Bitmap Back;
         public Bitmap Bottom;
@@ -22,24 +22,14 @@ namespace MYSTERAssetExplorer
         public Bitmap Top;
     }
 
-    public class PanoBuilder
+    public class CubeMapBuilder
     {
-        public void BuildPanorama(string fileSavePath, PanoImages images)
+        public Bitmap ConstructCubemap(CubemapImages images)
         {
-            var image = StichCubeMap(images);
-            //var finalSavePath = Path.Combine(outputDirectory, name);
-
-            long quality = 100;
-            using (EncoderParameters encoderParameters = new EncoderParameters(1))
-            using (EncoderParameter encoderParameter = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality))
-            {
-                ImageCodecInfo codecInfo = ImageCodecInfo.GetImageDecoders().First(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
-                encoderParameters.Param[0] = encoderParameter;
-                image.Save(fileSavePath, codecInfo, encoderParameters);
-            }
+            return StichCubeMap(images);
         }
 
-        private Bitmap GetOneValidImage(PanoImages images)
+        private Bitmap GetOneValidImage(CubemapImages images)
         {
             if (images.Back != null)
                 return images.Back;
@@ -56,22 +46,22 @@ namespace MYSTERAssetExplorer
             return null;
         }
 
-        private Bitmap StichCubeMap(PanoImages images)
+        private Bitmap StichCubeMap(CubemapImages images)
         {
             // grab the image size from first image found in the image set
             var first = GetOneValidImage(images);
             var size = first.Size;
             if (size.Height != size.Width)
-                throw new Exception("Images must have an aspect ratio of 1:1 to build a panorama");
+                throw new Exception("Images must have an aspect ratio of 1:1 to build a cubemap");
 
-            // this is the order the pano's are built in left to right
+            // this is the order the cubemaps's are built in left to right
             List<Bitmap> imagesList = new List<Bitmap>();
             imagesList.Add(CheckNull(images.Left, size.Height));
             imagesList.Add(CheckNull(images.Front, size.Height));
             imagesList.Add(CheckNull(images.Right, size.Height));
             imagesList.Add(CheckNull(images.Back, size.Height));
 
-            // need to flip the bottom/top images so pano is in correct format
+            // need to flip the bottom/top images so cubemap is in correct format
             Bitmap bottom = CheckNull(images.Bottom, size.Height);
             bottom.RotateFlip(RotateFlipType.Rotate90FlipNone);
             imagesList.Add(bottom);

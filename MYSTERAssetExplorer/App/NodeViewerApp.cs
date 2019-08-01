@@ -17,7 +17,7 @@ namespace MYSTERAssetExplorer.App
         RegistryManager registryManager;
         RegistryPersistenceService registryPersistence;
         RegistryTreeViewManager treeViewManager;
-        PanoBuilder panoBuilder = new PanoBuilder();
+        CubeMapBuilder panoBuilder = new CubeMapBuilder();
 
         public Node SelectedNode { get; private set; }
 
@@ -54,20 +54,25 @@ namespace MYSTERAssetExplorer.App
             return new byte[0];
         }
 
-        public void RunExport(string fileSavePath)
+        public void ExportSelectedNode(string fileSavePath)
         {
-            var images = new PanoImages();
+            ExportCubemap(fileSavePath, SelectedNode);
+        }
 
-            var imageSet = SelectedNode.CubeMaps.Color;
+        public void ExportCubemap(string fileSavePath, Node node)
+        {
+            var imageSet = node.CubeMaps.Color;
 
-            images.Back = Utils.LoadBitmapFromMemory(LookupFileImageData(SelectedNode, imageSet.Back.File), true);
-            images.Bottom = Utils.LoadBitmapFromMemory(LookupFileImageData(SelectedNode, imageSet.Bottom.File), true);
-            images.Front = Utils.LoadBitmapFromMemory(LookupFileImageData(SelectedNode, imageSet.Front.File), true);
-            images.Left = Utils.LoadBitmapFromMemory(LookupFileImageData(SelectedNode, imageSet.Left.File), true);
-            images.Right = Utils.LoadBitmapFromMemory(LookupFileImageData(SelectedNode, imageSet.Right.File), true);
-            images.Top = Utils.LoadBitmapFromMemory(LookupFileImageData(SelectedNode, imageSet.Top.File), true);
+            var images = new CubemapImages();
+            images.Back = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Back.File), true);
+            images.Bottom = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Bottom.File), true);
+            images.Front = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Front.File), true);
+            images.Left = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Left.File), true);
+            images.Right = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Right.File), true);
+            images.Top = Utils.LoadBitmapFromMemory(LookupFileImageData(node, imageSet.Top.File), true);
 
-            panoBuilder.BuildPanorama(fileSavePath, images);
+            Bitmap cubemap = new CubeMapBuilder().ConstructCubemap(images);
+            ImageSaveService.Save(fileSavePath, cubemap);
         }
 
         public void AddNodeToRegistry(GameEnum game, Node node)
@@ -133,6 +138,14 @@ namespace MYSTERAssetExplorer.App
                 SelectedNode.CubeMaps.Color.Back.File = files[0].Name;
 
             PopulateImages(SelectedNode);
+        }
+
+        internal List<Node> GetNodeList()
+        {
+            var list = new List<Node>();
+            list.AddRange(registryManager.Registry.Exile.Nodes);
+            list.AddRange(registryManager.Registry.Revelation.Nodes);
+            return list;
         }
 
         // for setting images from here

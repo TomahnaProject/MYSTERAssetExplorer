@@ -17,7 +17,7 @@ namespace MYSTERAssetExplorer.App
     public partial class AssetExplorer : Form
     {
         AssetExplorerApp app;
-        PanoBuilder builder;
+        CubeMapBuilder builder;
 
         bool filterSmallImages = false;
 
@@ -164,7 +164,7 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
-        private void folderExplorer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void nodeExplorer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
             fileExplorer.Items.Clear();
@@ -454,13 +454,13 @@ namespace MYSTERAssetExplorer.App
             //folderExplorer.ExpandAll(); // doesn't work well with rev's big data file
         }
 
-        private void folderExplorer_AfterExpand(object sender, TreeViewEventArgs e)
+        private void nodeExplorer_AfterExpand(object sender, TreeViewEventArgs e)
         {
             if (e.Node.ImageIndex == 0)
                 e.Node.ImageIndex = 1;
         }
 
-        private void folderExplorer_AfterCollapse(object sender, TreeViewEventArgs e)
+        private void nodeExplorer_AfterCollapse(object sender, TreeViewEventArgs e)
         {
             if (e.Node.ImageIndex == 1)
                 e.Node.ImageIndex = 0;

@@ -279,9 +279,9 @@
             this.folderExplorer.SelectedImageIndex = 0;
             this.folderExplorer.Size = new System.Drawing.Size(229, 647);
             this.folderExplorer.TabIndex = 23;
-            this.folderExplorer.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.folderExplorer_AfterCollapse);
-            this.folderExplorer.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.folderExplorer_AfterExpand);
-            this.folderExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.folderExplorer_NodeMouseClick);
+            this.folderExplorer.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.nodeExplorer_AfterCollapse);
+            this.folderExplorer.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.nodeExplorer_AfterExpand);
+            this.folderExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.nodeExplorer_NodeMouseClick);
             // 
             // contextMenuFolderExplorer
             // 

@@ -34,7 +34,7 @@ namespace MYSTERAssetExplorer.App
         public void Launch()
         {
             this.Show();
-            App.LoadRegistry();;
+            App.LoadRegistry(); ;
         }
 
         private void NodeViewer_FormClosing(object sender, FormClosingEventArgs e)
@@ -68,8 +68,8 @@ namespace MYSTERAssetExplorer.App
             node.Number = nodeProp_NumberInput.Text;
             //NodeType type;
             //Enum.TryParse<NodeType>(nodeProp_ClassificationInput.SelectedValue.ToString(), out type);
-            node.Type = (NodeType) nodeProp_ClassificationInput.SelectedValue;
-            node.Rotation.Yaw = (double) nodeProp_rotationZ.Value;
+            node.Type = (NodeType)nodeProp_ClassificationInput.SelectedValue;
+            node.Rotation.Yaw = (double)nodeProp_rotationZ.Value;
             node.Position.X = (double)nodeProp_PosX.Value;
             node.Position.Y = (double)nodeProp_PosY.Value;
             node.Position.Z = (double)nodeProp_PosZ.Value;
@@ -130,7 +130,7 @@ namespace MYSTERAssetExplorer.App
         private void nodeExplorer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
-            Node selectedNodeEntry = (Node) newSelected.Tag;
+            Node selectedNodeEntry = (Node)newSelected.Tag;
             App.SetSelectedNode(selectedNodeEntry);
             Populate(selectedNodeEntry);
         }
@@ -160,7 +160,7 @@ namespace MYSTERAssetExplorer.App
         {
             if (nodeExplorer.SelectedNode == null)
                 return;
-            if(nodeExplorer.SelectedNode.Tag is Node)
+            if (nodeExplorer.SelectedNode.Tag is Node)
             {
                 var selectedNode = (Node)nodeExplorer.SelectedNode.Tag;
                 var nodePath = nodeExplorer.SelectedNode.FullPath;
@@ -168,11 +168,6 @@ namespace MYSTERAssetExplorer.App
                 App.RemoveNodeFromRegistry(gameType, selectedNode);
                 App.RefreshRegistryTree();
             }
-        }
-
-        private void contextMenuNodeExplorer_Opening(object sender, CancelEventArgs e)
-        {
-
         }
 
         private void picturePanel_MouseDown(object sender, MouseEventArgs e)
@@ -257,9 +252,52 @@ namespace MYSTERAssetExplorer.App
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                App.RunExport(saveFileDialog.FileName);
+                App.ExportSelectedNode(saveFileDialog.FileName);
             }
         }
+
+        private void BatchExport(string folderPath, List<Node> nodes)
+        {
+            if(Directory.Exists(folderPath))
+            {
+                foreach (var node in nodes)
+                {
+                    var fileSavePath = Path.Combine(folderPath, node.GetFullName() + ".jpg");
+                    App.ExportCubemap(fileSavePath, node);
+                }
+            }
+        }
+
+        private void extractCubemapsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var s = sender;
+            var type = sender.GetType();
+        }
+
+        string exportDir = "";
+        private void ExportAllCubemaps_Click(object sender, EventArgs e)
+        {
+            var fileNameText = "Select Folder";
+            openFolderDialog.FileName = fileNameText;
+            openFolderDialog.CheckPathExists = true;
+            openFolderDialog.ShowReadOnly = false;
+            openFolderDialog.ReadOnlyChecked = true;
+            openFolderDialog.CheckFileExists = false;
+            openFolderDialog.ValidateNames = false;
+            openFolderDialog.InitialDirectory = exportDir;
+
+            if (openFolderDialog.ShowDialog() == DialogResult.OK)
+            {
+                exportDir = openFolderDialog.FileName.Replace(fileNameText, "");
+            }
+
+            if(!string.IsNullOrEmpty(exportDir))
+            {
+                var nodeList = this.App.GetNodeList();
+                BatchExport(exportDir, nodeList);
+            }
+        }
+
 
         //public void SetImage(CubeFaceEnum face, IVirtualFile file)
         //{

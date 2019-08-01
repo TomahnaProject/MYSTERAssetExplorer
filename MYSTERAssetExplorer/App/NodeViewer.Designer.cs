@@ -32,16 +32,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NodeViewer));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.nodeExplorer = new System.Windows.Forms.TreeView();
-            this.contextMenuNodeExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractAllChildNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuNode = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractCubeFacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frontImage = new System.Windows.Forms.Panel();
+            this.fileNameLabel_Front = new System.Windows.Forms.Label();
             this.bottomImage = new System.Windows.Forms.Panel();
+            this.fileNameLabel_Bottom = new System.Windows.Forms.Label();
             this.leftImage = new System.Windows.Forms.Panel();
+            this.fileNameLabel_Left = new System.Windows.Forms.Label();
             this.rightImage = new System.Windows.Forms.Panel();
+            this.fileNameLabel_Right = new System.Windows.Forms.Label();
             this.topImage = new System.Windows.Forms.Panel();
+            this.fileNameLabel_Top = new System.Windows.Forms.Label();
             this.backImage = new System.Windows.Forms.Panel();
+            this.fileNameLabel_Back = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NodePropertiesGroup = new System.Windows.Forms.GroupBox();
@@ -81,18 +88,17 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveRegistry = new System.Windows.Forms.ToolStripLabel();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.fileNameLabel_Bottom = new System.Windows.Forms.Label();
-            this.fileNameLabel_Left = new System.Windows.Forms.Label();
-            this.fileNameLabel_Right = new System.Windows.Forms.Label();
-            this.fileNameLabel_Top = new System.Windows.Forms.Label();
-            this.fileNameLabel_Back = new System.Windows.Forms.Label();
-            this.frontImage = new System.Windows.Forms.Panel();
-            this.fileNameLabel_Front = new System.Windows.Forms.Label();
+            this.contextMenuNodeViewer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractCubemapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
+            this.ExportAllCubemaps = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.contextMenuNodeExplorer.SuspendLayout();
+            this.contextMenuNode.SuspendLayout();
+            this.frontImage.SuspendLayout();
             this.bottomImage.SuspendLayout();
             this.leftImage.SuspendLayout();
             this.rightImage.SuspendLayout();
@@ -107,11 +113,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nodeProp_PosY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nodeProp_PosX)).BeginInit();
             this.panel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.MainPanel.SuspendLayout();
             this.nodeViewerMenuStrip.SuspendLayout();
-            this.frontImage.SuspendLayout();
+            this.contextMenuNodeViewer.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -146,7 +153,7 @@
             // 
             this.nodeExplorer.AllowDrop = true;
             this.nodeExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.nodeExplorer.ContextMenuStrip = this.contextMenuNodeExplorer;
+            this.nodeExplorer.ContextMenuStrip = this.contextMenuNode;
             this.nodeExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nodeExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.nodeExplorer.Location = new System.Drawing.Point(0, 0);
@@ -157,42 +164,64 @@
             this.nodeExplorer.TabIndex = 23;
             this.nodeExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.nodeExplorer_NodeMouseClick);
             // 
-            // contextMenuNodeExplorer
+            // contextMenuNode
             // 
-            this.contextMenuNodeExplorer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNodeToolStripMenuItem,
-            this.extractNodeToolStripMenuItem,
-            this.extractAllChildNodesToolStripMenuItem,
-            this.removeNodeToolStripMenuItem});
-            this.contextMenuNodeExplorer.Name = "contextMenuFolderExplorer";
-            this.contextMenuNodeExplorer.Size = new System.Drawing.Size(195, 92);
-            this.contextMenuNodeExplorer.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuNodeExplorer_Opening);
+            this.contextMenuNode.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renameToolStripMenuItem,
+            this.removeNodeToolStripMenuItem,
+            this.extractCubeFacesToolStripMenuItem,
+            this.extractNodeToolStripMenuItem});
+            this.contextMenuNode.Name = "contextMenuNode";
+            this.contextMenuNode.Size = new System.Drawing.Size(173, 92);
             // 
-            // addNodeToolStripMenuItem
+            // renameToolStripMenuItem
             // 
-            this.addNodeToolStripMenuItem.Name = "addNodeToolStripMenuItem";
-            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.addNodeToolStripMenuItem.Text = "Add Node";
-            this.addNodeToolStripMenuItem.Click += new System.EventHandler(this.addNodeToolStripMenuItem_Click);
-            // 
-            // extractNodeToolStripMenuItem
-            // 
-            this.extractNodeToolStripMenuItem.Name = "extractNodeToolStripMenuItem";
-            this.extractNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.extractNodeToolStripMenuItem.Text = "Extract Node";
-            // 
-            // extractAllChildNodesToolStripMenuItem
-            // 
-            this.extractAllChildNodesToolStripMenuItem.Name = "extractAllChildNodesToolStripMenuItem";
-            this.extractAllChildNodesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.extractAllChildNodesToolStripMenuItem.Text = "Extract All Child Nodes";
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.renameToolStripMenuItem.Text = "Rename";
             // 
             // removeNodeToolStripMenuItem
             // 
             this.removeNodeToolStripMenuItem.Name = "removeNodeToolStripMenuItem";
-            this.removeNodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.removeNodeToolStripMenuItem.Text = "Remove Node";
+            this.removeNodeToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.removeNodeToolStripMenuItem.Text = "Delete";
             this.removeNodeToolStripMenuItem.Click += new System.EventHandler(this.removeNodeToolStripMenuItem_Click);
+            // 
+            // extractCubeFacesToolStripMenuItem
+            // 
+            this.extractCubeFacesToolStripMenuItem.Name = "extractCubeFacesToolStripMenuItem";
+            this.extractCubeFacesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.extractCubeFacesToolStripMenuItem.Text = "Extract Cube Faces";
+            // 
+            // extractNodeToolStripMenuItem
+            // 
+            this.extractNodeToolStripMenuItem.Name = "extractNodeToolStripMenuItem";
+            this.extractNodeToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.extractNodeToolStripMenuItem.Text = "Extract Cubemap";
+            // 
+            // frontImage
+            // 
+            this.frontImage.AllowDrop = true;
+            this.frontImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.frontImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.frontImage.Controls.Add(this.fileNameLabel_Front);
+            this.frontImage.Location = new System.Drawing.Point(330, 340);
+            this.frontImage.Name = "frontImage";
+            this.frontImage.Size = new System.Drawing.Size(320, 320);
+            this.frontImage.TabIndex = 31;
+            this.frontImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragDrop);
+            this.frontImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
+            this.frontImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
+            // 
+            // fileNameLabel_Front
+            // 
+            this.fileNameLabel_Front.AutoSize = true;
+            this.fileNameLabel_Front.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Front.Location = new System.Drawing.Point(10, 9);
+            this.fileNameLabel_Front.Name = "fileNameLabel_Front";
+            this.fileNameLabel_Front.Size = new System.Drawing.Size(35, 14);
+            this.fileNameLabel_Front.TabIndex = 1;
+            this.fileNameLabel_Front.Text = "Front";
             // 
             // bottomImage
             // 
@@ -208,6 +237,16 @@
             this.bottomImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
             this.bottomImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
             // 
+            // fileNameLabel_Bottom
+            // 
+            this.fileNameLabel_Bottom.AutoSize = true;
+            this.fileNameLabel_Bottom.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Bottom.Location = new System.Drawing.Point(6, 6);
+            this.fileNameLabel_Bottom.Name = "fileNameLabel_Bottom";
+            this.fileNameLabel_Bottom.Size = new System.Drawing.Size(46, 14);
+            this.fileNameLabel_Bottom.TabIndex = 0;
+            this.fileNameLabel_Bottom.Text = "Bottom";
+            // 
             // leftImage
             // 
             this.leftImage.AllowDrop = true;
@@ -221,6 +260,16 @@
             this.leftImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragDrop);
             this.leftImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
             this.leftImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
+            // 
+            // fileNameLabel_Left
+            // 
+            this.fileNameLabel_Left.AutoSize = true;
+            this.fileNameLabel_Left.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Left.Location = new System.Drawing.Point(7, 9);
+            this.fileNameLabel_Left.Name = "fileNameLabel_Left";
+            this.fileNameLabel_Left.Size = new System.Drawing.Size(26, 14);
+            this.fileNameLabel_Left.TabIndex = 1;
+            this.fileNameLabel_Left.Text = "Left";
             // 
             // rightImage
             // 
@@ -236,6 +285,16 @@
             this.rightImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
             this.rightImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
             // 
+            // fileNameLabel_Right
+            // 
+            this.fileNameLabel_Right.AutoSize = true;
+            this.fileNameLabel_Right.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Right.Location = new System.Drawing.Point(6, 9);
+            this.fileNameLabel_Right.Name = "fileNameLabel_Right";
+            this.fileNameLabel_Right.Size = new System.Drawing.Size(35, 14);
+            this.fileNameLabel_Right.TabIndex = 2;
+            this.fileNameLabel_Right.Text = "Right";
+            // 
             // topImage
             // 
             this.topImage.AllowDrop = true;
@@ -250,6 +309,16 @@
             this.topImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
             this.topImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
             // 
+            // fileNameLabel_Top
+            // 
+            this.fileNameLabel_Top.AutoSize = true;
+            this.fileNameLabel_Top.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Top.Location = new System.Drawing.Point(10, 2);
+            this.fileNameLabel_Top.Name = "fileNameLabel_Top";
+            this.fileNameLabel_Top.Size = new System.Drawing.Size(26, 14);
+            this.fileNameLabel_Top.TabIndex = 2;
+            this.fileNameLabel_Top.Text = "Top";
+            // 
             // backImage
             // 
             this.backImage.AllowDrop = true;
@@ -263,6 +332,16 @@
             this.backImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragDrop);
             this.backImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
             this.backImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
+            // 
+            // fileNameLabel_Back
+            // 
+            this.fileNameLabel_Back.AutoSize = true;
+            this.fileNameLabel_Back.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel_Back.Location = new System.Drawing.Point(6, 9);
+            this.fileNameLabel_Back.Name = "fileNameLabel_Back";
+            this.fileNameLabel_Back.Size = new System.Drawing.Size(32, 14);
+            this.fileNameLabel_Back.TabIndex = 2;
+            this.fileNameLabel_Back.Text = "Back";
             // 
             // pictureBox1
             // 
@@ -546,6 +625,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ExportAllCubemaps);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.ForeColor = System.Drawing.Color.Gainsboro;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -664,79 +744,41 @@
             this.saveRegistry.Text = "Save Registry";
             this.saveRegistry.Click += new System.EventHandler(this.saveRegistry_Click);
             // 
-            // fileNameLabel_Bottom
+            // contextMenuNodeViewer
             // 
-            this.fileNameLabel_Bottom.AutoSize = true;
-            this.fileNameLabel_Bottom.BackColor = System.Drawing.Color.Transparent;
-            this.fileNameLabel_Bottom.Location = new System.Drawing.Point(6, 6);
-            this.fileNameLabel_Bottom.Name = "fileNameLabel_Bottom";
-            this.fileNameLabel_Bottom.Size = new System.Drawing.Size(46, 14);
-            this.fileNameLabel_Bottom.TabIndex = 0;
-            this.fileNameLabel_Bottom.Text = "Bottom";
+            this.contextMenuNodeViewer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.extractCubemapsToolStripMenuItem});
+            this.contextMenuNodeViewer.Name = "contextMenuNodeViewer";
+            this.contextMenuNodeViewer.Size = new System.Drawing.Size(170, 48);
             // 
-            // fileNameLabel_Left
+            // toolStripMenuItem1
             // 
-            this.fileNameLabel_Left.AutoSize = true;
-            this.fileNameLabel_Left.BackColor = System.Drawing.Color.Transparent;
-            this.fileNameLabel_Left.Location = new System.Drawing.Point(7, 9);
-            this.fileNameLabel_Left.Name = "fileNameLabel_Left";
-            this.fileNameLabel_Left.Size = new System.Drawing.Size(26, 14);
-            this.fileNameLabel_Left.TabIndex = 1;
-            this.fileNameLabel_Left.Text = "Left";
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(169, 22);
+            this.toolStripMenuItem1.Text = "Add Node";
             // 
-            // fileNameLabel_Right
+            // extractCubemapsToolStripMenuItem
             // 
-            this.fileNameLabel_Right.AutoSize = true;
-            this.fileNameLabel_Right.BackColor = System.Drawing.Color.Transparent;
-            this.fileNameLabel_Right.Location = new System.Drawing.Point(6, 9);
-            this.fileNameLabel_Right.Name = "fileNameLabel_Right";
-            this.fileNameLabel_Right.Size = new System.Drawing.Size(35, 14);
-            this.fileNameLabel_Right.TabIndex = 2;
-            this.fileNameLabel_Right.Text = "Right";
+            this.extractCubemapsToolStripMenuItem.Name = "extractCubemapsToolStripMenuItem";
+            this.extractCubemapsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.extractCubemapsToolStripMenuItem.Text = "Extract Cubemaps";
+            this.extractCubemapsToolStripMenuItem.Click += new System.EventHandler(this.extractCubemapsToolStripMenuItem_Click);
             // 
-            // fileNameLabel_Top
+            // openFolderDialog
             // 
-            this.fileNameLabel_Top.AutoSize = true;
-            this.fileNameLabel_Top.BackColor = System.Drawing.Color.Transparent;
-            this.fileNameLabel_Top.Location = new System.Drawing.Point(10, 2);
-            this.fileNameLabel_Top.Name = "fileNameLabel_Top";
-            this.fileNameLabel_Top.Size = new System.Drawing.Size(26, 14);
-            this.fileNameLabel_Top.TabIndex = 2;
-            this.fileNameLabel_Top.Text = "Top";
+            this.openFolderDialog.FileName = "Select Folder";
             // 
-            // fileNameLabel_Back
+            // ExportAllCubemaps
             // 
-            this.fileNameLabel_Back.AutoSize = true;
-            this.fileNameLabel_Back.BackColor = System.Drawing.Color.Transparent;
-            this.fileNameLabel_Back.Location = new System.Drawing.Point(6, 9);
-            this.fileNameLabel_Back.Name = "fileNameLabel_Back";
-            this.fileNameLabel_Back.Size = new System.Drawing.Size(32, 14);
-            this.fileNameLabel_Back.TabIndex = 2;
-            this.fileNameLabel_Back.Text = "Back";
-            // 
-            // frontImage
-            // 
-            this.frontImage.AllowDrop = true;
-            this.frontImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
-            this.frontImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.frontImage.Controls.Add(this.fileNameLabel_Front);
-            this.frontImage.Location = new System.Drawing.Point(330, 340);
-            this.frontImage.Name = "frontImage";
-            this.frontImage.Size = new System.Drawing.Size(320, 320);
-            this.frontImage.TabIndex = 31;
-            this.frontImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragDrop);
-            this.frontImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picturePanel_DragEnter);
-            this.frontImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
-            // 
-            // fileNameLabel_Front
-            // 
-            this.fileNameLabel_Front.AutoSize = true;
-            this.fileNameLabel_Front.BackColor = System.Drawing.Color.Transparent;
-            this.fileNameLabel_Front.Location = new System.Drawing.Point(10, 9);
-            this.fileNameLabel_Front.Name = "fileNameLabel_Front";
-            this.fileNameLabel_Front.Size = new System.Drawing.Size(35, 14);
-            this.fileNameLabel_Front.TabIndex = 1;
-            this.fileNameLabel_Front.Text = "Front";
+            this.ExportAllCubemaps.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ExportAllCubemaps.Location = new System.Drawing.Point(21, 23);
+            this.ExportAllCubemaps.Name = "ExportAllCubemaps";
+            this.ExportAllCubemaps.Size = new System.Drawing.Size(261, 58);
+            this.ExportAllCubemaps.TabIndex = 1;
+            this.ExportAllCubemaps.Text = "Export All Cubemaps";
+            this.ExportAllCubemaps.UseVisualStyleBackColor = false;
+            this.ExportAllCubemaps.Click += new System.EventHandler(this.ExportAllCubemaps_Click);
             // 
             // NodeViewer
             // 
@@ -758,7 +800,9 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.contextMenuNodeExplorer.ResumeLayout(false);
+            this.contextMenuNode.ResumeLayout(false);
+            this.frontImage.ResumeLayout(false);
+            this.frontImage.PerformLayout();
             this.bottomImage.ResumeLayout(false);
             this.bottomImage.PerformLayout();
             this.leftImage.ResumeLayout(false);
@@ -779,14 +823,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.nodeProp_PosY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nodeProp_PosX)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.MainPanel.ResumeLayout(false);
             this.nodeViewerMenuStrip.ResumeLayout(false);
             this.nodeViewerMenuStrip.PerformLayout();
-            this.frontImage.ResumeLayout(false);
-            this.frontImage.PerformLayout();
+            this.contextMenuNodeViewer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -821,10 +865,8 @@
         private System.Windows.Forms.RadioButton mapTypeDepth;
         private System.Windows.Forms.RadioButton mapTypeColor;
         private System.Windows.Forms.Label label_DepthRange;
-        private System.Windows.Forms.ContextMenuStrip contextMenuNodeExplorer;
+        private System.Windows.Forms.ContextMenuStrip contextMenuNode;
         private System.Windows.Forms.ToolStripMenuItem extractNodeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem extractAllChildNodesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addNodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeNodeToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown nodeProp_rotationZ;
         private System.Windows.Forms.Label label_PosZ;
@@ -851,5 +893,12 @@
         private System.Windows.Forms.Label fileNameLabel_Back;
         private System.Windows.Forms.Panel frontImage;
         private System.Windows.Forms.Label fileNameLabel_Front;
+        private System.Windows.Forms.ToolStripMenuItem extractCubeFacesToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuNodeViewer;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem extractCubemapsToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFolderDialog;
+        private System.Windows.Forms.Button ExportAllCubemaps;
     }
 }
