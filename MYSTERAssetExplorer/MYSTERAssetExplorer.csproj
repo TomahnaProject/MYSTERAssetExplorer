@@ -131,12 +131,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RegistryFiles\RevelationAssetRegistry.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="RegistryFiles\ExileAssetRegistry.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="RegistryFiles\RevelationAssetRegistry.xml" />
+    <EmbeddedResource Include="RegistryFiles\ExileAssetRegistry.xml" />
     <Content Include="Resources\archives.ico" />
     <Content Include="Resources\bullet.ico" />
     <Content Include="Resources\cube.png" />

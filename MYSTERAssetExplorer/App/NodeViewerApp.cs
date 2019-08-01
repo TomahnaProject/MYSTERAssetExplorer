@@ -98,13 +98,22 @@ namespace MYSTERAssetExplorer.App
             treeViewManager.RegenTreeView(registryManager.Registry);
         }
 
-        public void LoadRegistry()
+        public void LoadDefaultRegistry()
         {
-            WriteToConsole(Color.Orange, "Loading Registry...");
+            WriteToConsole(Color.Orange, "Loading Default Registry...");
+            var registry = registryPersistence.GetDefaultRegistry();
+            registryManager.Registry = registry;
+            RefreshRegistryTree();
+            WriteToConsole(Color.Green, "Default Registry Loaded Successfully!");
+        }
+
+        public void LoadCustomRegistry()
+        {
+            WriteToConsole(Color.Orange, "Loading Custom Registry...");
             var registry = registryPersistence.GetRegistryFromDisk();
             registryManager.Registry = registry;
             RefreshRegistryTree();
-            WriteToConsole(Color.Green, "Registry Loaded Successfully!");
+            WriteToConsole(Color.Green, "Custom Registry Loaded Successfully!");
         }
 
         public void SaveRegistry()

@@ -76,6 +76,7 @@
             this.label_Zone = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ExportAllCubemaps = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -92,7 +93,6 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.extractCubemapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
-            this.ExportAllCubemaps = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -634,6 +634,17 @@
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             // 
+            // ExportAllCubemaps
+            // 
+            this.ExportAllCubemaps.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ExportAllCubemaps.Location = new System.Drawing.Point(21, 23);
+            this.ExportAllCubemaps.Name = "ExportAllCubemaps";
+            this.ExportAllCubemaps.Size = new System.Drawing.Size(261, 58);
+            this.ExportAllCubemaps.TabIndex = 1;
+            this.ExportAllCubemaps.Text = "Export All Cubemaps";
+            this.ExportAllCubemaps.UseVisualStyleBackColor = false;
+            this.ExportAllCubemaps.Click += new System.EventHandler(this.ExportAllCubemaps_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -728,8 +739,8 @@
             // loadRegistry
             // 
             this.loadRegistry.Name = "loadRegistry";
-            this.loadRegistry.Size = new System.Drawing.Size(78, 22);
-            this.loadRegistry.Text = "Load Registry";
+            this.loadRegistry.Size = new System.Drawing.Size(123, 22);
+            this.loadRegistry.Text = "Load Custom Registry";
             this.loadRegistry.Click += new System.EventHandler(this.loadRegistry_Click);
             // 
             // toolStripSeparator1
@@ -740,8 +751,8 @@
             // saveRegistry
             // 
             this.saveRegistry.Name = "saveRegistry";
-            this.saveRegistry.Size = new System.Drawing.Size(76, 22);
-            this.saveRegistry.Text = "Save Registry";
+            this.saveRegistry.Size = new System.Drawing.Size(121, 22);
+            this.saveRegistry.Text = "Save Custom Registry";
             this.saveRegistry.Click += new System.EventHandler(this.saveRegistry_Click);
             // 
             // contextMenuNodeViewer
@@ -768,17 +779,6 @@
             // openFolderDialog
             // 
             this.openFolderDialog.FileName = "Select Folder";
-            // 
-            // ExportAllCubemaps
-            // 
-            this.ExportAllCubemaps.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ExportAllCubemaps.Location = new System.Drawing.Point(21, 23);
-            this.ExportAllCubemaps.Name = "ExportAllCubemaps";
-            this.ExportAllCubemaps.Size = new System.Drawing.Size(261, 58);
-            this.ExportAllCubemaps.TabIndex = 1;
-            this.ExportAllCubemaps.Text = "Export All Cubemaps";
-            this.ExportAllCubemaps.UseVisualStyleBackColor = false;
-            this.ExportAllCubemaps.Click += new System.EventHandler(this.ExportAllCubemaps_Click);
             // 
             // NodeViewer
             // 

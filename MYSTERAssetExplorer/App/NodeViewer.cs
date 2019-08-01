@@ -34,7 +34,7 @@ namespace MYSTERAssetExplorer.App
         public void Launch()
         {
             this.Show();
-            App.LoadRegistry(); ;
+            App.LoadDefaultRegistry(); ;
         }
 
         private void NodeViewer_FormClosing(object sender, FormClosingEventArgs e)
@@ -120,7 +120,7 @@ namespace MYSTERAssetExplorer.App
 
         private void loadRegistry_Click(object sender, EventArgs e)
         {
-            App.LoadRegistry();
+            App.LoadCustomRegistry();
         }
 
         private void saveRegistry_Click(object sender, EventArgs e)
