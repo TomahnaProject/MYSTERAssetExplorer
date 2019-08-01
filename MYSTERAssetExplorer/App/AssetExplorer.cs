@@ -19,6 +19,8 @@ namespace MYSTERAssetExplorer.App
         AssetExplorerApp app;
         PanoBuilder builder;
 
+        bool filterSmallImages = false;
+
         public AssetExplorer()
         {
             InitializeComponent();
@@ -167,13 +169,20 @@ namespace MYSTERAssetExplorer.App
             TreeNode newSelected = e.Node;
             fileExplorer.Items.Clear();
             IVirtualFolder nodeFolderInfo = (IVirtualFolder)newSelected.Tag;
-            ListViewItem.ListViewSubItem[] subItems;
-            ListViewItem item = null;
 
             SetLocation(newSelected);
 
+            ListFolders(nodeFolderInfo);
+            ListFiles(nodeFolderInfo);
+            //fileExplorer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        private void ListFolders(IVirtualFolder nodeFolderInfo)
+        {
             foreach (IVirtualFolder folder in nodeFolderInfo.SubFolders)
             {
+                ListViewItem item = null;
+                ListViewItem.ListViewSubItem[] subItems;
                 if (folder == null)
                     continue;
 
@@ -191,22 +200,38 @@ namespace MYSTERAssetExplorer.App
                 item.SubItems.AddRange(subItems);
                 fileExplorer.Items.Add(item);
             }
+        }
+
+        private void ListFiles(IVirtualFolder nodeFolderInfo)
+        {
+            ListViewItem.ListViewSubItem[] subItems;
+            ListViewItem item = null;
+            bool isSmallImage = true;
 
             foreach (var file in nodeFolderInfo.Files)
             {
+                isSmallImage = true;
                 item = new ListViewItem(file.Name, (int)file.ContentDetails.Type);
                 item.Tag = file;
+
                 if (file.ContentDetails is VirtualFileArchive)
                 {
                     var archiveIndex = file.ContentDetails as VirtualFileArchive;
+                    var fileSizeInBytes = archiveIndex.End - archiveIndex.Start;
                     subItems = new ListViewItem.ListViewSubItem[]
                     {
-                        new ListViewItem.ListViewSubItem(item, Utils.GetBytesReadable(archiveIndex.End - archiveIndex.Start)),
+                        new ListViewItem.ListViewSubItem(item, Utils.GetBytesReadable(fileSizeInBytes)),
                         new ListViewItem.ListViewSubItem(item, "(" + archiveIndex.Start + ", " + archiveIndex.End +")")
                     };
+
+                    // using a size cutoff for now, not reliable, but useful
+                    // anything below 20KB is filtered out
+                    // (I've never seen a cube face size fall below 30KB+)
+                    isSmallImage = fileSizeInBytes < 20000;
                 }
                 else if (file.ContentDetails is VirtualFileTiledImage)
                 {
+                    isSmallImage = false;
                     item.ImageIndex = 9;
                     var tiledImage = file.ContentDetails as VirtualFileTiledImage;
                     subItems = new ListViewItem.ListViewSubItem[]
@@ -220,11 +245,13 @@ namespace MYSTERAssetExplorer.App
                     subItems = new ListViewItem.ListViewSubItem[0];
                 }
 
+                if (filterSmallImages)
+                    if (isSmallImage)
+                        continue;
+
                 item.SubItems.AddRange(subItems);
                 fileExplorer.Items.Add(item);
             }
-
-            //fileExplorer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void PopulateFolderExplorer(List<IVirtualFolder> folders)
@@ -485,6 +512,11 @@ namespace MYSTERAssetExplorer.App
             }
 
             app.SendImagesToNodeViewer(game, scene, zone, files);
+        }
+
+        private void filterSmallImages_CheckedChanged(object sender, EventArgs e)
+        {
+            filterSmallImages = filterSmallImagesCheckbox.Checked;
         }
     }
 }

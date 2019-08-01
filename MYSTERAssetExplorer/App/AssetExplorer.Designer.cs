@@ -53,14 +53,15 @@
             this.expandAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iconSet = new System.Windows.Forms.ImageList(this.components);
+            this.filterSmallImagesCheckbox = new System.Windows.Forms.CheckBox();
             this.fileExplorer = new System.Windows.Forms.ListView();
             this.fileColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.sizeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.offsetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuFileExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.sendToNodeViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.previewGroup.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Main_Footer)).BeginInit();
@@ -256,6 +257,7 @@
             // 
             // Folder_File.Panel2
             // 
+            this.Folder_File.Panel2.Controls.Add(this.filterSmallImagesCheckbox);
             this.Folder_File.Panel2.Controls.Add(this.fileExplorer);
             this.Folder_File.Size = new System.Drawing.Size(463, 647);
             this.Folder_File.SplitterDistance = 229;
@@ -328,6 +330,18 @@
             this.iconSet.Images.SetKeyName(10, "red-alert.ico");
             this.iconSet.Images.SetKeyName(11, "zone.png");
             // 
+            // filterSmallImagesCheckbox
+            // 
+            this.filterSmallImagesCheckbox.AutoSize = true;
+            this.filterSmallImagesCheckbox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.filterSmallImagesCheckbox.Location = new System.Drawing.Point(0, 0);
+            this.filterSmallImagesCheckbox.Name = "filterSmallImagesCheckbox";
+            this.filterSmallImagesCheckbox.Size = new System.Drawing.Size(230, 18);
+            this.filterSmallImagesCheckbox.TabIndex = 1;
+            this.filterSmallImagesCheckbox.Text = "Filter Small Images";
+            this.filterSmallImagesCheckbox.UseVisualStyleBackColor = true;
+            this.filterSmallImagesCheckbox.CheckedChanged += new System.EventHandler(this.filterSmallImages_CheckedChanged);
+            // 
             // fileExplorer
             // 
             this.fileExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
@@ -336,11 +350,11 @@
             this.sizeColumn,
             this.offsetColumn});
             this.fileExplorer.ContextMenuStrip = this.contextMenuFileExplorer;
-            this.fileExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileExplorer.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.fileExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.fileExplorer.Location = new System.Drawing.Point(0, 0);
+            this.fileExplorer.Location = new System.Drawing.Point(0, 24);
             this.fileExplorer.Name = "fileExplorer";
-            this.fileExplorer.Size = new System.Drawing.Size(230, 647);
+            this.fileExplorer.Size = new System.Drawing.Size(230, 623);
             this.fileExplorer.SmallImageList = this.iconSet;
             this.fileExplorer.TabIndex = 0;
             this.fileExplorer.UseCompatibleStateImageBehavior = false;
@@ -370,7 +384,7 @@
             this.extractSelectedFilesToolStripMenuItem,
             this.sendToNodeViewerToolStripMenuItem});
             this.contextMenuFileExplorer.Name = "contextMenuFolderExplorer";
-            this.contextMenuFileExplorer.Size = new System.Drawing.Size(188, 70);
+            this.contextMenuFileExplorer.Size = new System.Drawing.Size(188, 48);
             // 
             // extractSelectedFilesToolStripMenuItem
             // 
@@ -414,6 +428,7 @@
             this.Files_Preview.ResumeLayout(false);
             this.Folder_File.Panel1.ResumeLayout(false);
             this.Folder_File.Panel2.ResumeLayout(false);
+            this.Folder_File.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Folder_File)).EndInit();
             this.Folder_File.ResumeLayout(false);
             this.contextMenuFolderExplorer.ResumeLayout(false);
@@ -454,6 +469,7 @@
         private System.Windows.Forms.Panel previewPanel;
         private System.Windows.Forms.ToolStripLabel findFileButton;
         private System.Windows.Forms.ToolStripMenuItem sendToNodeViewerToolStripMenuItem;
+        private System.Windows.Forms.CheckBox filterSmallImagesCheckbox;
     }
 }
 
