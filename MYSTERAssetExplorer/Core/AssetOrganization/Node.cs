@@ -59,6 +59,11 @@ namespace MYSTERAssetExplorer.Core
         [XmlAttribute]
         public NodeType Type { get; set; }
 
+        public string GetFullName()
+        {
+            return Scene + "_" + Zone + "_" + Number;
+        }
+
         // for photogrammetry purposes
         public NodeTranslation Position { get; set; }
         public NodeRotation Rotation { get; set; }

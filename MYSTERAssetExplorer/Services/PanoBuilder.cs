@@ -24,10 +24,10 @@ namespace MYSTERAssetExplorer
 
     public class PanoBuilder
     {
-        public void BuildPanorama(string outputDirectory, string name, PanoImages images)
+        public void BuildPanorama(string fileSavePath, PanoImages images)
         {
             var image = StichCubeMap(images);
-            var finalSavePath = Path.Combine(outputDirectory, name + ".jpg");
+            //var finalSavePath = Path.Combine(outputDirectory, name);
 
             long quality = 100;
             using (EncoderParameters encoderParameters = new EncoderParameters(1))
@@ -35,7 +35,7 @@ namespace MYSTERAssetExplorer
             {
                 ImageCodecInfo codecInfo = ImageCodecInfo.GetImageDecoders().First(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
                 encoderParameters.Param[0] = encoderParameter;
-                image.Save(finalSavePath, codecInfo, encoderParameters);
+                image.Save(fileSavePath, codecInfo, encoderParameters);
             }
         }
 

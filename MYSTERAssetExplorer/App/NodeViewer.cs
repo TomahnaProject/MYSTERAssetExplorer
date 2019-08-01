@@ -220,16 +220,15 @@ namespace MYSTERAssetExplorer.App
             if (App.SelectedNode == null)
                 return;
 
-            openFolderDialog.FileName = "Select Folder";
-            openFolderDialog.CheckPathExists = true;
-            openFolderDialog.ShowReadOnly = false;
-            openFolderDialog.ReadOnlyChecked = true;
-            openFolderDialog.CheckFileExists = false;
-            openFolderDialog.ValidateNames = false;
+            saveFileDialog.Filter = "Jpeg (*.jpg) |*.jpg";
+            saveFileDialog.FileName = App.SelectedNode.GetFullName();
+            saveFileDialog.CheckPathExists = true;
+            saveFileDialog.CheckFileExists = false;
+            saveFileDialog.ValidateNames = false;
 
-            if (openFolderDialog.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                App.RunExport(Path.GetDirectoryName(openFolderDialog.FileName));
+                App.RunExport(saveFileDialog.FileName);
             }
         }
 

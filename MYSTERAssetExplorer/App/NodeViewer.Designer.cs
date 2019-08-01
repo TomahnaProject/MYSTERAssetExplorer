@@ -40,6 +40,7 @@
             this.bottomImage = new System.Windows.Forms.Panel();
             this.leftImage = new System.Windows.Forms.Panel();
             this.rightImage = new System.Windows.Forms.Panel();
+            this.topImage = new System.Windows.Forms.Panel();
             this.backImage = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -75,13 +76,12 @@
             this.exportButton = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.frontImage = new System.Windows.Forms.Panel();
-            this.topImage = new System.Windows.Forms.Panel();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.nodeViewerMenuStrip = new System.Windows.Forms.ToolStrip();
             this.loadRegistry = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveRegistry = new System.Windows.Forms.ToolStripLabel();
-            this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -220,6 +220,19 @@
             this.rightImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
             this.rightImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
             this.rightImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
+            // 
+            // topImage
+            // 
+            this.topImage.AllowDrop = true;
+            this.topImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
+            this.topImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.topImage.Location = new System.Drawing.Point(330, 20);
+            this.topImage.Name = "topImage";
+            this.topImage.Size = new System.Drawing.Size(320, 320);
+            this.topImage.TabIndex = 30;
+            this.topImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
+            this.topImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
+            this.topImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
             // 
             // backImage
             // 
@@ -603,19 +616,6 @@
             this.frontImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
             this.frontImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
             // 
-            // topImage
-            // 
-            this.topImage.AllowDrop = true;
-            this.topImage.BackgroundImage = global::MYSTERAssetExplorer.Properties.Resources.picture_icon_large;
-            this.topImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.topImage.Location = new System.Drawing.Point(330, 20);
-            this.topImage.Name = "topImage";
-            this.topImage.Size = new System.Drawing.Size(320, 320);
-            this.topImage.TabIndex = 30;
-            this.topImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.picBox_DragDrop);
-            this.topImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.picBox_DragEnter);
-            this.topImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_MouseDown);
-            // 
             // MainPanel
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -659,10 +659,6 @@
             this.saveRegistry.Size = new System.Drawing.Size(76, 22);
             this.saveRegistry.Text = "Save Registry";
             this.saveRegistry.Click += new System.EventHandler(this.saveRegistry_Click);
-            // 
-            // openFolderDialog
-            // 
-            this.openFolderDialog.FileName = "Select Folder";
             // 
             // NodeViewer
             // 
@@ -758,6 +754,6 @@
         private System.Windows.Forms.Panel leftImage;
         private System.Windows.Forms.Panel rightImage;
         protected System.Windows.Forms.GroupBox NodePropertiesGroup;
-        private System.Windows.Forms.OpenFileDialog openFolderDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

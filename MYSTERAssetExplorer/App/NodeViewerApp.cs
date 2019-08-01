@@ -53,7 +53,7 @@ namespace MYSTERAssetExplorer.App
             return new byte[0];
         }
 
-        public void RunExport(string outputDir)
+        public void RunExport(string fileSavePath)
         {
             var images = new PanoImages();
 
@@ -66,7 +66,7 @@ namespace MYSTERAssetExplorer.App
             images.Right = Utils.LoadBitmapFromMemory(LookupFileImageData(SelectedNode, imageSet.Right.File), true);
             images.Top = Utils.LoadBitmapFromMemory(LookupFileImageData(SelectedNode, imageSet.Top.File), true);
 
-            panoBuilder.BuildPanorama(outputDir, SelectedNode.Scene + SelectedNode.Zone + SelectedNode.Number, images);
+            panoBuilder.BuildPanorama(fileSavePath, images);
         }
 
         public void AddNodeToRegistry(GameEnum game, Node node)
