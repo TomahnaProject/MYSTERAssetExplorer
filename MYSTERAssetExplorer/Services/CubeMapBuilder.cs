@@ -102,11 +102,15 @@ namespace MYSTERAssetExplorer
             newBitmap.SetResolution(originalImage.HorizontalResolution, originalImage.VerticalResolution);
             using (var g = Graphics.FromImage(newBitmap))
             {
-                var localWidth = 0;
+                var horizontalOffset = 0;
                 foreach (var image in enumerable)
                 {
-                    g.DrawImage(image, localWidth, 0);
-                    localWidth += image.Width;
+                    // Super important to specify the width and height
+                    // otherwise DrawImage will randomly scale some cubefaces
+                    // apparently some kind of DPI thing
+                    // https://stackoverflow.com/questions/41188689/drawimage-scales-original-image
+                    g.DrawImage(image, horizontalOffset, 0, image.Width, image.Height);
+                    horizontalOffset += image.Width;
                 }
             }
             return newBitmap;
