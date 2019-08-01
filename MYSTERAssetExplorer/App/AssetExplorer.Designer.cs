@@ -193,8 +193,7 @@
             // findFileButton
             // 
             this.findFileButton.Name = "findFileButton";
-            this.findFileButton.Size = new System.Drawing.Size(51, 22);
-            this.findFileButton.Text = "Find File";
+            this.findFileButton.Size = new System.Drawing.Size(0, 22);
             this.findFileButton.Click += new System.EventHandler(this.FindFileButton_Click);
             // 
             // Main_Footer

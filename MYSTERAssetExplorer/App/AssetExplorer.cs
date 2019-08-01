@@ -30,6 +30,7 @@ namespace MYSTERAssetExplorer.App
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            this.Text = this.Text + " (ver " + GetVersion() + ")";
             ApplicationEntryBootstrap();
         }
 
@@ -123,7 +124,22 @@ namespace MYSTERAssetExplorer.App
 
         private void aboutButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Utility used to view and extract assets of Myst 3 Exile, and Myst 4 Revelation.\r\nCreated in 2017 by James Thomas");
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("MYSTER Asset Explorer");
+            sb.AppendLine("Version " + GetVersion());
+            sb.AppendLine("Release Date 8/1/2019");
+            sb.AppendLine();
+            sb.AppendLine("A utility to view and extract assets of Myst 3 Exile, and Myst 4 Revelation.");
+            sb.AppendLine("Created by James Thomas");
+
+            MessageBox.Show(sb.ToString());
+        }
+
+        private string GetVersion()
+        {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            return fvi.FileVersion;
         }
 
         private void helpButton_Click(object sender, EventArgs e)
