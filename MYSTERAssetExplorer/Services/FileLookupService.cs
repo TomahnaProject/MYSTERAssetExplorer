@@ -46,21 +46,34 @@ namespace MYSTERAssetExplorer.Services
                 return null;
             }
 
-            var sceneName = (ExileSceneProperName)Enum.Parse(typeof(ExileSceneProperName), address.Scene, true);
-            var sceneCode = ((ExileSceneCode)sceneName).ToString();
+            ExileSceneCode sceneCode;
+            ExileSceneProperName scene;
+
+            if (address.Scene.Length < 3)
+            {
+                // verify it's proper scenecode
+                sceneCode = (ExileSceneCode) Enum.Parse(typeof(ExileSceneCode), address.Scene, true);
+                scene = (ExileSceneProperName)sceneCode;
+            }
+            else
+            {
+                // get the scenecode from the proper name
+                scene = (ExileSceneProperName)Enum.Parse(typeof(ExileSceneProperName), address.Scene, true);
+                sceneCode = (ExileSceneCode)scene;
+            }
 
             Type type = null;
-            if (sceneName == ExileSceneProperName.Amateria)
+            if (scene == ExileSceneProperName.Amateria)
                 type = typeof(ExileAmateriaZoneCode);
-            else if (sceneName == ExileSceneProperName.Edanna)
+            else if (scene == ExileSceneProperName.Edanna)
                 type = typeof(ExileEdannaZoneCode);
-            else if (sceneName == ExileSceneProperName.Jnanin)
+            else if (scene == ExileSceneProperName.Jnanin)
                 type = typeof(ExileJnaninZoneCode);
-            else if (sceneName == ExileSceneProperName.Narayan)
+            else if (scene == ExileSceneProperName.Narayan)
                 type = typeof(ExileNarayanZoneCode);
-            else if (sceneName == ExileSceneProperName.Tomahna)
+            else if (scene == ExileSceneProperName.Tomahna)
                 type = typeof(ExileTomahnaZoneCode);
-            else if (sceneName == ExileSceneProperName.Voltaic)
+            else if (scene == ExileSceneProperName.Voltaic)
                 type = typeof(ExileVoltaicZoneCode);
 
             var zoneName = Enum.Parse(type, address.Zone, true);

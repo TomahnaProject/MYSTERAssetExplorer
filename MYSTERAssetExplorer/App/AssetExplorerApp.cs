@@ -312,9 +312,9 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
-        internal void SendImagesToNodeViewer(List<IVirtualFile> files)
+        internal void SendImagesToNodeViewer(string game, string scene, string zone, List<IVirtualFile> files)
         {
-            NodeApp.SendImages(files);
+            NodeApp.ReceiveImages(game, scene, zone, files);
         }
     }
 }

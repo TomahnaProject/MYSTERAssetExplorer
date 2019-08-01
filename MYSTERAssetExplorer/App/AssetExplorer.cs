@@ -135,6 +135,33 @@ namespace MYSTERAssetExplorer.App
             MessageBox.Show(message);
         }
 
+        private string game = "";
+        private string scene = "";
+        private string zone = "";
+
+        private void SetLocation(TreeNode node)
+        {
+            var level1 = node;
+            var level2 = node;
+            while (level1.Parent != null)
+            {
+                level2 = level1;
+                level1 = level1.Parent;
+            }
+            var level1Name = level1.Text;
+            var level2Name = level2.Text;
+
+            game = level1Name;
+            if(level1Name != level2Name)
+            {
+                if(level2Name.Length > 3)
+                {
+                    scene = level2Name.Substring(0, 2);
+                    zone = level2Name.Substring(2, 2);
+                }
+            }
+        }
+
         private void folderExplorer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
@@ -142,6 +169,8 @@ namespace MYSTERAssetExplorer.App
             IVirtualFolder nodeFolderInfo = (IVirtualFolder)newSelected.Tag;
             ListViewItem.ListViewSubItem[] subItems;
             ListViewItem item = null;
+
+            SetLocation(newSelected);
 
             foreach (IVirtualFolder folder in nodeFolderInfo.SubFolders)
             {
@@ -454,7 +483,8 @@ namespace MYSTERAssetExplorer.App
                     files.Add(item.Tag as IVirtualFile);
                 }
             }
-            app.SendImagesToNodeViewer(files);
+
+            app.SendImagesToNodeViewer(game, scene, zone, files);
         }
     }
 }

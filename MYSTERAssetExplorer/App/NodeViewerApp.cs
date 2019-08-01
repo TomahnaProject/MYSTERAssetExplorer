@@ -48,7 +48,8 @@ namespace MYSTERAssetExplorer.App
             var file = FindFile(fileAddress);
             if (file != null)
             {
-                return GetDataForFile(file);
+                var imageData = GetDataForFile(file);
+                return imageData;
             }
             return new byte[0];
         }
@@ -112,9 +113,12 @@ namespace MYSTERAssetExplorer.App
             return MainApp.GetDataForFile(file);
         }
 
-        internal void SendImages(List<IVirtualFile> files)
+        internal void ReceiveImages(string game, string scene, string zone, List<IVirtualFile> files)
         {
             SelectedNode = new Node();
+            SelectedNode.Scene = scene;
+            SelectedNode.Zone = zone;
+
             if (files.Count > 5)
                 SelectedNode.CubeMaps.Color.Top.File = files[5].Name;
             if (files.Count > 4)
