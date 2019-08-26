@@ -60,9 +60,12 @@ namespace MYSTERAssetExplorer.App
             return new byte[0];
         }
 
-        public void ExportSelectedNode(string fileSavePath)
+        public void ExportSelectedNode(string fileSavePath, bool saveSeparately)
         {
-            ExportCubemap(fileSavePath, SelectedNode);
+            if (!saveSeparately)
+                ExportCubemap(fileSavePath, SelectedNode);
+            else
+                ExportCubemapAsFaces(fileSavePath, SelectedNode);
         }
 
         public CubemapImages GetCubemapImagesForImageSet(Node node, CubeMapImageSet imageSet)
@@ -84,6 +87,31 @@ namespace MYSTERAssetExplorer.App
 
             Bitmap cubemap = new CubeMapBuilder().ConstructCubemap(images);
             ImageSaveService.Save(fileSavePath, cubemap);
+        }
+
+        public void ExportCubemapAsFaces(string fileSavePath, Node node)
+        {
+            var imageSet = node.CubeMaps.Color;
+            var extension = ".jpg";
+            fileSavePath = fileSavePath.Replace(extension, "");
+            File.WriteAllBytes(
+                fileSavePath + "_back" + extension,
+                this.LookupFileImageData(node, imageSet.Back.File));
+            File.WriteAllBytes(
+                fileSavePath + "_bottom" + extension,
+                this.LookupFileImageData(node, imageSet.Bottom.File));
+            File.WriteAllBytes(
+                fileSavePath + "_front" + extension,
+                this.LookupFileImageData(node, imageSet.Front.File));
+            File.WriteAllBytes(
+                fileSavePath + "_left" + extension,
+                this.LookupFileImageData(node, imageSet.Left.File));
+            File.WriteAllBytes(
+                fileSavePath + "_right" + extension,
+                this.LookupFileImageData(node, imageSet.Right.File));
+            File.WriteAllBytes(
+                fileSavePath + "_top" + extension,
+                this.LookupFileImageData(node, imageSet.Top.File));
         }
 
         public void AddNodeToRegistry(GameEnum game, Node node)

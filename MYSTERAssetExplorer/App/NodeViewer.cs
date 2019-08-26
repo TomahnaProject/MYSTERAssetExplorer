@@ -280,7 +280,7 @@ namespace MYSTERAssetExplorer.App
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                App.ExportSelectedNode(saveFileDialog.FileName);
+                App.ExportSelectedNode(saveFileDialog.FileName, separateImagesCheckbox.Checked);
             }
         }
 

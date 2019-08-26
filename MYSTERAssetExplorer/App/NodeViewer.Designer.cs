@@ -80,7 +80,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.separateImagesCheckbox = new System.Windows.Forms.CheckBox();
             this.exportButton = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.MainPanel = new System.Windows.Forms.Panel();
@@ -665,7 +665,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Controls.Add(this.separateImagesCheckbox);
             this.groupBox2.Controls.Add(this.exportButton);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.ForeColor = System.Drawing.Color.Gainsboro;
@@ -676,15 +676,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Export";
             // 
-            // checkBox1
+            // separateImagesCheckbox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(29, 20);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(118, 18);
-            this.checkBox1.TabIndex = 21;
-            this.checkBox1.Text = "Separate Images";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.separateImagesCheckbox.AutoSize = true;
+            this.separateImagesCheckbox.Location = new System.Drawing.Point(29, 20);
+            this.separateImagesCheckbox.Name = "separateImagesCheckbox";
+            this.separateImagesCheckbox.Size = new System.Drawing.Size(118, 18);
+            this.separateImagesCheckbox.TabIndex = 21;
+            this.separateImagesCheckbox.Text = "Separate Images";
+            this.separateImagesCheckbox.UseVisualStyleBackColor = true;
             // 
             // exportButton
             // 
@@ -857,7 +857,7 @@
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox separateImagesCheckbox;
         private System.Windows.Forms.Label label_Rotation;
         private System.Windows.Forms.Label label_Position;
         private System.Windows.Forms.Panel panel3;
