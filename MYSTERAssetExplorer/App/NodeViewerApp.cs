@@ -20,6 +20,7 @@ namespace MYSTERAssetExplorer.App
         RegistryTreeViewManager treeViewManager;
         CubeMapBuilder panoBuilder = new CubeMapBuilder();
 
+        public string SelectedGame { get; private set; }
         public Node SelectedNode { get; private set; }
 
         public Action<TreeNode[]> PopulateNodes { get; set; }
@@ -41,6 +42,10 @@ namespace MYSTERAssetExplorer.App
         public void SetSelectedNode(Node node)
         {
             SelectedNode = node;
+        }
+        public void SetSelectedGame(string gameName)
+        {
+            SelectedGame = gameName;
         }
 
         public byte[] LookupFileImageData(Node node, string fileName)
@@ -107,20 +112,20 @@ namespace MYSTERAssetExplorer.App
             WriteToConsole(Color.Green, "Default Registry Loaded Successfully!");
         }
 
-        public void LoadCustomRegistry()
+        public void LoadCustomRegistry(string path)
         {
             WriteToConsole(Color.Orange, "Loading Custom Registry...");
-            var registry = registryPersistence.GetRegistryFromDisk();
+            var registry = registryPersistence.LoadRegistryFileFromDisk(path);
             registryManager.Registry = registry;
             RefreshRegistryTree();
             WriteToConsole(Color.Green, "Custom Registry Loaded Successfully!");
         }
 
-        public void SaveRegistry()
+        public void SaveCustomRegistry(string selectedGame, string fileName)
         {
-            WriteToConsole(Color.Orange, "Saving Registry...");
-            registryPersistence.SaveRegistryToDisk(registryManager.Registry);
-            WriteToConsole(Color.Green, "Registry Saved!");
+            WriteToConsole(Color.Orange, "Saving Custom Registry...");
+            registryPersistence.SaveRegistryToDisk(registryManager.Registry, selectedGame, fileName);
+            WriteToConsole(Color.Green, "Custom Registry Saved!");
         }
 
         internal IVirtualFile FindFile(VirtualFileAddress fileAddress)

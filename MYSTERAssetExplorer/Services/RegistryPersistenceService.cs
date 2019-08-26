@@ -45,18 +45,22 @@ namespace MYSTERAssetExplorer.Services
             }
         }
 
-        public GameRegistry GetRegistryFromDisk()
+        public GameRegistry LoadRegistryFileFromDisk(string path)
         {
             var registry = new GameRegistry();
-            registry.Exile = LoadRegistryFile(exileRegistryFilePath);
-            registry.Revelation = LoadRegistryFile(revelationRegistryFilePath);
+            if (path.ToUpper().Contains("EXILE"))
+                registry.Exile = LoadRegistryFile(path);
+            if (path.ToUpper().Contains("REVELATION"))
+                registry.Revelation = LoadRegistryFile(path);
             return registry;
         }
 
-        public void SaveRegistryToDisk(GameRegistry registry)
+        public void SaveRegistryToDisk(GameRegistry registry, string selectedGame, string filePath)
         {
-            SaveRegistryFile(exileRegistryFilePath, registry.Exile);
-            SaveRegistryFile(revelationRegistryFilePath, registry.Revelation);
+            if(selectedGame.ToUpper() == "EXILE")
+                SaveRegistryFile(filePath, registry.Exile);
+            if (selectedGame.ToUpper() == "REVELATION")
+                SaveRegistryFile(filePath, registry.Revelation);
         }
 
         private AssetRegistry LoadRegistryFile(string filePath)

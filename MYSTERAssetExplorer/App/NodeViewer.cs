@@ -120,17 +120,44 @@ namespace MYSTERAssetExplorer.App
 
         private void loadRegistry_Click(object sender, EventArgs e)
         {
-            App.LoadCustomRegistry();
+            openFolderDialog.Filter = "Registry File (*.xml) |*.xml";
+            openFolderDialog.CheckPathExists = true;
+            openFolderDialog.CheckFileExists = false;
+            openFolderDialog.ValidateNames = false;
+
+            if (openFolderDialog.ShowDialog() == DialogResult.OK)
+            {
+                App.LoadCustomRegistry(openFolderDialog.FileName);
+            }
         }
 
         private void saveRegistry_Click(object sender, EventArgs e)
         {
-            App.SaveRegistry();
+            if (string.IsNullOrEmpty(App.SelectedGame))
+                return;
+
+            saveFileDialog.Filter = "Registry File (*.xml) |*.xml";
+            saveFileDialog.FileName = App.SelectedGame;
+            saveFileDialog.CheckPathExists = true;
+            saveFileDialog.CheckFileExists = false;
+            saveFileDialog.ValidateNames = false;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                App.SaveCustomRegistry(App.SelectedGame, saveFileDialog.FileName);
+            }
         }
 
         private void nodeExplorer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
+            TreeNode current = newSelected;
+            while (current.Parent != null)
+            {
+                current = current.Parent;
+            }
+            App.SetSelectedGame(current.Text);
+
             Node selectedNodeEntry = (Node)newSelected.Tag;
             App.SetSelectedNode(selectedNodeEntry);
             Populate(selectedNodeEntry);

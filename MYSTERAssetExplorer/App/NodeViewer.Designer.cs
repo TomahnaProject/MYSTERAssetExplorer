@@ -93,6 +93,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.extractCubemapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFolderDialog = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -900,5 +901,6 @@
         private System.Windows.Forms.ToolStripMenuItem extractCubemapsToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFolderDialog;
         private System.Windows.Forms.Button ExportAllCubemaps;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
