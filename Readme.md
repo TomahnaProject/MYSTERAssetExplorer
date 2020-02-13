@@ -10,9 +10,12 @@ Released under the MIT license.
 - .zap files are viewable, and extract as normal .jpg images
 - Automatic assembly of Revelation’s tiled cubemap faces
 - Bink files can now be extracted for both games.
+- Bulk extraction of cubemaps for Exile
+- Editable registry for Exile data (which is viewable in the Node Viewer)
 
 ![Screenshot](screenshot.jpg "MYSTER Asset Explorer")
 
+![Screenshot](screenshot2.jpg "MYSTER Node Viewer")
 
 ## Known Issues
 - Indexing the data files can be painfully slow if the hard drive is slow.
@@ -37,18 +40,19 @@ DragonUnpacker seemed to work on the assumption that a folder had one or the oth
 - add way to do virtual filepath lookups to get a file and it's data (e.g. data.mb4/folder/sub.mb4/anotherfolder/anothersub.mb4/cube/front.jpg)
 - add way auto detect cubemaps / separate files into probable nodes
 - add drag and drop for files into node viewer
-- add export cubemap as single image (in various formats)
-- add batch export all node cubemaps
+- add export cubemap as single image (in various formats/layouts)
+- add batch export all node cubemaps (Rev)
+- add export scaled-down cubemaps in an atlas
 - add ability to sort on file listing
 - add vlc video/audio player
 - add 3d cubemap viewer
 
 ## Future Development
 
-I always planned to extend it so that it could save and load a registry file (xml) and make it possible to construct and save a registry of what files belong to what node (for Exile).
+I always planned to extend it so that it could save and load a registry file (xml) and make it possible to construct and save a registry of what files belong to what node (for Exile). (Already done)
 
 Then you could browse it a bit more like Revelation, navigating by node
 Also I intended to implement a viewer so you can see a given node's cubemap all at once.
 
 ## Used For
-This program was made for use in the [Tomahna Project](http://tomahna.pro/). Check it out!
+This program was made for use in the [Tomahna Project](http://tomahnaproject.com/). Check it out!
