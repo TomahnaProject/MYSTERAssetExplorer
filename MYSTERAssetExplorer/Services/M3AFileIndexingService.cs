@@ -11,12 +11,14 @@ namespace MYSTERAssetExplorer.Services
     public class M3AFileIndexingService : IFileIndexerService
     {
         public static readonly byte[] JPG_HEADER = new byte[] { 0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46, 0x49, 0x46 };
+        //public static readonly byte[] JPG_HEADER_SHORT = new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 };
         public static readonly byte[] JPG_FOOTER = new byte[] { 0xFF, 0xD9 };
         public static readonly byte[] BINK_HEADER = new byte[] { 0x42, 0x49, 0x4B, 0x69 };
 
         private static List<FileIdentifier> FileIdentifiers = new List<FileIdentifier>()
         {
             new FileIdentifier(M3AFileType.Jpg, FileBoundaryType.Start, JPG_HEADER),
+            //new FileIdentifier(M3AFileType.Jpg, FileBoundaryType.Start, JPG_HEADER_SHORT),
             new FileIdentifier(M3AFileType.Jpg, FileBoundaryType.End, JPG_FOOTER),
             new FileIdentifier(M3AFileType.Bink, FileBoundaryType.Start, BINK_HEADER),
         };
@@ -97,7 +99,7 @@ namespace MYSTERAssetExplorer.Services
                         {
                             additionalData = boundary.Skip((int)i).ToArray();
                         }
-                        results.Add(new FileIdentifierMatch() { Identifier = fid, FileOffset = (fileOffset - i), AdditionalData = additionalData});
+                        results.Add(new FileIdentifierMatch() { Identifier = fid, FileOffset = (fileOffset-((uint)previousBuffer.Length - i)), AdditionalData = additionalData});
                     }
                 }
             }
@@ -284,7 +286,7 @@ namespace MYSTERAssetExplorer.Services
 
                 while (loopCount <= bufferCount)
                 {
-                    buffer.Skip(BUFFER_SIZE - BUFFER_OVERLAP).Take(BUFFER_OVERLAP).ToArray().CopyTo(copyBuffer, 0);
+                    copyBuffer.CopyTo(endOfPreviousBuffer, 0);
                     currentFileOffset = loopCount * BUFFER_SIZE;
                     fileStream.Seek(currentFileOffset, SeekOrigin.Begin);
                     returnedBufferSize = fileStream.Read(buffer, 0, buffer.Length);
@@ -319,7 +321,7 @@ namespace MYSTERAssetExplorer.Services
                     //    machine.AddFileIdentifierMatch(match);
                     //}
 
-                    copyBuffer.CopyTo(endOfPreviousBuffer, 0);
+                    buffer.Skip(BUFFER_SIZE - BUFFER_OVERLAP).Take(BUFFER_OVERLAP).ToArray().CopyTo(copyBuffer, 0);
                 }
             }
             finally
