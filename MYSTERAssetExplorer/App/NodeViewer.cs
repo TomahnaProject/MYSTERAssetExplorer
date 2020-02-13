@@ -22,6 +22,7 @@ namespace MYSTERAssetExplorer.App
         public NodeViewer()
         {
             InitializeComponent();
+            this.nodeViewerMenuStrip.Renderer = new BorderlessToolstripRenderer();
 
             nodeProp_ClassificationInput.DataSource = Enum.GetValues(typeof(Node.NodeType));
 

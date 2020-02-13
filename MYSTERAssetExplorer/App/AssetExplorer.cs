@@ -24,6 +24,8 @@ namespace MYSTERAssetExplorer.App
         public AssetExplorer()
         {
             InitializeComponent();
+            this.assetExplorerMenuStrip.Renderer = new BorderlessToolstripRenderer();
+
             previewPanel.Tag = "";
             previewPanel.BackgroundImage = Properties.Resources.picture_icon_large;
         }

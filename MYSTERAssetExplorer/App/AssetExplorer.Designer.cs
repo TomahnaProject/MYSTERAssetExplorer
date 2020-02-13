@@ -34,15 +34,16 @@
             this.previewGroup = new System.Windows.Forms.GroupBox();
             this.previewPanel = new System.Windows.Forms.Panel();
             this.logOutput = new System.Windows.Forms.RichTextBox();
-            this.MenuStrip = new System.Windows.Forms.ToolStrip();
+            this.assetExplorerMenuStrip = new System.Windows.Forms.ToolStrip();
             this.openFolder = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.openViewer = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.findFileButton = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutButton = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.helpButton = new System.Windows.Forms.ToolStripLabel();
-            this.findFileButton = new System.Windows.Forms.ToolStripLabel();
             this.Main_Footer = new System.Windows.Forms.SplitContainer();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.Files_Preview = new System.Windows.Forms.SplitContainer();
@@ -62,9 +63,8 @@
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sendToNodeViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.previewGroup.SuspendLayout();
-            this.MenuStrip.SuspendLayout();
+            this.assetExplorerMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Main_Footer)).BeginInit();
             this.Main_Footer.Panel1.SuspendLayout();
             this.Main_Footer.Panel2.SuspendLayout();
@@ -130,9 +130,10 @@
             // 
             // MenuStrip
             // 
-            this.MenuStrip.BackColor = System.Drawing.Color.Gray;
-            this.MenuStrip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.assetExplorerMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.assetExplorerMenuStrip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.assetExplorerMenuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.assetExplorerMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openFolder,
             this.toolStripSeparator1,
             this.openViewer,
@@ -142,11 +143,11 @@
             this.aboutButton,
             this.toolStripSeparator5,
             this.helpButton});
-            this.MenuStrip.Location = new System.Drawing.Point(0, 0);
-            this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Size = new System.Drawing.Size(1004, 25);
-            this.MenuStrip.TabIndex = 8;
-            this.MenuStrip.Text = "Menu";
+            this.assetExplorerMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.assetExplorerMenuStrip.Name = "MenuStrip";
+            this.assetExplorerMenuStrip.Size = new System.Drawing.Size(1004, 25);
+            this.assetExplorerMenuStrip.TabIndex = 8;
+            this.assetExplorerMenuStrip.Text = "Menu";
             // 
             // openFolder
             // 
@@ -167,6 +168,19 @@
             this.openViewer.Size = new System.Drawing.Size(106, 22);
             this.openViewer.Text = "Open Node Viewer";
             this.openViewer.Click += new System.EventHandler(this.launchNodeViewer_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // findFileButton
+            // 
+            this.findFileButton.Enabled = false;
+            this.findFileButton.Name = "findFileButton";
+            this.findFileButton.Size = new System.Drawing.Size(30, 22);
+            this.findFileButton.Text = "Find";
+            this.findFileButton.Click += new System.EventHandler(this.FindFileButton_Click);
             // 
             // toolStripSeparator4
             // 
@@ -192,14 +206,6 @@
             this.helpButton.Text = "Help!";
             this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
             // 
-            // findFileButton
-            // 
-            this.findFileButton.Enabled = false;
-            this.findFileButton.Name = "findFileButton";
-            this.findFileButton.Size = new System.Drawing.Size(30, 22);
-            this.findFileButton.Text = "Find";
-            this.findFileButton.Click += new System.EventHandler(this.FindFileButton_Click);
-            // 
             // Main_Footer
             // 
             this.Main_Footer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -210,7 +216,7 @@
             // 
             // Main_Footer.Panel1
             // 
-            this.Main_Footer.Panel1.Controls.Add(this.MenuStrip);
+            this.Main_Footer.Panel1.Controls.Add(this.assetExplorerMenuStrip);
             this.Main_Footer.Panel1.Controls.Add(this.MainPanel);
             // 
             // Main_Footer.Panel2
@@ -406,11 +412,6 @@
             this.sendToNodeViewerToolStripMenuItem.Text = "Send To Node Viewer";
             this.sendToNodeViewerToolStripMenuItem.Click += new System.EventHandler(this.sendToNodeViewerToolStripMenuItem_Click);
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
             // AssetExplorer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -425,8 +426,8 @@
             this.Text = "MYSTER (Exile / Revelation) Asset Explorer";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.previewGroup.ResumeLayout(false);
-            this.MenuStrip.ResumeLayout(false);
-            this.MenuStrip.PerformLayout();
+            this.assetExplorerMenuStrip.ResumeLayout(false);
+            this.assetExplorerMenuStrip.PerformLayout();
             this.Main_Footer.Panel1.ResumeLayout(false);
             this.Main_Footer.Panel1.PerformLayout();
             this.Main_Footer.Panel2.ResumeLayout(false);
@@ -450,7 +451,7 @@
 
         #endregion
         private System.Windows.Forms.OpenFileDialog openFolderDialog;
-        private System.Windows.Forms.ToolStrip MenuStrip;
+        private System.Windows.Forms.ToolStrip assetExplorerMenuStrip;
         private System.Windows.Forms.ToolStripLabel openFolder;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel openViewer;

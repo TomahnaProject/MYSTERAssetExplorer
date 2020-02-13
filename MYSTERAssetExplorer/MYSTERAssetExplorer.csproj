@@ -58,6 +58,7 @@
     <Compile Include="App\AssetExplorer.Designer.cs">
       <DependentUpon>AssetExplorer.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\BorderlessToolstripRenderer.cs" />
     <Compile Include="App\NodeViewer.cs">
       <SubType>Form</SubType>
     </Compile>

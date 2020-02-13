@@ -726,7 +726,8 @@
             // 
             // nodeViewerMenuStrip
             // 
-            this.nodeViewerMenuStrip.BackColor = System.Drawing.Color.Gray;
+            this.nodeViewerMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.nodeViewerMenuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.nodeViewerMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadRegistry,
             this.toolStripSeparator1,
