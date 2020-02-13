@@ -131,6 +131,10 @@ namespace MYSTERAssetExplorer.App
             sb.AppendLine();
             sb.AppendLine("A utility to view and extract assets of Myst 3 Exile, and Myst 4 Revelation.");
             sb.AppendLine("Created by James Thomas");
+            sb.AppendLine();
+            sb.AppendLine("Released under the MIT license.");
+            sb.AppendLine("Get the source code:");
+            sb.AppendLine("https://github.com/julyfortoday/MYSTERAssetExplorer");
 
             MessageBox.Show(sb.ToString());
         }
