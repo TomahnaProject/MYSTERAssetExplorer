@@ -51,4 +51,4 @@ Then you could browse it a bit more like Revelation, navigating by node
 Also I intended to implement a viewer so you can see a given node's cubemap all at once.
 
 ## Used For
-This program was made for use in the [Tomahna Project](http://tomahna.pro/). Check it out!
+This program was made for use in the [Tomahna Project](http://tomahnaproject.com/). Check it out!
