@@ -8,14 +8,21 @@ using System.Xml.Serialization;
 
 namespace MYSTERAssetExplorer.Services
 {
+    //https://mlichtenberg.wordpress.com/2011/12/30/encoding-xml-in-utf-8-with-net/
+    public class StringWriterUtf8 : System.IO.StringWriter
+    {
+        public override Encoding Encoding { get { return Encoding.UTF8; } }
+    }
+
     public class AssetRegistrySerializationService
     {
         public string SerializeRegistry(AssetRegistry registry)
         {
-            using (var stringwriter = new System.IO.StringWriter())
+            using (var stringwriter = new StringWriterUtf8())
             {
                 var serializer = new XmlSerializer(typeof(AssetRegistry), new Type[] { });
-                serializer.Serialize(stringwriter, registry);
+                StringWriterUtf8 text = new StringWriterUtf8();
+                serializer.Serialize(text, registry);
                 return stringwriter.ToString();
             }
         }
