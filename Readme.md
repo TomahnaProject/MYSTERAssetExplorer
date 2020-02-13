@@ -9,17 +9,16 @@ Released under the MIT license.
 - Easily browse through nested .m4b and find interesting stuff without any extracting!
 - .zap files are viewable, and extract as normal .jpg images
 - Automatic assembly of Revelation’s tiled cubemap faces
+- Bink files can now be extracted for both games.
 
 ![Screenshot](screenshot.jpg "MYSTER Asset Explorer")
 
 
 ## Known Issues
 - Indexing the data files can be painfully slow if the hard drive is slow.
-- Bink extraction from Exile DOES NOT work correctly at the moment. You will get videos with glitches.
 
 ## Things To Fix:
 - Add check for hard disk speed. If slow disk then load each file into memory prior to indexing. Do this sequentially (multithreading will cause it to eat up all available memory). That or throttle multithreading somehow.
-- Bink extraction for Exile
 - Sound extraction from Revelation (sb0 files)
 
 ## UX Issues
