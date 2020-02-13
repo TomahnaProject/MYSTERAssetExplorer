@@ -174,9 +174,9 @@ namespace MYSTERAssetExplorer.App
             var level2Name = level2.Text;
 
             game = level1Name;
-            if(level1Name != level2Name)
+            if (level1Name != level2Name)
             {
-                if(level2Name.Length > 3)
+                if (level2Name.Length > 3)
                 {
                     scene = level2Name.Substring(0, 2);
                     zone = level2Name.Substring(2, 2);
@@ -342,6 +342,11 @@ namespace MYSTERAssetExplorer.App
 
         private void extractFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            UseDialogToExtractFolder();
+        }
+
+        private void UseDialogToExtractFolder()
+        {
             extractFileDialog.InitialDirectory = app.GetExtractionDirectory();
             extractFileDialog.FileName = "SelectedFolder";
             extractFileDialog.Title = "Save Folder";
@@ -355,26 +360,36 @@ namespace MYSTERAssetExplorer.App
                     MessageBox.Show("leave a name in the filename field (doesn't matter what, it won't be used)");
                     return;
                 }
+                ExtractFolder(extractionPath);
 
-                var node = folderExplorer.SelectedNode;
-                if (node.Tag is IVirtualFolder)
-                {
-                    var folder = node.Tag as IVirtualFolder;
+            }
+        }
 
-                    WriteToConsole(Color.LightBlue, "Extracting folder '" + folder.Name + "' to " + extractionPath);
-                    app.ExtractFolder(extractionPath, folder);
-                }
+        private void ExtractFolder(string savePath)
+        {
+            var node = folderExplorer.SelectedNode;
+            if (node.Tag is IVirtualFolder)
+            {
+                var folder = node.Tag as IVirtualFolder;
+
+                WriteToConsole(Color.LightBlue, "Extracting folder '" + folder.Name + "' to " + savePath);
+                app.ExtractFolder(savePath, folder);
             }
         }
 
         private void extractSelectedFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UseDialogToExtractSelectedFiles();
+        }
+
+        private void UseDialogToExtractSelectedFiles()
         {
             extractFileDialog.InitialDirectory = app.GetExtractionDirectory();
             extractFileDialog.FileName = "SelectedFiles";
             extractFileDialog.Title = "Save Files";
             if (extractFileDialog.ShowDialog() == DialogResult.OK)
             {
-                var extractionPath = Path.GetDirectoryName(extractFileDialog.FileName);
+                string extractionPath = Path.GetDirectoryName(extractFileDialog.FileName);
                 app.SetExtractionDirectory(extractionPath);
 
                 if (extractionPath.Length < 1)
@@ -382,20 +397,24 @@ namespace MYSTERAssetExplorer.App
                     MessageBox.Show("leave a name in the filename field (doesn't matter what, it won't be used)");
                     return;
                 }
-
-                WriteToConsole(Color.LightBlue, "Extracting Selected Files to " + extractionPath);
-
-                List<IVirtualFile> files = new List<IVirtualFile>();
-
-                foreach (ListViewItem item in fileExplorer.SelectedItems)
-                {
-                    if (item.Tag is IVirtualFile)
-                    {
-                        files.Add(item.Tag as IVirtualFile);
-                    }
-                }
-                app.ExtractFiles(extractionPath, files);
+                ExtractSelectedFiles(extractionPath);
             }
+        }
+
+        private void ExtractSelectedFiles(string savePath)
+        {
+            WriteToConsole(Color.LightBlue, "Extracting Selected Files to " + savePath);
+
+            List<IVirtualFile> files = new List<IVirtualFile>();
+
+            foreach (ListViewItem item in fileExplorer.SelectedItems)
+            {
+                if (item.Tag is IVirtualFile)
+                {
+                    files.Add(item.Tag as IVirtualFile);
+                }
+            }
+            app.ExtractFiles(savePath, files);
         }
 
         private void fileExplorer_SelectedIndexChanged(object sender, EventArgs e)

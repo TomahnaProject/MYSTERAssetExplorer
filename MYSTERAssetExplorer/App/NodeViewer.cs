@@ -223,9 +223,25 @@ namespace MYSTERAssetExplorer.App
 
         private void picturePanel_DragDrop(object sender, DragEventArgs e)
         {
-            Panel originator = (Panel)e.Data.GetData(typeof(Panel));
+            var panel = (Panel)e.Data.GetData(typeof(Panel));
+            var str = (String)e.Data.GetData(typeof(String));
+
+            if (panel == null && str == null)
+                return;
+
+            Panel originator = null;
+            string relocatingImageFileName = "";
+            if (str != null)
+            {
+                relocatingImageFileName = str;
+            }
+            else
+            {
+                originator = (Panel)e.Data.GetData(typeof(Panel));
+                relocatingImageFileName = (string)originator.Tag;
+            }
+
             Panel destination = (Panel)sender;
-            string relocatingImageFileName = (string)originator.Tag;
             string displacedImageFileName = (string)destination.Tag;
 
             //string imageFileName = e.Data.GetData(DataFormats.Text).ToString();
@@ -248,21 +264,22 @@ namespace MYSTERAssetExplorer.App
             if (sender == topImage)
                 App.SelectedNode.CubeMaps.Color.Top = cubeFace1;
 
-            if (!string.IsNullOrEmpty(displacedImageFileName))
-            {
-                if (originator == backImage)
-                    App.SelectedNode.CubeMaps.Color.Back = cubeFace2;
-                if (originator == bottomImage)
-                    App.SelectedNode.CubeMaps.Color.Bottom = cubeFace2;
-                if (originator == frontImage)
-                    App.SelectedNode.CubeMaps.Color.Front = cubeFace2;
-                if (originator == leftImage)
-                    App.SelectedNode.CubeMaps.Color.Left = cubeFace2;
-                if (originator == rightImage)
-                    App.SelectedNode.CubeMaps.Color.Right = cubeFace2;
-                if (originator == topImage)
-                    App.SelectedNode.CubeMaps.Color.Top = cubeFace2;
-            }
+            if(originator != null)
+                if (!string.IsNullOrEmpty(displacedImageFileName))
+                {
+                    if (originator == backImage)
+                        App.SelectedNode.CubeMaps.Color.Back = cubeFace2;
+                    if (originator == bottomImage)
+                        App.SelectedNode.CubeMaps.Color.Bottom = cubeFace2;
+                    if (originator == frontImage)
+                        App.SelectedNode.CubeMaps.Color.Front = cubeFace2;
+                    if (originator == leftImage)
+                        App.SelectedNode.CubeMaps.Color.Left = cubeFace2;
+                    if (originator == rightImage)
+                        App.SelectedNode.CubeMaps.Color.Right = cubeFace2;
+                    if (originator == topImage)
+                        App.SelectedNode.CubeMaps.Color.Top = cubeFace2;
+                }
 
             PopulateImages(App.SelectedNode);
         }
