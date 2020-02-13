@@ -343,13 +343,15 @@
             // 
             // fileExplorer
             // 
+            this.fileExplorer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.fileExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.fileExplorer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileColumn,
             this.sizeColumn,
             this.offsetColumn});
             this.fileExplorer.ContextMenuStrip = this.contextMenuFileExplorer;
-            this.fileExplorer.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.fileExplorer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.fileExplorer.Location = new System.Drawing.Point(0, 24);
             this.fileExplorer.Name = "fileExplorer";
