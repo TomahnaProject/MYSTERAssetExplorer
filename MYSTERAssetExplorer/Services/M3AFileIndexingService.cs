@@ -53,8 +53,8 @@ namespace MYSTERAssetExplorer.Services
         public class FileMarker
         {
             public M3AFileType Type;
-            public uint BeginOffset;
-            public uint EndOffset;
+            public int BeginOffset;
+            public int EndOffset;
         }
 
         public IVirtualFolder IndexFile(string filePath)
@@ -75,11 +75,11 @@ namespace MYSTERAssetExplorer.Services
         private class FileIdentifierMatch
         {
             public FileIdentifier Identifier;
-            public uint FileOffset;
+            public int FileOffset;
             public byte[] AdditionalData;
         }
 
-        private List<FileIdentifierMatch> FindFileIdentifiersInBufferBoundary(byte[] previousBuffer, byte[] currentBuffer, uint fileOffset)
+        private List<FileIdentifierMatch> FindFileIdentifiersInBufferBoundary(byte[] previousBuffer, byte[] currentBuffer, int fileOffset)
         {
             List<FileIdentifierMatch> results = new List<FileIdentifierMatch>();
 
@@ -90,7 +90,7 @@ namespace MYSTERAssetExplorer.Services
             foreach (var fid in FileIdentifiers)
             {
                 fidLength = fid.FilePattern.Length;
-                for (uint i = (uint)(previousBuffer.Length - fidLength + 1); i < previousBuffer.Length; i++)
+                for (int i = (int)(previousBuffer.Length - fidLength + 1); i < previousBuffer.Length; i++)
                 {
                     if (EqualsPatternAtPosition(boundary, fid.FilePattern, i))
                     {
@@ -99,7 +99,7 @@ namespace MYSTERAssetExplorer.Services
                         {
                             additionalData = boundary.Skip((int)i).ToArray();
                         }
-                        results.Add(new FileIdentifierMatch() { Identifier = fid, FileOffset = (fileOffset-((uint)previousBuffer.Length - i)), AdditionalData = additionalData});
+                        results.Add(new FileIdentifierMatch() { Identifier = fid, FileOffset = (fileOffset-((int)previousBuffer.Length - i)), AdditionalData = additionalData});
                     }
                 }
             }
@@ -107,11 +107,11 @@ namespace MYSTERAssetExplorer.Services
         }
 
 
-        private List<FileIdentifierMatch> FindFileIdentifiersInBuffer(byte[] data, uint fileOffset)
+        private List<FileIdentifierMatch> FindFileIdentifiersInBuffer(byte[] data, int fileOffset)
         {
             List<FileIdentifierMatch> results = new List<FileIdentifierMatch>();
 
-            for (uint i = 0; i < data.Length; i++)
+            for (int i = 0; i < data.Length; i++)
             {
                 foreach (var fid in FileIdentifiers)
                 {
@@ -165,8 +165,8 @@ namespace MYSTERAssetExplorer.Services
                     {
                         // check if data leading up to this file was an adjacent file, or a gap
                         var previousFile = markers.LastOrDefault();
-                        uint gapStart = 0;
-                        uint gapEnd = 0;
+                        int gapStart = 0;
+                        int gapEnd = 0;
                         bool precededByGap = false;
 
                         if (previousFile != null)
@@ -206,7 +206,7 @@ namespace MYSTERAssetExplorer.Services
                         if (currentFile.Type == M3AFileType.Bink)
                         {
                             // read header and mark end of bink file
-                            uint length = FindEndOffsetOfBinkFile(match.AdditionalData);
+                            int length = (int)FindEndOffsetOfBinkFile(match.AdditionalData);
                             currentFile.EndOffset = match.FileOffset + length - 1; // bink length!
                             markers.Add(currentFile);
                             currentFile = null;
@@ -220,7 +220,7 @@ namespace MYSTERAssetExplorer.Services
                     {
                         if (currentFile.Type == M3AFileType.Jpg)
                         {
-                            currentFile.EndOffset = match.FileOffset + (uint)match.Identifier.FilePattern.Length - 1;
+                            currentFile.EndOffset = match.FileOffset + (int)match.Identifier.FilePattern.Length - 1;
                             markers.Add(currentFile);
                             currentFile = null;
                         }
@@ -228,7 +228,7 @@ namespace MYSTERAssetExplorer.Services
                 }
             }
 
-            public void EndOfFile(uint fileLength)
+            public void EndOfFile(int fileLength)
             {
                 if (currentFile != null)
                     throw new Exception("Error: expected end for jpg or bink file");
@@ -263,7 +263,7 @@ namespace MYSTERAssetExplorer.Services
 
             FileMarkerMachine machine = new FileMarkerMachine();
             
-            const int BUFFER_SIZE = 4096;
+            const int BUFFER_SIZE = 16384;
             const int BUFFER_OVERLAP = 10;
 
             byte[] buffer = new byte[BUFFER_SIZE];
@@ -274,11 +274,11 @@ namespace MYSTERAssetExplorer.Services
             FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             try
             {
-                uint fileLength = (uint)fileStream.Length;
-                uint bufferCount = (uint)fileLength / (uint)buffer.Length;
+                int fileLength = (int)fileStream.Length;
+                int bufferCount = (int)fileLength / (int)buffer.Length;
 
-                uint loopCount = 0;
-                uint currentFileOffset = 0;
+                int loopCount = 0;
+                int currentFileOffset = 0;
                 int returnedBufferSize = 0;
                 bool endOfFile = false;
 
@@ -480,9 +480,9 @@ namespace MYSTERAssetExplorer.Services
         }
         */
 
-        private bool EqualsPatternAtPosition(byte[] source, byte[] pattern, uint position)
+        private bool EqualsPatternAtPosition(byte[] source, byte[] pattern, int position)
         {
-            for (uint i = 0; i < pattern.Length; ++i)
+            for (int i = 0; i < pattern.Length; ++i)
                 if (position + i >= source.Length || source[position + i] != pattern[i])
                     return false;
             return true;
