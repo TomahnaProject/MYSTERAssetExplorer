@@ -155,8 +155,10 @@ namespace MYSTERAssetExplorer.Services
                                                 var setDefaultFolder = GetSubFolder(layerDefaultFolder, "set_default");
                                                 if(setDefaultFolder != null)
                                                 {
+                                                    var fileName = address.FileName.Replace(".jpg","");
                                                     // finally the files
-                                                    var file = setDefaultFolder.Files.FirstOrDefault(x => x.Name == address.FileName);
+                                                    var file = setDefaultFolder.Files.FirstOrDefault(x => x.Name == fileName);
+
                                                     if (file != null)
                                                     {
                                                         couldFind = true;

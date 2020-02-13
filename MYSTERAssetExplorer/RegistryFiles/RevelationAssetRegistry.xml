@@ -1,3 +1,19 @@
 ﻿<AssetRegistry>
-  <Nodes />
+  <Nodes>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="020" Type="Normal">
+      <Position X="0" Y="0" Z="0" />
+      <Rotation Yaw="0" />
+      <CubeMaps DepthRange="0">
+        <Color>
+          <Back File="back.jpg" />
+          <Bottom File="bottom.jpg" />
+          <Front File="front.jpg" />
+          <Left File="left.jpg" />
+          <Right File="right.jpg" />
+          <Top File="top.jpg" />
+        </Color>
+      </CubeMaps>
+      <Sprites />
+    </Node>
+  </Nodes>
 </AssetRegistry>

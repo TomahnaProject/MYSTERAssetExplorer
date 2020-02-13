@@ -50,7 +50,8 @@ namespace MYSTERAssetExplorer.App
 
         public byte[] LookupFileImageData(Node node, string fileName)
         {
-            var fileAddress = new VirtualFileAddress(GameEnum.Exile.ToString(), node.Scene, node.Zone, node.Number, fileName);
+            var game = SelectedGame;
+            var fileAddress = new VirtualFileAddress(game, node.Scene, node.Zone, node.Number, fileName);
             var file = FindFile(fileAddress);
             if (file != null)
             {

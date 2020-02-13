@@ -60,7 +60,7 @@ namespace MYSTERAssetExplorer.Core
     {
         DR = 1, //DeadwoodRidge
         FO = 2, //FOrest
-        NE = 3, //NearEnd
+        NE = 3, //NEst
         SP = 4, //SwamP
         SW = 5, //SWing
     }
@@ -93,7 +93,7 @@ namespace MYSTERAssetExplorer.Core
         Menu = 6,
     }
 
-    // day and night versions share same zones
+    // day and night versions of tomahna share same zones
     public enum RevelationTomahnaZone
     {
         Exterior = 1,
