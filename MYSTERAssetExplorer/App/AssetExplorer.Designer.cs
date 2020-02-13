@@ -62,6 +62,7 @@
             this.extractSelectedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sendToNodeViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.previewGroup.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Main_Footer)).BeginInit();
@@ -135,11 +136,12 @@
             this.openFolder,
             this.toolStripSeparator1,
             this.openViewer,
+            this.toolStripSeparator2,
+            this.findFileButton,
             this.toolStripSeparator4,
             this.aboutButton,
             this.toolStripSeparator5,
-            this.helpButton,
-            this.findFileButton});
+            this.helpButton});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(1004, 25);
@@ -192,8 +194,10 @@
             // 
             // findFileButton
             // 
+            this.findFileButton.Enabled = false;
             this.findFileButton.Name = "findFileButton";
-            this.findFileButton.Size = new System.Drawing.Size(0, 22);
+            this.findFileButton.Size = new System.Drawing.Size(30, 22);
+            this.findFileButton.Text = "Find";
             this.findFileButton.Click += new System.EventHandler(this.FindFileButton_Click);
             // 
             // Main_Footer
@@ -333,6 +337,7 @@
             // 
             this.filterSmallImagesCheckbox.AutoSize = true;
             this.filterSmallImagesCheckbox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.filterSmallImagesCheckbox.Enabled = false;
             this.filterSmallImagesCheckbox.Location = new System.Drawing.Point(0, 0);
             this.filterSmallImagesCheckbox.Name = "filterSmallImagesCheckbox";
             this.filterSmallImagesCheckbox.Size = new System.Drawing.Size(230, 18);
@@ -400,6 +405,11 @@
             this.sendToNodeViewerToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.sendToNodeViewerToolStripMenuItem.Text = "Send To Node Viewer";
             this.sendToNodeViewerToolStripMenuItem.Click += new System.EventHandler(this.sendToNodeViewerToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // AssetExplorer
             // 
@@ -471,6 +481,7 @@
         private System.Windows.Forms.ToolStripLabel findFileButton;
         private System.Windows.Forms.ToolStripMenuItem sendToNodeViewerToolStripMenuItem;
         private System.Windows.Forms.CheckBox filterSmallImagesCheckbox;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 
