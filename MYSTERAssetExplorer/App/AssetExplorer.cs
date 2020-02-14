@@ -427,15 +427,7 @@ namespace MYSTERAssetExplorer.App
                 if (selected.Tag is VirtualFolder)
                     return;
 
-                if (selected.Tag is IVirtualFile)
-                {
-                    var file = selected.Tag as IVirtualFile;
-                    if (!(file.ContentDetails.Type == FileType.Jpg ||
-                        file.ContentDetails.Type == FileType.Zap))
-                        return;
-                }
-                var imageData = GetDataForImageFile(selected);
-                SetImageDataIntoPreviewWindow(selected.Text, imageData);
+                HandleNewlySelectedItem(selected);
             }
             else
             {
@@ -444,29 +436,28 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
-        private byte[] GetDataForImageFile(ListViewItem item)
+        private void HandleNewlySelectedItem(ListViewItem selected)
         {
-            byte[] imageData = new byte[0];
-            if (item.Tag is IVirtualFile)
+            if (!(selected.Tag is IVirtualFile))
+                return;
+
+            var file = selected.Tag as IVirtualFile;
+
+            if((file.ContentDetails.Type == FileType.Jpg ||
+                file.ContentDetails.Type == FileType.Zap))
             {
-                var file = item.Tag as IVirtualFile;
-
-                if (file.ContentDetails is VirtualFileTiledImage)
-                {
-                    WriteToConsole(Color.Yellow, "Assembling Tiled Image: '" + file.Name + "'");
-                    var stopwatch = new Stopwatch();
-                    stopwatch.Start();
-                    imageData = app.GetDataForFile(file);
-                    stopwatch.Stop();
-                    WriteToConsole(Color.Green, "'" + file.Name + "' assembled in " + stopwatch.ElapsedMilliseconds + "ms");
-                }
-                else
-                {
-                    imageData = app.GetDataForFile(file);
-                }
-
+                var imageData = app.GetDataForFile(file);
+                SetImageDataIntoPreviewWindow(selected.Text, imageData);
             }
-            return imageData;
+            else if (file.ContentDetails.Type == FileType.Bink)
+            {
+                //var videoData = app.GetDataForFile(file);
+                // PLAY VIDEO ONCE YOU HAVE MEDIA PLAYER
+            }
+            else if(file.ContentDetails.Type == FileType.Unknown)
+            {
+                // AUDIO EVENTUALLY
+            }
         }
 
         private void SetImageDataIntoPreviewWindow(string imageName, byte[] imageData)
