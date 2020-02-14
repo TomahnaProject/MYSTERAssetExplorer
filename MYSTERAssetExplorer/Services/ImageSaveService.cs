@@ -12,6 +12,8 @@ namespace MYSTERAssetExplorer.Services
     {
         public static void Save(string fileSavePath, Bitmap image)
         {
+            if (image == null)
+                return;
             long quality = 100;
             using (EncoderParameters encoderParameters = new EncoderParameters(1))
             using (EncoderParameter encoderParameter = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality))

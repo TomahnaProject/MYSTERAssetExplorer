@@ -103,12 +103,13 @@ namespace MYSTERAssetExplorer.App
             // some kind of check to validate images?
             CubemapImages data = App.GetCubemapImagesForImageSet(node, imageSet);
 
-            backImage.BackgroundImage = data.Back;
-            bottomImage.BackgroundImage = data.Bottom;
-            frontImage.BackgroundImage = data.Front;
-            leftImage.BackgroundImage = data.Left;
-            rightImage.BackgroundImage = data.Right;
-            topImage.BackgroundImage = data.Top;
+            var blank = Properties.Resources.picture_icon_large;
+            backImage.BackgroundImage = data.Back != null ? data.Back : blank;
+            bottomImage.BackgroundImage = data.Bottom != null ? data.Bottom : blank;
+            frontImage.BackgroundImage = data.Front != null ? data.Front : blank;
+            leftImage.BackgroundImage = data.Left != null ? data.Left : blank;
+            rightImage.BackgroundImage = data.Right != null ? data.Right : blank;
+            topImage.BackgroundImage = data.Top != null ? data.Top : blank;
 
             backImage.Tag = imageSet.Back.File;
             bottomImage.Tag = imageSet.Bottom.File;
