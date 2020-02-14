@@ -55,7 +55,7 @@ namespace MYSTERAssetExplorer.App
         {
             var game = SelectedGame;
 
-            if(game == "Revelation" && (!MapTypeColorSelected))
+            if (game == "Revelation" && (!MapTypeColorSelected))
             {
                 fileName += "_depth";
             }
@@ -69,12 +69,9 @@ namespace MYSTERAssetExplorer.App
             return new byte[0];
         }
 
-        public void ExportSelectedNode(string fileSavePath, bool saveSeparately)
+        public void ExportSelectedNode(string fileSavePath, bool saveSeparately = false, bool sphericalProjection = false)
         {
-            if (!saveSeparately)
-                ExportCubemap(fileSavePath, SelectedNode);
-            else
-                ExportCubemapAsFaces(fileSavePath, SelectedNode);
+            ExportCubemap(fileSavePath, SelectedNode, saveSeparately, sphericalProjection);
         }
 
         public CubemapImages GetCubemapImagesForImageSet(Node node, CubeMapImageSet imageSet)
@@ -89,49 +86,88 @@ namespace MYSTERAssetExplorer.App
             return data;
         }
 
-        public void ExportCubemap(string fileSavePath, Node node)
+        public void ExportCubemap(string fileSavePath, Node node, bool saveSeparately = false, bool exportAsSphericalProjection = false)
         {
-            // export color cube map
+            CubeMapImageSet imageSet;
+            if (node.CubeMaps.Depth != null)
             {
-                var imageSet = node.CubeMaps.Color;
-                CubemapImages images = GetCubemapImagesForImageSet(node, imageSet);
-
-                Bitmap cubemap = new CubeMapBuilder().ConstructCubemap(images);
-                ImageSaveService.Save(fileSavePath, cubemap);
+                imageSet = node.CubeMaps.Depth;
             }
-            // export depth cubemap if it exists
-            if(node.CubeMaps.Depth != null)
+            else
+                imageSet = node.CubeMaps.Color;
+
+            CubemapImages images = GetCubemapImagesForImageSet(node, imageSet);
+
+            if(!saveSeparately)
             {
-                var imageSet = node.CubeMaps.Color;
-                CubemapImages images = GetCubemapImagesForImageSet(node, imageSet);
-                Bitmap cubemap = new CubeMapBuilder().ConstructCubemap(images);
-                ImageSaveService.Save(fileSavePath, cubemap);
+                Bitmap finalImage;
+                if (exportAsSphericalProjection)
+                    finalImage = new SphericalProjectionService().ConstructProjection(images);
+                else
+                    finalImage = new CubeMapBuilder().ConstructCubemap(images);
+
+                ImageSaveService.Save(fileSavePath, finalImage);
+            }
+            else
+            {
+                // with Revelation images need assembly, which create bitmaps in memory
+                // the best output for images manipulated by the program as png files
+                // that way they retain detail, without creating output files that are gigantic
+                // saving as jpg would be too lossy
+
+                // With Exile the original jpg image data can be saved directly from the original files
+                // this avoids un-needed conversion and loss of detail or increase the output file size
+                if (SelectedGame == "Exile")
+                    ExportCubemapDataDirectly(fileSavePath, node);
+                else
+                    ExportCubemapAsFaces(fileSavePath, images);
             }
         }
 
-        public void ExportCubemapAsFaces(string fileSavePath, Node node)
+        public void ExportCubemapAsFaces(string fileSavePath, CubemapImages images)
         {
+            var filenames = GetCubeFileNames(fileSavePath);
+            ImageSaveService.Save(filenames[0], images.Back);
+            ImageSaveService.Save(filenames[1], images.Bottom);
+            ImageSaveService.Save(filenames[2], images.Front);
+            ImageSaveService.Save(filenames[3], images.Left);
+            ImageSaveService.Save(filenames[4], images.Right);
+            ImageSaveService.Save(filenames[5], images.Top);
+        }
+        private void ExportCubemapDataDirectly(string fileSavePath, Node node)
+        {
+            var filenames = GetCubeFileNames(fileSavePath);
             var imageSet = node.CubeMaps.Color;
-            var extension = ".png";
-            fileSavePath = fileSavePath.Replace(extension, "");
-            File.WriteAllBytes(
-                fileSavePath + "_back" + extension,
-                this.LookupFileImageData(node, imageSet.Back.File));
-            File.WriteAllBytes(
-                fileSavePath + "_bottom" + extension,
-                this.LookupFileImageData(node, imageSet.Bottom.File));
-            File.WriteAllBytes(
-                fileSavePath + "_front" + extension,
-                this.LookupFileImageData(node, imageSet.Front.File));
-            File.WriteAllBytes(
-                fileSavePath + "_left" + extension,
-                this.LookupFileImageData(node, imageSet.Left.File));
-            File.WriteAllBytes(
-                fileSavePath + "_right" + extension,
-                this.LookupFileImageData(node, imageSet.Right.File));
-            File.WriteAllBytes(
-                fileSavePath + "_top" + extension,
-                this.LookupFileImageData(node, imageSet.Top.File));
+            ImageSaveService.Save(
+            filenames[0],
+            this.LookupFileImageData(node, imageSet.Back.File));
+            ImageSaveService.Save(
+            filenames[1],
+            this.LookupFileImageData(node, imageSet.Bottom.File));
+            ImageSaveService.Save(
+            filenames[2],
+            this.LookupFileImageData(node, imageSet.Front.File));
+            ImageSaveService.Save(
+            filenames[3],
+            this.LookupFileImageData(node, imageSet.Left.File));
+            ImageSaveService.Save(
+            filenames[4],
+            this.LookupFileImageData(node, imageSet.Right.File));
+            ImageSaveService.Save(
+            filenames[5],
+            this.LookupFileImageData(node, imageSet.Top.File));
+        }
+        private string[] GetCubeFileNames(string fileSavePath)
+        {
+            string[] names = new string[6];
+            var tag = "[face]";
+            names[0] = fileSavePath.Replace(tag, "[face][back]");
+            names[1] = fileSavePath.Replace(tag, "[face][bottom]");
+            names[2] = fileSavePath.Replace(tag, "[face][front]");
+            names[3] = fileSavePath.Replace(tag, "[face][left]");
+            names[4] = fileSavePath.Replace(tag, "[face][right]");
+            names[5] = fileSavePath.Replace(tag, "[face][top]");
+            return names;
         }
 
         public void AddNodeToRegistry(GameEnum game, Node node)

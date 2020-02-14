@@ -296,26 +296,44 @@ namespace MYSTERAssetExplorer.App
             if (App.SelectedNode == null)
                 return;
 
+            var fileNameStart = App.SelectedNode.GetFullName();
+            fileNameStart += GetImageFileNameTagForNode(App.SelectedNode);
+
+            if (App.SelectedGame == "Revelation" && (!App.MapTypeColorSelected))
+            {
+                fileNameStart += "[depth]";
+            }
+
             saveFileDialog.Filter = "PNG (*.png)|*.png|Jpeg (*.jpg) |*.jpg";
-            saveFileDialog.FileName = App.SelectedNode.GetFullName();
+            saveFileDialog.FileName = fileNameStart;
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.CheckFileExists = false;
             saveFileDialog.ValidateNames = false;
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                App.ExportSelectedNode(saveFileDialog.FileName, separateImagesCheckbox.Checked);
+                App.ExportSelectedNode(saveFileDialog.FileName, separateImagesCheckbox.Checked, sphericalProjection.Checked);
             }
         }
 
-        private void BatchExport(string folderPath, List<Node> nodes)
+        private string GetImageFileNameTagForNode(Node node)
+        {
+            string tag = "[cube]";
+            if (separateImagesCheckbox.Checked)
+                tag = "[face]";
+            else if (sphericalProjection.Checked)
+                tag = "[sphere]";
+            return tag;
+        }
+
+        private void BatchExport(string folderPath, List<Node> nodes, bool exportAsSphericalProjection)
         {
             if(Directory.Exists(folderPath))
             {
                 foreach (var node in nodes)
                 {
                     var fileSavePath = Path.Combine(folderPath, node.GetFullName() + ".png");
-                    App.ExportCubemap(fileSavePath, node);
+                    App.ExportCubemap(fileSavePath, node, exportAsSphericalProjection);
                 }
             }
         }
@@ -346,7 +364,7 @@ namespace MYSTERAssetExplorer.App
             if(!string.IsNullOrEmpty(exportDir))
             {
                 var nodeList = this.App.GetNodeList();
-                BatchExport(exportDir, nodeList);
+                BatchExport(exportDir, nodeList, sphericalProjection.Checked);
             }
         }
 
@@ -358,6 +376,20 @@ namespace MYSTERAssetExplorer.App
                 App.MapTypeColorSelected = false;
 
             PopulateImages(App.SelectedNode);
+        }
+
+        private void separateImagesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if(separateImagesCheckbox.Checked)
+            {
+                sphericalProjection.Checked = false;
+                sphericalProjection.Enabled = false;
+            }
+            else
+            {
+                sphericalProjection.Checked = false;
+                sphericalProjection.Enabled = true;
+            }
         }
 
         //public void SetImage(CubeFaceEnum face, IVirtualFile file)

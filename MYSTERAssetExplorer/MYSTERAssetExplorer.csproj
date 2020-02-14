@@ -39,6 +39,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -88,6 +89,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Services\CacheSerializationService.cs" />
     <Compile Include="Services\ConversionService.cs" />
+    <Compile Include="Services\SphericalProjectionService.cs" />
     <Compile Include="Services\FileLookupService.cs" />
     <Compile Include="Services\IFileIndexerService.cs" />
     <Compile Include="Services\ImageSaveService.cs" />

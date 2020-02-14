@@ -103,11 +103,10 @@ namespace MYSTERAssetExplorer
                 return Properties.Resources.picture_icon_large;
             }
 
-            Bitmap bmp;
-            using (var ms = new MemoryStream(imageData))
-            {
-                return new Bitmap(ms);
-            }
+            // originally wrapped this in a using block, but is apparently unnecessary
+            //https://stackoverflow.com/questions/336387/image-save-throws-a-gdi-exception-because-the-memory-stream-is-closed
+            var ms = new MemoryStream(imageData);  
+            return new Bitmap(ms);            
         }
     }
 }

@@ -80,6 +80,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.sphericalProjection = new System.Windows.Forms.CheckBox();
             this.separateImagesCheckbox = new System.Windows.Forms.CheckBox();
             this.exportButton = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
@@ -666,6 +667,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.sphericalProjection);
             this.groupBox2.Controls.Add(this.separateImagesCheckbox);
             this.groupBox2.Controls.Add(this.exportButton);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -677,6 +679,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Export";
             // 
+            // sphericalProjection
+            // 
+            this.sphericalProjection.AutoSize = true;
+            this.sphericalProjection.Location = new System.Drawing.Point(172, 20);
+            this.sphericalProjection.Name = "sphericalProjection";
+            this.sphericalProjection.Size = new System.Drawing.Size(133, 18);
+            this.sphericalProjection.TabIndex = 22;
+            this.sphericalProjection.Text = "Spherical Projection";
+            this.sphericalProjection.UseVisualStyleBackColor = true;
+            // 
             // separateImagesCheckbox
             // 
             this.separateImagesCheckbox.AutoSize = true;
@@ -686,6 +698,7 @@
             this.separateImagesCheckbox.TabIndex = 21;
             this.separateImagesCheckbox.Text = "Separate Images";
             this.separateImagesCheckbox.UseVisualStyleBackColor = true;
+            this.separateImagesCheckbox.CheckedChanged += new System.EventHandler(this.separateImagesCheckbox_CheckedChanged);
             // 
             // exportButton
             // 
@@ -904,5 +917,6 @@
         private System.Windows.Forms.OpenFileDialog openFolderDialog;
         private System.Windows.Forms.Button ExportAllCubemaps;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.CheckBox sphericalProjection;
     }
 }

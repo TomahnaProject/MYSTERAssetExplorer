@@ -14,7 +14,7 @@ namespace MYSTERAssetExplorer.Services
         {
             string extension = "";
             if (type == FileType.Jpg)
-                extension = ".png";
+                extension = ".jpg";
             else if (type == FileType.Bink)
                 extension = ".bik";
 
@@ -22,7 +22,11 @@ namespace MYSTERAssetExplorer.Services
                 fileName += extension;
 
             var savePath = Path.Combine(filePath, fileName);
-            File.WriteAllBytes(savePath, data);
+
+            if (type == FileType.Jpg)
+                ImageSaveService.Save(savePath, data);
+            else
+                File.WriteAllBytes(savePath, data);
         }
 
         public string SaveFolder(string filePath, string folderName)
