@@ -15,9 +15,10 @@ namespace MYSTERAssetExplorer.Services
             using (EncoderParameters encoderParameters = new EncoderParameters(1))
             using (EncoderParameter encoderParameter = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality))
             {
-                ImageCodecInfo codecInfo = ImageCodecInfo.GetImageDecoders().First(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
+                ImageCodecInfo codecInfo = ImageCodecInfo.GetImageDecoders().First(codec => codec.FormatID == ImageFormat.Png.Guid);
                 encoderParameters.Param[0] = encoderParameter;
 
+                fileSavePath.Replace(".jpg", ".png");
                 image.Save(fileSavePath, codecInfo, encoderParameters);
             }
         }

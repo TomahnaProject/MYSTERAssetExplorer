@@ -14,7 +14,7 @@ namespace MYSTERAssetExplorer.Services
         {
             string extension = "";
             if (type == FileType.Jpg)
-                extension = ".jpg";
+                extension = ".png";
             else if (type == FileType.Bink)
                 extension = ".bik";
 

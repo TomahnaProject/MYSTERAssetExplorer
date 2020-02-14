@@ -296,7 +296,7 @@ namespace MYSTERAssetExplorer.App
             if (App.SelectedNode == null)
                 return;
 
-            saveFileDialog.Filter = "Jpeg (*.jpg) |*.jpg";
+            saveFileDialog.Filter = "PNG (*.png)|*.png|Jpeg (*.jpg) |*.jpg";
             saveFileDialog.FileName = App.SelectedNode.GetFullName();
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.CheckFileExists = false;
@@ -314,7 +314,7 @@ namespace MYSTERAssetExplorer.App
             {
                 foreach (var node in nodes)
                 {
-                    var fileSavePath = Path.Combine(folderPath, node.GetFullName() + ".jpg");
+                    var fileSavePath = Path.Combine(folderPath, node.GetFullName() + ".png");
                     App.ExportCubemap(fileSavePath, node);
                 }
             }

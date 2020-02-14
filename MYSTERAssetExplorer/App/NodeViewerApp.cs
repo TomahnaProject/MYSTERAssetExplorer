@@ -112,7 +112,7 @@ namespace MYSTERAssetExplorer.App
         public void ExportCubemapAsFaces(string fileSavePath, Node node)
         {
             var imageSet = node.CubeMaps.Color;
-            var extension = ".jpg";
+            var extension = ".png";
             fileSavePath = fileSavePath.Replace(extension, "");
             File.WriteAllBytes(
                 fileSavePath + "_back" + extension,
