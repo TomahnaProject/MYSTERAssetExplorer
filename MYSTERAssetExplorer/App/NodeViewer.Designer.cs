@@ -535,6 +535,7 @@
             this.mapTypeColor.TabStop = true;
             this.mapTypeColor.Text = "Color Map";
             this.mapTypeColor.UseVisualStyleBackColor = true;
+            this.mapTypeColor.CheckedChanged += new System.EventHandler(this.mapTypeColor_CheckedChanged);
             // 
             // label_Classification
             // 

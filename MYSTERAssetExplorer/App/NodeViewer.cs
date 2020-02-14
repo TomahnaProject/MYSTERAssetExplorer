@@ -93,8 +93,14 @@ namespace MYSTERAssetExplorer.App
 
         public void PopulateImages(Node node)
         {
+            CubeMapImageSet imageSet = node.CubeMaps.Color;
+            
+            //if (mapTypeIsColor == true)
+            //    imageSet = node.CubeMaps.Color;
+            //else
+            //    imageSet = node.CubeMaps.Depth;
+            
             // some kind of check to validate images?
-            var imageSet = node.CubeMaps.Color;
             CubemapImages data = App.GetCubemapImagesForImageSet(node, imageSet);
 
             backImage.BackgroundImage = data.Back;
@@ -344,6 +350,15 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
+        private void mapTypeColor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (mapTypeColor.Checked)
+                App.MapTypeColorSelected = true;
+            else
+                App.MapTypeColorSelected = false;
+
+            PopulateImages(App.SelectedNode);
+        }
 
         //public void SetImage(CubeFaceEnum face, IVirtualFile file)
         //{

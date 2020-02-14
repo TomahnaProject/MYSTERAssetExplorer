@@ -28,6 +28,9 @@ namespace MYSTERAssetExplorer.App
         public Action<CubeFaceEnum, IVirtualFile> SetImage { get; set; }
         public Action Launch { get; set; }
 
+        public bool MapTypeColorSelected = true;
+        bool showMapTypeOption = false;
+
         public NodeViewerApp()
         {
             registryManager = new RegistryManager();
@@ -51,6 +54,11 @@ namespace MYSTERAssetExplorer.App
         public byte[] LookupFileImageData(Node node, string fileName)
         {
             var game = SelectedGame;
+
+            if(game == "Revelation" && (!MapTypeColorSelected))
+            {
+                fileName += "_depth";
+            }
             var fileAddress = new VirtualFileAddress(game, node.Scene, node.Zone, node.Number, fileName);
             var file = FindFile(fileAddress);
             if (file != null)
@@ -83,11 +91,22 @@ namespace MYSTERAssetExplorer.App
 
         public void ExportCubemap(string fileSavePath, Node node)
         {
-            var imageSet = node.CubeMaps.Color;
-            CubemapImages images = GetCubemapImagesForImageSet(node, imageSet);
+            // export color cube map
+            {
+                var imageSet = node.CubeMaps.Color;
+                CubemapImages images = GetCubemapImagesForImageSet(node, imageSet);
 
-            Bitmap cubemap = new CubeMapBuilder().ConstructCubemap(images);
-            ImageSaveService.Save(fileSavePath, cubemap);
+                Bitmap cubemap = new CubeMapBuilder().ConstructCubemap(images);
+                ImageSaveService.Save(fileSavePath, cubemap);
+            }
+            // export depth cubemap if it exists
+            if(node.CubeMaps.Depth != null)
+            {
+                var imageSet = node.CubeMaps.Color;
+                CubemapImages images = GetCubemapImagesForImageSet(node, imageSet);
+                Bitmap cubemap = new CubeMapBuilder().ConstructCubemap(images);
+                ImageSaveService.Save(fileSavePath, cubemap);
+            }
         }
 
         public void ExportCubemapAsFaces(string fileSavePath, Node node)

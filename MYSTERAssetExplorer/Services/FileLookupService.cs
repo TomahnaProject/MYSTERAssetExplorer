@@ -149,13 +149,17 @@ namespace MYSTERAssetExplorer.Services
                                         var cubeFolder = GetSubFolder(fileNameFolder, "cube");
                                         if (cubeFolder != null)
                                         {
-                                            var layerDefaultFolder = GetSubFolder(cubeFolder, "layer_default.m4b");
+                                            IVirtualFolder layerDefaultFolder;
+                                            if (address.FileName.Contains("_depth"))
+                                                layerDefaultFolder = GetSubFolder(cubeFolder, "z_layer_default.m4b");
+                                            else
+                                                layerDefaultFolder = GetSubFolder(cubeFolder, "layer_default.m4b");
                                             if (layerDefaultFolder != null)
                                             {
                                                 var setDefaultFolder = GetSubFolder(layerDefaultFolder, "set_default");
                                                 if(setDefaultFolder != null)
                                                 {
-                                                    var fileName = address.FileName.Replace(".jpg","");
+                                                    var fileName = address.FileName.Replace(".jpg","").Replace("_depth", "");
                                                     // finally the files
                                                     var file = setDefaultFolder.Files.FirstOrDefault(x => x.Name == fileName);
 
