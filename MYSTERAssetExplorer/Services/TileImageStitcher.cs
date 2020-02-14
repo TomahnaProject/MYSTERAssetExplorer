@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace MYSTERAssetExplorer.Services
 {
@@ -66,11 +65,16 @@ namespace MYSTERAssetExplorer.Services
             var height = tileCount * tileSizeInPixels;
             var bitmap = new Bitmap(width, height);
 
-            for (int i = 0; i < tileCount; i++)
+            int horizontalCount = 0;
+            int verticalCount = 0;
+            for (verticalCount = 0; verticalCount < tileCount; verticalCount++)
             {
-                for (int j = 0; j < tileCount; j++)
+                for (horizontalCount = 0; horizontalCount < tileCount; horizontalCount++)
                 {
-                    Overlay(j, i, bitmap, tiles.FirstOrDefault(x=>(x.PositionX-1) == i && (x.PositionY-1) == j));
+                    Overlay(horizontalCount, verticalCount,
+                        bitmap, tiles.FirstOrDefault(x =>
+                        (x.PositionX-1) == verticalCount &&
+                        (x.PositionY-1) == horizontalCount));
                 }
             }
 
@@ -83,24 +87,17 @@ namespace MYSTERAssetExplorer.Services
             return data;
         }
 
+        private Point Coordinate = new Point();
         private void Overlay(int xIndex, int yIndex, Bitmap bitmap, Tile tile)
         {
             if (tile == null)
                 return;
 
-            var tileStartX = tile.Bmp.Width * xIndex;
-            var tileStartY = tile.Bmp.Height * yIndex;
-            var XOffset = (tile.Bmp.Width * xIndex);
-            var YOffset = (tile.Bmp.Height * yIndex);
+            Coordinate.X = tile.Bmp.Width * xIndex;
+            Coordinate.Y = tile.Bmp.Height * yIndex;
 
-            for (int i = 0; i < tile.Bmp.Width; i++)
-            {
-                for (int j = 0; j < tile.Bmp.Height; j++)
-                {
-                    var color = tile.Bmp.GetPixel(i, j);
-                    bitmap.SetPixel(XOffset + i, YOffset + j, color);
-                }
-            }
+            Graphics g = Graphics.FromImage(bitmap);
+            g.DrawImage(tile.Bmp, Coordinate.X, Coordinate.Y, tile.Bmp.Width, tile.Bmp.Height);
         }
     }
 }
