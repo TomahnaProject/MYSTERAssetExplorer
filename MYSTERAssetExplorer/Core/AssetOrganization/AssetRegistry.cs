@@ -36,5 +36,10 @@ namespace MYSTERAssetExplorer.Core
         {
             return Nodes.Where(x => x.Scene == sceneName && x.Zone == zone).ToList();
         }
+
+        public void OrderNodes()
+        {
+            Nodes = Nodes.OrderBy(x => x.Scene).ThenBy(x=>x.Zone).ThenBy(x=>x.Number).ToList();
+        }
     }
 }

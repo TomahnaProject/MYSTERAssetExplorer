@@ -18,6 +18,7 @@ namespace MYSTERAssetExplorer.Services
     {
         public string SerializeRegistry(AssetRegistry registry)
         {
+            registry.OrderNodes();
             using (var stringwriter = new StringWriterUtf8())
             {
                 var serializer = new XmlSerializer(typeof(AssetRegistry), new Type[] { });
