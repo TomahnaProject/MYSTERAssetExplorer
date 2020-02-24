@@ -21,8 +21,7 @@ namespace MYSTERAssetExplorer.Services
             using (var stringwriter = new StringWriterUtf8())
             {
                 var serializer = new XmlSerializer(typeof(AssetRegistry), new Type[] { });
-                StringWriterUtf8 text = new StringWriterUtf8();
-                serializer.Serialize(text, registry);
+                serializer.Serialize(stringwriter, registry);
                 return stringwriter.ToString();
             }
         }
