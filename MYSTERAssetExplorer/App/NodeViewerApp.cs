@@ -102,11 +102,19 @@ namespace MYSTERAssetExplorer.App
             {
                 Bitmap finalImage;
                 if (exportAsSphericalProjection)
+                {
+                    MessageBox.Show("Exporting as spherical projection may take up to around a minute to finish.");
                     finalImage = new SphericalProjectionService().ConstructProjection(images);
+                }
                 else
                     finalImage = new CubeMapBuilder().ConstructCubemap(images);
 
                 ImageSaveService.Save(fileSavePath, finalImage);
+
+                if(exportAsSphericalProjection)
+                {
+                    MessageBox.Show("Exporting as spherical projection has completed!");
+                }
             }
             else
             {

@@ -21,6 +21,68 @@ namespace MYSTERAssetExplorer
         public Bitmap Right;
         public Bitmap Top;
     }
+    public static class CubemapHelper
+    {
+        public static void FillAnyNullWithBlanks(CubemapImages cubemap)
+        {
+            Bitmap empty = new Bitmap(768,768); // HACK
+            Graphics g = Graphics.FromImage(empty);
+            g.Clear(Color.Black);
+            if (cubemap.Back == null)
+                cubemap.Back = empty;
+            if (cubemap.Bottom == null)
+                cubemap.Bottom = empty;
+            if (cubemap.Front == null)
+                cubemap.Front = empty;
+            if (cubemap.Left == null)
+                cubemap.Left = empty;
+            if (cubemap.Right == null)
+                cubemap.Right = empty;
+            if (cubemap.Top == null)
+                cubemap.Top = empty;
+        }
+
+        public static void UpsizeAnyPartials(CubemapImages cubemap)
+        {
+            if (CheckPartial(cubemap.Back))
+                cubemap.Back = Upsize(cubemap.Back);
+            if (CheckPartial(cubemap.Bottom))
+                cubemap.Bottom = Upsize(cubemap.Bottom);
+            if (CheckPartial(cubemap.Front))
+                cubemap.Front = Upsize(cubemap.Front);
+            if (CheckPartial(cubemap.Left))
+                cubemap.Left = Upsize(cubemap.Left);
+            if (CheckPartial(cubemap.Right))
+                cubemap.Right = Upsize(cubemap.Right);
+            if (CheckPartial(cubemap.Top))
+                cubemap.Top = Upsize(cubemap.Top);
+        }
+
+        private static Bitmap Upsize(Bitmap image)
+        {
+
+            int cubeSize = 640;
+            if (image.Width == 768 || image.Height == 768)
+                cubeSize = 768;
+            if (image.Width * 2 == 768 || image.Height * 2 == 768)
+                cubeSize = 768;
+
+            Bitmap upsized = new Bitmap(cubeSize, cubeSize);
+            Graphics g = Graphics.FromImage(upsized);
+            g.Clear(Color.Black);
+            g.DrawImage(image, 0, 0, image.Width, image.Height);
+            return upsized;
+        }
+
+        private static bool CheckPartial(Bitmap image)
+        {
+            if (image.Width == (768 / 2) || image.Width == (640 / 2))
+                return true;
+            if (image.Height == (768 / 2) || image.Height == (640 / 2))
+                return true;
+            return false;
+        }
+    }
 
     public class CubeMapBuilder
     {

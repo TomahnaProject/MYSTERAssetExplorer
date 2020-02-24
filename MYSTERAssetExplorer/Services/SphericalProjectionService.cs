@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -12,8 +13,6 @@ namespace MYSTERAssetExplorer.Services
 {
     public class SphericalProjectionService
     {
-        private double yAxis;
-
         public Bitmap ConstructProjection(CubemapImages images)
         {
             return ConvertToEquirectangular(images);
@@ -22,29 +21,39 @@ namespace MYSTERAssetExplorer.Services
         //https://stackoverflow.com/questions/34250742/converting-a-cubemap-into-equirectangular-panorama
         //https://github.com/adamb70/Python-Spherical-Projection/blob/master/cube2equi.py
         //https://stackoverflow.com/questions/11504584/cubic-to-equirectangular-projection-algorithm
-        public Bitmap ConvertToEquirectangular(CubemapImages cubeMap)
+        private Bitmap ConvertToEquirectangular(CubemapImages cubeMap)
         {
-            DirectBitmap[] faces = ConverCubeToDirectBitmap(cubeMap);
+            CubemapHelper.FillAnyNullWithBlanks(cubeMap);
+            CubemapHelper.UpsizeAnyPartials(cubeMap);
 
-            int cubeFaceWidth = cubeMap.Bottom.Width;
+            DirectBitmap[] faces = ResizeAndConverCubeToDirectBitmap(cubeMap);
+
+            int cubeFaceWidth = faces[0].Width;
             int cubeFaceHeight = cubeFaceWidth;
 
-            int cubePixelCount = cubeFaceHeight * cubeFaceWidth;
-            int totalCubePixelCount = cubePixelCount * 6;
-
-            int sizeToGetComparablePixelDensity = (int) Math.Sqrt(totalCubePixelCount / 2);
+            // this block is to calculate a size that has a comparable pixel density to that of the combined input images
             int factor = 256;
-            int nearestMultiple =
-                    (int)Math.Round(
-                         (sizeToGetComparablePixelDensity / (double)factor),
-                         MidpointRounding.AwayFromZero
-                     ) * factor;
+            int nearestMultiple = 0;
+            {
+                int cubePixelCount = cubeFaceHeight * cubeFaceWidth;
+                int totalCubePixelCount = cubePixelCount * 6;
 
+                int sizeToGetComparablePixelDensity = (int)Math.Sqrt(totalCubePixelCount / 2);
+                nearestMultiple =
+                        (int)Math.Round(
+                             (sizeToGetComparablePixelDensity / (double)factor),
+                             MidpointRounding.AwayFromZero
+                         ) * factor;
+            }
             int outputHeight = nearestMultiple + factor; // round it up
-            outputHeight = 3200;  // double the size of output image
-            int outputWidth = outputHeight * 2;            
+            int outputWidth = outputHeight * 2;
 
-            DirectBitmap equiTexture = new DirectBitmap(outputWidth, outputHeight);
+            // make the projection a multiple of the width of the combined images
+            int scale_factor = 4;
+            int projectionWidth = (cubeFaceWidth * 4)* scale_factor;
+            int projectionHeight = projectionWidth / 2;
+
+            DirectBitmap equiTexture = new DirectBitmap(projectionWidth, projectionHeight);
 
             //Normalised UV texture coordinates, from 0 to 1, starting at lower left corner
             double u_coordinate;
@@ -119,7 +128,7 @@ namespace MYSTERAssetExplorer.Services
                         //Right
                         normX = (((zAxis + 1f) / 2f) - 1f);
                         normY = (((yAxis + 1f) / 2f));
-                        pixelCoord = GetPixelCoordinates(normX, normY, cubeFaceWidth, cubeFaceHeight);
+                        pixelCoord = GetPixelCoordinates(normX, normY, faces[4].Width, faces[4].Height);
                         color = faces[4].GetPixel(pixelCoord.X, pixelCoord.Y);
                     }
                     else if (xAxis == -1)
@@ -127,7 +136,7 @@ namespace MYSTERAssetExplorer.Services
                         //Left
                         normX = ((zAxis + 1) / 2);
                         normY = ((yAxis + 1) / 2);
-                        pixelCoord = GetPixelCoordinates(normX, normY, cubeFaceWidth, cubeFaceHeight);
+                        pixelCoord = GetPixelCoordinates(normX, normY, faces[3].Width, faces[3].Height);
                         color = faces[3].GetPixel(pixelCoord.X, pixelCoord.Y);
                     }
                     else if (yAxis == -1)
@@ -135,7 +144,7 @@ namespace MYSTERAssetExplorer.Services
                         //Up
                         normX = ((xAxis + 1f) / 2f);
                         normY = ((zAxis + 1f) / 2f);
-                        pixelCoord = GetPixelCoordinates(normX, normY, cubeFaceWidth, cubeFaceHeight);
+                        pixelCoord = GetPixelCoordinates(normX, normY, faces[5].Width, faces[5].Height);
                         color = faces[5].GetPixel(pixelCoord.X, pixelCoord.Y);
                     }
                     else if (yAxis == 1)
@@ -143,7 +152,7 @@ namespace MYSTERAssetExplorer.Services
                         //Down
                         normX = ((xAxis + 1f) / 2f);
                         normY = (((zAxis + 1f) / 2f) - 1f);
-                        pixelCoord = GetPixelCoordinates(normX, normY, cubeFaceWidth, cubeFaceHeight);
+                        pixelCoord = GetPixelCoordinates(normX, normY, faces[1].Width, faces[1].Height);
                         color = faces[1].GetPixel(pixelCoord.X, pixelCoord.Y);
                     }
                     else if (zAxis == 1)
@@ -151,7 +160,7 @@ namespace MYSTERAssetExplorer.Services
                         //Front
                         normX = ((xAxis + 1f) / 2f);
                         normY = ((yAxis + 1f) / 2f);
-                        pixelCoord = GetPixelCoordinates(normX, normY, cubeFaceWidth, cubeFaceHeight);
+                        pixelCoord = GetPixelCoordinates(normX, normY, faces[2].Width, faces[2].Height);
                         color = faces[2].GetPixel(pixelCoord.X, pixelCoord.Y);
                     }
                     else if (zAxis == -1)
@@ -159,7 +168,7 @@ namespace MYSTERAssetExplorer.Services
                         //Back
                         normX = (((xAxis + 1f) / 2f) - 1f);
                         normY = ((yAxis + 1f) / 2f);
-                        pixelCoord = GetPixelCoordinates(normX, normY, cubeFaceWidth, cubeFaceHeight);
+                        pixelCoord = GetPixelCoordinates(normX, normY, faces[0].Width, faces[0].Height);
                         color = faces[0].GetPixel(pixelCoord.X, pixelCoord.Y);
                     }
                     else
@@ -170,7 +179,8 @@ namespace MYSTERAssetExplorer.Services
                     equiTexture.SetPixel(widthIndex, heightIndex, color);
                 }
             }
-            return equiTexture.Bitmap;
+            var downscaled  = ResizeImage(equiTexture.Bitmap, equiTexture.Width / scale_factor, equiTexture.Height / scale_factor);
+            return downscaled;
         }
 
         Point coordinate = new Point();
@@ -185,28 +195,75 @@ namespace MYSTERAssetExplorer.Services
             return coordinate;
         }
 
-        private DirectBitmap[] ConverCubeToDirectBitmap(CubemapImages images)
+        private DirectBitmap[] ResizeAndConverCubeToDirectBitmap(CubemapImages images)
         {
+            Bitmap[] processedFaces = new Bitmap[6];
+            bool resize = false;
+            if (resize)
+            {
+                processedFaces[0] = ResizeImage(images.Back, images.Back.Width * 2, images.Back.Height * 2);
+                processedFaces[1] = ResizeImage(images.Bottom, images.Bottom.Width * 2, images.Bottom.Height * 2);
+                processedFaces[2] = ResizeImage(images.Front, images.Front.Width * 2, images.Front.Height * 2);
+                processedFaces[3] = ResizeImage(images.Left, images.Left.Width * 2, images.Left.Height * 2);
+                processedFaces[4] = ResizeImage(images.Right, images.Right.Width * 2, images.Right.Height * 2);
+                processedFaces[5] = ResizeImage(images.Top, images.Top.Width * 2, images.Top.Height * 2);
+            }
+            else
+            {
+                processedFaces[0] = images.Back;
+                processedFaces[1] = images.Bottom;
+                processedFaces[2] = images.Front;
+                processedFaces[3] = images.Left;
+                processedFaces[4] = images.Right;
+                processedFaces[5] = images.Top;
+            }
             DirectBitmap[] faces = new DirectBitmap[6];
-            faces[0] = CopyImageToDirectBitmap(images.Back);
-            faces[1] = CopyImageToDirectBitmap(images.Bottom);
-            faces[2] = CopyImageToDirectBitmap(images.Front);
-            faces[3] = CopyImageToDirectBitmap(images.Left);
-            faces[4] = CopyImageToDirectBitmap(images.Right);
-            faces[5] = CopyImageToDirectBitmap(images.Top);
+            faces[0] = CopyImageToDirectBitmap(processedFaces[0]);
+            faces[1] = CopyImageToDirectBitmap(processedFaces[1]);
+            faces[2] = CopyImageToDirectBitmap(processedFaces[2]);
+            faces[3] = CopyImageToDirectBitmap(processedFaces[3]);
+            faces[4] = CopyImageToDirectBitmap(processedFaces[4]);
+            faces[5] = CopyImageToDirectBitmap(processedFaces[5]);
             return faces;
         }
         private DirectBitmap CopyImageToDirectBitmap(Bitmap image)
         {
             DirectBitmap result = new DirectBitmap(image.Width, image.Height);
-            for(int row = 0; row < image.Height; row++)
+            for (int row = 0; row < image.Height; row++)
             {
-                for(int col = 0; col < image.Width; col++)
+                for (int col = 0; col < image.Width; col++)
                 {
                     result.SetPixel(col, row, image.GetPixel(col, row));
                 }
             }
             return result;
+        }
+
+        //http://www.nathanaeljones.com/blog/2009/20-image-resizing-pitfalls
+        //https://stackoverflow.com/questions/1922040/how-to-resize-an-image-c-sharp
+        private Bitmap ResizeImage(Bitmap image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
         }
     }
 

@@ -93,6 +93,8 @@ namespace MYSTERAssetExplorer.App
 
         public void PopulateImages(Node node)
         {
+            if (node == null)
+                return;
             CubeMapImageSet imageSet = node.CubeMaps.Color;
             
             //if (mapTypeIsColor == true)
@@ -167,8 +169,24 @@ namespace MYSTERAssetExplorer.App
             App.SetSelectedGame(current.Text);
 
             Node selectedNodeEntry = (Node)newSelected.Tag;
+            if(App.SelectedGame == "Revelation")
+            {
+                FillRevNodesWithAutomaticFaces(selectedNodeEntry);
+            }
             App.SetSelectedNode(selectedNodeEntry);
             Populate(selectedNodeEntry);
+        }
+
+        private void FillRevNodesWithAutomaticFaces(Node node)
+        {
+            if (node == null || node.CubeMaps == null)
+                return;
+            node.CubeMaps.Color.Back.File = "back";
+            node.CubeMaps.Color.Bottom.File = "bottom";
+            node.CubeMaps.Color.Front.File = "front";
+            node.CubeMaps.Color.Left.File = "left";
+            node.CubeMaps.Color.Right.File = "right";
+            node.CubeMaps.Color.Top.File = "top";
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -329,7 +347,7 @@ namespace MYSTERAssetExplorer.App
 
         private void BatchExport(string folderPath, List<Node> nodes, bool exportAsSphericalProjection)
         {
-            if(Directory.Exists(folderPath))
+            if(Directory.Exists(Path.GetDirectoryName(folderPath)))
             {
                 foreach (var node in nodes)
                 {
@@ -349,6 +367,7 @@ namespace MYSTERAssetExplorer.App
         private void ExportAllCubemaps_Click(object sender, EventArgs e)
         {
             var fileNameText = "Select Folder";
+            openFolderDialog.Filter = "Png (*.png) |*.png";
             openFolderDialog.FileName = fileNameText;
             openFolderDialog.CheckPathExists = true;
             openFolderDialog.ShowReadOnly = false;
@@ -359,7 +378,7 @@ namespace MYSTERAssetExplorer.App
 
             if (openFolderDialog.ShowDialog() == DialogResult.OK)
             {
-                exportDir = openFolderDialog.FileName.Replace(fileNameText, "");
+                exportDir = Path.GetDirectoryName(openFolderDialog.FileName.Replace(fileNameText, ""));
             }
 
             if(!string.IsNullOrEmpty(exportDir))
