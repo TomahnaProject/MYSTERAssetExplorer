@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace MYSTERAssetExplorer
+namespace MYSTERAssetExplorer.Utils
 {
     public static class Extensions
     {

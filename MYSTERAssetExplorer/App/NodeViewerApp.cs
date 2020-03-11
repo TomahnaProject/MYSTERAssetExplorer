@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using MYSTERAssetExplorer.Core;
 using MYSTERAssetExplorer.Core.Model;
 using System.IO;
+using MYSTERAssetExplorer.Utils;
 
 namespace MYSTERAssetExplorer.App
 {
@@ -77,12 +78,12 @@ namespace MYSTERAssetExplorer.App
         public CubemapImages GetCubemapImagesForImageSet(Node node, CubeMapImageSet imageSet)
         {
             var data = new CubemapImages();
-            data.Back = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Back.File));
-            data.Bottom = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Bottom.File));
-            data.Front = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Front.File));
-            data.Left = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Left.File));
-            data.Right = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Right.File));
-            data.Top = Utils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Top.File));
+            data.Back = BitmapUtils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Back.File));
+            data.Bottom = BitmapUtils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Bottom.File));
+            data.Front = BitmapUtils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Front.File));
+            data.Left = BitmapUtils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Left.File));
+            data.Right = BitmapUtils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Right.File));
+            data.Top = BitmapUtils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Top.File));
             return data;
         }
 

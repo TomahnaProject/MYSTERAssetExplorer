@@ -1,5 +1,6 @@
 ﻿using MYSTERAssetExplorer.Core;
 using MYSTERAssetExplorer.Services;
+using MYSTERAssetExplorer.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -242,7 +243,7 @@ namespace MYSTERAssetExplorer.App
                     var fileSizeInBytes = archiveIndex.End - archiveIndex.Start;
                     subItems = new ListViewItem.ListViewSubItem[]
                     {
-                        new ListViewItem.ListViewSubItem(item, Utils.GetBytesReadable(fileSizeInBytes)),
+                        new ListViewItem.ListViewSubItem(item, FormatUtils.GetBytesReadable(fileSizeInBytes)),
                         new ListViewItem.ListViewSubItem(item, "(" + archiveIndex.Start + ", " + archiveIndex.End +")")
                     };
 
@@ -464,7 +465,7 @@ namespace MYSTERAssetExplorer.App
         {
             try
             {
-                Bitmap bmp = Utils.LoadBitmapFromMemory(imageData);
+                Bitmap bmp = BitmapUtils.LoadBitmapFromMemory(imageData);
                 previewPanel.BackgroundImage = bmp;
                 previewPanel.Tag = imageName;
             }

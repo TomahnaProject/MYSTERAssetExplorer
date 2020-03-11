@@ -86,7 +86,8 @@
     <Compile Include="Core\VirtualFolder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Utils\BitmapUtils.cs" />
+    <Compile Include="Utils\Extensions\Extensions.cs" />
     <Compile Include="Services\CacheSerializationService.cs" />
     <Compile Include="Services\ConversionService.cs" />
     <Compile Include="Services\SphericalProjectionService.cs" />
@@ -103,7 +104,9 @@
     <Compile Include="Services\AssetRegistrySerializationService.cs" />
     <Compile Include="Services\CubeMapBuilder.cs" />
     <Compile Include="Services\RegistryManager.cs" />
-    <Compile Include="Utils.cs" />
+    <Compile Include="Utils\FormatUtils.cs" />
+    <Compile Include="Utils\Extensions\UInt32Extension.cs" />
+    <Compile Include="Utils\ValidationUtils.cs" />
     <EmbeddedResource Include="App\AssetExplorer.resx">
       <DependentUpon>AssetExplorer.cs</DependentUpon>
     </EmbeddedResource>

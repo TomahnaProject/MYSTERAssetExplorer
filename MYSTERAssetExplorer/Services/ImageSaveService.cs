@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MYSTERAssetExplorer.Utils;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -50,7 +51,7 @@ namespace MYSTERAssetExplorer.Services
             {
                 actualExtension = ".bmp";
                 // dont save as bmp, save as png
-                var image = Utils.LoadBitmapFromMemory(imageData);
+                var image = BitmapUtils.LoadBitmapFromMemory(imageData);
                 Save(fileSavePath.Replace(".jpg", ".png"), image);
                 return;
             }
