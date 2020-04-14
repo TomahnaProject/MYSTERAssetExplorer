@@ -15,10 +15,10 @@ namespace MYSTERAssetExplorer.Services
             RootFolder = rootFolder;
         }
 
-        public IVirtualFile GetFile(out bool couldFind, VirtualFileAddress address)
+        public IVirtualFileEntry GetFile(out bool couldFind, VirtualFileAddress address)
         {
             couldFind = false;
-            IVirtualFile file = null;
+            IVirtualFileEntry file = null;
 
             var gameFolder = RootFolder.SubFolders.FirstOrDefault(
                 x => string.Equals(x.Name, address.Game, StringComparison.OrdinalIgnoreCase));
@@ -38,7 +38,7 @@ namespace MYSTERAssetExplorer.Services
             return file;
         }
 
-        public IVirtualFile GetExileFile(out bool couldFind, IVirtualFolder gameFolder, VirtualFileAddress address)
+        public IVirtualFileEntry GetExileFile(out bool couldFind, IVirtualFolder gameFolder, VirtualFileAddress address)
         {
             if (string.IsNullOrEmpty(address.Scene))
             {
@@ -100,7 +100,7 @@ namespace MYSTERAssetExplorer.Services
             return null;
         }
 
-        public IVirtualFile GetRevelationFile(out bool couldFind, IVirtualFolder gameFolder, VirtualFileAddress address)
+        public IVirtualFileEntry GetRevelationFile(out bool couldFind, IVirtualFolder gameFolder, VirtualFileAddress address)
         {
             var sceneName = (RevelationScene)Enum.Parse(typeof(RevelationScene), address.Scene, true);
             int sceneCode = (int)sceneName;

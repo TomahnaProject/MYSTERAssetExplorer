@@ -1,19 +1,293 @@
 ﻿<AssetRegistry>
+  <Game>Revelation</Game>
   <Nodes>
-    <Node Scene="TomahnaNight" Zone="Exterior" Number="020" Type="Normal">
-      <Position X="0" Y="0" Z="0" />
-      <Rotation Yaw="0" />
-      <CubeMaps DepthRange="0">
-        <Color>
-          <Back File="back.jpg" />
-          <Bottom File="bottom.jpg" />
-          <Front File="front.jpg" />
-          <Left File="left.jpg" />
-          <Right File="right.jpg" />
-          <Top File="top.jpg" />
-        </Color>
-      </CubeMaps>
-      <Sprites />
-    </Node>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="020" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="021" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="040" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="041" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="050" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="090" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="160" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="200" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="210" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="230" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="240" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="241" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="250" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="260" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="270" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="290" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Exterior" Number="310" Type="Normal"/>
+
+    <Node Scene="TomahnaNight" Zone="Lab" Number="010" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="020" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="021" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="030" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="031" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="032" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="040" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="041" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="050" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="060" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="070" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="071" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="090" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="130" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="131" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="140" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="141" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="142" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="143" Type="Partial"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="150" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="160" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Lab" Number="170" Type="Normal"/>
+    
+    <Node Scene="TomahnaNight" Zone="Study" Number="010" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="030" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="050" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="051" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="060" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="070" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="080" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="090" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="091" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="093" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="094" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="100" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="101" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Study" Number="103" Type="Normal"/> 
+    
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="010" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="020" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="040" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="050" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="060" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="070" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="080" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="090" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="091" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="100" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="101" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="102" Type="Normal"/>    
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="103" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="104" Type="Normal"/>    
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="110" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="111" Type="Normal"/>    
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="112" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="113" Type="Normal"/>    
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="114" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="115" Type="Normal"/>    
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="120" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="121" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="122" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="130" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="131" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Greenhouse" Number="140" Type="Normal"/>
+    
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="010" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="011" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="020" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="021" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="022" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="030" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="031" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="032" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="040" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="050" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="051" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="052" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="053" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="060" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="070" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="Kitchen" Number="071" Type="Normal"/>
+    
+    <Node Scene="TomahnaNight" Zone="Vault" Number="010" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="YeeshaRoom" Number="010" Type="Normal"/>
+    <Node Scene="TomahnaNight" Zone="MasterBedroom" Number="010" Type="Normal"/>
+    
+    <Node Scene="Haven" Zone="Ship" Number="010" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="030" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="040" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="050" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="060" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="061" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="062" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="070" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="080" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="090" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="100" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="110" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="120" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="130" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="131" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="132" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="140" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="141" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="150" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="160" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="170" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="180" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="190" Type="Normal"/>
+    <Node Scene="Haven" Zone="Ship" Number="191" Type="Normal"/>
+    
+    <Node Scene="Haven" Zone="Gap" Number="010" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="011" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="012" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="013" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="015" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="020" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="021" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="030" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="050" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="051" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="070" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="071" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="100" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="130" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="150" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="160" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="170" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="180" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="190" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gap" Number="230" Type="Normal"/>
+    
+    
+    <Node Scene="Haven" Zone="MainForest" Number="010" Type="Normal"/>
+    <Node Scene="Haven" Zone="Swamp" Number="010" Type="Normal"/>
+    <Node Scene="Haven" Zone="SouthForest" Number="010" Type="Normal"/>
+    <Node Scene="Haven" Zone="Lake" Number="010" Type="Normal"/>
+    <Node Scene="Haven" Zone="Grassland" Number="010" Type="Normal"/>
+    <Node Scene="Haven" Zone="Gate" Number="010" Type="Normal"/>
+    
+    <Node Scene="Spire" Zone="Peak" Number="020" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="021" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="030" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="031" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="032" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="040" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="050" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="060" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="070" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="080" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="081" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="090" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="110" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="100" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="120" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="121" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="122" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="130" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="131" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="132" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="133" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="140" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="180" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="190" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="200" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="250" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="251" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="252" Type="Partial"/>
+    <Node Scene="Spire" Zone="Peak" Number="270" Type="Normal"/>
+    <Node Scene="Spire" Zone="Peak" Number="271" Type="Partial"/>   
+    
+    <Node Scene="Spire" Zone="Garden" Number="010" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="020" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="030" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="050" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="051" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="060" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="070" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="071" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="090" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="101" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="103" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="104" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="110" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="120" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="130" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="150" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="151" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="152" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="160" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="190" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="200" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="210" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="211" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="220" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="230" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="231" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="250" Type="Normal"/>
+    <Node Scene="Spire" Zone="Garden" Number="500" Type="Normal"/>
+    
+    <Node Scene="Spire" Zone="Dwelling" Number="010" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="011" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="030" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="031" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="050" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="051" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="052" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="053" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="060" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="061" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="062" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="070" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="071" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="072" Type="Normal"/>
+    <Node Scene="Spire" Zone="Dwelling" Number="073" Type="Normal"/>
+     
+    <Node Scene="Spire" Zone="Island" Number="100" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="110" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="120" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="130" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="131" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="150" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="151" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="160" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="161" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="170" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="180" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="190" Type="Normal"/>
+    <Node Scene="Spire" Zone="Island" Number="200" Type="Normal"/>
+    
+    <Node Scene="Spire" Zone="Cavern" Number="010" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="020" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="021" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="030" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="050" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="060" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="061" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="070" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="080" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="090" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="091" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="092" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="093" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="094" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="100" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="110" Type="Normal"/>
+    <Node Scene="Spire" Zone="Cavern" Number="111" Type="Normal"/>
+    
+    <Node Scene="Spire" Zone="Factory" Number="030" Type="Normal"/>
+    <Node Scene="Spire" Zone="Factory" Number="040" Type="Normal"/>
+    <Node Scene="Spire" Zone="Factory" Number="050" Type="Normal"/>
+    <Node Scene="Spire" Zone="Factory" Number="051" Type="Normal"/>
+    <Node Scene="Spire" Zone="Factory" Number="052" Type="Normal"/>
+    <Node Scene="Spire" Zone="Factory" Number="060" Type="Normal"/>
+    <Node Scene="Spire" Zone="Factory" Number="061" Type="Normal"/>
+    <Node Scene="Spire" Zone="Factory" Number="062" Type="Normal"/>
+    <Node Scene="Spire" Zone="Factory" Number="070" Type="Normal"/>
+    <Node Scene="Spire" Zone="Factory" Number="071" Type="Normal"/>
+    
+    <Node Scene="Serenia" Zone="Cave" Number="010" Type="Normal"/>
+    <Node Scene="Serenia" Zone="Forest" Number="010" Type="Normal"/>
+    <Node Scene="Serenia" Zone="Temple" Number="010" Type="Normal"/>
+    <Node Scene="Serenia" Zone="Flower" Number="010" Type="Normal"/>
+    <Node Scene="Serenia" Zone="Basin" Number="010" Type="Normal"/>
+    <Node Scene="Serenia" Zone="DeadFlower" Number="010" Type="Normal"/>
+    
+    <Node Scene="TomahnaDay" Zone="Exterior" Number="010" Type="Normal"/>
+    <Node Scene="TomahnaDay" Zone="Lab" Number="010" Type="Normal"/>
+    <Node Scene="TomahnaDay" Zone="Greenhouse" Number="010" Type="Normal"/>
+    <Node Scene="TomahnaDay" Zone="MasterBedroom" Number="010" Type="Normal"/>
   </Nodes>
 </AssetRegistry>

@@ -10,6 +10,6 @@ namespace MYSTERAssetExplorer.Core
     {
         string Name { get; set; }
         List<IVirtualFolder> SubFolders { get; }
-        List<IVirtualFile> Files { get; }
+        List<IVirtualFileEntry> Files { get; }
     }
 }

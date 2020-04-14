@@ -1,533 +1,375 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using MYSTERAssetExplorer.Core;
-using System.IO;
+using MYSTERAssetExplorer.Utils;
 
 namespace MYSTERAssetExplorer.Services
 {
+    public enum Myst3ResourceType
+    {
+        CubeFace = 0,
+        WaterEffectMask = 1,
+        LavaEffectMask = 2,
+        MagneticEffectMask = 3,
+        ShieldEffectMask = 4,
+        SpotItem = 5,
+        Frame = 6,
+        RawData = 7,
+        Movie = 8,
+        StillMovie = 10,
+        Text = 11,
+        TextMetadata = 12,
+        NumMetadata = 13,
+        LocalizedSpotItem = 69,
+        LocalizedFrame = 70,
+        MultitrackMovie = 72,
+        DialogMovie = 74
+    }
+    public enum M3CubeFace
+    {
+        None = 0,
+        Back = 1,
+        Bottom = 2,
+        Front = 3,
+        Left = 4,
+        Right = 5,
+        Top = 6,
+    }
+    public class SpotItemData
+    {
+        public uint U;
+        public uint V;
+    }
+    public class Vector3
+    {
+        public float X;
+        public float Y;
+        public float Z;
+    }
+    public class VideoData
+    {
+        public Vector3 V1 = new Vector3();
+        public Vector3 V2 = new Vector3();
+        public int U;
+        public int V;
+        public int Width;
+        public int Height;
+    }
+    public class M3ArchiveFileEntry
+    {
+        public string Folder = null;
+        //public byte[] HeaderData = new byte[0];
+        public UInt32 Offset;
+        public UInt32 Size;
+        public UInt16 MetaDataSize;
+        public M3CubeFace CubeFace = M3CubeFace.None;
+        public Myst3ResourceType Type = Myst3ResourceType.RawData;
+        public byte[] MetaData = new byte[0];
+        //public byte[] MiscData = new byte[0];
+        public VideoData VideoData = new VideoData();
+        public SpotItemData SpotItemData = new SpotItemData();
+    }
+
     public class M3AFileIndexingService : IFileIndexerService
     {
-        public static readonly byte[] JPG_HEADER = new byte[] { 0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46, 0x49, 0x46 };
-        //public static readonly byte[] JPG_HEADER_SHORT = new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 };
-        public static readonly byte[] JPG_FOOTER = new byte[] { 0xFF, 0xD9 };
-        public static readonly byte[] BINK_HEADER = new byte[] { 0x42, 0x49, 0x4B, 0x69 };
-
-        private static List<FileIdentifier> FileIdentifiers = new List<FileIdentifier>()
-        {
-            new FileIdentifier(M3AFileType.Jpg, FileBoundaryType.Start, JPG_HEADER),
-            //new FileIdentifier(M3AFileType.Jpg, FileBoundaryType.Start, JPG_HEADER_SHORT),
-            new FileIdentifier(M3AFileType.Jpg, FileBoundaryType.End, JPG_FOOTER),
-            new FileIdentifier(M3AFileType.Bink, FileBoundaryType.Start, BINK_HEADER),
-        };
-
-        public class FileIdentifier
-        {
-            public M3AFileType FileType { get; }
-            public FileBoundaryType Boundary { get; }
-            public byte[] FilePattern { get; }
-
-            public FileIdentifier(M3AFileType fileType, FileBoundaryType boundary, byte[] filePattern)
-            {
-                FileType = fileType;
-                Boundary = boundary;
-                FilePattern = filePattern;
-            }
-        }
-
-        public enum M3AFileType
-        {
-            Unknown,
-            Jpg,
-            Bink
-        }
-
-        public enum FileBoundaryType
-        {
-            Start,
-            End
-        }
-
-        public class FileMarker
-        {
-            public M3AFileType Type;
-            public int BeginOffset;
-            public int EndOffset;
-        }
-
         public IVirtualFolder IndexFile(string filePath)
         {
-            List<FileMarker> markers = GetMarkers(filePath);
-            return CreateListing(markers, filePath);
-        }
-
-        private List<FileMarker> GetMarkers(string filePath)
-        {
-            List<FileMarker> markers = new List<FileMarker>();
-
-            markers = ScanThroughFile(filePath);
-
-            return markers;
-        }
-
-        private class FileIdentifierMatch
-        {
-            public FileIdentifier Identifier;
-            public int FileOffset;
-            public byte[] AdditionalData;
-        }
-
-        private List<FileIdentifierMatch> FindFileIdentifiersInBufferBoundary(byte[] previousBuffer, byte[] currentBuffer, int fileOffset)
-        {
-            List<FileIdentifierMatch> results = new List<FileIdentifierMatch>();
-
-            byte[] boundary = new byte[previousBuffer.Length + currentBuffer.Length];
-            previousBuffer.CopyTo(boundary, 0);
-            currentBuffer.CopyTo(boundary, previousBuffer.Length);
-            int fidLength = 0;
-            foreach (var fid in FileIdentifiers)
-            {
-                fidLength = fid.FilePattern.Length;
-                for (int i = (int)(previousBuffer.Length - fidLength + 1); i < previousBuffer.Length; i++)
-                {
-                    if (EqualsPatternAtPosition(boundary, fid.FilePattern, i))
-                    {
-                        byte[] additionalData = null;
-                        if (fid.FileType == M3AFileType.Bink)
-                        {
-                            additionalData = boundary.Skip((int)i).ToArray();
-                        }
-                        results.Add(new FileIdentifierMatch() { Identifier = fid, FileOffset = (fileOffset-((int)previousBuffer.Length - i)), AdditionalData = additionalData});
-                    }
-                }
-            }
-            return results;
-        }
-
-
-        private List<FileIdentifierMatch> FindFileIdentifiersInBuffer(byte[] data, int fileOffset)
-        {
-            List<FileIdentifierMatch> results = new List<FileIdentifierMatch>();
-
-            for (int i = 0; i < data.Length; i++)
-            {
-                foreach (var fid in FileIdentifiers)
-                {
-                    if (EqualsPatternAtPosition(data, fid.FilePattern, i))
-                    {
-                        byte[] additionalData = null;
-                        if (fid.FileType == M3AFileType.Bink)
-                        {
-                            additionalData = data.Skip((int)i).ToArray();
-                        }
-                        results.Add(new FileIdentifierMatch() { Identifier = fid, FileOffset = fileOffset + i, AdditionalData = additionalData });
-                    }
-                }
-            }
-            return results;
-        }
-        
-        /*
-        randdata
-
-        jpgheader
-        jpgdata
-        jpgfooter
-
-        binkheader(filesize)
-        binkdata
-
-        jpgheader
-        jpgdata
-        jpgfooter
-
-        randdata
-
-        binkheader(filesize)
-        binkdata
-
-        randdata
-        */
-
-        private class FileMarkerMachine
-        {
-            List<FileMarker> markers = new List<FileMarker>();
-            FileMarker currentFile = null;
-
-            public void AddFileIdentifierMatch(FileIdentifierMatch match)
-            {
-                if (currentFile == null)
-                {
-                    // the scanner is proceeding to the next file
-                    if (match.Identifier.Boundary == FileBoundaryType.Start)
-                    {
-                        // check if data leading up to this file was an adjacent file, or a gap
-                        var previousFile = markers.LastOrDefault();
-                        int gapStart = 0;
-                        int gapEnd = 0;
-                        bool precededByGap = false;
-
-                        if (previousFile != null)
-                        {
-                            if (previousFile.EndOffset != (match.FileOffset - 1))
-                            {
-                                precededByGap = true;
-                                gapStart = previousFile.EndOffset + 1;
-                                gapEnd = match.FileOffset - 1;
-                            }
-                        }
-                        else
-                        {
-                            if (0 < match.FileOffset)
-                            {
-                                // bunch of binary stuff at beginning of file
-                                precededByGap = true;
-                                gapStart = 0;
-                                gapEnd = match.FileOffset - 1;
-                            }
-                        }
-
-                        if(precededByGap)
-                        {
-                            var gap = new FileMarker();
-                            gap.Type = M3AFileType.Unknown;
-                            gap.BeginOffset = gapStart;
-                            gap.EndOffset = gapEnd;
-                            markers.Add(gap);
-                        }
-
-                        // proceed to open filemarker to enclose the oncoming file
-                        currentFile = new FileMarker();
-                        currentFile.Type = match.Identifier.FileType;
-                        currentFile.BeginOffset = match.FileOffset;
-
-                        if (currentFile.Type == M3AFileType.Bink)
-                        {
-                            // read header and mark end of bink file
-                            int length = (int)FindEndOffsetOfBinkFile(match.AdditionalData);
-                            currentFile.EndOffset = match.FileOffset + length - 1; // bink length!
-                            markers.Add(currentFile);
-                            currentFile = null;
-                        }
-                    }
-                }
-                else
-                {
-                    // the scanner is inside a file, be on look out for end of file
-                    if (match.Identifier.Boundary == FileBoundaryType.End)
-                    {
-                        if (currentFile.Type == M3AFileType.Jpg)
-                        {
-                            currentFile.EndOffset = match.FileOffset + (int)match.Identifier.FilePattern.Length - 1;
-                            markers.Add(currentFile);
-                            currentFile = null;
-                        }
-                    }
-                }
-            }
-
-            public void EndOfFile(int fileLength)
-            {
-                if (currentFile != null)
-                    throw new Exception("Error: expected end for jpg or bink file");
-                var previousFile = markers.Last();
-                if(previousFile.EndOffset < fileLength)
-                {
-                    var gap = new FileMarker();
-                    gap.Type = M3AFileType.Unknown;
-                    gap.BeginOffset = previousFile.EndOffset;
-                    gap.EndOffset = fileLength;
-                    markers.Add(gap);
-                }
-
-                foreach (var marker in markers)
-                {
-                    if(marker.EndOffset > fileLength)
-                    {
-                        marker.EndOffset = 0;
-                        //throw new Exception("File ending is malformed");
-                    }
-                }
-            }
-
-            public List<FileMarker> GetMarkers()
-            {
-                return markers;
-            }
-        }
-        
-        private List<FileMarker> ScanThroughFile(string filePath)
-        {
-
-            FileMarkerMachine machine = new FileMarkerMachine();
-            
-            const int BUFFER_SIZE = 16384;
-            const int BUFFER_OVERLAP = 10;
-
-            byte[] buffer = new byte[BUFFER_SIZE];
-            byte[] copyBuffer = new byte[BUFFER_OVERLAP];
-            // a file identifer might get cut off by the end of the buffer
-            // so keep a copy of the end of previous loop's buffer
-            byte[] endOfPreviousBuffer = new byte[BUFFER_OVERLAP];
+            IVirtualFolder builtFolder;
+            var fileName = Path.GetFileName(filePath);
             FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             try
             {
-                int fileLength = (int)fileStream.Length;
-                int bufferCount = (int)fileLength / (int)buffer.Length;
-
-                int loopCount = 0;
-                int currentFileOffset = 0;
-                int returnedBufferSize = 0;
-                bool endOfFile = false;
-
-                List<FileIdentifierMatch> matches = new List<FileIdentifierMatch>();
-
-                while (loopCount <= bufferCount)
-                {
-                    copyBuffer.CopyTo(endOfPreviousBuffer, 0);
-                    currentFileOffset = loopCount * BUFFER_SIZE;
-                    fileStream.Seek(currentFileOffset, SeekOrigin.Begin);
-                    returnedBufferSize = fileStream.Read(buffer, 0, buffer.Length);
-                    loopCount++;
-
-                    //check and handle end of file
-                    if (returnedBufferSize < BUFFER_SIZE)
-                    {
-                        buffer = buffer.Take(returnedBufferSize).ToArray();
-                        endOfFile = true;
-                    }                   
-
-                    matches = FindFileIdentifiersInBufferBoundary(endOfPreviousBuffer, buffer, currentFileOffset);
-                    matches.AddRange(FindFileIdentifiersInBuffer(buffer, currentFileOffset));
-                    
-                    foreach(var match in matches)
-                    {
-                        machine.AddFileIdentifierMatch(match);
-                    }
-
-                    if(endOfFile)
-                    {
-                        machine.EndOfFile(fileLength);
-                    }
-
-                    //// in case there is unknown data at start of file
-                    //if(loopCount == 0 &  matches.Count < 1)
-                    //{
-                    //    var match = new FileIdentifierMatch();
-                    //    match.FileOffset = 0;
-                    //    match.Identifier = new FileIdentifier(M3AFileType.Unknown, FileBoundaryType.Start, null);
-                    //    machine.AddFileIdentifierMatch(match);
-                    //}
-
-                    buffer.Skip(BUFFER_SIZE - BUFFER_OVERLAP).Take(BUFFER_OVERLAP).ToArray().CopyTo(copyBuffer, 0);
-                }
+                var totalFileSize = fileStream.Seek(0, SeekOrigin.End);
+                builtFolder = ReadMyst3Archive(fileStream, fileName, 0, totalFileSize);
             }
             finally
             {
                 fileStream.Close();
             }
-
-            return machine.GetMarkers();
+            return builtFolder;
         }
 
-        private static uint FindEndOffsetOfBinkFile(byte[] startOfBinkFile)
+        private IVirtualFolder ReadMyst3Archive(FileStream fileStream, string fileName, long fileStart, long fileEnd)
         {
-            byte[] fileLengthData = startOfBinkFile.Skip(4).Take(4).ToArray();
+            var header = ReadArchiveHeader(fileStream);
+            //File.WriteAllBytes("E:\\test\\" + Path.GetFileName(fileStream.Name), header);
 
-            //int num = 45943;
-            //var hex = BitConverter.GetBytes(num);
+            bool containsSubFolders = false;
+            containsSubFolders =
+                fileName.ToLower().Contains(".m3r") ||
+                fileName.ToLower().Contains(".m3o") ||
+                fileName.ToLower().Contains(".m3u") ||
+                fileName.ToLower().Contains(".m3t");
 
+            var folder = CreateListingForArchive(fileStream.Name, fileEnd, header, containsSubFolders);
+            return folder;
 
-            // bink stores the file's lenght as 4 bytes
-            // when the last bytes bits are 0, then it is a uint16 number
-            // when the last bytes bits are used, then it is a uint32 number
-            uint fileLength = 0;
-            if (fileLengthData[2] == 0 && fileLengthData[3] == 0)
+        }
+        private byte[] ReadArchiveHeader(FileStream fileStream)
+        {
+            fileStream.Seek(0, SeekOrigin.Begin);
+            UInt32 headerSize = fileStream.ReadUInt32LE(0);
+
+            // first 4 bytes contains the header size
+            // in reality the header is never going to be very large
+            // but when encrypted it's value will appear gigantic
+            // check if it has an enormous value
+            // if that is the case, it's encrypted
+            bool encrypted = headerSize > 1000000;
+
+            byte[] headerBuffer = null;
+
+            if (encrypted)
             {
-                fileLength = BitConverter.ToUInt16(fileLengthData, 0);
+                headerBuffer = DecryptArchiveHeader(fileStream);
             }
             else
             {
-                fileLength = BitConverter.ToUInt32(fileLengthData, 0);
+                headerBuffer = CopyHeader(fileStream, headerSize);
             }
-
-            //Bink uses INT32 - Little Endian (DCBA)
-            return fileLength + 8; // the file length does not include length of header
+            return headerBuffer;
         }
 
-
-
-        /*
-        private List<FileMarker> FilePotentialMarkers(string filePath)
+        private byte[] CopyHeader(FileStream fileStream, UInt32 headerLength)
         {
-            List<FileMarker> markers = new List<FileMarker>();
+            var headerBuffer = new byte[headerLength];
+            fileStream.Seek(0, SeekOrigin.Begin);
+            fileStream.Read(headerBuffer, 0, headerBuffer.Length);
+            return headerBuffer;
+        }
 
-            int BUFFER_SIZE = 4096;
-            byte[] buffer = new byte[BUFFER_SIZE];
-            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            try
+        // this decryption code is a ported/modified version of code used in residualvm myst3 engine code
+        // https://github.com/residualvm/residualvm/blob/master/engines/myst3/archive.cpp
+        const UInt32 decryptionAddKey = 0x3C6EF35F; // 1013904223
+        const UInt32 decryptionMultKey = 0x0019660D; // 1664525
+        private byte[] DecryptArchiveHeader(FileStream fileStream)
+        {
+            fileStream.Seek(0, SeekOrigin.Begin);
+            UInt32 encryptedHeaderSize = fileStream.ReadUInt32LE(0);
+            UInt32 headerSize = (encryptedHeaderSize ^ decryptionAddKey);
+            var fileEnd = fileStream.Seek(0, SeekOrigin.End);
+            if (headerSize > fileEnd)
+                throw new Exception("Header size is larger than file, something went wrong");
+
+            var headerBuffer = CopyHeader(fileStream, headerSize * 4);
+
+            //File.WriteAllBytes("E:\\test\\" + Path.GetFileName(fileStream.Name) + "_encrypted", headerBuffer);
+
+            UInt32 currentKey = 0;
+            byte[] copyBuffer = new byte[4];
+            UInt32 value = 0;
+
+            int offset = 0;
+            for (uint i = 0; i < headerSize; i++)
             {
-                int fileLength = (int)fileStream.Length;
-                int bufferCount = fileLength / buffer.Length;
+                offset = (int)i * 4;
 
-                int count = 0;
-                int bufferOffset = 0;
-                int returnedBufferSize = 0;
-                int offset;
-                while (count <= bufferCount)
+                currentKey += decryptionAddKey;
+
+                copyBuffer[0] = headerBuffer[offset];
+                copyBuffer[1] = headerBuffer[offset + 1];
+                copyBuffer[2] = headerBuffer[offset + 2];
+                copyBuffer[3] = headerBuffer[offset + 3];
+                value = BitConverter.ToUInt32(copyBuffer, 0);
+
+                value = value ^ currentKey;
+                value.CopyToByteArrayLE(headerBuffer, offset);
+
+                currentKey *= decryptionMultKey;
+            }
+            return headerBuffer;
+        }
+
+        public List<M3ArchiveFileEntry> ExtractFileEntriesFromArchive(byte[] headerData, bool containsSubFolders = true)
+        {
+            List<M3ArchiveFileEntry> entries = new List<M3ArchiveFileEntry>();
+
+            int headerIndex = sizeof(UInt32);
+            int metaDataStartIndex;
+            byte[] folderNameBytes;
+            string folderName = "";
+            M3ArchiveFileEntry entry;
+            while (headerIndex + sizeof(UInt32) < headerData.Length)
+            {
+                if (containsSubFolders)
                 {
-                    bufferOffset = count * BUFFER_SIZE;
-                    fileStream.Seek(bufferOffset, SeekOrigin.Begin);
-                    returnedBufferSize = fileStream.Read(buffer, 0, buffer.Length);
-                    count++;
+                    folderNameBytes = headerData.Skip(headerIndex).Take(sizeof(UInt32)).ToArray();
+                    folderName = Encoding.ASCII.GetString(folderNameBytes);
+                    headerIndex += sizeof(UInt32);
+                }
 
-                    //check and handle end of file
-                    if (returnedBufferSize < BUFFER_SIZE)
-                    {
-                        buffer = new byte[returnedBufferSize];
-                        // need to manually do this again to get that last bit of the file
-                        fileStream.Seek(bufferOffset, SeekOrigin.Begin);
-                        fileStream.Read(buffer, 0, buffer.Length);
-                    }
+                // directoryIndex is stored as 24 bit int
+                UInt16 part = BitConverter.ToUInt16(headerData, headerIndex);
+                uint directoryIndex = (uint)(part | (headerData[headerIndex + 2] << 16));
+                uint subItemCount = headerData[headerIndex + 3];
+                headerIndex += sizeof(UInt32);
 
-                    //search buffer for the start of markers/headers
-                    for (int i = 0; i < buffer.Length; i++)
-                    {
-                        offset = bufferOffset + i;
+                for (int i = 0; i < subItemCount; i++)
+                {
+                    // READ VALUES
+                    entry = new M3ArchiveFileEntry();
+                    entry.Folder = folderName;
+                    entry.Offset = BitConverter.ToUInt32(headerData, headerIndex);
+                    headerIndex += sizeof(UInt32);
+                    entry.Size = BitConverter.ToUInt32(headerData, headerIndex);
+                    headerIndex += sizeof(UInt32);
+                    entry.MetaDataSize = BitConverter.ToUInt16(headerData, headerIndex);
+                    headerIndex += sizeof(UInt16);
+                    entry.CubeFace = (M3CubeFace)headerData[headerIndex];
+                    headerIndex += sizeof(byte);
+                    entry.Type = (Myst3ResourceType)headerData[headerIndex];
+                    headerIndex += sizeof(byte);
 
-                        if (i < (buffer.Length-1))
-                        {
-                            if (buffer[i] == jpgStart[0])
-                            {
-                                if(buffer[i + 1] == jpgStart[1])
-                                    markers.Add(new FileMarker(offset, FileMarkerType.JpgStart));
-                                else if (buffer[i + 1] == jpgEnd[1])
-                                    markers.Add(new FileMarker(offset, FileMarkerType.JpgEnd));
-                            }
-                        }
-                        else
-                        {
-                            if (buffer[i] == jpgStart[0])
-                                markers.Add(new FileMarker(offset, FileMarkerType.JpgStart));
-                        }
-                    }
+                    metaDataStartIndex = headerIndex;
+                    headerIndex += (sizeof(UInt32) * entry.MetaDataSize);
+                    entry.MetaData = new byte[sizeof(UInt32) * entry.MetaDataSize];
+                    // some of the archives cause the following line to go out of bounds
+                    // not sure what the problem is (this is coded ported from ResidualVM)
+                    // it's needed for the game, but not for a program like this, so I'm commenting it out
+                    //Array.Copy(headerData, metaDataStartIndex, entry.MetaData, 0, sizeof(UInt32) * entry.MetaDataSize);
+                    ReadMetaData(entry);
+
+                    entries.Add(entry);
                 }
             }
-            finally
-            {
-                fileStream.Close();
-            }
-            return markers;
+
+            return entries;
         }
 
-        private List<FileMarker> GetConfirmedMarkers(string filePath, List<FileMarker> potentialMarkers)
+        private void ReadMetaData(M3ArchiveFileEntry entry)
         {
-            List<FileMarker> confirmedMarkers = new List<FileMarker>();
-            int headerRegionSize = 64;
-            byte[] headerRegion = new byte[headerRegionSize];
-
-            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            try
+            // MAKE USE OF META DATA
+            if (entry.MetaDataSize == 2 && (entry.Type == Myst3ResourceType.SpotItem || entry.Type == Myst3ResourceType.LocalizedSpotItem))
             {
-                int fileLength = (int)fileStream.Length;
-                int headerRegionReturnSize = 64;
-                foreach (var marker in potentialMarkers)
+                // create SpotItemData
+                entry.SpotItemData.U = BitConverter.ToUInt32(entry.MetaData, 0);
+                entry.SpotItemData.V = BitConverter.ToUInt32(entry.MetaData, sizeof(UInt32));
+            }
+            else if (entry.MetaDataSize == 10 && (entry.Type == Myst3ResourceType.Movie || entry.Type == Myst3ResourceType.MultitrackMovie))
+            {
+                // create VideoData
+            }
+            else if (entry.Type == Myst3ResourceType.NumMetadata || entry.Type == Myst3ResourceType.TextMetadata)
+            {
+                // copy metadata to something accessible to this item
+            }
+            else if (entry.MetaDataSize != 0)
+            {
+                //throw new Exception("Metadata not read for type " + resType +  " size: " + metaDataSize);
+            }
+        }
+
+        private IVirtualFolder CreateListingForArchive(string filePath, long fileEnd, byte[] headerData, bool containsSubFolders = true)
+        {
+            var entries = ExtractFileEntriesFromArchive(headerData, containsSubFolders);
+
+            var archiveFileName = Path.GetFileName(filePath);
+            var rootFolder = new VirtualFolder(archiveFileName);
+            VirtualFolder currentFolder = null;
+
+            int nodeCount = 0;
+            int imageCount = 1;
+            int spotImageCount = 1;
+            int videoCount = 1;
+
+            foreach(var entry in entries)
+            {
+                string fileName = entry.Type.ToString();
+
+                // TRANSFORM FILE TYPE
+                var fileType = FileType.Unknown;
+                if (entry.Type == Myst3ResourceType.CubeFace ||
+                    entry.Type == Myst3ResourceType.Frame ||
+                    entry.Type == Myst3ResourceType.LocalizedFrame ||
+                    entry.Type == Myst3ResourceType.SpotItem ||
+                    entry.Type == Myst3ResourceType.LocalizedSpotItem
+                    )
                 {
-                    if(marker.Index < fileLength)
+                    fileType = FileType.Jpg;
+                }
+                if (entry.Type == Myst3ResourceType.Movie ||
+                    entry.Type == Myst3ResourceType.MultitrackMovie ||
+                    entry.Type == Myst3ResourceType.DialogMovie ||
+                    entry.Type == Myst3ResourceType.StillMovie)
+                {
+                    fileType = FileType.Bink;
+                }
+                if (entry.Type == Myst3ResourceType.RawData)
+                {
+                    // could be bitmap,
+                    //could be archetype ascii text file
+                    // could be xet file
+                    fileType = FileType.Bmp;
+                    // if it starts with BM, then it's a bmp
+                    // if it starts with XET it's a xet
+                    // if it starts with ASCII it's a text file
+                }
+
+
+                var fileContent = new VirtualFileDataInArchive(filePath, fileType, entry.Offset, entry.Offset + entry.Size);
+
+                if (entry.Type == Myst3ResourceType.CubeFace)
+                {
+                    if (entry.CubeFace == M3CubeFace.Back) // Back is always first
                     {
-                        fileStream.Seek(marker.Index, SeekOrigin.Begin);
-                        fileStream.Read(headerRegion, 0, headerRegion.Length);
+                        nodeCount++;
+                        spotImageCount = 1;
+                    }
+                    fileName += "_" + nodeCount.ToString().PadLeft(3, '0') + "_" + entry.CubeFace.ToString().ToLower();
+                }
+                if(fileType == FileType.Bink)
+                {
+                    fileName += "_" + videoCount.ToString().PadLeft(3, '0');
+                    videoCount++;
+
+                }
+                if (fileType == FileType.Jpg && entry.Type != Myst3ResourceType.CubeFace)
+                {
+                    if(entry.Type == Myst3ResourceType.SpotItem || entry.Type == Myst3ResourceType.LocalizedSpotItem)
+                    {
+                        fileName = nodeCount.ToString().PadLeft(3, '0') + "_SpotItem_" + spotImageCount;
+                        spotImageCount++;
                     }
                     else
                     {
-                        fileStream.Seek(marker.Index, SeekOrigin.Begin);
-                        // headerRegionReturnSize should always be at least 1
-                        headerRegionReturnSize = fileStream.Read(headerRegion, 0, headerRegion.Length);
+                        fileName += "_" + imageCount.ToString().PadLeft(4, '0');
+                        imageCount++;
                     }
+                }
 
-                    if (headerRegionReturnSize < jpgEnd.Length) // too small for jpg marker
-                        continue;
-
-                    if (headerRegion[0] == jpgStart[0])
+                // create the listing
+                //var vFile = new VirtualFileEntry(entry.Offset + "_" + (entry.Offset + entry.Size) + "_" + entry.Type, fileContent);
+                var vFile = new VirtualFileEntry(fileName, fileContent);
+                if (containsSubFolders)
+                {
+                    if (!string.IsNullOrEmpty(entry.Folder))
                     {
-                        if (headerRegion[1] == jpgStart[1])
+                        if (rootFolder.SubFolders.Any(x => x.Name.ToUpper() == entry.Folder.ToUpper()))
                         {
-                            if (headerRegionReturnSize < jpgStart.Length) // prefer to find a full header
-                                continue;
-
-                            if (headerRegion[2] == jpgStart[2])
-                                if (headerRegion[3] == jpgStart[3])
-                                    if (headerRegion[4] == jpgStart[4])
-                                        if (headerRegion[5] == jpgStart[5])
-                                            if (headerRegion[6] == jpgStart[6])
-                                                confirmedMarkers.Add(new FileMarker(marker.Index, FileMarkerType.JpgStart));
+                            currentFolder = rootFolder.SubFolders.FirstOrDefault(x => x.Name.ToUpper() == entry.Folder.ToUpper()) as VirtualFolder;
                         }
-                        else if (headerRegion[1] == jpgEnd[1])
+                        else
                         {
-                            confirmedMarkers.Add(new FileMarker(marker.Index, FileMarkerType.JpgEnd));
+                            currentFolder = new VirtualFolder(entry.Folder.ToUpper());
+                            rootFolder.SubFolders.Add(currentFolder);
                         }
+                        currentFolder.Files.Add(vFile);
                     }
-                }
-            }
-            finally
-            {
-                fileStream.Close();
-            }
-
-            return confirmedMarkers;
-        }
-        */
-
-        private bool EqualsPatternAtPosition(byte[] source, byte[] pattern, int position)
-        {
-            for (int i = 0; i < pattern.Length; ++i)
-                if (position + i >= source.Length || source[position + i] != pattern[i])
-                    return false;
-            return true;
-        }
-
-        private VirtualFolder CreateListing(List<FileMarker> markers, string filePath)
-        {
-            var fileName = Path.GetFileName(filePath);
-            var folder = new VirtualFolder(fileName);
-            var fileCount = 0;
-            var jpgCount = 0;
-            var binkCount = 0;
-            var binCount = 0;
-            string countLabel = "";
-            VirtualFileArchive archiveIndex = null;
-
-            foreach (var marker in markers)
-            {
-                countLabel = "";
-                FileType type = FileType.Unknown;
-                string fileExtension = ".unknown";
-                if (marker.Type == M3AFileType.Jpg)
-                {
-                    type = FileType.Jpg;
-                    fileExtension = ".jpg";
-                    jpgCount += 1;
-                    countLabel = jpgCount.ToString("D4");
-                }
-                else if(marker.Type == M3AFileType.Bink)
-                {
-                    type = FileType.Bink;
-                    fileExtension = ".bik";
-                    binkCount += 1;
-                    countLabel = binkCount.ToString("D4");
+                    else
+                    {
+                        rootFolder.Files.Add(vFile);
+                    }
                 }
                 else
                 {
-                    binCount += 1;
-                    countLabel = binCount.ToString("D4");
+                    rootFolder.Files.Add(vFile);
                 }
-
-                archiveIndex = new VirtualFileArchive(filePath, type, marker.BeginOffset, marker.EndOffset);
-                folder.Files.Add(new VirtualFile(countLabel + fileExtension, archiveIndex));
             }
-            return folder;
+
+            return rootFolder;
         }
     }
 }

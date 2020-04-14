@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MYSTERAssetExplorer.Core
 {
-    public interface IVirtualFileContentDetails
+    public interface IVirtualFileData
     {
         FileType Type { get; }
     }

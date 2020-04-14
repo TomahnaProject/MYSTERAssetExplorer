@@ -17,5 +17,7 @@ namespace MYSTERAssetExplorer.Core
         Zap = 6,
         Bink = 7,
         Binary = 8,
+        Bmp = 9,
+        Text = 10,
     }
 }

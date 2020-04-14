@@ -13,7 +13,7 @@ namespace MYSTERAssetExplorer.Services
     {
         class Tile
         {
-            public IVirtualFile TileFile { get; set; }
+            public IVirtualFileEntry TileFile { get; set; }
             public int PositionX { get; set; }
             public int PositionY { get; set; }
             public Bitmap Bmp { get; set; }

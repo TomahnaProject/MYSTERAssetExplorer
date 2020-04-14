@@ -22,7 +22,7 @@ namespace MYSTERAssetExplorer.App
         public NodeViewerApp NodeApp;
 
         public Action<Color, string> WriteToConsole { get; set; }
-        public Action<List<IVirtualFile>> ListFiles { get; set; }
+        public Action<List<IVirtualFileEntry>> ListFiles { get; set; }
         public Action<List<IVirtualFolder>> PopulateFolders { get; set; }
 
         public AssetExplorerApp()
@@ -98,7 +98,10 @@ namespace MYSTERAssetExplorer.App
         {
             consoleWrite(Color.Yellow, "Indexing Files...");
 
-            var exileFiles = filePaths.Where(x => Path.GetExtension(x).ToLower() == _context.M3A_FileExtension).ToList();
+            //m3a, m3o, m3s, m3u
+            var exileFiles = filePaths.Where(x => Path.GetExtension(x).ToLower().Contains("m3")).ToList();
+
+            //var exileFiles = filePaths.Where(x => Path.GetExtension(x).ToLower() == _context.M3A_FileExtension).ToList();
             var revFiles = filePaths.Where(x => Path.GetExtension(x).ToLower() == _context.M4B_FileExtension).ToList();
 
             VirtualFolder exileFolder = new VirtualFolder("Exile");
@@ -188,8 +191,9 @@ namespace MYSTERAssetExplorer.App
         public List<string> LoadDataFiles()
         {
             var files = Directory.GetFiles(_context.DataDirectory, "*.*", SearchOption.AllDirectories)
-                .Where(s => 
-                    s.EndsWith(_context.M3A_FileExtension, StringComparison.OrdinalIgnoreCase) || 
+                .Where(s =>
+                    s.ToLower().Contains(".m3") ||
+                    //s.EndsWith(_context.M3A_FileExtension, StringComparison.OrdinalIgnoreCase) || 
                     s.EndsWith(_context.M4B_FileExtension, StringComparison.OrdinalIgnoreCase)
                 );
             return files.ToList();
@@ -210,7 +214,7 @@ namespace MYSTERAssetExplorer.App
             return _context.DataDirectory;
         }
 
-        public void ExtractFiles(string extractionPath, List<IVirtualFile> files)
+        public void ExtractFiles(string extractionPath, List<IVirtualFileEntry> files)
         {
             var saveService = new VirtualFileSaveService();
             var extractor = new VirtualFileExtractionService();
@@ -218,9 +222,9 @@ namespace MYSTERAssetExplorer.App
             {
                 WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
                 var fileData = extractor.GetDataForVirtualFile(file);
-                var savefileType = file.ContentDetails.Type;
+                var savefileType = file.FileData.Type;
 
-                if (file.ContentDetails.Type == FileType.Zap)
+                if (file.FileData.Type == FileType.Zap)
                 {
                     fileData = ConversionService.ConvertFromZapToJpg(fileData);
                     savefileType = FileType.Jpg;
@@ -240,9 +244,9 @@ namespace MYSTERAssetExplorer.App
             {
                 WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
                 var fileData = extractor.GetDataForVirtualFile(file);
-                var savefileType = file.ContentDetails.Type;
+                var savefileType = file.FileData.Type;
 
-                if (file.ContentDetails.Type == FileType.Zap)
+                if (file.FileData.Type == FileType.Zap)
                 {
                     fileData = ConversionService.ConvertFromZapToJpg(fileData);
                     savefileType = FileType.Jpg;
@@ -255,13 +259,13 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
-        public byte[] GetDataForFile(IVirtualFile file)
+        public byte[] GetDataForFile(IVirtualFileEntry file)
         {
             var extractor = new VirtualFileExtractionService();
             return extractor.GetDataForVirtualFile(file);
         }
 
-        public IVirtualFile FindFile(VirtualFileAddress address)
+        public IVirtualFileEntry FindFile(VirtualFileAddress address)
         {
             var lookup = new FileLookupService(_context.VirtualFiles);
             bool couldFind = false;
@@ -312,7 +316,7 @@ namespace MYSTERAssetExplorer.App
             }
         }
 
-        internal void SendImagesToNodeViewer(string game, string scene, string zone, List<IVirtualFile> files)
+        internal void SendImagesToNodeViewer(string game, string scene, string zone, List<IVirtualFileEntry> files)
         {
             NodeApp.ReceiveImages(game, scene, zone, files);
         }

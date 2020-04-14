@@ -81,7 +81,7 @@ namespace MYSTERAssetExplorer.App
             }));
         }
 
-        private void FillListView(List<IVirtualFile> files)
+        private void FillListView(List<IVirtualFileEntry> files)
         {
             fileExplorer.Items.Clear();
 
@@ -234,12 +234,12 @@ namespace MYSTERAssetExplorer.App
             foreach (var file in nodeFolderInfo.Files)
             {
                 isSmallImage = true;
-                item = new ListViewItem(file.Name, (int)file.ContentDetails.Type);
+                item = new ListViewItem(file.Name, (int)file.FileData.Type);
                 item.Tag = file;
 
-                if (file.ContentDetails is VirtualFileArchive)
+                if (file.FileData is VirtualFileDataInArchive)
                 {
-                    var archiveIndex = file.ContentDetails as VirtualFileArchive;
+                    var archiveIndex = file.FileData as VirtualFileDataInArchive;
                     var fileSizeInBytes = archiveIndex.End - archiveIndex.Start;
                     subItems = new ListViewItem.ListViewSubItem[]
                     {
@@ -252,11 +252,11 @@ namespace MYSTERAssetExplorer.App
                     // (I've never seen a cube face size fall below 30KB+)
                     isSmallImage = fileSizeInBytes < 20000;
                 }
-                else if (file.ContentDetails is VirtualFileTiledImage)
+                else if (file.FileData is VirtualFileTiledImage)
                 {
                     isSmallImage = false;
                     item.ImageIndex = 9;
-                    var tiledImage = file.ContentDetails as VirtualFileTiledImage;
+                    var tiledImage = file.FileData as VirtualFileTiledImage;
                     subItems = new ListViewItem.ListViewSubItem[]
                     {
                         new ListViewItem.ListViewSubItem(item, ""),
@@ -408,13 +408,13 @@ namespace MYSTERAssetExplorer.App
         {
             WriteToConsole(Color.LightBlue, "Extracting Selected Files to " + savePath);
 
-            List<IVirtualFile> files = new List<IVirtualFile>();
+            List<IVirtualFileEntry> files = new List<IVirtualFileEntry>();
 
             foreach (ListViewItem item in fileExplorer.SelectedItems)
             {
-                if (item.Tag is IVirtualFile)
+                if (item.Tag is IVirtualFileEntry)
                 {
-                    files.Add(item.Tag as IVirtualFile);
+                    files.Add(item.Tag as IVirtualFileEntry);
                 }
             }
             app.ExtractFiles(savePath, files);
@@ -439,23 +439,23 @@ namespace MYSTERAssetExplorer.App
 
         private void HandleNewlySelectedItem(ListViewItem selected)
         {
-            if (!(selected.Tag is IVirtualFile))
+            if (!(selected.Tag is IVirtualFileEntry))
                 return;
 
-            var file = selected.Tag as IVirtualFile;
+            var file = selected.Tag as IVirtualFileEntry;
 
-            if((file.ContentDetails.Type == FileType.Jpg ||
-                file.ContentDetails.Type == FileType.Zap))
+            if((file.FileData.Type == FileType.Jpg ||
+                file.FileData.Type == FileType.Zap))
             {
                 var imageData = app.GetDataForFile(file);
                 SetImageDataIntoPreviewWindow(selected.Text, imageData);
             }
-            else if (file.ContentDetails.Type == FileType.Bink)
+            else if (file.FileData.Type == FileType.Bink)
             {
                 //var videoData = app.GetDataForFile(file);
                 // PLAY VIDEO ONCE YOU HAVE MEDIA PLAYER
             }
-            else if(file.ContentDetails.Type == FileType.Unknown)
+            else if(file.FileData.Type == FileType.Unknown)
             {
                 // AUDIO EVENTUALLY
             }
@@ -534,13 +534,13 @@ namespace MYSTERAssetExplorer.App
 
         private void sendToNodeViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<IVirtualFile> files = new List<IVirtualFile>();
+            List<IVirtualFileEntry> files = new List<IVirtualFileEntry>();
 
             foreach (ListViewItem item in fileExplorer.SelectedItems)
             {
-                if (item.Tag is IVirtualFile)
+                if (item.Tag is IVirtualFileEntry)
                 {
-                    files.Add(item.Tag as IVirtualFile);
+                    files.Add(item.Tag as IVirtualFileEntry);
                 }
             }
 

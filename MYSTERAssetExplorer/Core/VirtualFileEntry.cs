@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 namespace MYSTERAssetExplorer.Core
 {
     // meant to be read only; once the indexer figures out what/where a file is, then it shouldn't change around
-    public class VirtualFile : IVirtualFile
+    public class VirtualFileEntry : IVirtualFileEntry
     {
         private string _name;
-        private IVirtualFileContentDetails _contentDetails;
+        private IVirtualFileData _fileData;
 
 
         public string Name { get { return _name; } }
-        public IVirtualFileContentDetails ContentDetails { get { return _contentDetails; } }
+        public IVirtualFileData FileData { get { return _fileData; } }
 
-        public VirtualFile(string name, IVirtualFileContentDetails contentDetails)
+        public VirtualFileEntry(string name, IVirtualFileData fileData)
         {
             _name = name;
-            _contentDetails = contentDetails;
+            _fileData = fileData;
         }
     }
 }

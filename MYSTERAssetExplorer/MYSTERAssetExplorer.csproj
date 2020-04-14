@@ -72,13 +72,14 @@
     <Compile Include="Core\AssetOrganization\GameRegistry.cs" />
     <Compile Include="Core\AssetOrganization\CubeMapImageSet.cs" />
     <Compile Include="Core\AssetOrganization\AssetRegistry.cs" />
-    <Compile Include="Core\IVirtualFile.cs" />
-    <Compile Include="Core\IVirtualFileContentDetails.cs" />
+    <Compile Include="Core\IVirtualFileEntry.cs" />
+    <Compile Include="Core\IVirtualFileData.cs" />
     <Compile Include="Core\IVirtualFolder.cs" />
     <Compile Include="Core\Model\CubeFaces.cs" />
-    <Compile Include="Core\VirtualFile.cs" />
-    <Compile Include="Core\VirtualFileArchive.cs" />
+    <Compile Include="Core\VirtualFileEntry.cs" />
+    <Compile Include="Core\VirtualFileDataInArchive.cs" />
     <Compile Include="Core\VirtualFileAddress.cs" />
+    <Compile Include="Core\VirtualFileDataInMemory.cs" />
     <Compile Include="Core\VirtualFileTiledImage.cs" />
     <Compile Include="Core\ZoneMappings.cs" />
     <Compile Include="Core\FileType.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Core\VirtualFolder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\M3AFileIndexingService.cs" />
     <Compile Include="Utils\BitmapUtils.cs" />
     <Compile Include="Utils\Extensions\Extensions.cs" />
     <Compile Include="Services\CacheSerializationService.cs" />
@@ -98,7 +100,6 @@
     <Compile Include="Services\RegistryPersistenceService.cs" />
     <Compile Include="Services\TileImageStitcher.cs" />
     <Compile Include="Services\VirtualFileExtractionService.cs" />
-    <Compile Include="Services\M3AFileIndexingService.cs" />
     <Compile Include="Services\VirtualFileSaveService.cs" />
     <Compile Include="Services\NodeFaceValidator.cs" />
     <Compile Include="Services\AssetRegistrySerializationService.cs" />
@@ -137,8 +138,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RegistryFiles\RevelationAssetRegistry.xml" />
-    <EmbeddedResource Include="RegistryFiles\ExileAssetRegistry.xml" />
+    <EmbeddedResource Include="RegistryFiles\RevelationAssetRegistry.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistryFiles\ExileAssetRegistry.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="Resources\archives.ico" />
     <Content Include="Resources\bullet.ico" />
     <Content Include="Resources\cube.png" />

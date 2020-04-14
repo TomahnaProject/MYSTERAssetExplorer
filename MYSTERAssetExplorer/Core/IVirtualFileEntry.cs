@@ -6,10 +6,10 @@ using System.Text;
 
 namespace MYSTERAssetExplorer.Core
 {
-    public interface IVirtualFile
+    public interface IVirtualFileEntry
     {
         string Name { get; }
         //string ParentPath { get; }
-        IVirtualFileContentDetails ContentDetails { get; }
+        IVirtualFileData FileData { get; }
     }
 }

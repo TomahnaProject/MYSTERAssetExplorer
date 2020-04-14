@@ -26,7 +26,7 @@ namespace MYSTERAssetExplorer.App
 
         public Action<TreeNode[]> PopulateNodes { get; set; }
         public Action<Node> PopulateImages { get; set; }
-        public Action<CubeFaceEnum, IVirtualFile> SetImage { get; set; }
+        public Action<CubeFaceEnum, IVirtualFileEntry> SetImage { get; set; }
         public Action Launch { get; set; }
 
         public bool MapTypeColorSelected = true;
@@ -221,17 +221,17 @@ namespace MYSTERAssetExplorer.App
             WriteToConsole(Color.Green, "Custom Registry Saved!");
         }
 
-        internal IVirtualFile FindFile(VirtualFileAddress fileAddress)
+        internal IVirtualFileEntry FindFile(VirtualFileAddress fileAddress)
         {
             return MainApp.FindFile(fileAddress);
         }
 
-        internal byte[] GetDataForFile(IVirtualFile file)
+        internal byte[] GetDataForFile(IVirtualFileEntry file)
         {
             return MainApp.GetDataForFile(file);
         }
 
-        internal void ReceiveImages(string game, string scene, string zone, List<IVirtualFile> files)
+        internal void ReceiveImages(string game, string scene, string zone, List<IVirtualFileEntry> files)
         {
             SelectedNode = new Node();
             SelectedNode.Scene = scene;
