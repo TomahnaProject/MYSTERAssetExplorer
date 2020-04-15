@@ -1,0 +1,25 @@
+FILES ASSOCIATED WITH MYST3:
+
+.m3a = main data archive (cubemap jpgs, spotitem jpgs, bink videos, watermasks, tiny unknown files)
+.m3r = resource archive (cursor bmps, small binks for UI purposes, Archetype and XET files)
+.m3o = resource archive for patches (v. 101) (mainly a handful of jpgs)
+.m3t = localized assets (images and text for subtitles)
+.m3u = localized UI archive
+
+.m3s = binary save format
+
+with the exception of the .m3s these are all the same type of file (the myst 3 archive file) with different extensions
+
+a myst3 archive file has a header containing a listing of all the archive's files, their offset, size, and if appropriate, metadata, and containing directory
+
+the archive header is usually encrypted (as far as I can tell only the LEET node archive is not encrypted)
+
+.m3s is presumably a straight binary file, and must be read by code aware of the meaning and placement of the values
+
+The RSRC (Resource) archive has some interesting sub files:
+
+- ARCHETYPE file is an ASCII text file and is a sort of database / object schema
+
+- XET files are odd. There are 7 of them. They all start with XET, and have a small header.
+The data that follows seems to contain data in blocks. Each file has a single block size, but different files have different block sizes.
+unknown what the data actually contains/ is used for (perhaps data for audio/music sequences? cannot find where that data lives)
