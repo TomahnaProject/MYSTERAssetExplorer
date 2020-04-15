@@ -130,7 +130,7 @@ namespace MYSTERAssetExplorer.App
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("MYSTER Asset Explorer");
             sb.AppendLine("Version " + GetVersion());
-            sb.AppendLine("Release Date 8/1/2019");
+            sb.AppendLine("Release Date 4/15/2020");
             sb.AppendLine();
             sb.AppendLine("A utility to view and extract assets of Myst 3 Exile, and Myst 4 Revelation.");
             sb.AppendLine("Created by James Thomas");

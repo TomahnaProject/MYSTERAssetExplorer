@@ -19,6 +19,7 @@ Released under the MIT license.
 
 ## Known Issues
 - Indexing the data files can be painfully slow if the hard drive is slow.
+- Batch export of cubemaps is blocking and consumes *lots* of memory
 
 ## Things To Fix:
 - Add check for hard disk speed. If slow disk then load each file into memory prior to indexing. Do this sequentially (multithreading will cause it to eat up all available memory). That or throttle multithreading somehow.
