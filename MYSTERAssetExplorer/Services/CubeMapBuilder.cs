@@ -112,6 +112,10 @@ namespace MYSTERAssetExplorer
         {
             // grab the image size from first image found in the image set
             var first = GetOneValidImage(images);
+
+            if(first == null)
+                return null;
+
             var size = first.Size;
             if (size.Height != size.Width)
                 throw new Exception("Images must have an aspect ratio of 1:1 to build a cubemap");

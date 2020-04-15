@@ -17,6 +17,8 @@ namespace MYSTERAssetExplorer.Core
         }
 
         [XmlIgnore]
+        public string Game { get; set; }
+        [XmlIgnore]
         public CubeMapImageSet CubeMap { get; set; }
         [XmlIgnore]
         public CubeMapImageSet DepthMap { get; set; }

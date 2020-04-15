@@ -45,8 +45,10 @@ namespace MYSTERAssetExplorer.App
         }
         public void SetSelectedNode(Node node)
         {
+            FillNodeFaces(node);
             SelectedNode = node;
         }
+
         public void SetSelectedGame(string gameName)
         {
             SelectedGame = gameName;
@@ -85,6 +87,68 @@ namespace MYSTERAssetExplorer.App
             data.Right = BitmapUtils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Right.File));
             data.Top = BitmapUtils.LoadBitmapFromMemory(this.LookupFileImageData(node, imageSet.Top.File));
             return data;
+        }
+
+        internal List<Node> GetNodeList()
+        {
+            var list = new List<Node>();
+            list.AddRange(registryManager.Registry.Exile.Nodes);
+            list.AddRange(registryManager.Registry.Revelation.Nodes);
+            return list;
+        }
+
+        private void FillNodeFaces(Node node)
+        {
+            if (SelectedGame == "Exile")
+                FillExileNodesWithAutomaticFaces(node);
+            else if (SelectedGame == "Revelation")
+                FillRevNodesWithAutomaticFaces(node);
+        }
+
+        private void FillExileNodesWithAutomaticFaces(Node node)
+        {
+            if (node == null || node.CubeMap == null)
+                return;
+
+            string nodeIdentifier = "CubeFace_" + node.Order + "_";
+            node.CubeMap.Back.File = nodeIdentifier + "back";
+            node.CubeMap.Bottom.File = nodeIdentifier + "bottom";
+            node.CubeMap.Front.File = nodeIdentifier + "front";
+            node.CubeMap.Left.File = nodeIdentifier + "left";
+            node.CubeMap.Right.File = nodeIdentifier + "right";
+            node.CubeMap.Top.File = nodeIdentifier + "top";
+        }
+
+        private void FillRevNodesWithAutomaticFaces(Node node)
+        {
+            if (node == null || node.CubeMap == null)
+                return;
+            node.CubeMap.Back.File = "back";
+            node.CubeMap.Bottom.File = "bottom";
+            node.CubeMap.Front.File = "front";
+            node.CubeMap.Left.File = "left";
+            node.CubeMap.Right.File = "right";
+            node.CubeMap.Top.File = "top";
+        }
+
+        public void BatchExport(string folderPath, bool exportAsSphericalProjection)
+        {
+            var nodes = new List<Node>();
+            if (SelectedGame == "Exile")
+                nodes = registryManager.Registry.Exile.Nodes;
+            if (SelectedGame == "Revelation")
+                nodes = registryManager.Registry.Revelation.Nodes;
+
+            string panoType = exportAsSphericalProjection ? "[sphere]" : "[cube]";
+            if (Directory.Exists(Path.GetDirectoryName(folderPath)))
+            {
+                foreach (var node in nodes)
+                {
+                    FillNodeFaces(node);
+                    var fileSavePath = Path.Combine(folderPath, node.GetFullName() + panoType + ".png");
+                    ExportCubemap(fileSavePath, node, exportAsSphericalProjection);
+                }
+            }
         }
 
         public void ExportCubemap(string fileSavePath, Node node, bool saveSeparately = false, bool exportAsSphericalProjection = false)
@@ -251,14 +315,6 @@ namespace MYSTERAssetExplorer.App
                 SelectedNode.CubeMap.Back.File = files[0].Name;
 
             PopulateImages(SelectedNode);
-        }
-
-        internal List<Node> GetNodeList()
-        {
-            var list = new List<Node>();
-            list.AddRange(registryManager.Registry.Exile.Nodes);
-            list.AddRange(registryManager.Registry.Revelation.Nodes);
-            return list;
         }
 
         // for setting images from here

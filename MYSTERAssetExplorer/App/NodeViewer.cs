@@ -170,42 +170,8 @@ namespace MYSTERAssetExplorer.App
 
             Node selectedNodeEntry = (Node)newSelected.Tag;
 
-            if (App.SelectedGame == "Exile")
-            {
-                FillExileNodesWithAutomaticFaces(selectedNodeEntry);
-            }
-            else if (App.SelectedGame == "Revelation")
-            {
-                FillRevNodesWithAutomaticFaces(selectedNodeEntry);
-            }
             App.SetSelectedNode(selectedNodeEntry);
             Populate(selectedNodeEntry);
-        }
-
-        private void FillExileNodesWithAutomaticFaces(Node node)
-        {
-            if (node == null || node.CubeMap == null)
-                return;
-
-            string nodeIdentifier = "CubeFace_" + node.Order + "_";
-            node.CubeMap.Back.File = nodeIdentifier + "back";
-            node.CubeMap.Bottom.File = nodeIdentifier + "bottom";
-            node.CubeMap.Front.File = nodeIdentifier + "front";
-            node.CubeMap.Left.File = nodeIdentifier + "left";
-            node.CubeMap.Right.File = nodeIdentifier + "right";
-            node.CubeMap.Top.File = nodeIdentifier + "top";
-        }
-
-        private void FillRevNodesWithAutomaticFaces(Node node)
-        {
-            if (node == null || node.CubeMap == null)
-                return;
-            node.CubeMap.Back.File = "back";
-            node.CubeMap.Bottom.File = "bottom";
-            node.CubeMap.Front.File = "front";
-            node.CubeMap.Left.File = "left";
-            node.CubeMap.Right.File = "right";
-            node.CubeMap.Top.File = "top";
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -364,18 +330,6 @@ namespace MYSTERAssetExplorer.App
             return tag;
         }
 
-        private void BatchExport(string folderPath, List<Node> nodes, bool exportAsSphericalProjection)
-        {
-            if(Directory.Exists(Path.GetDirectoryName(folderPath)))
-            {
-                foreach (var node in nodes)
-                {
-                    var fileSavePath = Path.Combine(folderPath, node.GetFullName() + ".png");
-                    App.ExportCubemap(fileSavePath, node, exportAsSphericalProjection);
-                }
-            }
-        }
-
         private void extractCubemapsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var s = sender;
@@ -402,8 +356,7 @@ namespace MYSTERAssetExplorer.App
 
             if(!string.IsNullOrEmpty(exportDir))
             {
-                var nodeList = this.App.GetNodeList();
-                BatchExport(exportDir, nodeList, sphericalProjection.Checked);
+                App.BatchExport(exportDir, sphericalProjection.Checked);
             }
         }
 
