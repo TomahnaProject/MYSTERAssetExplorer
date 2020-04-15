@@ -64,7 +64,7 @@ namespace MYSTERAssetExplorer.Services
             cubeMap.Left.File = "0004.jpg";
             cubeMap.Right.File = "0005.jpg";
             cubeMap.Top.File = "0006.jpg";
-            node01.CubeMaps.Color = cubeMap;
+            node01.CubeMap = cubeMap;
 
             registry.Nodes.Add(node01);
             return registry;

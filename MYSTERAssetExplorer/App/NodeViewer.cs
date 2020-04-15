@@ -70,11 +70,11 @@ namespace MYSTERAssetExplorer.App
             //NodeType type;
             //Enum.TryParse<NodeType>(nodeProp_ClassificationInput.SelectedValue.ToString(), out type);
             node.Type = (NodeType)nodeProp_ClassificationInput.SelectedValue;
-            node.Rotation.Yaw = (double)nodeProp_rotationZ.Value;
-            node.Position.X = (double)nodeProp_PosX.Value;
-            node.Position.Y = (double)nodeProp_PosY.Value;
-            node.Position.Z = (double)nodeProp_PosZ.Value;
-            node.CubeMaps.DepthRange = (double)nodeProp_Depth.Value;
+            node.Yaw = (double)nodeProp_rotationZ.Value;
+            node.X = (double)nodeProp_PosX.Value;
+            node.Y = (double)nodeProp_PosY.Value;
+            node.Z = (double)nodeProp_PosZ.Value;
+            node.Depth = (double)nodeProp_Depth.Value;
         }
 
         public void PopulateFields(Node node)
@@ -83,11 +83,11 @@ namespace MYSTERAssetExplorer.App
             nodeProp_ZoneInput.Text = node.Zone;
             nodeProp_NumberInput.Text = node.Number;
             nodeProp_ClassificationInput.SelectedItem = node.Type;
-            nodeProp_rotationZ.Value = (decimal)node.Rotation.Yaw;
-            nodeProp_PosX.Value = (decimal)node.Position.X;
-            nodeProp_PosY.Value = (decimal)node.Position.Y;
-            nodeProp_PosZ.Value = (decimal)node.Position.Z;
-            nodeProp_Depth.Value = (decimal)node.CubeMaps.DepthRange;
+            nodeProp_rotationZ.Value = (decimal)node.Yaw;
+            nodeProp_PosX.Value = (decimal)node.X;
+            nodeProp_PosY.Value = (decimal)node.Y;
+            nodeProp_PosZ.Value = (decimal)node.Z;
+            nodeProp_Depth.Value = (decimal)node.Depth;
             mapTypeColor.Select();
         }
 
@@ -95,10 +95,10 @@ namespace MYSTERAssetExplorer.App
         {
             if (node == null)
                 return;
-            CubeMapImageSet imageSet = node.CubeMaps.Color;
+            CubeMapImageSet imageSet = node.CubeMap;
             
             //if (mapTypeIsColor == true)
-            //    imageSet = node.CubeMaps.Color;
+            //    imageSet = node.CubeMap;
             //else
             //    imageSet = node.CubeMaps.Depth;
             
@@ -169,7 +169,12 @@ namespace MYSTERAssetExplorer.App
             App.SetSelectedGame(current.Text);
 
             Node selectedNodeEntry = (Node)newSelected.Tag;
-            if(App.SelectedGame == "Revelation")
+
+            if (App.SelectedGame == "Exile")
+            {
+                FillExileNodesWithAutomaticFaces(selectedNodeEntry);
+            }
+            else if (App.SelectedGame == "Revelation")
             {
                 FillRevNodesWithAutomaticFaces(selectedNodeEntry);
             }
@@ -177,16 +182,30 @@ namespace MYSTERAssetExplorer.App
             Populate(selectedNodeEntry);
         }
 
+        private void FillExileNodesWithAutomaticFaces(Node node)
+        {
+            if (node == null || node.CubeMap == null)
+                return;
+
+            string nodeIdentifier = "CubeFace_" + node.Order + "_";
+            node.CubeMap.Back.File = nodeIdentifier + "back";
+            node.CubeMap.Bottom.File = nodeIdentifier + "bottom";
+            node.CubeMap.Front.File = nodeIdentifier + "front";
+            node.CubeMap.Left.File = nodeIdentifier + "left";
+            node.CubeMap.Right.File = nodeIdentifier + "right";
+            node.CubeMap.Top.File = nodeIdentifier + "top";
+        }
+
         private void FillRevNodesWithAutomaticFaces(Node node)
         {
-            if (node == null || node.CubeMaps == null)
+            if (node == null || node.CubeMap == null)
                 return;
-            node.CubeMaps.Color.Back.File = "back";
-            node.CubeMaps.Color.Bottom.File = "bottom";
-            node.CubeMaps.Color.Front.File = "front";
-            node.CubeMaps.Color.Left.File = "left";
-            node.CubeMaps.Color.Right.File = "right";
-            node.CubeMaps.Color.Top.File = "top";
+            node.CubeMap.Back.File = "back";
+            node.CubeMap.Bottom.File = "bottom";
+            node.CubeMap.Front.File = "front";
+            node.CubeMap.Left.File = "left";
+            node.CubeMap.Right.File = "right";
+            node.CubeMap.Top.File = "top";
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -278,33 +297,33 @@ namespace MYSTERAssetExplorer.App
             var cubeFace1 = new CubeFace() { File = relocatingImageFileName };
             var cubeFace2 = new CubeFace() { File = displacedImageFileName };
             if (sender == backImage)
-                App.SelectedNode.CubeMaps.Color.Back = cubeFace1;
+                App.SelectedNode.CubeMap.Back = cubeFace1;
             if (sender == bottomImage)
-                App.SelectedNode.CubeMaps.Color.Bottom = cubeFace1;
+                App.SelectedNode.CubeMap.Bottom = cubeFace1;
             if (sender == frontImage)
-                App.SelectedNode.CubeMaps.Color.Front = cubeFace1;
+                App.SelectedNode.CubeMap.Front = cubeFace1;
             if (sender == leftImage)
-                App.SelectedNode.CubeMaps.Color.Left = cubeFace1;
+                App.SelectedNode.CubeMap.Left = cubeFace1;
             if (sender == rightImage)
-                App.SelectedNode.CubeMaps.Color.Right = cubeFace1;
+                App.SelectedNode.CubeMap.Right = cubeFace1;
             if (sender == topImage)
-                App.SelectedNode.CubeMaps.Color.Top = cubeFace1;
+                App.SelectedNode.CubeMap.Top = cubeFace1;
 
             if(originator != null)
                 if (!string.IsNullOrEmpty(displacedImageFileName))
                 {
                     if (originator == backImage)
-                        App.SelectedNode.CubeMaps.Color.Back = cubeFace2;
+                        App.SelectedNode.CubeMap.Back = cubeFace2;
                     if (originator == bottomImage)
-                        App.SelectedNode.CubeMaps.Color.Bottom = cubeFace2;
+                        App.SelectedNode.CubeMap.Bottom = cubeFace2;
                     if (originator == frontImage)
-                        App.SelectedNode.CubeMaps.Color.Front = cubeFace2;
+                        App.SelectedNode.CubeMap.Front = cubeFace2;
                     if (originator == leftImage)
-                        App.SelectedNode.CubeMaps.Color.Left = cubeFace2;
+                        App.SelectedNode.CubeMap.Left = cubeFace2;
                     if (originator == rightImage)
-                        App.SelectedNode.CubeMaps.Color.Right = cubeFace2;
+                        App.SelectedNode.CubeMap.Right = cubeFace2;
                     if (originator == topImage)
-                        App.SelectedNode.CubeMaps.Color.Top = cubeFace2;
+                        App.SelectedNode.CubeMap.Top = cubeFace2;
                 }
 
             PopulateImages(App.SelectedNode);

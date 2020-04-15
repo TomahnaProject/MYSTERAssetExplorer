@@ -90,12 +90,12 @@ namespace MYSTERAssetExplorer.App
         public void ExportCubemap(string fileSavePath, Node node, bool saveSeparately = false, bool exportAsSphericalProjection = false)
         {
             CubeMapImageSet imageSet;
-            if (node.CubeMaps.Depth != null)
+            if (node.DepthMap != null)
             {
-                imageSet = node.CubeMaps.Depth;
+                imageSet = node.DepthMap;
             }
             else
-                imageSet = node.CubeMaps.Color;
+                imageSet = node.CubeMap;
 
             CubemapImages images = GetCubemapImagesForImageSet(node, imageSet);
 
@@ -146,7 +146,7 @@ namespace MYSTERAssetExplorer.App
         private void ExportCubemapDataDirectly(string fileSavePath, Node node)
         {
             var filenames = GetCubeFileNames(fileSavePath);
-            var imageSet = node.CubeMaps.Color;
+            var imageSet = node.CubeMap;
             ImageSaveService.Save(
             filenames[0],
             this.LookupFileImageData(node, imageSet.Back.File));
@@ -238,17 +238,17 @@ namespace MYSTERAssetExplorer.App
             SelectedNode.Zone = zone;
 
             if (files.Count > 5)
-                SelectedNode.CubeMaps.Color.Top.File = files[5].Name;
+                SelectedNode.CubeMap.Top.File = files[5].Name;
             if (files.Count > 4)
-                SelectedNode.CubeMaps.Color.Right.File = files[4].Name;
+                SelectedNode.CubeMap.Right.File = files[4].Name;
             if (files.Count > 3)
-                SelectedNode.CubeMaps.Color.Left.File = files[3].Name;
+                SelectedNode.CubeMap.Left.File = files[3].Name;
             if (files.Count > 2)
-                SelectedNode.CubeMaps.Color.Front.File = files[2].Name;
+                SelectedNode.CubeMap.Front.File = files[2].Name;
             if (files.Count > 1)
-                SelectedNode.CubeMaps.Color.Bottom.File = files[1].Name;
+                SelectedNode.CubeMap.Bottom.File = files[1].Name;
             if (files.Count > 0)
-                SelectedNode.CubeMaps.Color.Back.File = files[0].Name;
+                SelectedNode.CubeMap.Back.File = files[0].Name;
 
             PopulateImages(SelectedNode);
         }
