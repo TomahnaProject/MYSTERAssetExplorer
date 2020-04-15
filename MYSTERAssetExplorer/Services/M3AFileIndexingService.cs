@@ -128,14 +128,15 @@ namespace MYSTERAssetExplorer.Services
             }
             else
             {
-                headerBuffer = CopyHeader(fileStream, headerSize);
+                // LEET archive is the only one not encrypted, no idea why that is
+                headerBuffer = CopyHeader(fileStream, headerSize, 4);
             }
             return headerBuffer;
         }
 
-        private byte[] CopyHeader(FileStream fileStream, UInt32 headerLength)
+        private byte[] CopyHeader(FileStream fileStream, UInt32 headerLength, int stride)
         {
-            var headerBuffer = new byte[headerLength];
+            var headerBuffer = new byte[headerLength * stride];
             fileStream.Seek(0, SeekOrigin.Begin);
             fileStream.Read(headerBuffer, 0, headerBuffer.Length);
             return headerBuffer;
@@ -154,9 +155,7 @@ namespace MYSTERAssetExplorer.Services
             if (headerSize > fileEnd)
                 throw new Exception("Header size is larger than file, something went wrong");
 
-            var headerBuffer = CopyHeader(fileStream, headerSize * 4);
-
-            //File.WriteAllBytes("E:\\test\\" + Path.GetFileName(fileStream.Name) + "_encrypted", headerBuffer);
+            var headerBuffer = CopyHeader(fileStream, headerSize, 4);
 
             UInt32 currentKey = 0;
             byte[] copyBuffer = new byte[4];
@@ -226,10 +225,7 @@ namespace MYSTERAssetExplorer.Services
                     metaDataStartIndex = headerIndex;
                     headerIndex += (sizeof(UInt32) * entry.MetaDataSize);
                     entry.MetaData = new byte[sizeof(UInt32) * entry.MetaDataSize];
-                    // some of the archives cause the following line to go out of bounds
-                    // not sure what the problem is (this is coded ported from ResidualVM)
-                    // it's needed for the game, but not for a program like this, so I'm commenting it out
-                    //Array.Copy(headerData, metaDataStartIndex, entry.MetaData, 0, sizeof(UInt32) * entry.MetaDataSize);
+                    Array.Copy(headerData, metaDataStartIndex, entry.MetaData, 0, sizeof(UInt32) * entry.MetaDataSize);
                     ReadMetaData(entry);
 
                     entries.Add(entry);
