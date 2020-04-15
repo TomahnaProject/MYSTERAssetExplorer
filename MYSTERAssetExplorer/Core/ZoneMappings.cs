@@ -59,10 +59,10 @@ namespace MYSTERAssetExplorer.Core
     public enum ExileEdannaZoneCode
     {
         DR = 1, //DeadwoodRidge
-        FO = 2, //FOrest
-        NE = 3, //NEst
+        FO = 3, //FOrest
+        NE = 5, //NEst
         SP = 4, //SwamP
-        SW = 5, //SWing
+        SW = 2, //SWing
     }
     public enum ExileAmateriaZoneCode
     {

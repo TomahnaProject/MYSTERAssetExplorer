@@ -1,11 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{0281F826-5529-4B35-8FD1-0802D4DE50D3}"
 	ProjectSection(SolutionItems) = preProject
 		Architecture.txt = Architecture.txt
+		Notes\M3_fileformats.txt = Notes\M3_fileformats.txt
 		Notes\M4b_fileformat.txt = Notes\M4b_fileformat.txt
 		Readme.md = Readme.md
 		RegistryFormat.xml = RegistryFormat.xml
@@ -26,5 +27,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0F68429B-A889-4366-A35A-70835B189442}
 	EndGlobalSection
 EndGlobal
