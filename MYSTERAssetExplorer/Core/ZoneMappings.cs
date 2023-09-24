@@ -43,7 +43,7 @@ namespace MYSTERAssetExplorer.Core
         DD = 2, //DryDock
         EM = 3, //EnergyManagement
         LC = 4, //LavaCave
-        LI = 5, //LastIsland
+        LI = 5, //LevitatingIsland
         PP = 6, //PowerPlant
         SI = 7, //StartingIsland
     }
@@ -105,6 +105,7 @@ namespace MYSTERAssetExplorer.Core
         YeeshaRoom = 7,
         MasterBedroom = 9,
     }
+
     public enum RevelationHavenZone
     {
         Ship = 1,
@@ -126,6 +127,7 @@ namespace MYSTERAssetExplorer.Core
         Cavern = 5,
         Factory = 6
     }
+
     public enum RevelationSereniaZone
     {
         Cave = 1,
