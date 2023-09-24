@@ -23,3 +23,16 @@ The RSRC (Resource) archive has some interesting sub files:
 - XET files are odd. There are 7 of them. They all start with XET, and have a small header.
 The data that follows seems to contain data in blocks. Each file has a single block size, but different files have different block sizes.
 unknown what the data actually contains/ is used for (perhaps data for audio/music sequences? cannot find where that data lives)
+
+
+
+M3Archive
+
+M3A_HEADER (encrypted)
+4 bytes HEADER_LENGTH
+6 bytes DIR_INDEX
+4 bytes ITEM_COUNT
+
+
+M3A_DATA
+BINARY DATA OF FILES IN ARCHIVE
