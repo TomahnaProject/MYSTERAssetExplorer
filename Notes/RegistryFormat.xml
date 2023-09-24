@@ -1,0 +1,53 @@
+<!-- registry format -->
+
+<!-- Revelation -->
+<Nodes>
+  <Node scene="haven" zone="ship" number="010">
+    <!-- need this to distinguish between a normal node and special uses of nodes-->
+    <Classification type="normal"/>
+    <Position x="" y="" z=""/>
+    <Rotation yaw=""/>
+    <CubeMaps>
+      <Color>
+        <!-- these cube side tags may contain file="" attributes-->
+        <!-- if there is a need to distinguish which file (exile needs this)-->
+        <Back/>
+        <Bottom/>
+        <Front/>
+        <Left/>
+        <Right/>
+        <Top/>
+      </Color>
+      <!-- tag will be absent if no depth map-->
+      <Depth range="">
+        <!-- side tags will be absent if particular faces are missing-->
+        <Back/>
+        <Bottom/>
+        <Front/>
+        <Left/>
+        <Right/>
+        <Top/>
+      </Depth>
+    </CubeMaps>
+  </Node>
+</Nodes>
+
+<!-- Exile -->
+<Nodes>
+  <Node scene="amateria" zone="cave" number="010">
+    <!-- need this to distinguish between a normal node and special uses of nodes-->
+    <Classification type="normal"/>
+    <Position x="" y="" z=""/>
+    <Rotation yaw="0"/>
+    <CubeMaps>
+      <Color>
+        <Back file="0001"/>
+        <Bottom file="0001"/>
+        <Front file="0001"/>
+        <Left file="0001"/>
+        <Right file="0001"/>
+        <Top file="0001"/>
+      </Color>
+    </CubeMaps>
+  </Node>
+</Nodes>

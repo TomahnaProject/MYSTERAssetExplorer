@@ -1,0 +1,44 @@
+NOTES
+Using Rev nodes in node viewer will blow up
+
+IMPROVEMENTS TO REGISTRY EDITING
+Saving/altering the registry refreshes the TreeView (collapsing all nodes - very annoying)
+drop and drop actually changes the registry in memory, necessitating loading from disk to undo
+NEEDS TO BE FIXED:
+drag and drop should NOT be saved without explicitly done
+
+IMPLEMENT:
+Add Node
+Extract Node
+Extract All Child Nodes
+Remove Node
+
+Rename on Treeview
+
+BLOWS UP WHEN TRYING TO SEND REV IMAGES TO NODE VIEWER
+
+WOULD BE NICE:
+fix file tree anchor cuz of filter checkbox
+would be nice to see only small as well
+definitely switch to cube faces when possible
+
+add brightness setting for export
+implement jobs for batching
+drag and drop from file explorer to node viewer
+pressing down on node viewer tree view would load next node
+Jobs/operations for stuff like batch export
+CUBE FACE ONLY CHECKBOX ON FILE EXPLORER
+
+sorting on columns in File Explorer
+move Nodes Details to right side
+put image name on lable on node viewer
+node viewer should be scalable
+right click in node viewer should have remove option
+should indicate node is altered/needs saving
+
+Alphabetize Registery tree
+
+rename "Node Identity" to Node Details
+
+way to customize Cubemap Format
+way to export Equirectangular
