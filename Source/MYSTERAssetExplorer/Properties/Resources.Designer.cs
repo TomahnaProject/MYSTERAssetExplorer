@@ -22,7 +22,7 @@ namespace MYSTERAssetExplorer.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace MYSTERAssetExplorer.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MYSTERAssetExplorer.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace MYSTERAssetExplorer.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,12 +61,48 @@ namespace MYSTERAssetExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;AssetRegistry&gt;
+        ///  &lt;Game&gt;Exile&lt;/Game&gt;
+        ///  &lt;Nodes&gt;
+        ///    &lt;!--AMATERIA--&gt;
+        ///    &lt;Node Scene=&quot;Amateria&quot; Zone=&quot;CA&quot; Number=&quot;010&quot; Type=&quot;Normal&quot; Order=&quot;001&quot;/&gt;
+        ///    &lt;Node Scene=&quot;Amateria&quot; Zone=&quot;CA&quot; Number=&quot;020&quot; Type=&quot;Normal&quot; Order=&quot;002&quot;/&gt;
+        ///    &lt;Node Scene=&quot;Amateria&quot; Zone=&quot;CA&quot; Number=&quot;030&quot; Type=&quot;Normal&quot; Order=&quot;003&quot;/&gt;
+        ///    &lt;Node Scene=&quot;Amateria&quot; Zone=&quot;CA&quot; Number=&quot;040&quot; Type=&quot;Normal&quot; Order=&quot;004&quot;/&gt;
+        ///    &lt;Node Scene=&quot;Amateria&quot; Zone=&quot;CA&quot; Number=&quot;050&quot; Type=&quot;Normal&quot; Order=&quot;005&quot;/&gt;
+        ///    &lt;N [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string ExileAssetRegistry {
+            get {
+                return ResourceManager.GetString("ExileAssetRegistry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap picture_icon_large {
+        public static System.Drawing.Bitmap picture_icon_large {
             get {
                 object obj = ResourceManager.GetObject("picture_icon_large", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;AssetRegistry&gt;
+        ///  &lt;Game&gt;Revelation&lt;/Game&gt;
+        ///  &lt;Nodes&gt;
+        ///    &lt;Node Scene=&quot;TomahnaNight&quot; Zone=&quot;Exterior&quot; Number=&quot;020&quot; Type=&quot;Normal&quot;/&gt;
+        ///    &lt;Node Scene=&quot;TomahnaNight&quot; Zone=&quot;Exterior&quot; Number=&quot;021&quot; Type=&quot;Partial&quot;/&gt;
+        ///    &lt;Node Scene=&quot;TomahnaNight&quot; Zone=&quot;Exterior&quot; Number=&quot;040&quot; Type=&quot;Normal&quot;/&gt;
+        ///    &lt;Node Scene=&quot;TomahnaNight&quot; Zone=&quot;Exterior&quot; Number=&quot;041&quot; Type=&quot;Partial&quot;/&gt;
+        ///    &lt;Node Scene=&quot;TomahnaNight&quot; Zone=&quot;Exterior&quot; Number=&quot;050&quot; Type=&quot;Normal&quot;/&gt;
+        ///    &lt;Node Scene=&quot;TomahnaNight&quot; Zone=&quot;Exterior&quot; Number=&quot;090&quot; Type=&quot;Norm [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string RevelationAssetRegistry {
+            get {
+                return ResourceManager.GetString("RevelationAssetRegistry", resourceCulture);
             }
         }
     }

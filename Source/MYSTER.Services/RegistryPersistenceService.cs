@@ -28,12 +28,13 @@ namespace MYSTER.Services
 
         private string GetEmbeddedResource(string resource)
         {
-            var assembly = Assembly.GetExecutingAssembly();
+            // this service is in the service assembly, need to get the main executable
+            var mainAssembly = Assembly.GetEntryAssembly();
 
-            string resourceName = assembly.GetManifestResourceNames()
-              .Single(str => str.EndsWith(resource));
+            var resources = mainAssembly.GetManifestResourceNames();
+            string resourceName = resources.Single(str => str.EndsWith(resource));
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (Stream stream = mainAssembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))
             {
                 string result = reader.ReadToEnd();
