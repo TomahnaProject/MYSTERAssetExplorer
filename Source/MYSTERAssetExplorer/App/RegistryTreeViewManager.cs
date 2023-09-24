@@ -1,9 +1,7 @@
-﻿using MYSTERAssetExplorer.Core;
-using MYSTERAssetExplorer.Services;
+﻿using MYSTER.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MYSTERAssetExplorer.App
@@ -32,7 +30,7 @@ namespace MYSTERAssetExplorer.App
 
             var nodesByScene = registry.Nodes.GroupBy(x => x.Scene);
 
-            foreach(var scene in nodesByScene)
+            foreach (var scene in nodesByScene)
             {
                 var sceneName = scene.FirstOrDefault().Scene;
                 var scene_tNodes = new List<TreeNode>();

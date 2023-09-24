@@ -1,15 +1,12 @@
-﻿using MYSTERAssetExplorer.Services;
+﻿using ArchiveSystem.VirtualFileSystem;
+using MYSTER.Core;
+using MYSTER.Services;
+using MYSTER.Services.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using MYSTERAssetExplorer.Core;
-using MYSTERAssetExplorer.Core.Model;
 using System.IO;
-using MYSTERAssetExplorer.Utils;
-using ArchiveSystem.VirtualFileSystem;
+using System.Windows.Forms;
 
 namespace MYSTERAssetExplorer.App
 {
@@ -164,7 +161,7 @@ namespace MYSTERAssetExplorer.App
 
             CubemapImages images = GetCubemapImagesForImageSet(node, imageSet);
 
-            if(!saveSeparately)
+            if (!saveSeparately)
             {
                 Bitmap finalImage;
                 if (exportAsSphericalProjection)
@@ -177,7 +174,7 @@ namespace MYSTERAssetExplorer.App
 
                 ImageSaveService.Save(fileSavePath, finalImage);
 
-                if(exportAsSphericalProjection)
+                if (exportAsSphericalProjection)
                 {
                     MessageBox.Show("Exporting as spherical projection has completed!");
                 }

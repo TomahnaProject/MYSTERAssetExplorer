@@ -13,6 +13,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -71,37 +86,10 @@
     <Compile Include="App\NodeViewerApp.cs" />
     <Compile Include="App\NodeViewerContext.cs" />
     <Compile Include="App\RegistryTreeViewManager.cs" />
-    <Compile Include="Core\AssetOrganization\GameRegistry.cs" />
-    <Compile Include="Core\AssetOrganization\CubeMapImageSet.cs" />
-    <Compile Include="Core\AssetOrganization\AssetRegistry.cs" />
-    <Compile Include="Core\Model\CubeFaces.cs" />
-    <Compile Include="Core\VirtualFileTiledImage.cs" />
-    <Compile Include="Core\ZoneMappings.cs" />
-    <Compile Include="Core\AssetOrganization\Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\M3AFileIndexingService.cs" />
-    <Compile Include="Utils\BitmapUtils.cs" />
-    <Compile Include="Utils\Extensions\StringExtensions.cs" />
-    <Compile Include="Utils\Extensions\StreamExtensions.cs" />
     <Compile Include="Utils\Extensions\RichTextBoxExtensions.cs" />
-    <Compile Include="Services\CacheSerializationService.cs" />
-    <Compile Include="Services\ConversionService.cs" />
-    <Compile Include="Services\SphericalProjectionService.cs" />
-    <Compile Include="Services\FileLookupService.cs" />
-    <Compile Include="Services\IFileIndexerService.cs" />
-    <Compile Include="Services\ImageSaveService.cs" />
-    <Compile Include="Services\M4BFileIndexingService.cs" />
-    <Compile Include="Services\RegistryPersistenceService.cs" />
-    <Compile Include="Services\TileImageStitcher.cs" />
-    <Compile Include="Services\VirtualFileExtractionService.cs" />
-    <Compile Include="Services\VirtualFileSaveService.cs" />
-    <Compile Include="Services\NodeFaceValidator.cs" />
-    <Compile Include="Services\AssetRegistrySerializationService.cs" />
-    <Compile Include="Services\CubeMapBuilder.cs" />
-    <Compile Include="Services\RegistryManager.cs" />
     <Compile Include="Utils\FormatUtils.cs" />
-    <Compile Include="Utils\Extensions\UInt32Extension.cs" />
     <Compile Include="Utils\ValidationUtils.cs" />
     <EmbeddedResource Include="App\AssetExplorer.resx">
       <DependentUpon>AssetExplorer.cs</DependentUpon>
@@ -159,15 +147,27 @@
     <Content Include="Resources\video.ico" />
     <Content Include="Resources\zone.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Interfaces\" />
-    <Folder Include="Core\Operations\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ArchiveSystem\ArchiveSystem.csproj">
       <Project>{feef3892-e370-40a3-8da2-2497bf1869ce}</Project>
       <Name>ArchiveSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MYSTER.Core\MYSTER.Core.csproj">
+      <Project>{1e9441d9-08e1-44f7-ab39-888c78e3b765}</Project>
+      <Name>MYSTER.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MYSTER.Services\MYSTER.Services.csproj">
+      <Project>{afa9cd07-75e4-4e78-bb2c-8f88e6cd7c9e}</Project>
+      <Name>MYSTER.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

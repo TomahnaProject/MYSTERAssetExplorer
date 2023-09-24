@@ -1,16 +1,13 @@
 ﻿using ArchiveSystem.VirtualFileSystem;
-using MYSTERAssetExplorer.Core;
-using MYSTERAssetExplorer.Services;
+using MYSTER.Core;
+using MYSTER.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MYSTERAssetExplorer.App
 {
@@ -114,7 +111,7 @@ namespace MYSTERAssetExplorer.App
             Stopwatch eWatch = new Stopwatch();
             Stopwatch rWatch = new Stopwatch();
             bool[] exileFinished = new bool[exileFiles.Count()];
-            bool[] revFinished =  new bool[revFiles.Count()];
+            bool[] revFinished = new bool[revFiles.Count()];
             for (int i = 0; i < revFiles.Count(); i++)
             {
                 var filePath = revFiles[i];
@@ -136,13 +133,13 @@ namespace MYSTERAssetExplorer.App
                     rWatch.Reset(); rWatch.Start();
                     //var fileThread = new Thread(() =>
                     //{
-                        IVirtualFolder indexedFile = revIndexer.IndexFile(filePath);
-                        revelationFolder.SubFolders.Add(indexedFile);
-                        revFinished[threadAccessibleIndex] = true;
-                        rWatch.Stop();
-                        consoleWrite(Color.Green, fileName + " Indexed in " + rWatch.ElapsedMilliseconds + "ms");
-                        var serializedIndex = _context.CacheService.SerializeIndexedFolder(indexedFile as VirtualFolder);
-                        //File.WriteAllText(Path.Combine(_context.CacheDirectory, ""),serializedIndex);
+                    IVirtualFolder indexedFile = revIndexer.IndexFile(filePath);
+                    revelationFolder.SubFolders.Add(indexedFile);
+                    revFinished[threadAccessibleIndex] = true;
+                    rWatch.Stop();
+                    consoleWrite(Color.Green, fileName + " Indexed in " + rWatch.ElapsedMilliseconds + "ms");
+                    var serializedIndex = _context.CacheService.SerializeIndexedFolder(indexedFile as VirtualFolder);
+                    //File.WriteAllText(Path.Combine(_context.CacheDirectory, ""),serializedIndex);
                     //});
                     //fileThread.Start();
                 }
@@ -177,7 +174,7 @@ namespace MYSTERAssetExplorer.App
             }
 
             bool notFinished = true;
-            while(notFinished)
+            while (notFinished)
             {
                 notFinished = !(exileFinished.All(x => x == true) && revFinished.All(x => x == true));
                 Thread.Sleep(1000);
@@ -272,7 +269,7 @@ namespace MYSTERAssetExplorer.App
             bool couldFind = false;
             return lookup.GetFile(out couldFind, address);
         }
-        
+
         public void FindFile()
         {
             FindExileFile();

@@ -1,16 +1,16 @@
 ﻿using ArchiveSystem.VirtualFileSystem;
-using MYSTERAssetExplorer.Core;
+using MYSTER.Core;
+using MYSTER.Core.Utils;
+using MYSTER.Services;
+using MYSTER.Services.Utils;
 using MYSTERAssetExplorer.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MYSTERAssetExplorer.App
@@ -444,7 +444,7 @@ namespace MYSTERAssetExplorer.App
 
             var file = selected.Tag as IVirtualFileEntry;
 
-            if((file.FileData.Type == FileType.Jpg ||
+            if ((file.FileData.Type == FileType.Jpg ||
                 file.FileData.Type == FileType.Zap))
             {
                 var imageData = app.GetDataForFile(file);
@@ -455,7 +455,7 @@ namespace MYSTERAssetExplorer.App
                 //var videoData = app.GetDataForFile(file);
                 // PLAY VIDEO ONCE YOU HAVE MEDIA PLAYER
             }
-            else if(file.FileData.Type == FileType.Unknown)
+            else if (file.FileData.Type == FileType.Unknown)
             {
                 // AUDIO EVENTUALLY
             }

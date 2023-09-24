@@ -1,17 +1,8 @@
-﻿using MYSTERAssetExplorer.Core;
-using MYSTERAssetExplorer.Core.Model;
-using MYSTERAssetExplorer.Services;
+﻿using MYSTER.Core;
+using MYSTER.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using static MYSTERAssetExplorer.Core.CubeMapImageSet;
-using static MYSTERAssetExplorer.Core.Node;
 
 namespace MYSTERAssetExplorer.App
 {
@@ -24,7 +15,7 @@ namespace MYSTERAssetExplorer.App
             InitializeComponent();
             this.nodeViewerMenuStrip.Renderer = new BorderlessToolstripRenderer();
 
-            nodeProp_ClassificationInput.DataSource = Enum.GetValues(typeof(Node.NodeType));
+            nodeProp_ClassificationInput.DataSource = Enum.GetValues(typeof(NodeType));
 
             App = new NodeViewerApp();
             App.PopulateNodes += PopulateNodeExplorer;
@@ -96,12 +87,12 @@ namespace MYSTERAssetExplorer.App
             if (node == null)
                 return;
             CubeMapImageSet imageSet = node.CubeMap;
-            
+
             //if (mapTypeIsColor == true)
             //    imageSet = node.CubeMap;
             //else
             //    imageSet = node.CubeMaps.Depth;
-            
+
             // some kind of check to validate images?
             CubemapImages data = App.GetCubemapImagesForImageSet(node, imageSet);
 
@@ -260,8 +251,8 @@ namespace MYSTERAssetExplorer.App
                 return;
 
             // perform a swap
-            var cubeFace1 = new CubeFace() { File = relocatingImageFileName };
-            var cubeFace2 = new CubeFace() { File = displacedImageFileName };
+            var cubeFace1 = new CubeMapFace() { File = relocatingImageFileName };
+            var cubeFace2 = new CubeMapFace() { File = displacedImageFileName };
             if (sender == backImage)
                 App.SelectedNode.CubeMap.Back = cubeFace1;
             if (sender == bottomImage)
@@ -275,7 +266,7 @@ namespace MYSTERAssetExplorer.App
             if (sender == topImage)
                 App.SelectedNode.CubeMap.Top = cubeFace1;
 
-            if(originator != null)
+            if (originator != null)
                 if (!string.IsNullOrEmpty(displacedImageFileName))
                 {
                     if (originator == backImage)
@@ -354,7 +345,7 @@ namespace MYSTERAssetExplorer.App
                 exportDir = Path.GetDirectoryName(openFolderDialog.FileName.Replace(fileNameText, ""));
             }
 
-            if(!string.IsNullOrEmpty(exportDir))
+            if (!string.IsNullOrEmpty(exportDir))
             {
                 App.BatchExport(exportDir, sphericalProjection.Checked);
             }
@@ -372,7 +363,7 @@ namespace MYSTERAssetExplorer.App
 
         private void separateImagesCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            if(separateImagesCheckbox.Checked)
+            if (separateImagesCheckbox.Checked)
             {
                 sphericalProjection.Checked = false;
                 sphericalProjection.Enabled = false;
