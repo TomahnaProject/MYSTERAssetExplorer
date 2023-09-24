@@ -153,6 +153,14 @@
       <Project>{feef3892-e370-40a3-8da2-2497bf1869ce}</Project>
       <Name>ArchiveSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\M3ArchiveLib\M3ArchiveLib.csproj">
+      <Project>{8575a471-6522-4750-9ab1-2a3b6c1f803e}</Project>
+      <Name>M3ArchiveLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\M4ArchiveLib\M4ArchiveLib.csproj">
+      <Project>{335b0f6e-d063-4c51-8eaa-afc9871653a3}</Project>
+      <Name>M4ArchiveLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MYSTER.Core\MYSTER.Core.csproj">
       <Project>{1e9441d9-08e1-44f7-ab39-888c78e3b765}</Project>
       <Name>MYSTER.Core</Name>

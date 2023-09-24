@@ -1,5 +1,5 @@
 ﻿using ArchiveSystem.VirtualFileSystem;
-using MYSTER.Core;
+using M4ArchiveLib;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

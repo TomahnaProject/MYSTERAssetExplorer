@@ -1,12 +1,13 @@
-﻿using ArchiveSystem.VirtualFileSystem;
-using MYSTER.Core.Utils;
+﻿using ArchiveSystem;
+using ArchiveSystem.Utils;
+using ArchiveSystem.VirtualFileSystem;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MYSTER.Services
+namespace M3ArchiveLib
 {
     public enum Myst3ResourceType
     {

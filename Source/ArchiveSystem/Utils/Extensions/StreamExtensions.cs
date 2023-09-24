@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace MYSTER.Core.Utils
+namespace ArchiveSystem.Utils
 {
     public static class StreamExtensions
     {

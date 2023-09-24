@@ -1,6 +1,6 @@
 ﻿using ArchiveSystem.VirtualFileSystem;
 
-namespace MYSTER.Services
+namespace ArchiveSystem
 {
     public interface IFileIndexerService
     {

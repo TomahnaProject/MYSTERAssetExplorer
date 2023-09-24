@@ -47,10 +47,7 @@
     <Compile Include="ConversionService.cs" />
     <Compile Include="CubeMapBuilder.cs" />
     <Compile Include="FileLookupService.cs" />
-    <Compile Include="IFileIndexerService.cs" />
     <Compile Include="ImageSaveService.cs" />
-    <Compile Include="M3AFileIndexingService.cs" />
-    <Compile Include="M4BFileIndexingService.cs" />
     <Compile Include="NodeFaceValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryManager.cs" />
@@ -65,6 +62,10 @@
     <ProjectReference Include="..\ArchiveSystem\ArchiveSystem.csproj">
       <Project>{feef3892-e370-40a3-8da2-2497bf1869ce}</Project>
       <Name>ArchiveSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\M4ArchiveLib\M4ArchiveLib.csproj">
+      <Project>{335B0F6E-D063-4C51-8EAA-AFC9871653A3}</Project>
+      <Name>M4ArchiveLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\MYSTER.Core\MYSTER.Core.csproj">
       <Project>{1e9441d9-08e1-44f7-ab39-888c78e3b765}</Project>

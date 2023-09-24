@@ -1,7 +1,7 @@
 ﻿using ArchiveSystem.VirtualFileSystem;
 using System.Collections.Generic;
 
-namespace MYSTER.Core
+namespace M4ArchiveLib
 {
     public class VirtualFileTiledImage : IVirtualFileData
     {

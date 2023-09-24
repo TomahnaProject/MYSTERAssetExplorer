@@ -1,5 +1,5 @@
-﻿using ArchiveSystem.VirtualFileSystem;
-using MYSTER.Core;
+﻿using ArchiveSystem;
+using ArchiveSystem.VirtualFileSystem;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MYSTER.Services
+namespace M4ArchiveLib
 {
     public class M4BFileIndexingService : IFileIndexerService
     {

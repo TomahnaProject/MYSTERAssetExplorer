@@ -1,4 +1,6 @@
 ﻿using ArchiveSystem.VirtualFileSystem;
+using M4ArchiveLib;
+using M3ArchiveLib;
 using MYSTER.Core;
 using MYSTER.Services;
 using System;
@@ -26,7 +28,7 @@ namespace MYSTERAssetExplorer.App
         public AssetExplorerApp()
         {
             _context = new AssetExplorerContext();
-            _context.CacheDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "IndexCache");
+            _context.CacheDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MYSTER_Cache");
             if (!Directory.Exists(_context.CacheDirectory))
                 Directory.CreateDirectory(_context.CacheDirectory);
 

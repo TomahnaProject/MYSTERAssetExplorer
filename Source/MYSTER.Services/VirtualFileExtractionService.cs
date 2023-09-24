@@ -1,4 +1,5 @@
 ﻿using ArchiveSystem.VirtualFileSystem;
+using M4ArchiveLib;
 using MYSTER.Core;
 using System.IO;
 

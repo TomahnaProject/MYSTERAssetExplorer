@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MYSTER.Core.Utils
+namespace ArchiveSystem.Utils
 {
     public static class UInt32Extension
     {
