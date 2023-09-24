@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MYSTERAssetExplorer.Core
+namespace ArchiveSystem.VirtualFileSystem
 {
     // numbers used for visual icons
     public enum FileType

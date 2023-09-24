@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MYSTERAssetExplorer.Core
+namespace ArchiveSystem.VirtualFileSystem
 {
     public class VirtualFileAddress
     {

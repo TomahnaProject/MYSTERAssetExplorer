@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{0281F826
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MYSTERAssetExplorer", "MYSTERAssetExplorer\MYSTERAssetExplorer.csproj", "{4C8F15E9-7AB0-4220-8E4E-7CB241DCA561}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchiveSystem", "ArchiveSystem\ArchiveSystem.csproj", "{FEEF3892-E370-40A3-8DA2-2497BF1869CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{4C8F15E9-7AB0-4220-8E4E-7CB241DCA561}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C8F15E9-7AB0-4220-8E4E-7CB241DCA561}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C8F15E9-7AB0-4220-8E4E-7CB241DCA561}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEEF3892-E370-40A3-8DA2-2497BF1869CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEEF3892-E370-40A3-8DA2-2497BF1869CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEEF3892-E370-40A3-8DA2-2497BF1869CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEEF3892-E370-40A3-8DA2-2497BF1869CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

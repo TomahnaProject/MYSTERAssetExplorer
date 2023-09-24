@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MYSTERAssetExplorer.Core
+namespace ArchiveSystem.VirtualFileSystem
 {
     // meant to be read only; once the indexer figures out what/where a file is, then it shouldn't change around
     public class VirtualFileEntry : IVirtualFileEntry

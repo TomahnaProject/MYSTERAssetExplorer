@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\myster_icon.ico</ApplicationIcon>
@@ -72,19 +74,10 @@
     <Compile Include="Core\AssetOrganization\GameRegistry.cs" />
     <Compile Include="Core\AssetOrganization\CubeMapImageSet.cs" />
     <Compile Include="Core\AssetOrganization\AssetRegistry.cs" />
-    <Compile Include="Core\IVirtualFileEntry.cs" />
-    <Compile Include="Core\IVirtualFileData.cs" />
-    <Compile Include="Core\IVirtualFolder.cs" />
     <Compile Include="Core\Model\CubeFaces.cs" />
-    <Compile Include="Core\VirtualFileEntry.cs" />
-    <Compile Include="Core\VirtualFileDataInArchive.cs" />
-    <Compile Include="Core\VirtualFileAddress.cs" />
-    <Compile Include="Core\VirtualFileDataInMemory.cs" />
     <Compile Include="Core\VirtualFileTiledImage.cs" />
     <Compile Include="Core\ZoneMappings.cs" />
-    <Compile Include="Core\FileType.cs" />
     <Compile Include="Core\AssetOrganization\Node.cs" />
-    <Compile Include="Core\VirtualFolder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\M3AFileIndexingService.cs" />
@@ -167,6 +160,12 @@
   <ItemGroup>
     <Folder Include="Core\Interfaces\" />
     <Folder Include="Core\Operations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArchiveSystem\ArchiveSystem.csproj">
+      <Project>{feef3892-e370-40a3-8da2-2497bf1869ce}</Project>
+      <Name>ArchiveSystem</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

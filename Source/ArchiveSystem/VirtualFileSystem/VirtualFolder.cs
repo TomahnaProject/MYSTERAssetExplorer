@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace MYSTERAssetExplorer.Core
+namespace ArchiveSystem.VirtualFileSystem
 {
     [KnownType(typeof(VirtualFolder))]
     [KnownType(typeof(VirtualFileEntry))]

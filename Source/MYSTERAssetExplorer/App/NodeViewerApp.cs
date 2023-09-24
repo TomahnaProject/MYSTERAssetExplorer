@@ -9,6 +9,7 @@ using MYSTERAssetExplorer.Core;
 using MYSTERAssetExplorer.Core.Model;
 using System.IO;
 using MYSTERAssetExplorer.Utils;
+using ArchiveSystem.VirtualFileSystem;
 
 namespace MYSTERAssetExplorer.App
 {

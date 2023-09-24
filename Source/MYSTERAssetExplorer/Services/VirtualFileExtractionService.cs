@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MYSTERAssetExplorer.Core;
 using System.IO;
+using ArchiveSystem.VirtualFileSystem;
 
 namespace MYSTERAssetExplorer.Services
 {

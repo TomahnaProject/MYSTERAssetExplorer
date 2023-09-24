@@ -1,4 +1,5 @@
-﻿using MYSTERAssetExplorer.Core;
+﻿using ArchiveSystem.VirtualFileSystem;
+using MYSTERAssetExplorer.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
