@@ -220,16 +220,16 @@ namespace MYSTERAssetExplorer.App
             var extractor = new VirtualFileExtractionService();
             foreach (var file in files)
             {
-                WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
+                WriteToConsole(Color.LightBlue, "Extracting " + file.FileName);
                 var fileData = extractor.GetDataForVirtualFile(file);
-                var savefileType = file.FileData.Type;
+                var savefileType = file.FileData.FileType;
 
-                if (file.FileData.Type == FileType.Zap)
+                if (file.FileData.FileType.NameIs("zap"))
                 {
                     fileData = ConversionService.ConvertFromZapToJpg(fileData);
-                    savefileType = FileType.Jpg;
+                    savefileType = FileType.GetFileTypeByName("jpg");
                 }
-                saveService.SaveFile(extractionPath, file.Name, savefileType, fileData);
+                saveService.SaveFile(extractionPath, file.FileName, savefileType, fileData);
             }
         }
 
@@ -242,16 +242,16 @@ namespace MYSTERAssetExplorer.App
 
             foreach (var file in folder.Files)
             {
-                WriteToConsole(Color.LightBlue, "Extracting " + file.Name);
+                WriteToConsole(Color.LightBlue, "Extracting " + file.FileName);
                 var fileData = extractor.GetDataForVirtualFile(file);
-                var savefileType = file.FileData.Type;
+                var savefileType = file.FileData.FileType;
 
-                if (file.FileData.Type == FileType.Zap)
+                if (file.FileData.FileType.NameIs("zap"))
                 {
                     fileData = ConversionService.ConvertFromZapToJpg(fileData);
-                    savefileType = FileType.Jpg;
+                    savefileType = FileType.GetFileTypeByName("jpg");
                 }
-                saveService.SaveFile(thisFolderPath, file.Name, savefileType, fileData);
+                saveService.SaveFile(thisFolderPath, file.FileName, savefileType, fileData);
             }
             foreach (var subFolder in folder.SubFolders)
             {
@@ -289,7 +289,7 @@ namespace MYSTERAssetExplorer.App
             stopwatch.Stop();
             if (fileFound)
             {
-                WriteToConsole(Color.Cyan, file.Name + " found in " + stopwatch.ElapsedMilliseconds + " ms");
+                WriteToConsole(Color.Cyan, file.FileName + " found in " + stopwatch.ElapsedMilliseconds + " ms");
             }
             else
             {
@@ -308,7 +308,7 @@ namespace MYSTERAssetExplorer.App
             stopwatch.Stop();
             if (fileFound)
             {
-                WriteToConsole(Color.Cyan, file.Name + " found in " + stopwatch.ElapsedMilliseconds + " ms");
+                WriteToConsole(Color.Cyan, file.FileName + " found in " + stopwatch.ElapsedMilliseconds + " ms");
             }
             else
             {

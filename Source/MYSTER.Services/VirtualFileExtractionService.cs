@@ -31,7 +31,7 @@ namespace MYSTER.Services
 
         private byte[] GetFileDataFromArchive(VirtualFileDataInArchive archivedFile)
         {
-            if (archivedFile.Type == FileType.Zap)
+            if (archivedFile.FileType.Extension == "zap")
             {
                 var zapData = CopyFileDataFromArchive(archivedFile);
                 var jpgData = ConversionService.ConvertFromZapToJpg(zapData);
@@ -46,12 +46,12 @@ namespace MYSTER.Services
 
         private byte[] CopyFileDataFromArchive(VirtualFileDataInArchive archiveIndex)
         {
-            int bufferSize = (int)(archiveIndex.End - archiveIndex.Start) + 1; // assuming that any given file never has more bytes that max int size
+            int bufferSize = (int)(archiveIndex.FileOffsetBegin - archiveIndex.FileOffsetEnd) + 1; // assuming that any given file never has more bytes that max int size
             byte[] buffer = new byte[bufferSize];
             FileStream fileStream = new FileStream(archiveIndex.ArchiveFilePath, FileMode.Open, FileAccess.Read);
             try
             {
-                fileStream.Seek(archiveIndex.Start, SeekOrigin.Begin);
+                fileStream.Seek(archiveIndex.FileOffsetBegin, SeekOrigin.Begin);
                 fileStream.Read(buffer, 0, bufferSize);
             }
             finally

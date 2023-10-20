@@ -253,22 +253,11 @@ namespace M4ArchiveLib
 
             var FileOffset = BitConverter.ToUInt32(buffer, 0);
 
-            var fileType = FileType.Unknown;
             var fileNameLowercase = FileName.TrimEnd(new char[1] { '\0' }).ToLower();
-            if (fileNameLowercase.EndsWith(".jpg"))
-                fileType = FileType.Jpg;
-            else if (fileNameLowercase.EndsWith(".zap"))
-                fileType = FileType.Zap;
-            else if (fileNameLowercase.EndsWith(".m4b"))
-                fileType = FileType.M4B;
-            else if (fileNameLowercase.EndsWith(".bik"))
-                fileType = FileType.Bink;
-            else if (fileNameLowercase.EndsWith(".bin"))
-                fileType = FileType.Binary;
-            else
-                fileType = FileType.Unknown;
+            var extension = Path.GetExtension(fileNameLowercase);
+            var fileType = FileType.GetFileTypeByExension(extension);
 
-            if (fileType == FileType.M4B)
+            if (fileType.Extension == "m4b")
             {
                 var folder = ReadM4BFileData(fileStream, fileNameLowercase, fileStart + FileOffset, FileOffset + FileSize);
                 parentFolder.SubFolders.Add(folder);
@@ -277,7 +266,7 @@ namespace M4ArchiveLib
             {
                 var totalStartOffset = fileStart + FileOffset;
                 var totalEndOffset = fileStart + FileOffset + FileSize;
-                var thisFile = new VirtualFileEntry(fileNameLowercase, new VirtualFileDataInArchive(fileStream.Name, fileType, totalStartOffset, totalEndOffset));
+                var thisFile = new VirtualFileEntry(fileNameLowercase,"", new VirtualFileDataInArchive(fileStream.Name, fileType,"", totalStartOffset, totalEndOffset));
                 parentFolder.Files.Add(thisFile);
             }
             return index;
@@ -286,7 +275,7 @@ namespace M4ArchiveLib
         private void AddAnyTiledImages(VirtualFolder parentFolder)
         {
             string tileLayoutPattern = @"_\d\d_\d\d\.\w\w\w";
-            var matches = parentFolder.Files.Where(x => Regex.IsMatch(x.Name, tileLayoutPattern)).ToList();
+            var matches = parentFolder.Files.Where(x => Regex.IsMatch(x.FileName, tileLayoutPattern)).ToList();
 
             if (matches.Count < 1)
                 return;
@@ -295,20 +284,20 @@ namespace M4ArchiveLib
             VirtualFileTiledImage tiledImage;
             foreach (var match in matches)
             {
-                var startOfName = Regex.Split(match.Name, tileLayoutPattern)[0];
+                var startOfName = Regex.Split(match.FileName, tileLayoutPattern)[0];
 
-                if (tiledImages.Any(x => x.Name == startOfName))
+                if (tiledImages.Any(x => x.FileName == startOfName))
                 {
                     // add to existing
-                    var existing = tiledImages.FirstOrDefault(x => x.Name == startOfName);
+                    var existing = tiledImages.FirstOrDefault(x => x.FileName == startOfName);
                     tiledImage = existing.FileData as VirtualFileTiledImage;
                 }
                 else
                 {
                     // create a new one
                     tiledImage = new VirtualFileTiledImage();
-                    tiledImage.Type = FileType.Jpg;
-                    var file = new VirtualFileEntry(startOfName, tiledImage);
+                    tiledImage.Type = FileType.GetFileTypeByExension("jpg");
+                    var file = new VirtualFileEntry(startOfName, "jpg", tiledImage);
                     tiledImages.Add(file);
                 }
                 tiledImage.Tiles.Add(match);

@@ -6,18 +6,57 @@ using System.Threading.Tasks;
 
 namespace ArchiveSystem.VirtualFileSystem
 {
-    // numbers used for visual icons
-    public enum FileType
+    public class FileType
     {
-        // 0 and 1 for open/closed folder icons
-        Unknown = 2,
-        M3A = 3,
-        M4B = 4,
-        Jpg = 5,
-        Zap = 6,
-        Bink = 7,
-        Binary = 8,
-        Bmp = 9,
-        Text = 10,
+        public string Name { get; private set; }
+        public string Extension { get; private set; }
+
+        public static List<FileType> SupportedFiles { get; set; } = new List<FileType>()
+        {
+            new FileType("unknown","unk"),
+            new FileType("binary","bin"),
+            new FileType("jpg","jpg"),
+            new FileType("m3archive","m3a"),
+            new FileType("m4archive","m4b"),
+            new FileType("zap","zap"),
+            new FileType("bink","bik"),
+            new FileType("bitmap","bmp"),
+            new FileType("text","txt"),
+        };
+
+
+        public FileType(string name, string extension)
+        {
+            Name = name;
+            Extension = extension;
+        }
+
+
+        public static FileType GetFileTypeByExension(string extension)
+        {
+            if (extension.StartsWith("."))
+                extension = extension.Remove(0, 1);
+            var fileType = SupportedFiles.Where(x => x.Extension.ToLower() == extension.ToLower()).FirstOrDefault();
+            if (fileType == null)
+                throw new FormatException(extension + " is not a supported file format");
+            return fileType;
+        }
+        public static FileType GetFileTypeByName(string name)
+        {
+            var fileType = SupportedFiles.Where(x => x.Name.ToLower() == name.ToLower()).FirstOrDefault();
+            if (fileType == null)
+                throw new FormatException(name + " is not a supported file format");
+            return fileType;
+        }
+
+        public bool NameIs(string name)
+        {
+            return this.Name.ToLower() == name.ToLower();
+        }
+
+        public bool ExtensionIs(string extension)
+        {
+            return this.Extension.ToLower() == extension.ToLower();
+        }
     }
 }

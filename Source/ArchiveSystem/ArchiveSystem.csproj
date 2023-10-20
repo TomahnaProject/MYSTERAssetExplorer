@@ -47,13 +47,9 @@
     <Compile Include="Utils\Extensions\StreamExtensions.cs" />
     <Compile Include="Utils\Extensions\UInt32Extension.cs" />
     <Compile Include="VirtualFileSystem\FileType.cs" />
-    <Compile Include="VirtualFileSystem\IVirtualFileData.cs" />
-    <Compile Include="VirtualFileSystem\IVirtualFileEntry.cs" />
-    <Compile Include="VirtualFileSystem\IVirtualFolder.cs" />
+    <Compile Include="VirtualFileSystem\VirtualFileData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VirtualFileSystem\VirtualFileAddress.cs" />
-    <Compile Include="VirtualFileSystem\VirtualFileDataInArchive.cs" />
-    <Compile Include="VirtualFileSystem\VirtualFileDataInMemory.cs" />
     <Compile Include="VirtualFileSystem\VirtualFileEntry.cs" />
     <Compile Include="VirtualFileSystem\VirtualFolder.cs" />
   </ItemGroup>

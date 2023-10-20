@@ -1,25 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ArchiveSystem.VirtualFileSystem
+﻿namespace ArchiveSystem.VirtualFileSystem
 {
+    public interface IVirtualFileEntry
+    {
+        string FileName { get; }
+        //string ParentPath { get; }
+
+        string FileExtension { get; }
+        VirtualFileData FileData { get; }
+    }
+
     // meant to be read only; once the indexer figures out what/where a file is, then it shouldn't change around
     public class VirtualFileEntry : IVirtualFileEntry
     {
-        private string _name;
-        private IVirtualFileData _fileData;
+        public string FileName { get; private set; }
+        public string FileExtension { get; private set; }
+        public VirtualFileData FileData { get; private set; }
 
-
-        public string Name { get { return _name; } }
-        public IVirtualFileData FileData { get { return _fileData; } }
-
-        public VirtualFileEntry(string name, IVirtualFileData fileData)
+        public VirtualFileEntry(string name, string fileExtension, VirtualFileData fileData)
         {
-            _name = name;
-            _fileData = fileData;
+            FileName = name;
+            FileData = fileData;
+            FileExtension = fileExtension;
         }
     }
 }

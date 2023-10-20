@@ -7,18 +7,12 @@ namespace MYSTER.Services
     {
         public void SaveFile(string filePath, string fileName, FileType type, byte[] data)
         {
-            string extension = "";
-            if (type == FileType.Jpg)
-                extension = ".jpg";
-            else if (type == FileType.Bink)
-                extension = ".bik";
-
-            if (!fileName.Contains(extension))
-                fileName += extension;
+            if (!fileName.Contains(type.Extension))
+                fileName += "." + type.Extension;
 
             var savePath = Path.Combine(filePath, fileName);
 
-            if (type == FileType.Jpg)
+            if (type.Name == "jpg")
                 ImageSaveService.Save(savePath, data);
             else
                 File.WriteAllBytes(savePath, data);

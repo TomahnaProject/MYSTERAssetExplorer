@@ -39,8 +39,8 @@ namespace MYSTER.Services
             {
                 var tile = new Tile();
                 tile.TileFile = tileFile;
-                tile.PositionX = int.Parse(tileFile.Name[tileFile.Name.Length - 8].ToString());
-                tile.PositionY = int.Parse(tileFile.Name[tileFile.Name.Length - 5].ToString());
+                tile.PositionX = int.Parse(tileFile.FileName[tileFile.FileName.Length - 8].ToString());
+                tile.PositionY = int.Parse(tileFile.FileName[tileFile.FileName.Length - 5].ToString());
                 var imageData = Extractor.GetDataForVirtualFile(tileFile);
 
                 using (var ms = new MemoryStream(imageData))

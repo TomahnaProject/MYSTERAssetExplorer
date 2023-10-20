@@ -6,6 +6,13 @@ using System.Text;
 
 namespace ArchiveSystem.VirtualFileSystem
 {
+    public interface IVirtualFolder
+    {
+        string Name { get; set; }
+        List<IVirtualFolder> SubFolders { get; }
+        List<IVirtualFileEntry> Files { get; }
+    }
+
     [KnownType(typeof(VirtualFolder))]
     [KnownType(typeof(VirtualFileEntry))]
     public class VirtualFolder : IVirtualFolder
@@ -26,5 +33,8 @@ namespace ArchiveSystem.VirtualFileSystem
             SubFolders = new List<IVirtualFolder>();
             Files = new List<IVirtualFileEntry>();
         }
+
+        // public void CreateDirectory(string path);
+        // public void AddFile();
     }
 }

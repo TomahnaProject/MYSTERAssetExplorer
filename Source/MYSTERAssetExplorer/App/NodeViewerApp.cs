@@ -300,17 +300,17 @@ namespace MYSTERAssetExplorer.App
             SelectedNode.Zone = zone;
 
             if (files.Count > 5)
-                SelectedNode.CubeMap.Top.File = files[5].Name;
+                SelectedNode.CubeMap.Top.File = files[5].FileName;
             if (files.Count > 4)
-                SelectedNode.CubeMap.Right.File = files[4].Name;
+                SelectedNode.CubeMap.Right.File = files[4].FileName;
             if (files.Count > 3)
-                SelectedNode.CubeMap.Left.File = files[3].Name;
+                SelectedNode.CubeMap.Left.File = files[3].FileName;
             if (files.Count > 2)
-                SelectedNode.CubeMap.Front.File = files[2].Name;
+                SelectedNode.CubeMap.Front.File = files[2].FileName;
             if (files.Count > 1)
-                SelectedNode.CubeMap.Bottom.File = files[1].Name;
+                SelectedNode.CubeMap.Bottom.File = files[1].FileName;
             if (files.Count > 0)
-                SelectedNode.CubeMap.Back.File = files[0].Name;
+                SelectedNode.CubeMap.Back.File = files[0].FileName;
 
             PopulateImages(SelectedNode);
         }

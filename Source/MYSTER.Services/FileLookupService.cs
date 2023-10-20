@@ -86,7 +86,7 @@ namespace MYSTER.Services
 
                 if(dataFile != null)
                 {
-                    var file = dataFile.Files.FirstOrDefault(x => x.Name == address.FileName);
+                    var file = dataFile.Files.FirstOrDefault(x => x.FileName == address.FileName);
                     if(file!=null)
                     {
                         couldFind = true;
@@ -160,7 +160,7 @@ namespace MYSTER.Services
                                                 {
                                                     var fileName = address.FileName.Replace(".jpg","").Replace("_depth", "");
                                                     // finally the files
-                                                    var file = setDefaultFolder.Files.FirstOrDefault(x => x.Name == fileName);
+                                                    var file = setDefaultFolder.Files.FirstOrDefault(x => x.FileName == fileName);
 
                                                     if (file != null)
                                                     {

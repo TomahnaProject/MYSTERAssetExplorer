@@ -277,7 +277,7 @@ namespace M3ArchiveLib
                 string fileName = entry.Type.ToString();
 
                 // TRANSFORM FILE TYPE
-                var fileType = FileType.Unknown;
+                var fileType = FileType.GetFileTypeByName("unknown");
                 if (entry.Type == Myst3ResourceType.CubeFace ||
                     entry.Type == Myst3ResourceType.Frame ||
                     entry.Type == Myst3ResourceType.LocalizedFrame ||
@@ -285,28 +285,28 @@ namespace M3ArchiveLib
                     entry.Type == Myst3ResourceType.LocalizedSpotItem
                     )
                 {
-                    fileType = FileType.Jpg;
+                    fileType = FileType.GetFileTypeByName("jpg");
                 }
                 if (entry.Type == Myst3ResourceType.Movie ||
                     entry.Type == Myst3ResourceType.MultitrackMovie ||
                     entry.Type == Myst3ResourceType.DialogMovie ||
                     entry.Type == Myst3ResourceType.StillMovie)
                 {
-                    fileType = FileType.Bink;
+                    fileType = FileType.GetFileTypeByName("bink");
                 }
                 if (entry.Type == Myst3ResourceType.RawData)
                 {
                     // could be bitmap,
                     //could be archetype ascii text file
                     // could be xet file
-                    fileType = FileType.Bmp;
+                    fileType = FileType.GetFileTypeByName("bitmap");
                     // if it starts with BM, then it's a bmp
                     // if it starts with XET it's a xet
                     // if it starts with ASCII it's a text file
                 }
 
 
-                var fileContent = new VirtualFileDataInArchive(filePath, fileType, entry.Offset, entry.Offset + entry.Size);
+                var fileContent = new VirtualFileDataInArchive(filePath, fileType,"", entry.Offset, entry.Offset + entry.Size);
 
                 if (entry.Type == Myst3ResourceType.CubeFace)
                 {
@@ -317,13 +317,13 @@ namespace M3ArchiveLib
                     }
                     fileName += "_" + nodeCount.ToString().PadLeft(3, '0') + "_" + entry.CubeFace.ToString().ToLower();
                 }
-                if (fileType == FileType.Bink)
+                if (fileType == FileType.GetFileTypeByName("bink"))
                 {
                     fileName += "_" + videoCount.ToString().PadLeft(3, '0');
                     videoCount++;
 
                 }
-                if (fileType == FileType.Jpg && entry.Type != Myst3ResourceType.CubeFace)
+                if (fileType == FileType.GetFileTypeByName("jpg") && entry.Type != Myst3ResourceType.CubeFace)
                 {
                     if (entry.Type == Myst3ResourceType.SpotItem || entry.Type == Myst3ResourceType.LocalizedSpotItem)
                     {
@@ -339,7 +339,7 @@ namespace M3ArchiveLib
 
                 // create the listing
                 //var vFile = new VirtualFileEntry(entry.Offset + "_" + (entry.Offset + entry.Size) + "_" + entry.Type, fileContent);
-                var vFile = new VirtualFileEntry(fileName, fileContent);
+                var vFile = new VirtualFileEntry(fileName,"", fileContent);
                 if (containsSubFolders)
                 {
                     if (!string.IsNullOrEmpty(entry.Folder))

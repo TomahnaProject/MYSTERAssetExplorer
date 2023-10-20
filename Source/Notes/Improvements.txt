@@ -42,3 +42,8 @@ rename "Node Identity" to Node Details
 
 way to customize Cubemap Format
 way to export Equirectangular
+
+
+
+bink player
+https://github.com/nickdu088/Bink-Unity-Player/tree/main/Assets/Scripts

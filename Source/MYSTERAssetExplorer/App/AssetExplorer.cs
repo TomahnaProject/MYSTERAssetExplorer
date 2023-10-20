@@ -88,7 +88,7 @@ namespace MYSTERAssetExplorer.App
 
             foreach (var file in files)
             {
-                var item = new ListViewItem(file.Name, 1);
+                var item = new ListViewItem(file.FileName, 1);
                 var subItems = new ListViewItem.ListViewSubItem[]
                 {
                     //new ListViewItem.ListViewSubItem(item, (file.End - file.Start).ToString()),
@@ -213,9 +213,9 @@ namespace MYSTERAssetExplorer.App
                 item = new ListViewItem(folder.Name, 0);
                 item.Tag = folder;
                 if (folder.Name.CaseInsensitiveContains(app.M4B_FileExtension))
-                    item.ImageIndex = (int)FileType.M4B;
+                    item.ImageIndex = (int)FileIconMapping.GetIconIndexForFileType("M4B");
                 else if (folder.Name.Contains(app.M3A_FileExtension))
-                    item.ImageIndex = (int)FileType.M3A;
+                    item.ImageIndex = (int)FileIconMapping.GetIconIndexForFileType("M3A");
                 subItems = new ListViewItem.ListViewSubItem[]
                 {
                     new ListViewItem.ListViewSubItem(item, ""),
@@ -235,17 +235,17 @@ namespace MYSTERAssetExplorer.App
             foreach (var file in nodeFolderInfo.Files)
             {
                 isSmallImage = true;
-                item = new ListViewItem(file.Name, (int)file.FileData.Type);
+                item = new ListViewItem(file.FileName, (int)FileIconMapping.GetIconIndexForFileType(file.FileData.FileType));
                 item.Tag = file;
 
                 if (file.FileData is VirtualFileDataInArchive)
                 {
                     var archiveIndex = file.FileData as VirtualFileDataInArchive;
-                    var fileSizeInBytes = archiveIndex.End - archiveIndex.Start;
+                    var fileSizeInBytes = archiveIndex.FileOffsetBegin - archiveIndex.FileOffsetEnd;
                     subItems = new ListViewItem.ListViewSubItem[]
                     {
                         new ListViewItem.ListViewSubItem(item, FormatUtils.GetBytesReadable(fileSizeInBytes)),
-                        new ListViewItem.ListViewSubItem(item, "(" + archiveIndex.Start + ", " + archiveIndex.End +")")
+                        new ListViewItem.ListViewSubItem(item, "(" + archiveIndex.FileOffsetBegin + ", " + archiveIndex.FileOffsetEnd +")")
                     };
 
                     // using a size cutoff for now, not reliable, but useful
@@ -315,12 +315,12 @@ namespace MYSTERAssetExplorer.App
 
                 if (subFolder.Name.CaseInsensitiveContains(app.M4B_FileExtension))
                 {
-                    iconIndex = (int)FileType.M4B;
+                    iconIndex = (int)FileIconMapping.GetIconIndexForFileType("M4B");
                     selecedIndex = iconIndex;
                 }
                 else if (subFolder.Name.CaseInsensitiveContains(app.M3A_FileExtension))
                 {
-                    iconIndex = (int)FileType.M3A;
+                    iconIndex = (int)FileIconMapping.GetIconIndexForFileType("M3A");
                     selecedIndex = iconIndex;
                 }
                 else
@@ -445,18 +445,18 @@ namespace MYSTERAssetExplorer.App
 
             var file = selected.Tag as IVirtualFileEntry;
 
-            if ((file.FileData.Type == FileType.Jpg ||
-                file.FileData.Type == FileType.Zap))
+            if ((file.FileData.FileType == FileType.GetFileTypeByName("jpg") ||
+                file.FileData.FileType == FileType.GetFileTypeByName("zap")))
             {
                 var imageData = app.GetDataForFile(file);
                 SetImageDataIntoPreviewWindow(selected.Text, imageData);
             }
-            else if (file.FileData.Type == FileType.Bink)
+            else if (file.FileData.FileType == FileType.GetFileTypeByName("bink"))
             {
                 //var videoData = app.GetDataForFile(file);
                 // PLAY VIDEO ONCE YOU HAVE MEDIA PLAYER
             }
-            else if (file.FileData.Type == FileType.Unknown)
+            else if (file.FileData.FileType == FileType.GetFileTypeByName("unknown"))
             {
                 // AUDIO EVENTUALLY
             }
